@@ -4,7 +4,6 @@ import java.util.Set;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import dev.louiiuol.etin.models.dtos.requests.users.PasswordUpdateDto;
 import dev.louiiuol.etin.models.dtos.requests.users.UserCreateDto;
 import dev.louiiuol.etin.models.dtos.requests.users.UserUpdateDto;
 import dev.louiiuol.etin.models.dtos.responses.users.UserViewDetailsDto;
@@ -61,15 +60,6 @@ public interface UserService extends UserDetailsService {
      * @param dto User's informations to update
      */
     public void update(Long id, UserUpdateDto UserUpdateDto);
-
-    /**
-     * Update password of user matching
-     * the given id with provided dto
-     * 
-     * @param id User's identifier
-     * @param dto User's password to update
-     */
-    public  void updatePassword(Long id,  PasswordUpdateDto passwordUpdateDto);
 
     /**
      * Delete user matching the given id

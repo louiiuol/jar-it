@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import dev.louiiuol.etin.models.dtos.requests.users.UserCreateDto;
 import dev.louiiuol.etin.models.dtos.requests.users.UserUpdateDto;
-import dev.louiiuol.etin.models.dtos.requests.users.PasswordUpdateDto;
 import dev.louiiuol.etin.models.dtos.responses.users.UserViewDetailsDto;
 import dev.louiiuol.etin.models.dtos.responses.users.UserViewDto;
 import dev.louiiuol.etin.api.exceptions.ResourceNotFoundException;
@@ -49,12 +48,7 @@ public class UserServiceImpl extends AbstractService<User, UserRepository>
     public UserViewDetailsDto getDetails(Long id) { return mapView( getEntity(id), UserViewDetailsDto.class); }
 
     @Override
-    public void update(Long id, UserUpdateDto dto) { updateEntityById(dto, id); };
-
-    @Override
-    public void updatePassword(Long id, PasswordUpdateDto passwordUpdateDto) {
-        // TODO Implement UpdatePassword method
-    }
+    public void update(Long id, UserUpdateDto dto) { updateEntityById(dto, id); }
 
     @Override
     public void delete(Long id) { repo().deleteById(id); }
