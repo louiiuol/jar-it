@@ -1,0 +1,58 @@
+server:
+    port: 80
+    servlet:
+        context-path: /
+        jsp:
+            registered: false
+    error:
+        whitelabel: 
+            enabled: false
+
+spring:
+    application:
+        name: etin
+    banner:
+        location: classpath:banners/banner-prod.txt
+    profiles:
+        active: prod
+    datasource:
+        url: jdbc:mysql://localhost:3306/etin?createDatabaseIfNotExist=false&useSSL=true&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
+        username: root
+        password:
+    jpa:
+        open-in-view: false
+        show-sql: false
+        generate-ddl: false #true
+        hibernate:
+            ddl-auto: none #update
+        properties: 
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+                format_sql: false
+                jdbc:
+                    batch_size: 10
+                    order_inserts: false
+                    order_updates: false
+                    generate_statistics: false
+    messages:
+        use-code-as-default-message: false
+    mvc:
+        throw-exception-if-no-handler-found: true
+        favicon:
+            enabled: false
+    resources:
+        add-mappings: false
+
+logging:
+    config: classpath:logs/logback-spring.xml
+
+jwt-auth-server:
+    keyStore: jwt.jks
+    keyPass: "JwtKey"
+    keyAlias: "jwtKey"
+    accessTokenValiditySeconds: 1800
+    refreshTokenValiditySeconds: 86400
+
+cron:
+    config:
+        each-day: "0 0 0 * * *"

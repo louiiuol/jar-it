@@ -1,0 +1,59 @@
+server:
+    port: 1337
+    servlet:
+        context-path: /
+        jsp:
+            registered: false
+    error:
+        whitelabel: 
+            enabled: false
+
+spring:
+    application:
+        name: etin
+    banner:
+        location: classpath:banners/banner-dev.txt
+    profiles:
+        active: dev
+    datasource:
+        url: jdbc:mysql://localhost:3306/etin_dev?createDatabaseIfNotExist=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
+        username: root
+        password:
+    jpa:
+        open-in-view: false
+        show-sql: true
+        generate-ddl: false #true
+        hibernate:
+            ddl-auto: none #create
+        properties: 
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+                format_sql: true
+                jdbc:
+                    batch_size: 10
+                    order_inserts: false
+                    order_updates: false
+                    generate_statistics: true
+    messages:
+        use-code-as-default-message: false
+    mvc:
+        throw-exception-if-no-handler-found: true
+    resources:
+        add-mappings: false
+
+logging:
+    config: classpath:logs/logback-dev.xml
+
+jwt-auth-server:
+    keyStore: jwt.jks
+    keyPass: "JwtKey"
+    keyAlias: "jwtKey"
+    accessTokenValiditySeconds: 1800
+    refreshTokenValiditySeconds: 86400
+
+cron:
+    config:
+        each-day: "0 0 0 * * *"
+
+validators:
+    uniqueEmail: "this email is already taken"

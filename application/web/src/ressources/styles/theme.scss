@@ -1,0 +1,139 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$blue: (
+  50: #e0f8fa,
+  100: #b3ecf2,
+  200: #80e0ea,
+  300: #4dd4e1,
+  400: #26cada,
+  500: #00c1d4,
+  600: #00bbcf,
+  700: #00b3c9,
+  800: #00abc3,
+  900: #009eb9,
+  A100: #e2faff,
+  A200: #aff1ff,
+  A400: #7ce9ff,
+  A700: #63e4ff,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$pink: (
+  50: #fdecf4,
+  100: #facfe3,
+  200: #f7b0d1,
+  300: #f490bf,
+  400: #f178b1,
+  500: #ef60a3,
+  600: #ed589b,
+  700: #eb4e91,
+  800: #e84488,
+  900: #e43377,
+  A100: #ffffff,
+  A200: #fff6fa,
+  A400: #ffc3d9,
+  A700: #ffaac9,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$red: (
+    50 : #fee8e7,
+    100 : #fdc6c4,
+    200 : #fca19d,
+    300 : #fb7b75,
+    400 : #fa5e58,
+    500 : #f9423a,
+    600 : #f83c34,
+    700 : #f7332c,
+    800 : #f62b25,
+    900 : #f51d18,
+    A100 : #ffffff,
+    A200 : #fff3f3,
+    A400 : #ffc1c0,
+    A700 : #ffa8a7,
+    contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$primary: mat-palette($blue);
+$accent: mat-palette($pink);
+$warn: mat-palette($red);
+
+$theme: mat-light-theme($primary, $accent, $warn); 
+
+@include angular-material-theme($theme);
+
+.is-accent { color: mat-color($accent) !important; }
+.is-primary { color: mat-color($primary) !important; }
+.cdk-overlay-pane { margin-top: 4px !important; }
+
+mat-dialog-container { position: relative; }
+mat-dialog-actions, mat-card-actions { display: flex !important; justify-content: space-evenly !important; }
+.mat-dialog-content { margin: 3rem 0 0 !important;}
+mat-chip-list.centered .mat-chip-list-wrapper { justify-content: center;}
+#tinees-preview mat-tab-group { min-width: 60vw; }
+#tinees-preview .mat-tab-body-content.active {
+  height: 30vh;
+  transform: none;
+  overflow-y: auto !important;
+}
+snack-bar-container {
+  width: auto !important;
+  background: #ffffff !important;
+  color: mat-color($accent) !important;
+  border: 1px solid currentColor;
+}
+mat-slide-toggle label { flex: 0 !important;}
+.mat-button-wrapper { display: block; }
