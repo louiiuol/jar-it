@@ -1,0 +1,10 @@
+input ; expected
+{"username": "tester53", "email": "test@test.fr", "avatar": "m4"} ; 200
+{"username": "louiiuol"} ; 400
+{"username": "lou"} ; 400
+{"username": "toolongusername"} ; 400
+{email": "notanemail"} ; 400
+{email": "louiiuol@live.fr"} ; 400
+{email": "waytoolongemaiulfoorarealemailnowaythishappensl@live.fr"} ; 400
+{"avatar": "a"}; 400
+{"avatar": "tooLongName"}; 400

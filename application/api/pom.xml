@@ -11,9 +11,9 @@
 
 	<groupId>dev.louiiuol.etin</groupId>
 	<artifactId>api</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>etinApi</name>
-	<description>Turn those nasty habits into occasion to support action you care about!</description>
+	<description>Turn those nasty habits into an occasion to support the action you care about!</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
