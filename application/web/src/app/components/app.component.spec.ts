@@ -2,6 +2,10 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { Config } from '../../ressources/config';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { IconComponent } from './shared/icon/icon.component';
+import { MatMenu, MatToolbar } from '@angular/material';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -11,6 +15,11 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent
+        // NavbarComponent,
+        // LoaderComponent,
+        // IconComponent,
+        // MatMenu,
+        // MatToolbar
       ],
     }).compileComponents();
   }));
@@ -25,13 +34,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual(Config.title);
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('app is running!');
   });
 
 });

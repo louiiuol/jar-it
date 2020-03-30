@@ -1,0 +1,26 @@
+<form id="login-form" class="expanded spaced" [formGroup]="loginForm" (submit)="login()" >
+    <mat-form-field>
+        <mat-label>Who are you ?</mat-label>
+        <input matInput placeholder="johnDoe45" formControlName="username">
+        <mat-error *ngFor="let validation of errorMessages.username">
+            <mat-error *ngIf="forms.isValid(username, validation)">{{validation.message}}</mat-error>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Proove it !</mat-label>
+            <input matInput placeholder="password" formControlName="password" [type]="hide ? 'password' : 'text'">
+            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <icon class="xs" name="{{hide ? 'hidden' : 'visible'}}"></icon>
+            </a>
+            <mat-hint align="end"> At least one letter uppercase, one lowercase, and one number </mat-hint>
+            <mat-error *ngFor="let validation of errorMessages.password">
+                <mat-error *ngIf="forms.isValid(password, validation)">{{validation.message}}</mat-error>
+            </mat-error>
+    </mat-form-field>
+
+    <footer class="is-flex space-evenly">
+        <button mat-raised-button [disabled]="username.invalid || password.invalid" color="primary" >Stop swearing now</button>
+        <a color="primary" mat-button (click)="showRegister()">Doesn't have an account yet ?</a>
+    </footer>
+</form>

@@ -1,0 +1,56 @@
+<form id="register-form" class="expanded spaced" [formGroup]="registerForm" novalidate (ngSubmit)="register(registerForm.value)">
+
+    <mat-form-field>
+        <mat-label>What's your name ?</mat-label>
+        <input formControlName="username" matInput maxlength="20" placeholder="johnDoe1986" required >
+        <mat-error *ngFor="let validation of errorMessages.username">
+            <mat-error *ngIf="forms.isValid(username, validation)">{{validation.message}}</mat-error>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>How can we reach you ?</mat-label>
+        <input formControlName="email" matInput placeholder="name@mail.com" email required >
+        <mat-error *ngFor="let validation of errorMessages.email">
+            <mat-error *ngIf="forms.isValid(email, validation)">{{validation.message}}</mat-error>
+        </mat-error>
+    </mat-form-field>
+
+    <section formGroupName="passwordForm" class="is-flex space-evenly">
+
+        <mat-form-field style="width:40%">
+            <mat-label>Choose a password</mat-label>
+            <input formControlName="password" [type]="hide ? 'password' : 'text'" matInput placeholder="*************" required>
+            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <icon class="xs" name="{{hide ? 'hidden' : 'visible'}}"></icon>
+            </a>
+            <mat-error *ngFor="let validation of errorMessages.password">
+                <mat-error *ngIf="forms.isValid(password, validation)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field style="width:40%">
+            <mat-label>Confirm your password</mat-label>
+            <input formControlName="confirm" [type]="hideConfirm ? 'password' : 'text'" matInput placeholder="*************"
+            [errorStateMatcher]="parentErrorStateMatcher" required >
+            <a mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirm">
+                <icon class="xs" name="{{hide ? 'hidden' : 'visible'}}"></icon>
+            </a>
+            <mat-error *ngFor="let validation of errorMessages.confirm">
+                <mat-error *ngIf="forms.isValid(confirm, validation)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+    </section>
+
+    <mat-slide-toggle class="is-flex space-evenly"formControlName="agree" color="accent"required >
+        Do you agree with <span class='is-accent'>usage terms</span>
+    </mat-slide-toggle>
+
+    <footer class="is-flex spaced space-evenly">
+        
+        <button type="submit" mat-raised-button [disabled]="registerForm.invalid" color="primary" >Join us !</button>
+        <button color="primary" mat-button (click)="showLogin()">Already have an account ?</button>
+    </footer>
+
+</form>

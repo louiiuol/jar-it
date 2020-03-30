@@ -1,0 +1,22 @@
+h1 {
+  font-size: 10vw;
+  line-height: 15vw !important;
+  text-align: center;
+  padding-bottom: 1rem !important;
+}
+
+h2 {
+  max-width: 780px;
+  line-height: 4rem;
+  font-family: poppins, sans-serif !important;
+  margin: 5rem auto !important;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  icon { margin-right: 1rem; }
+}
+mat-card#forms {
+  padding: 0;
+  margin: 1rem auto;
+  max-width: 550px;
+}
