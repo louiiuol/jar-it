@@ -1,0 +1,74 @@
+/* UTILITARY  STYLES */
+.spaced { 
+    padding: 1.25rem 2rem;
+    &.xs { padding: .5rem .8rem}
+}
+.centered { text-align: center; }
+.legend { color: #AAA; font-style: italic;}
+
+#members-preview { position: relative; width: 90%; margin: 0 auto;}
+#close-dialog { float: right; }
+.empty { padding: 1rem; color: #888; font-style: italic; text-align: center; font-family: 'poppins, sans-serif' !important;}
+
+footer.expanded {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+}
+
+form.expanded {
+    width: 100%;
+    mat-form-field { width: 100%; margin-bottom: 1.25rem; }
+    footer {padding-top: 2rem; }
+}
+
+.mat-step-icon-content { display: flex; }
+
+.is-flex {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    align-content: space-around !important;
+    flex-flow: row wrap !important;
+    &-inline{ 
+        display: inline-flex !important; 
+        &.space-evenly { justify-content: space-evenly !important; }
+        &.content-evenly { align-content: space-evenly !important; }
+        &.nowrap { flex-flow: row nowrap !important;}
+    }
+    &.space-evenly { justify-content: space-evenly !important; }
+    &.content-evenly { align-content: space-evenly !important; }
+    &.nowrap { flex-flow: row nowrap !important;}
+}
+
+.is-absolute {
+    position: absolute !important;
+    &.top-right {
+        top: 0;
+        right: 0; 
+        transform: translate(50%, -50%);
+        &.inset { transform: translate(-15%, 15%)}
+        &.outset { transform: translate(15%, 15%)}
+    }
+    &.top-left {
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+    }
+    &.bottom-left {
+        bottom: 0; 
+        left: 0;
+    }
+    &.center-left {
+        left: 0rem;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+    &.center {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+.is-relative { position: relative; }
