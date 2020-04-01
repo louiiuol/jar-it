@@ -1,0 +1,38 @@
+<mat-toolbar>
+    <img height="62" id ="logo" src="assets/img/logo.svg" alt="eTin logo">
+    <div *ngIf="isLoggedIn()">
+        <button id="userMenu"
+        mat-stroked-button
+        color='accent'
+        [matMenuTriggerFor]="userMenu" 
+        aria-label="user navigation menu">
+            <app-icon class="icon" avatar="true" name="{{avatar}}"></app-icon>
+            <app-icon class="sm" name="arrow-down"></app-icon>
+        </button>
+
+        <mat-menu #userMenu="matMenu" xPosition="before">
+            <span id="username">Logged as <strong>{{ username }}</strong></span>
+
+            <button mat-menu-item
+                class='is-accent'
+                (click)="showDashboard()">
+                <app-icon class="sm" name="dashboard"></app-icon>
+                Dashboard
+            </button>
+
+            <button mat-menu-item
+                class='is-accent'
+                (click)="showProfile()" >
+                <app-icon class="sm" name="profile"></app-icon>
+                Profile
+            </button>
+
+            <button mat-menu-item
+                (click)="logout()" 
+                class='is-accent' >
+            <app-icon class="sm" name="power"></app-icon>
+            Disconnect
+            </button>
+        </mat-menu>
+    </div>
+</mat-toolbar>

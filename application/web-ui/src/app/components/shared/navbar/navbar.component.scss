@@ -1,0 +1,13 @@
+mat-toolbar {
+    margin-top: .5rem;
+    align-items: center;
+    justify-content: space-between;
+    background: none !important;
+    #userMenu {
+        border: 1px solid currentColor;
+        padding: .25rem .5rem;
+    }
+}
+
+button.mat-menu-item { display: flex; align-items: center; justify-content: flex-start; icon {padding-right: 1rem;} }
+#username { width: 100%; text-align: center; background: #00c1d4; color: white; padding: 1rem; margin-top: -8px; display: block;}
