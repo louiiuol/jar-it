@@ -1,3 +1,12 @@
+---
+name: User Stroy
+about: Features describe as needs
+title: ''
+labels: ''
+assignees: ''
+
+---
+
 # User Story name
 
 ## Context
