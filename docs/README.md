@@ -2,7 +2,7 @@
 
 ## ![alt text](src/img/banner.png "eTin wiki banner")
 
-> This *Github Pages* contains all documentation related to eTin project: from designing interfaces to concepting and implementing databases. This wiki will explains the creation process  of this project  as follow:
+> This *Github Pages* contains all documentation related to the eTin project: from designing interfaces to conceiving and implementing databases. This wiki will explain the creation process  of this project  as follow:
 
 ### 🔍 Index
 
@@ -53,6 +53,6 @@ See more examples here:
 
 ## ✉️ Contact
 
-> Feel free to contact me, by pulling requests on comment on [Github](https://github.com/louiiuol/e.Tin/), if you needs more informations related to this project !
+> Feel free to contact me, by pulling requests on comment on [Github](https://github.com/louiiuol/e.Tin/), if you need more information related to this project!
 
 🏡 *[Go back home](https://louiiuol.github.io/e.Tin/)*
