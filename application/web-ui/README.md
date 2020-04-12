@@ -1,27 +1,49 @@
-# e.Tin WEB UI
+# e-Tin Web UI
 
 ## ![eTin wiki banner](../../docs/src/img/banner.png)
 
-## Development server
+## Prerequisites 📚
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+| Dependency | version required |
+|:-----------|:----------:|
+| Node.js | 10.16.0 |
+| Angular CLI | 8.3.6 |
 
-## Code scaffolding
+## Development server 🛠
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+> Run `ng serve` for a dev server. Navigate to `http://localhost:3333/`. The app will automatically reload if you change any of the source files.
 
-## Build
+```shell
+cd swear-tin/application/web-ui;
+npm install;
+ng serve
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Testing🧪
 
-## Running unit tests
+> Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+> Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```shell
+cd swear-tin/application/web-ui;
+npm install;
+ng [test/e2e]
+```
 
-## Running end-to-end tests
+## Code scaffolding ⚙️
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+> Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Authors 🖊
+## Build 🏗
 
-> * **Louis Godlewski** - [louiiuol](https://github.com/louiiuol)
+> Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Further help ☝️
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+***
+
+## Contact ✉️
+
+Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspect of this project.
