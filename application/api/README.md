@@ -1,10 +1,44 @@
-# e.Tin REST API
+# e-Tin Api V1
 
-> This application, using SpringBoot Security combined with OAuth, provides a secured RESTFUL API to handle, persist and retrieve business values, mapped as entities, in the database configured as requested. More information about the API context and technical stack available in the documentation.
+## ![eTin wiki banner](../../docs/src/img/banner.png)
 
-## Controllers
+> This application, using SpringBoot Security combined with OAuth, provides a secured RESTFUL API to handle, persist and retrieve business values, mapped from *dtos* to *entities*, in the database configured as requested. More information about the API context and technical stack available in the documentation.
 
-> Provides the following resources:
+## Getting Started 💪
+
+> These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+> Each folder hold a README for further information
+
+## Prerequisites 📚
+
+| Dependency | version required |
+|:-----------|:----------:|
+| Maven | 3.6.0 |
+| JDK | 13.0.1 |
+| SQL Workbench | 8.0.13 |
+
+## Installing 🛠
+
+```shell
+cd swear-tin/application/api;
+mvn clean install;
+mvn spring-boot:run -Dspring-boot.run.profiles=[dev/prod]
+```
+
+## Testing & Build 🧪
+
+>Tests are very time consuming and no always worthy. Because this application is mainly a RESTFUL API, tests will be focused around Integration Test. More details about the tests in the documentation.
+
+```shell
+cd swear-tin/application/api;
+mvn clean install
+```
+
+## REST API Resources
+
+> This program provides a RESTFULL Api to handle functionalities needed for build IHM.
+> Please follow the guide if you want to do your own request.
+> Find below all ressources available:
 
 ### Users
 
@@ -38,6 +72,12 @@ description | action | url | param | authentication |
 | accountNonLocked | boolean | 1 | ENUM('T', 'F') NN |
 | credentialsNonExpired | boolean | 1 | ENUM('T', 'F') NN |
 
-## Tests
+## Further help ☝️
 
->Tests are very time consuming and no always worthy. Because this application is mainly a RESTFUL API, tests will be focused around Integration Test. More details about the tests in the documentation.
+> the following links will help you understand how this project was made:
+
+***
+
+## Contact ✉️
+
+Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspect of this project.
