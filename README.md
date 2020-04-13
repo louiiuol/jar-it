@@ -1,4 +1,4 @@
-# *e*Tin: the first electronic swear tin
+# *e*Tin | the first electronic swear tin
 
 ![Spring CI](https://github.com/louiiuol/swear-tin/workflows/Spring%20CI/badge.svg)
 ![Node CI](https://github.com/louiiuol/swear-tin/workflows/Node%20CI/badge.svg)
