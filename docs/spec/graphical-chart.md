@@ -1,17 +1,17 @@
-# *e*Tin | Graphical Chart 🎨
+# Graphical Chart 🎨
 
 ## ![wiki banner](../src/img/banner.png "wiki banner")
 
-## Overview
+## Overview 🌍
 
-> The following chart defines the graphical sytem of «e.Tin» application with a concret definition of most important visual elements.
+The following chart defines the graphical sytem of «e.Tin» application with a concret definition of most important visual elements.
 
 ### ![graphical-chart](../src/img/graphic/graphic-chart.png "moodboard insparation")
 
-## Mood board
+## Mood board 🖼
 
-> the following mood board helps graphist describing the atmosphere of the graphical chart: It provides the sources of inspirations used to choose colors, fonts, spacing and alignement.
->
+This mood board helps graphist describing the atmosphere of the graphical chart: It provides the sources of inspirations used to choose colors, fonts, spacing and alignement.
+
 > It describes a *cartoon atmosphere* with large fonts  and vives colors. This means that eTin needs to express more simple visual based on the *comics world*.
 
 ### ![moodboard](../src/img/graphic/moodboard.jpg "moodboard insparation")
@@ -28,16 +28,16 @@
 
 ## Fonts
 
-> * **Headline**: YouthHome *(Regular)*
-> * **SubTitle**: Written in the stars *(Regular)*
-> * **Texts**: Poppins *(Medium / Medium Italic / SemiBold / SemiBold Italic)*
-> * **Helpers**: Ubuntu sans *(Regular)*
+* **Headline**: YouthHome *(Regular)*
+* **SubTitle**: Written in the stars *(Regular)*
+* **Texts**: Poppins *(Medium / Medium Italic / SemiBold / SemiBold Italic)*
+* **Helpers**: Ubuntu sans *(Regular)*
 
 ## Logotype
 
-> Le logotype est  l’élément le plus important de cette charte graphique. Il rappel le style Flat Design, par ses formes, mais est composé de vives couleurs.
+Le logotype est  l’élément le plus important de cette charte graphique. Il rappel le style Flat Design, par ses formes, mais est composé de vives couleurs.
 
-### ![moodboard](../src/img/graphic/logotype.png "moodboard insparation")
+### ![logotype](../src/img/graphic/logotype.png "moodboard insparation")
 
 ***
 
@@ -45,4 +45,4 @@
 
 Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspect of this project.
 
-🏡 *[Go back home](https://louiiuol.github.io/swear-tin/)*
+🏡 *[Go back home](../README.md)*
