@@ -20,6 +20,6 @@ export class NavbarComponent {
 
   showProfile(): void { alert('feature coming soon'); }
 
-  logout = (): void => this.authService.logout();
+  logout(): void { this.authService.logout(); }
 
 }
