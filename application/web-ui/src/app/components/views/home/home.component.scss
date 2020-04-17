@@ -6,10 +6,7 @@ main {
     align-self: stretch;
     display: flex;
     flex-flow: column nowrap;
-    h1 {
-      text-align: center;
-    }
-  
+    h1 { text-align: center; }
     h2 {
       font-family: poppins, sans-serif !important;
       .icons { margin-right: 1.25rem; min-width: 64px; }
@@ -28,7 +25,6 @@ main {
       }
     }
   }
-  
   mat-card#forms {
     padding: 0;
     margin: 1rem auto;

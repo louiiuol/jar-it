@@ -25,4 +25,20 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should init with login form', () => {
+    expect(component.active).toEqual('login');
+  });
+
+  it('should toggle to register form', () => {
+    const register = 'register';
+    component.setActive(register);
+    expect(component.active).toEqual(register);
+  });
+
+  it('should load sub-titles', () => {
+    const subs = component.subTitles;
+    expect(subs.length).toEqual(3);
+  });
+
 });
