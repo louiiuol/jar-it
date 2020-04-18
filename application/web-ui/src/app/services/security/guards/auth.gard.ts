@@ -7,10 +7,15 @@ export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) { }
 
+  /**Overriding canActivate to non-logged routes
+   * This method redirect to dashboard view if user is logged in,
+   * and returns boolean: true if he isn't logged in, false otherwise
+   */
   canActivate() {
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['dashboard']);
     }
     return !this.authService.isLoggedIn();
   }
+
 }
