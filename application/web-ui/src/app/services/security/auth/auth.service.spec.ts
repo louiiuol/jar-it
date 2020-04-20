@@ -32,7 +32,7 @@ describe('AuthService', () => {
   it('should register with success', () => {
     const data = { username: 'tester42', password: 'Password1', email: 'testingemail@mail.com' };
     service.signUp(data).subscribe();
-    const req = httpMock.expectOne(`${Config.uris.register}`);
+    const req = httpMock.expectOne(`${Config.uris.register}`, 'yolo');
     expect(req.request.method).toBe('POST');
     req.flush(data);
     // TODO add success assertion

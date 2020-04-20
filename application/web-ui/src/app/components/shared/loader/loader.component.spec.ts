@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoaderComponent } from './loader.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { LoaderService } from './loader.service';
 
 describe('LoaderComponent', () => {

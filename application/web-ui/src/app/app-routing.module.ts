@@ -5,21 +5,21 @@ import { AuthGuard, UserGuard } from './services/security/guards';
 import { PageNotFoundComponent } from './components/views/page-not-found/page-not-found.component';
 import { DashboardComponent } from './components/views/dashboard/dashboard.component';
 
-const routes: Routes = [
+export const routes: Routes = [
 
   { path: 'welcome',
     component: HomeComponent,
     canActivate: [AuthGuard] },
 
-    { path: 'dashboard',
+  { path: 'dashboard',
     component: DashboardComponent,
     canActivate: [UserGuard] },
 
-  { path: '',
-    redirectTo: '/welcome',
-    pathMatch: 'full' },
+  { path: '404', component: PageNotFoundComponent },
 
-  { path: '**', component: PageNotFoundComponent }
+  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
+
+  { path: '**', redirectTo: '/404', pathMatch: 'full' }
 
 ];
 

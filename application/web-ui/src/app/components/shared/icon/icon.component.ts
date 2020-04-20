@@ -6,6 +6,8 @@ import { Component, Input } from '@angular/core';
 })
 export class IconComponent {
 
+  constructor() { }
+
   @Input() name: string;
   @Input() avatar: boolean;
 
@@ -13,8 +15,6 @@ export class IconComponent {
   private prefix = 'icons.svg#';
   private prefixForAvatar = 'avatars.svg#';
 
-  get href() { return this.base +  (!!this.avatar ? this.prefixForAvatar : this.prefix) + this.name; }
-
-  constructor() { }
+  get href() {return this.base + (!!this.avatar ? this.prefixForAvatar : this.prefix) + this.name; }
 
 }

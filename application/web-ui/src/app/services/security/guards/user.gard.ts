@@ -7,11 +7,16 @@ export class UserGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) { }
 
+  /**Overriding canActivate to restricted routes
+   * This method redirect to home page view if user is not logged in,
+   * and returns boolean: true if the user is logged in, false otherwise
+   */
   canActivate() {
-    if (!this.authService.isLoggedIn()) {
+    const logged: boolean = this.authService.isLoggedIn();
+    if ( !logged ) {
       this.router.navigate(['/welcome']);
     }
-    return this.authService.isLoggedIn();
+    return logged;
   }
 
 }
