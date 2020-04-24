@@ -1,4 +1,4 @@
-# *e*Tin: the first electronic swear tin
+# *e*Tin | the first electronic swear tin
 
 ![Spring CI](https://github.com/louiiuol/swear-tin/workflows/Spring%20CI/badge.svg)
 ![Node CI](https://github.com/louiiuol/swear-tin/workflows/Node%20CI/badge.svg)
@@ -17,19 +17,21 @@
 * [Angular X](https://angular.io/docs) - JS Framework
 * [Material angular 2](https://angular.io/docs) - JS Overlay Framework
 
-> *More information related to the stack [here](https://louiiuol.github.io/swear-tin/spec/technical/)!*
+> *More information related to the stack [here](https://louiiuol.github.io/swear-tin/spec/stack.md/)!*
 
 ## Contributing 🙌
 
-> Before contributing to project, please check the following:
->
-> * [HowToGit.md](https://gist.github.com/louiiuol/2697f8217853689fef9173e4eaad5386#versioning-how-to-git) (git commands)
-> * [CONTRIBUTING.md](https://gist.github.com/louiiuol/f1ca9436c877c85f39f20e683ed64156) (code of conduct,  pull requests process)
+Before contributing to project, please check the following:
+
+* [HowToGit.md](https://gist.github.com/louiiuol/2697f8217853689fef9173e4eaad5386#versioning-how-to-git) (git commands)
+* [CONTRIBUTING.md](https://gist.github.com/louiiuol/f1ca9436c877c85f39f20e683ed64156) (code of conduct,  pull requests process)
 
 ## License 💼
 
-> This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GNU General Public License v3.0 License (cf. [License](LICENSE.md))
 
-## Authors 🖊
+***
 
-> * **Louis Godlewski**  - [louiiuol](https://github.com/louiiuol)
+## Contact ✉️
+
+Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspect of this project.

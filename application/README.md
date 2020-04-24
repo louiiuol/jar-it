@@ -1,4 +1,4 @@
-# e.Tin Application
+# e.Tin Application Overview
 
 ## ![eTin wiki banner](../docs/src/img/banner.png)
 
@@ -19,39 +19,24 @@
 
 ## Installing 🛠
 
-### Server API
-
 ```shell
-cd swear-tin/application/api;
-mvn clean install;
-mvn spring-boot:run -Dspring-boot.run.profiles=[dev/test/prod]
-```
-
-### Web App
-
-```shell
-cd swear-tin/application/web-ui;
-npm install;
-ng serve
+launch command coming soon ...
 ```
 
 ## Testing🧪
 
-### Server API
-
 ```shell
-cd swear-tin/application/api;
-mvn clean install
+test command coming soon ...
 ```
 
-### Web App
+## Build 🏗
 
 ```shell
-cd swear-tin/application/web-ui;
-npm install;
-ng test
+build command coming soon ...
 ```
 
-## Authors 🖊
+***
 
-> * **Louis Godlewski** - [louiiuol](https://github.com/louiiuol)
+## Contact ✉️
+
+Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspect of this project.
