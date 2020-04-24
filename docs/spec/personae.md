@@ -33,25 +33,25 @@ The following personae defines final users of the application. Every features, a
 
 Marie, as Technological leader, is very busy. She often does long Peer Review of code, where she need to be very focus and cannot be distracted by anything. She also helps a lot her team, and need calm to do so effectively.
 
-#### ![personae marie](../src/img/personae/marie.png)
+#### ![personae marie](../src/img/spec/personae/marie.png)
 
 ### Lucas, _as_ **Happy Manager**
 
 Lucas is the Happy Manager of the company. He takes care of organising everyone work depending on their skills and their needs. He always tries he best to create a peacefull and productive atmosphere.
 
-#### ![personae lucas](../src/img/personae/lucas.png)
+#### ![personae lucas](../src/img/spec/personae/lucas.png)
 
 ### Julie, _as_ **Product Owner**
 
 Julie is the Product Owner of every company’s prjects, she is always on skype discussing with clients and would like a quieter place to work but is too shy to ask others to behave.  
 
-#### ![personae marie](../src/img/personae/julie.png)
+#### ![personae marie](../src/img/spec/personae/julie.png)
 
 ### Marc, _as_ **Intern**
 
 Marc arrived 2 month ago as intern in the company, he assist Marie and John on various development task and learn good practice, so needs time to try out and discover mistakes by himself
 
-#### ![personae marie](../src/img/personae/marc.png)
+#### ![personae marie](../src/img/spec/personae/marc.png)
 
 ## Conclusion 💡
 

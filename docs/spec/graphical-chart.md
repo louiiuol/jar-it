@@ -6,7 +6,7 @@
 
 The following chart defines the graphical sytem of «e.Tin» application with a concret definition of most important visual elements.
 
-### ![graphical-chart](../src/img/graphic/graphic-chart.png "moodboard insparation")
+### ![graphical-chart](../src/img/spec/graphic/graphic-chart.png "moodboard insparation")
 
 ## Mood board 🖼
 
@@ -14,7 +14,7 @@ This mood board helps graphist describing the atmosphere of the graphical chart:
 
 > It describes a *cartoon atmosphere* with large fonts  and vives colors. This means that eTin needs to express more simple visual based on the *comics world*.
 
-### ![moodboard](../src/img/graphic/moodboard.jpg "moodboard insparation")
+### ![moodboard](../src/img/spec/graphic/moodboard.jpg "moodboard insparation")
 
 ## Colors
 
@@ -37,7 +37,7 @@ This mood board helps graphist describing the atmosphere of the graphical chart:
 
 Le logotype est  l’élément le plus important de cette charte graphique. Il rappel le style Flat Design, par ses formes, mais est composé de vives couleurs.
 
-### ![logotype](../src/img/graphic/logotype.png "moodboard insparation")
+### ![logotype](../src/img/spec/graphic/logotype.png "moodboard insparation")
 
 ***
 

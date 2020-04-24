@@ -8,7 +8,7 @@ This project was mainly made to pass the following RNCP title: "Applications con
 
 The following tables represent RNCP Skills **covered in this project** in order to pass the "*Application Designer & Developer*" professional title:
 
-![alt text](../src/img/references-rncp.png "RNCP  requirements")
+![alt text](../src/img/spec/references-rncp.png "RNCP  requirements")
 
 ## Skills Details 🔍
 

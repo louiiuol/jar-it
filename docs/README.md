@@ -10,10 +10,22 @@
 
 * [RNCP requirements](spec/rncp.md)
 * [Project Summary](spec/project-summary.md)
-* [Graphical Chart](spec/graphical-chart.md)
 * [Tricount Benchmark](spec/tricount.md)
+
+#### Graphism
+
+* [Graphical Chart](spec/graphical-chart.md)
+* [Wireframes](spec/graphical-chart.md)
+
+#### Functional
+
 * [Personae](spec/personae.md)
 * [Needs Expression](spec/needs.md)
+* [Features](spec/features.md)
+
+#### Technical
+
+* [Architecture Overview](spec/architecture.md)
 
 ***
 
