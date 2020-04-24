@@ -11,17 +11,21 @@ assignees: 'louiiuol'
 
 ## Context
 
-> **THE USER IS** [...]
->
-> **THE USER HAS** [...] (if relevant)
+### **THE USER IS** [...]
+
+### **THE USER HAS** [...] (if relevant)
+
+***
 
 ## User Story
 
-> **AS** [...] , [...]
->
-> **I WANT TO** [...]
->
-> **SO THAT I CAN** [...]
+### **AS** [...] , [...]
+
+### **I WANT TO** [...]
+
+### **SO THAT I CAN** [...]
+
+***
 
 ## Functional specifications (VIEWS)
 
@@ -41,11 +45,13 @@ assignees: 'louiiuol'
 - [x] [...]
 - [x] [...]
 
+***
+
 ## Functional specifications (FORM)
 
 ### Loading task
 
-> Inputs will disappear and the user will see a circular loader while [...]
+> [...]
 
 ### Success
 
@@ -55,7 +61,7 @@ assignees: 'louiiuol'
 
 > If some errors occurred, [...]
 
-### Form rules:
+### Form rules
 
 |Field|Placeholder|Pattern|Requirements|
 |:----|:---------:|:-----:|:----------:|
