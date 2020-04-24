@@ -34,7 +34,6 @@
 * [Report own swears](https://github.com/louiiuol/swear-tin/issues/16)
 * [Display team's swear historic table](https://github.com/louiiuol/swear-tin/issues/18)
 
-
 ***
 
 ## Contact ✉️

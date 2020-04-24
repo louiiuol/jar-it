@@ -134,9 +134,3 @@ Temporary Items
 .directory
 .Trash-*
 .nfs*
-
-###  GRAPHICS ###
-@SRC/
-*.psd
-*.ai
-*.ae
