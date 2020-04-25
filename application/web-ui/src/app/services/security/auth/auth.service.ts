@@ -14,6 +14,12 @@ export class AuthService {
 
   signUp = (info: any): Observable<string> => this.http.post<string>(Config.uris.register, info, Config.httpOptions.json);
 
+  logOut() {
+    console.log('hello motehrfuicker');
+    this.tokenStore.clearToken();
+    this.router.navigate(['/welcome']);
+  }
+
   logIn(data: AuthLogin): void {
     this.createPasswordGrant(data).subscribe(
       token => {
@@ -31,11 +37,6 @@ export class AuthService {
         }
       }
     );
-  }
-
-  logout = (): void => {
-    this.tokenStore.clearToken();
-    this.router.navigate(['/welcome']);
   }
 
   isLoggedIn = (): boolean => this.tokenStore.checkToken();

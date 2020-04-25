@@ -9,17 +9,26 @@ import { AuthService } from 'src/app/services/security/auth/auth.service';
 })
 export class NavbarComponent {
 
-  constructor(protected router: Router, protected authService: AuthService) {}
+  constructor(private router: Router, private service: AuthService) {}
 
-  get username() { if (this.isLoggedIn()) { return this.authService.getCurrentUser().username; } }
-  get avatar() { if (this.isLoggedIn()) { return this.authService.getCurrentUser().avatar; } }
+  get username() {
+    if (this.isLoggedIn()) {
+    return this.service.getCurrentUser().username;
+    }
+  }
 
-  isLoggedIn(): boolean { return this.authService.isLoggedIn(); }
+  get avatar() {
+    if (this.isLoggedIn()) {
+      return this.service.getCurrentUser().avatar;
+    }
+  }
+
+  isLoggedIn(): boolean { return this.service.isLoggedIn(); }
+
+  logout(): void { this.service.logOut(); }
 
   showDashboard(): void { this.router.navigate(['/dashboard']); }
 
-  showProfile(): void { alert('feature coming soon'); }
-
-  logout(): void { this.authService.logout(); }
+  showProfile(): void { this.router.navigate(['/profile']); }
 
 }

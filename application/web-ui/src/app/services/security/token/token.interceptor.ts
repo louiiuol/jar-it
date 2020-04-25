@@ -11,11 +11,11 @@ import { LoaderService } from 'src/app/components/shared';
 @Injectable({ providedIn: 'root' })
 export class TokenInterceptor implements HttpInterceptor {
 
-    constructor(private tokenStore: TokenStorageService, protected authService: AuthService, protected loaderService: LoaderService) { }
+    constructor(private tokenStore: TokenStorageService, protected loaderService: LoaderService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.loaderService.show();
-        const token =  this.tokenStore.getToken();
+        const token = this.tokenStore.getToken();
         if ( !!token ) {
             req = this.addToken(req, token.accessToken);
         }
