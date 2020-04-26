@@ -17,14 +17,14 @@ spring:
         active: dev
     datasource:
         url: jdbc:mysql://localhost:3306/etin_dev?createDatabaseIfNotExist=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
-        username: root
+        username: staff
         password:
     jpa:
         open-in-view: false
         show-sql: true
-        generate-ddl: false #true
+        generate-ddl: true #true
         hibernate:
-            ddl-auto: none #create
+            ddl-auto: create #create
         properties: 
             hibernate:
                 dialect: org.hibernate.dialect.MySQL5InnoDBDialect
@@ -42,18 +42,15 @@ spring:
         add-mappings: false
 
 logging:
-    config: classpath:logs/logback-dev.xml
+    config: classpath:logback/logback-dev.xml
 
 jwt-auth-server:
     keyStore: jwt.jks
-    keyPass: "JwtKey"
-    keyAlias: "jwtKey"
+    keyPass: "SwearTinKey"
+    keyAlias: "SwearTinKey"
     accessTokenValiditySeconds: 1800
     refreshTokenValiditySeconds: 86400
 
 cron:
     config:
         each-day: "0 0 0 * * *"
-
-validators:
-    uniqueEmail: "this email is already taken"

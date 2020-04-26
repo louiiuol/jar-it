@@ -1,5 +1,5 @@
 server:
-    port: 9090
+    port: 1338
     servlet:
         context-path: /
         jsp:
@@ -17,7 +17,7 @@ spring:
         active: test
     datasource:
         url: jdbc:mysql://localhost:3306/etin_test?createDatabaseIfNotExist=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
-        username: root
+        username: staff
         password: 
         data: classpath:sql/integration-test.sql
         initialization-mode: always 
@@ -44,12 +44,12 @@ spring:
         add-mappings: false
 
 logging:
-    config: classpath:logs/logback-dev.xml
+    config: classpath:logback/logback-dev.xml
 
 jwt-auth-server:
     keyStore: jwt.jks
-    keyPass: "JwtKey"
-    keyAlias: "jwtKey"
+    keyPass: "SwearTinKey"
+    keyAlias: "SwearTinKey"
     accessTokenValiditySeconds: 1800
     refreshTokenValiditySeconds: 86400
 

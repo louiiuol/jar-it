@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- Standard output -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<!-- <pattern>%d{dd/MM/yyyy - HH:mm:ss} |%-5p| [%F::%M:%L] - %m%n</pattern> -->
+			<pattern>%d{HH:mm} |%-5p| [%F::%M:%L] - %m%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Root logger -->
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+	</root>
+
+		<logger name="Debugger" additivity="false" level="debug">
+			<appender-ref ref="CONSOLE" />
+		</logger>
+
+		<logger name="Tracer" additivity="false" level="trace">
+			<appender-ref ref="CONSOLE" />
+		</logger>
+
+</configuration>
