@@ -29,7 +29,7 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/resources/styles/styles.scss"
+              "src/styles/styles.scss"
             ],
             "scripts": []
           },
@@ -97,7 +97,7 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/resources/styles/styles.scss"
+              "src/styles/styles.scss"
             ],
             "scripts": []
           }
@@ -128,12 +128,6 @@
           }
         }
       }
-    }
-  },
-  "defaultProject": "web-ui",
-  "schematics": {
-    "@schematics/angular:component": {
-      "styleext": "scss"
     }
   }
 }

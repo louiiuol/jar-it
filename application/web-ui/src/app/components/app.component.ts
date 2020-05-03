@@ -6,9 +6,10 @@ import { Component } from '@angular/core';
   <app-navbar></app-navbar>
   <main class="container mat-typography">
     <router-outlet></router-outlet>
-  </main>
-  `
+  </main>`
 })
 export class AppComponent {
-  constructor() {}
+
+  constructor() { }
+
 }

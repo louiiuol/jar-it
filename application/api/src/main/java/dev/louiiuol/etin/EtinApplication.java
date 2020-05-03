@@ -11,6 +11,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 
  * @see SpringBootApplication
  * @see EnableSwagger2
+ * @author louiiuol
  */
 @SpringBootApplication(scanBasePackages = "dev.louiiuol")
 @EnableSwagger2

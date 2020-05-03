@@ -1,15 +1,18 @@
 package dev.louiiuol.etin.models.dtos.requests.users;
 
 import java.text.MessageFormat;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Convert;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import dev.louiiuol.etin.api.validators.adult.Adult;
 import dev.louiiuol.etin.api.validators.email.UniqueEmail;
 import dev.louiiuol.etin.api.validators.username.UniqueUsername;
 import dev.louiiuol.etin.models.entities.Role;
@@ -24,7 +27,9 @@ import dev.louiiuol.etin.services.utils.BooleanConverter;
  */
 public class UserCreateDto {
 
-    protected UserCreateDto() {/*Overrides default constructor as protected without arguments*/}
+    protected UserCreateDto() {
+        // Overrides default no-args constructor as protected
+    }
 
     @NotBlank
     @UniqueUsername
@@ -43,6 +48,10 @@ public class UserCreateDto {
 
     @JsonIgnore
     private String avatar = "unknown";
+
+    @NotNull
+    @Adult
+    private LocalDate birthDate;
 
     private Set<Role> roles;
 
@@ -66,8 +75,9 @@ public class UserCreateDto {
 
     @Override
     public String toString() {
-        return MessageFormat.format("UserCreateDTO: [username: {0}, email: {1}, password: [PROTECTED], roles: {2}, avatar: {3}, enabled: {4} ]",
-        username, email, roles, avatar, enabled );
+        return MessageFormat.format(
+            "UserCreateDTO: [username: {0}, email: {1}, password: [PROTECTED], birthDate: {2}, avatar: {3}, roles: {4}, enabled: {5} ]",
+            username, email, birthDate, roles, avatar, enabled );
     }
 
 }

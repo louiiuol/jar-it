@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-import { Config } from 'src/resources/config';
-import { User } from 'src/app/models';
+import { environment } from 'src/environments/environment';
+import { UserView, IUserView } from 'src/app/models';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-  constructor(private http: HttpClient) {}
+  private readonly users_url =  environment.root_url_secured + 'users';
 
-  getAllUser = (): Observable<User[]> => this.http.get<any>(Config.uris.user, Config.httpOptions.json);
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  get = (id: number): Observable<User> => this.http.get<any>(Config.uris.user + '/' + id, Config.httpOptions.json);
+  getAllUsers = (): Observable<UserView[]> => this.http.get<IUserView[]>(this.users_url, environment.config.jsonHeader);
+
+  get = (id: number): Observable<UserView> => this.http.get<IUserView>(this.users_url + '/' + id, environment.config.jsonHeader);
 
 }

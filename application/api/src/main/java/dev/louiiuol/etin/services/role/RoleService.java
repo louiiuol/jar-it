@@ -6,10 +6,8 @@ import dev.louiiuol.etin.models.entities.Role;
 
 /**
  * Public Interface to deal with user's {@code Role} informations:
- * <b> This Service is meant to be use only by UserService & Validators </b>
- * <ul>
- * 	<li> Set<Role> {@link #getRoles(code)}
- * </ul>
+ * <p>
+ * <b>This Service is meant to be use only by UserService & Validators</b>
  */
 public interface RoleService {
 

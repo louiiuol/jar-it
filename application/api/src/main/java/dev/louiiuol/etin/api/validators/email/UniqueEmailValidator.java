@@ -14,7 +14,9 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, St
 
     private final UserService service;
 
-    protected UniqueEmailValidator(UserService service) { this.service = service; }
+    protected UniqueEmailValidator(UserService service) {
+        this.service = service;
+    }
 
     /**
      * Checks the unicity of the email based on the service returns

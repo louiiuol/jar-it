@@ -28,7 +28,9 @@ import dev.louiiuol.etin.config.token.CustomTokenEnhancer;
 import dev.louiiuol.etin.services.user.UserService;
 
 /**
- * Defines configuration for the authorization applied over the API
+ * Defines a custom authorization's configuration applied over the API based on {@link AuthorizationServerConfigurerAdapter}
+ * oauth providers. The main extension point for customizations is the {@link TokenEnhancer} which will be
+ * called after the access and refresh tokens have been generated but before they are stored.
  * 
  * @see  AuthorizationServerSecurityConfigurer
  * @see AuthorizationServerEndpointsConfigurer
@@ -65,11 +67,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     private final PasswordEncoder encoder;
 
-    protected AuthorizationServerConfig( AuthenticationManager authenticationManagerBean, UserService userDetailsService, CustomAccessTokenConverter customAccessTokenConverter, PasswordEncoder encoder) {
+    protected AuthorizationServerConfig(
+        AuthenticationManager authenticationManagerBean,
+        UserService userDetailsService,
+        CustomAccessTokenConverter customAccessTokenConverter,
+        PasswordEncoder encoder
+    ) {
         this.authenticationManager = authenticationManagerBean;
         this.userDetailsService = userDetailsService;
         this.customAccessTokenConverter = customAccessTokenConverter;
-        this.encoder =  encoder;
+        this.encoder = encoder;
     }
 
     /**
@@ -87,25 +94,33 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     /**
-     * JwtTokenStore can read and write JWT thanks to the token converter
+     * Defines a custom JwtTokenStore based on custom {@link JwtAccessTokenConverter}
+     * to read and write users' tokens.
      * 
      * @return {@code TokenStore}
      */
     @Bean
-    protected TokenStore tokenStore() { return new JwtTokenStore(accessTokenConverter()); }
+    protected TokenStore tokenStore() {
+        JwtAccessTokenConverter converter = accessTokenConverter();
+        return new JwtTokenStore(converter);
+    }
 
     /**
-     * Strategy for enhancing an access token before it is stored by an AuthorizationServerTokenServices implementation
+     * Strategy for enhancing an access token before it is
+     * stored by an AuthorizationServerTokenServices implementation
      * 
      * @return {@code TokenEnhancer}
      */
     @Bean
-    public TokenEnhancer tokenEnhancer() { return new CustomTokenEnhancer(); }
+    public TokenEnhancer tokenEnhancer() {
+        return new CustomTokenEnhancer();
+    }
 
     /**
-     * A token converter for JWT and specifies a signing key (private/public key pair)
+     * Defines custom configuration of {@link JwtAccessTokenConverter}
+     * providing JKS keys using a {@link KeyStoreKeyFactory}.
      * 
-     * @return {@code JwtAccessTokenConverter}
+     * @return custom {@code JwtAccessTokenConverter}
      */
     @Bean
     protected JwtAccessTokenConverter accessTokenConverter() {
@@ -141,12 +156,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      * @throws Exception
      */
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer configurer) throws Exception { configurer.allowFormAuthenticationForClients(); }
+    public void configure(AuthorizationServerSecurityConfigurer configurer) throws Exception {
+        configurer.allowFormAuthenticationForClients();
+    }
 
     /**
      * In memory client with empty secret, application is a "private" API with a single client,
      * but Spring forces a client authentication. Authorized grant types are
-     * <i>password</i> and <i>refresh_token</i>
+     * <i>password</i> and <i>refresh_token</i> with scope <i>trusted</i>
      * 
      * @param clients config sor ClientDetails authorization
      * @throws Exception

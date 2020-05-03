@@ -18,7 +18,7 @@ import dev.louiiuol.etin.models.entities.UserDetails;
  */
 public class CustomTokenEnhancer implements TokenEnhancer {
 
-    final static String USER_ID_KEY = "userId";
+    static final String USER_ID_KEY = "userId";
 
 	/**
 	 * Customizes an access token before creating a new token by adding the {@code userId}

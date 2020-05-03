@@ -17,11 +17,10 @@ import dev.louiiuol.etin.models.entities.AbstractEntity;
  * Abstract Service to be extends in every domain services of the API, 
  * provides couple of methods and injected services:
  * <p>
- * <b> The Abstract Class defines a contract for every services that extends it,
+ * This class defines a contract for every services that extends it,
  * most of basic methods are defined here to simplify persistence and mapping in Service's Implementations:
  * use them & do not create new unnecessary ones. When using this class,
- * please provide {@code T} Entity & {@code R} Repository </b>
- * {@code AbstractService<Entity, EntityRepository>}
+ * please provide {@code T} Entity & {@code R} Repository
  * <ul>
  * <li> {@link ModelMapper} - to map DTO in Entity and vice versa
  * <li> {@link R Repository} - Repository used to persist datas
@@ -135,7 +134,7 @@ public abstract class AbstractService<T extends AbstractEntity, R extends JpaRep
      */
     protected <V> Set<V> mapSetView(Collection<T> source, Class<V> type) {
         return source.stream()
-            .map( entity -> (V) mapper.map(entity, type) )
+            .map( entity -> mapper.map(entity, type) )
             .collect(Collectors.toUnmodifiableSet());
     }
 

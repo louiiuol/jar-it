@@ -39,10 +39,15 @@ public class UserDetails extends User {
 
     private String avatar;
 
-    public final static String USER_ID_KEY = "userId";
+    public static final String USER_ID_KEY = "userId";
 
-    public Long getId() { return id; }
-    public String getAvatar() { return avatar; }
+    public Long getId() {
+      return id;
+    }
+
+    public String getAvatar() {
+      return avatar;
+    }
 
     /**
      * Create {@code Map} of {@code UserDetails} custom informations
@@ -54,7 +59,7 @@ public class UserDetails extends User {
       Map<String, Object> additionalInfo = new HashMap<>();
       additionalInfo.put(USER_ID_KEY, id);
       additionalInfo.put("username", getUsername());
-      additionalInfo.put("role", getAuthorities());
+      additionalInfo.put("roles", getAuthorities());
       additionalInfo.put("avatar", getAvatar());
       return additionalInfo;
     }
@@ -72,7 +77,8 @@ public class UserDetails extends User {
 
     @Override
     public String toString() {
-      return MessageFormat.format("[ id: {0}, authorities: {1}, password: [PROTECTED], username: {2}, enabled: {3}, expired: {4}, locked: {5}, credentials-expired: {6} ]",
+      return MessageFormat
+        .format("{ id: {0}, authorities: {1}, password: [PROTECTED], username: {2}, enabled: {3}, expired: {4}, locked: {5}, credentials-expired: {6} }",
         id, getAuthorities(), getUsername(), isEnabled(), !isAccountNonExpired(), !isAccountNonLocked(), !isCredentialsNonExpired() );
     }
 

@@ -15,9 +15,10 @@
 
 * [Spring](https://spring.io/) - Java Framework
 * [Angular X](https://angular.io/docs) - JS Framework
-* [Material angular 2](https://angular.io/docs) - JS Overlay Framework
 
-> *More information related to the stack [here](https://louiiuol.github.io/swear-tin/spec/stack.md/)!*
+## ![eTin wiki banner](docs/src/img/spec/architecture/architecture.png)
+
+> *More information related to the stack [here](https://louiiuol.github.io/swear-tin/spec/architecture.md/)!*
 
 ## Contributing 🙌
 
@@ -34,4 +35,4 @@ This project is licensed under the GNU General Public License v3.0 License (cf. 
 
 ## Contact ✉️
 
-Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspect of this project.
+Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspects of this project.

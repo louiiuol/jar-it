@@ -1,13 +1,14 @@
+/**
+ * Represents current User's informations
+ * when creating new account.
+ */
 export class RegisterInfo {
-    username: string;
-    email: string;
-    roles: string[];
-    password: string;
 
-    constructor(username: string, email: string, password: string) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.roles = ['ROLE_USER'];
-    }
+  constructor(
+    public readonly username: string,
+    public readonly email: string,
+    public readonly password: string,
+    public readonly birthDate: Date
+  ) { }
+
 }

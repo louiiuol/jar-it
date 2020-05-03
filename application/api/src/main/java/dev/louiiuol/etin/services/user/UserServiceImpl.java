@@ -19,7 +19,7 @@ import dev.louiiuol.etin.services.utils.AbstractService;
 
 /**
  * Concrete implementation of {@code UserService}
- * that extends {@code AbstractService} to handle {@code User}
+ * that extends {@code AbstractService} to handle {@code User} persistence
  * 
  * @see UserService
  * @see AbstractService
@@ -34,7 +34,7 @@ public class UserServiceImpl extends AbstractService<User, UserRepository>
 
     private final RoleService roleService;
 
-    private final String USER_ROLE = "ROLE_USER";
+    private static final String USER_ROLE = "ROLE_USER";
 
     protected UserServiceImpl(UserRepository repo, RoleService roleService) {
         super(repo);
@@ -42,33 +42,49 @@ public class UserServiceImpl extends AbstractService<User, UserRepository>
     }
 
     @Override
-    public UserViewDto get(Long id) { return mapView( getEntity(id), UserViewDto.class); }
+    public UserViewDto get(Long id) {
+        return mapView(getEntity(id), UserViewDto.class);
+    }
 
     @Override
-    public UserViewDetailsDto getDetails(Long id) { return mapView( getEntity(id), UserViewDetailsDto.class); }
+    public UserViewDetailsDto getDetails(Long id) {
+        return mapView(getEntity(id), UserViewDetailsDto.class);
+    }
 
     @Override
-    public void update(Long id, UserUpdateDto dto) { updateEntityById(dto, id); }
+    public void update(Long id, UserUpdateDto dto) {
+        updateEntityById(dto, id);
+    }
 
     @Override
-    public void delete(Long id) { repo().deleteById(id); }
+    public void close(Long id) {
+        User current = repo().getById(id).orElseThrow(ResourceNotFoundException::new);
+        current.close();
+        updateEntityById(current, id);
+    }
 
     @Override
-    public Set<UserViewDto> getAll() { return getAll(UserViewDto.class); }
+    public Set<UserViewDto> getAll() {
+        return mapSetView(repo().findByEnabledTrue(), UserViewDto.class);
+    }
 
     @Override
-    public boolean existsByEmail(String email) { return repo().existsByEmail(email); };
+    public boolean existsByEmail(String email) {
+        return repo().existsByEmail(email);
+    }
 
     @Override
-    public boolean existsByUserName(String username) { return repo().existsByUsername(username); };
+    public boolean existsByUserName(String username) {
+        return repo().existsByUsername(username);
+    }
 
     @Override
-    public Long create(UserCreateDto dto) { 
+    public Long create(UserCreateDto dto) {
         dto.setPassword(encoder.encode( dto.getPassword() ) );
-        dto.setRoles(roleService.getRoles(this.USER_ROLE));
+        dto.setRoles(roleService.getRoles(USER_ROLE));
         User entity = mapper().map(dto, User.class);
         return repo().save( entity ).getId();
-    };
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) {

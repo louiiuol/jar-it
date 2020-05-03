@@ -10,6 +10,8 @@ public class ResourceNotFoundException extends RuntimeException {
 
     private static final long serialVersionUID = -8832903629692927911L;
 
-    public ResourceNotFoundException() {/*Overrides default constructor as public without arguments*/}
+    public ResourceNotFoundException() {
+        super();
+    }
 
 }

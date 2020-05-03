@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomAccessTokenConverter extends DefaultAccessTokenConverter {
 
-	/** 
+	/**
 	 * Convert map of claims and store into {@code OAuth2Authentication}
 	 * 
 	 * @param claim a Map of String containing authentication's claims

@@ -12,7 +12,7 @@ import dev.louiiuol.etin.models.entities.Role;
  *
  * @see JpaRepository 
  */
-public interface RoleRepository  extends  JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
 
 	/**
       * Find {@code Report} with given {@code code}

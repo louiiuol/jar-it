@@ -14,7 +14,9 @@ public class UniqueUsernameValidator implements ConstraintValidator<UniqueUserna
 
     private final UserService service;
 
-    protected UniqueUsernameValidator(UserService service) { this.service = service; }
+    protected UniqueUsernameValidator(UserService service) {
+        this.service = service;
+    }
 
     /**
      * Checks the unicity of the {@code User}'s username based on the service returns

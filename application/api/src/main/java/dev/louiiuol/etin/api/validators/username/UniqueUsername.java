@@ -20,7 +20,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = UniqueUsernameValidator.class)
 public @interface UniqueUsername {
 
-    String message() default "username is already taken";
+    String message() default "{E_NOT_UNIQUE}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 

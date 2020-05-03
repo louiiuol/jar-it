@@ -1,39 +1,51 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
-
-import { AuthService, FormFactory } from 'src/app/services';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { FormGroup, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthLogin } from 'src/app/models';
+import { AuthService } from 'src/app/services/security/auth/auth.service';
+import { FormFactory } from 'src/app/services/forms/form.factory';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
-  constructor( protected authService: AuthService, public forms: FormFactory, protected fb: FormBuilder ) {}
+  @Output() activeEvent = new EventEmitter<string>();
 
   hide = true;
   loginForm: FormGroup;
   readonly errorMessages = this.forms.errorMessages;
+  private sub: Subscription = new Subscription();
 
-  @Output() activeEvent = new EventEmitter<string>();
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    public forms: FormFactory,
+  ) { }
 
   get username(): AbstractControl { return this.loginForm.get('username'); }
-  get password(): AbstractControl  { return this.loginForm.get('password'); }
+  get password(): AbstractControl { return this.loginForm.get('password'); }
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group( {
-      username: this.forms.userForm.username,
-      password: this.forms.userForm.password
-    });
+    this.loginForm = this.forms.buildForm('login');
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   login(): void {
     const credentials = new AuthLogin(this.username.value, this.password.value);
-    if (!!credentials.username) { this.authService.logIn(credentials); }
+    this.sub = this.authService.logIn(credentials).subscribe( () => {
+      this.forms.handleSuccessMessages('Welcome Back ' + this.username.value + ' !');
+      this.router.navigate(['/dashboard']);
+    }, err => this.forms.handleErrorMessages(err) );
   }
 
-  showRegister(): void {
+  toggleForm(): void {
     this.loginForm.reset();
     this.activeEvent.emit('register');
   }

@@ -16,13 +16,23 @@
         </mat-error>
     </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>What is your bithdate ?</mat-label>
+      <input  formControlName="birthDate" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngFor="let validation of errorMessages.birthDate">
+          <mat-error *ngIf="forms.isValid(birthDate, validation)">{{validation.message}}</mat-error>
+      </mat-error>
+  </mat-form-field>
+
     <section formGroupName="passwordForm" class="is-flex space-evenly">
 
         <mat-form-field style="width:40%">
             <mat-label>Choose a password</mat-label>
-            <input formControlName="password" [type]="hide ? 'password' : 'text'" matInput placeholder="*************" required>
-            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <app-icon class="xs" name="{{hide ? 'hidden' : 'visible'}}"></app-icon>
+            <input formControlName="password" [type]="hidden.pass ? 'password' : 'text'" matInput placeholder="*************" required>
+            <a mat-icon-button matSuffix (click)="hidden.pass = !hidden.pass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidden.pass">
+                <app-icon class="icon xs" name="{{hidden.pass ? 'hidden' : 'visible'}}"></app-icon>
             </a>
             <mat-error *ngFor="let validation of errorMessages.password">
                 <mat-error *ngIf="forms.isValid(password, validation)">{{validation.message}}</mat-error>
@@ -31,10 +41,10 @@
 
         <mat-form-field style="width:40%">
             <mat-label>Confirm your password</mat-label>
-            <input formControlName="confirm" [type]="hideConfirm ? 'password' : 'text'" matInput placeholder="*************"
+            <input formControlName="confirm" [type]="hidden.confirm ? 'password' : 'text'" matInput placeholder="*************"
             [errorStateMatcher]="parentErrorStateMatcher" required >
-            <a mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirm">
-                <app-icon class="xs" name="{{hide ? 'hidden' : 'visible'}}"></app-icon>
+            <a mat-icon-button matSuffix (click)="hidden.confirm = !hidden.confirm" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidden.confirm">
+                <app-icon class="icon xs" name="{{hidden.confirm ? 'hidden' : 'visible'}}"></app-icon>
             </a>
             <mat-error class="is-flex spaced space-evenly" *ngFor="let validation of errorMessages.confirm">
                 <mat-error *ngIf="forms.isValid(confirm, validation)">{{validation.message}}</mat-error>
@@ -49,7 +59,7 @@
 
     <footer class="is-flex spaced space-evenly">
         <button type="submit" mat-raised-button [disabled]="registerForm.invalid" color="primary" >Join us !</button>
-        <button color="primary" mat-button (click)="showLogin()">Already have an account ?</button>
+        <button color="primary" mat-button (click)="toggleForm()">Already have an account ?</button>
     </footer>
 
 </form>

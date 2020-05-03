@@ -1,8 +1,8 @@
 {
-  "name": "web-ui",
-  "short_name": "web-ui",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "swear-tin-web-ui",
+  "short_name": "swear-tin",
+  "theme_color": "#26cada",
+  "background_color": "#f4f4f4",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

@@ -32,13 +32,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> getById(Long id);
 
     /**
-     * Return a  list of all Users registered
-     *
-     * @return {@code List<User>}
-     */
-    List<User> findAll();
-
-    /**
      * Check if {@User} with given {@code Username} exists or not.
      *
      * @param username User's name
@@ -53,5 +46,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @return {@code true} if {@code email} exists; {@code false} otherwise.
      */
     boolean existsByEmail(String email);
+
+    /**
+     * Return a list of all ACTIVE Users in database
+     *
+     * @return {@code List<User>}
+     */
+	List<User> findByEnabledTrue();
 
 }
