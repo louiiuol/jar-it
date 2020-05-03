@@ -11,17 +11,6 @@ import dev.louiiuol.etin.models.dtos.responses.users.UserViewDto;
 
 /**
  * Interface to deal with {@code User} informations.
- * <ul>
- *  <li> Long {@link #create(UserCreateDto input)}
- *  <li> UserViewDto {@link #get(Long userId)}
- *  <li> UserViewDetailsDto {@link #getDetails(Long userId)}
- *  <li> void {@link #update(Long id, UserUpdateDto dto)}
- *  <li> void {@link #updatePassword(Long id, PasswordUpdateDto dto)}
- *  <li> void {@link #delete(Long id)}
- *  <li> Set<UserViewDto> {@link #getAll()}
- *  <li> Boolean {@link #existsByUsername(String username)}
- *  <li> Boolean {@link #existsByEmail(String email)}
- * </ul>
  */
 public interface UserService extends UserDetailsService {
 
@@ -34,10 +23,10 @@ public interface UserService extends UserDetailsService {
      * <li> Save in database via Jpa Repository
      * </ul>
      * 
-     * @param dto User's information 
+     * @param userCreateDto User's information 
      * @return {@code Long} created User's identifier
      */
-    public Long create(UserCreateDto UserCreateDto);
+    public Long create(UserCreateDto userCreateDto);
 
     /**
      * Return user matching the given id
@@ -57,16 +46,16 @@ public interface UserService extends UserDetailsService {
      * Update user matching the given id with provided dto
      * 
      * @param id User's identifier
-     * @param dto User's informations to update
+     * @param userUpdateDto User's informations to update
      */
-    public void update(Long id, UserUpdateDto UserUpdateDto);
+    public void update(Long id, UserUpdateDto userUpdateDto);
 
     /**
      * Delete user matching the given id
      * 
      * @param id User's identifier
      */
-    public void delete(Long id);
+    public void close(Long id);
 
     /**
      * Return Pageable containing all users existing in database.

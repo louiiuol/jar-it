@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import dev.louiiuol.etin.models.entities.AbstractEntity;
 import dev.louiiuol.etin.services.utils.BooleanConverter;
 
 /**
@@ -27,7 +26,9 @@ import dev.louiiuol.etin.services.utils.BooleanConverter;
 )
 public class Role extends AbstractEntity {
 
-    protected Role() {/*Overrides default constructor as protected without arguments*/}
+    protected Role() {
+        // Overrides default no-args constructor as protected
+    }
 
     private static final long serialVersionUID = 1467670401616465661L;
 
@@ -38,10 +39,14 @@ public class Role extends AbstractEntity {
     @Column(columnDefinition = "ENUM('T', 'F') DEFAULT 'T'", nullable = false)
     private boolean defaultRole = false;
 
-    protected String getCode() { return code; }
+    protected String getCode() {
+        return code;
+    }
 
     @Override
-    public int hashCode() { return Objects.hash(code ); }
+    public int hashCode() {
+        return Objects.hash(code);
+    }
 
     @Override
 	public boolean equals(Object other) {
@@ -51,9 +56,9 @@ public class Role extends AbstractEntity {
     }
 
     @Override
-    public String toString() { 
-        return MessageFormat.format("Role#{0}: [code: {1}, default: {2} ]",
-        getId(), code, defaultRole); 
+    public String toString() {
+        return MessageFormat.format("{ id: {0}, code: {1}, default: {2} }",
+            getId(), code, defaultRole); 
     }
 
 }

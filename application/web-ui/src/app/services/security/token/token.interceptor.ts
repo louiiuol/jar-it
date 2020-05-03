@@ -1,29 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { TokenStorageService } from './token-storage.service';
-import { Config } from 'src/resources/config';
+import { TokenStore } from './token.store';
 
-import { AuthService } from '../auth/auth.service';
-import { LoaderService } from 'src/app/components/shared';
+const headerConf = {
+  type: 'bearer',
+  header: 'Authorization'
+};
 
 @Injectable({ providedIn: 'root' })
 export class TokenInterceptor implements HttpInterceptor {
 
-    constructor(private tokenStore: TokenStorageService, protected loaderService: LoaderService) { }
+  constructor(
+    private tokenStore: TokenStore
+  ) {}
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this.loaderService.show();
-        const token = this.tokenStore.getToken();
-        if ( !!token ) {
-            req = this.addToken(req, token.accessToken);
-        }
-        return next.handle(req).pipe( finalize( () => this.loaderService.hide() ) );
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (this.tokenStore.checkToken()) {
+      const token = this.tokenStore.getToken();
+      req = this.addHeader(req, token.access_token);
     }
+    return next.handle(req);
+  }
 
-    private addToken(req: HttpRequest<any>, token: string) {
-        return req.clone({ headers: req.headers.set(Config.token.header, Config.token.type + token) });
-    }
+  addHeader = (req: HttpRequest<any>, token: string): HttpRequest<any> =>
+    req.clone({ headers: req.headers.set(headerConf.header, headerConf.type + token) })
 
 }

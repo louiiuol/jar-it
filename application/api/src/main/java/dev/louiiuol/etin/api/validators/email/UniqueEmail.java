@@ -20,7 +20,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = UniqueEmailValidator.class)
 public @interface UniqueEmail {
 
-    String message() default "email is already taken";
+    String message() default "{E_NOT_UNIQUE}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 

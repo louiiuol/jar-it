@@ -1,9 +1,10 @@
 package dev.louiiuol.etin.api.errors;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 
 /** 
- * Represents an error when message is not readable.
+ * Represents an error when an object is not readable.
  * Provides cause as {@code String} to understand why this error occured
  */
 public class MessageNotReadableError implements Serializable {
@@ -20,8 +21,12 @@ public class MessageNotReadableError implements Serializable {
      * @param cause reason why message is not readable
      * @return new instance of {@code MessageNotReadableError}
      */
-    public MessageNotReadableError(String cause) { this.cause = cause; }
+    public MessageNotReadableError(String cause) {
+        this.cause = cause;
+    }
 
-    public String toString() { return "{cause=" + cause + ", error=" + error + "}"; }
+    public String toString() {
+        return MessageFormat.format("{ cause: {0}, error: {1} }", cause, error);
+    }
 
 }

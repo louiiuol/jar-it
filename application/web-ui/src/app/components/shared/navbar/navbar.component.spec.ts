@@ -1,107 +1,93 @@
-import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
-
-import { NavbarComponent } from './navbar.component';
-import { Router } from '@angular/router';
+import { ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { AuthService } from 'src/app/services';
 import { MatMenuModule } from '@angular/material/menu';
-import { routes } from 'src/app/app-routing.module';
+import { of } from 'rxjs';
+import { routes } from 'src/app/app.routing';
+import { NavbarComponent } from './navbar.component';
+import { AuthService } from 'src/app/services/security/auth/auth.service';
+import { loginMock } from 'src/app/models/utils/mocks';
 
-class MockAuthService {
-  logged = false;
-  isLoggedIn() { return this.logged; }
-  getCurrentUser() { return {
-    username: 'tester42',
-    avatar: 'unknown'
-  }; }
-  logOut(){}
-}
-
+// tslint:disable: no-string-literal
 describe('NavbarComponent', () => {
 
   let authService: AuthService;
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
   let router: Router;
+  let location: Location;
 
-  beforeEach(async(() => {
+  beforeEach( () => {
     TestBed.configureTestingModule({
       declarations: [ NavbarComponent ],
-      imports: [RouterTestingModule.withRoutes(routes), HttpClientModule, MatSnackBarModule, MatMenuModule],
-      providers: [{provide: AuthService, useClass: MockAuthService}],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
-    })
-    .compileComponents();
-    fixture = TestBed.createComponent(NavbarComponent);
+      imports: [RouterTestingModule.withRoutes(routes), HttpClientModule, MatMenuModule],
+      providers: [AuthService],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    }).compileComponents();
     router = TestBed.inject(Router);
-    component = fixture.componentInstance;
     authService = TestBed.inject(AuthService);
+    location = TestBed.inject(Location);
+    fixture = TestBed.createComponent(NavbarComponent);
+    component = fixture.componentInstance;
+    fixture.ngZone.run(() => { router.initialNavigation(); });
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should not be logged in when init', () => {
-    expect(component.isLoggedIn()).toBeFalsy();
+  it('shouldn\'t get user informations when not logged', () => {
+    authService.logOut();
+    expect(component.user).toBeNull();
   });
 
-  it('should get username when logged in', () => {
-    spyOn(authService, 'isLoggedIn').and.returnValue(true);
-    expect(component.username).toEqual('tester42');
+  it('should redirect to dashboard when logged in', () => {
+    fixture.ngZone.run(fakeAsync(() => {
+      authService['isLoggedIn$'] = of(true);
+      component.showDashboard().then(() => {
+        tick();
+        expect(location.path()).toBe('/dashboard');
+      });
+    }));
   });
 
-  it('shouldn\'t get username when not logged', () => {
-    spyOn(authService, 'isLoggedIn').and.returnValue(false);
-    expect(component.username).toEqual(undefined);
+  it('shouldn\'t redirect to dashboard when not logged', () => {
+    fixture.ngZone.run(fakeAsync(() => {
+      authService['isLoggedIn$'] = of(false);
+      component.showDashboard().then(() => {
+        tick();
+        expect(location.path()).toBe('/');
+      });
+    }));
   });
 
-  it('should get avatar name when logged in', () => {
-    spyOn(authService, 'isLoggedIn').and.returnValue(true);
-    expect(component.avatar).toEqual('unknown');
+  it('should redirect to profile when logged in', () => {
+    fixture.ngZone.run(fakeAsync(() => {
+      authService.logIn(loginMock);
+      component.showProfile();
+      tick();
+      // expect(location.path()).toBe('/profile'); => To uncomment when user profile component is created
+    }));
   });
 
-  it('shouldn\'t get avatar when not logged', () => {
-    spyOn(authService, 'isLoggedIn').and.returnValue(false);
-    expect(component.avatar).toEqual(undefined);
+  it('shouldn\'t redirect to profile when not logged', () => {
+    fixture.ngZone.run(fakeAsync(() => {
+      component.showProfile();
+      tick();
+      // expect(location.path()).toBe('/welcome'); => To uncomment when user profile component is created
+    }));
   });
-
-  it('should redirect to dashboard when logged in', fakeAsync( () => {
-    spyOn(authService, 'isLoggedIn').and.returnValue(true);
-    component.showDashboard();
-    tick();
-    expect(router.url).toBe('/dashboard');
-  }));
-
-  it('shouldn\'t redirect to dashboard when not logged', fakeAsync( () => {
-    spyOn(authService, 'isLoggedIn').and.returnValue(false);
-    component.showDashboard();
-    tick();
-    expect(router.url).toBe('/welcome');
-  }));
-
-  it('should redirect to profile when logged in', fakeAsync( () => {
-    spyOn(authService, 'isLoggedIn').and.returnValue(true);
-    component.showProfile();
-    tick();
-    // expect(router.url).toBe('/profile'); => To uncomment when user profile component is created
-  }));
-
-  it('shouldn\'t redirect to dashboard when not logged', fakeAsync( () => {
-    spyOn(authService, 'isLoggedIn').and.returnValue(false);
-    component.showProfile();
-    tick();
-    // expect(router.url).toBe('/welcome'); => To uncomment when user profile component is created
-  }));
 
   it('should log out', () => {
-    const spy = spyOn(authService, 'logOut').and.returnValue();
-    component.logout();
-    expect(spy).toHaveBeenCalledTimes(1);
+    fixture.ngZone.run(fakeAsync(() => {
+      const spy = spyOn(authService, 'logOut');
+      component.logout();
+      expect(spy).toHaveBeenCalledTimes(1);
+    }));
   });
 
 });

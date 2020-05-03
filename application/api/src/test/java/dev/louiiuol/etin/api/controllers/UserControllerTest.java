@@ -34,7 +34,7 @@ public class UserControllerTest extends IntegrationTestConfig {
     private final String ROOT = "/csv/user/";
     private final String REGISTER_URI = "/api/auth/signup";
     private final String USERS_URI = "/api/secure/users";
-    // private final String WHOAMI_URI = "/secure/whoami";
+    private final String WHOAMI_URI = "/api/secure/whoami";
     private final String JSON_TYPE = "application/json;charset=UTF-8";
 
     /**
@@ -129,7 +129,7 @@ public class UserControllerTest extends IntegrationTestConfig {
      */
     @Test
     void getDetails_logged_success() throws Exception {
-        String result = loggedGet(USERS_URI + "/1/details", true)
+        String result = loggedGet(WHOAMI_URI, true)
             .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
             UserViewDetailsDto user = objectMapper.readValue(result, UserViewDetailsDto.class);
             assertEquals((Long) 1L, user.getId());
@@ -169,7 +169,7 @@ public class UserControllerTest extends IntegrationTestConfig {
             .andExpect(status().isOk())
             .andReturn().getResponse().getContentAsString();
         Set<UserViewDto> users = objectMapper.readValue(result, Set.class);
-        assertEquals(4, users.size());
+        assertEquals(5, users.size());
     }
 
     /**

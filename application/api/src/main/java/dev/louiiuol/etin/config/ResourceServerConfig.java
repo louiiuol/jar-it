@@ -8,8 +8,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
 /**
- * Provdes configuration of {@code ResourceServerConfigurerAdapter}
- * intercepting every requests done over the API
+ * Defines a custom {@code ResourceServerConfigurerAdapter} configuration
+ * to handle resources restrictions and HttpSecurity configuration
  * 
  *  @see ResourceServerConfigurerAdapter
  *  @see HttpSecurity
@@ -22,18 +22,20 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	/**
-	 * Defines this application as stateless (no HTTP session),
-	 * and disables HTTP basic auth / CSRF / Spring default login form
+	 * Defines this application as stateless (no HTTP session), with CORS enabled,
+	 * HTTP basic auth and CSRF disabled, and authenticated restrictions on protected routes
 	 *
 	 * @param httpSecurity instance of {@code HttpSecurity} to customize 
 	 * @throws Exception
 	 */
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.cors()
-			.and().httpBasic().disable().csrf().disable()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-			.and().authorizeRequests().antMatchers("api/public/**").permitAll()
+		httpSecurity.cors().and()
+			.httpBasic().disable()
+			.csrf().disable()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+			.authorizeRequests()
+			.antMatchers("api/public/**").permitAll()
 			.antMatchers("/api/secure/**").authenticated();
 	}
 

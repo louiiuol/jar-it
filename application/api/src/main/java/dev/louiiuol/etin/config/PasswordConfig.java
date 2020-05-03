@@ -7,7 +7,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * Defines configuration for {@code PasswordEncoder} used by the API
+ * Defines default {@code PasswordEncoder} configuration
+ * used by the API to encode {@code User} passwords
  * 
  * @see  PasswordEncoder
  * @see BCryptPasswordEncoder
@@ -16,11 +17,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class PasswordConfig {
 
 	/**
-     * Default {@code BCryptPasswordEncoder} to encode/decoode passwords
+     * Defines default {@code BCryptPasswordEncoder} Bean
+     * to encode/decoode {@code User} passwords
      * 
      * @return (@code PasswordEncoder}
      */
     @Bean
-    protected PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
+    protected PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }

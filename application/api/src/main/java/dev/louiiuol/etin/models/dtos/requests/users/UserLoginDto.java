@@ -11,7 +11,9 @@ import javax.validation.constraints.Size;
  */
 public class UserLoginDto {
 
-    protected UserLoginDto() {/*Overrides default constructor as protected without arguments*/}
+    protected UserLoginDto() {
+        // Overrides default no-args constructor as protected
+    }
 
     @NotBlank
     @Size(min = 3, max = 60)

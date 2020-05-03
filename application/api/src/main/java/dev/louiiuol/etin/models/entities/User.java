@@ -1,6 +1,7 @@
 package dev.louiiuol.etin.models.entities;
 
 import java.text.MessageFormat;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -25,7 +26,7 @@ import dev.louiiuol.etin.services.utils.BooleanConverter;
  * @see Table
  */
 @Entity
-@Table(name="users", 
+@Table(name="users",
     uniqueConstraints = {
         @UniqueConstraint( columnNames = "username", name = "user_username_UNIQUE"),
         @UniqueConstraint( columnNames = "email", name = "user_email_UNIQUE"),
@@ -33,7 +34,9 @@ import dev.louiiuol.etin.services.utils.BooleanConverter;
 )
 public class User extends AbstractEntity {
 
-    protected User() {/*Overrides default constructor as protected without arguments*/}
+    protected User() {
+        // Overrides default no-args constructor as protected
+    }
 
     private static final long serialVersionUID = -9139538865891144579L;
 
@@ -48,6 +51,9 @@ public class User extends AbstractEntity {
 
     @Column(nullable = false)
     private String avatar;
+
+    @Column(columnDefinition = "DATE", nullable = false, updatable = false)
+    private LocalDate birthDate;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( name = "users_roles",
@@ -71,15 +77,37 @@ public class User extends AbstractEntity {
     @Convert(converter = BooleanConverter.class)
     private boolean credentialsNonExpired;
 
+    public void close() {
+        this.enabled = false;
+    }
+
     /** Following methods are used by Spring's UserDetails ONLY to customize tokens */
-    protected String getUsername() { return username; }
-    protected String getEmail() { return email; }
-    protected String getPassword() { return password; }
-    protected String getAvatar() { return avatar; }
-    protected Set<Role> getRoles() { return roles; }
+    protected String getUsername() {
+        return username;
+    }
+
+    protected String getEmail() {
+        return email;
+    }
+
+    protected String getPassword() {
+        return password;
+    }
+
+    protected String getAvatar() {
+        return avatar;
+    }
+
+    protected Set<Role> getRoles() {
+        return roles;
+    }
+
 
     @Override
-    public int hashCode() { return username.hashCode(); }
+    public int hashCode() {
+        return username.hashCode();
+    }
+
 
     @Override
 	public boolean equals(Object other) {
@@ -90,8 +118,8 @@ public class User extends AbstractEntity {
 
     @Override
     public String toString() {
-        return MessageFormat.format("User#{0}: [username: {1}, email: {2}, roles: {3}, enabled: {4} ]",
-        getId(), username, email, roles, enabled );
+        return MessageFormat.format("{ id: {0}, username: {1}, email: {2}, birthDate: {3}, roles: {4}, enabled: {5} }",
+            getId(), username, email, birthDate, roles, enabled);
     }
 
 }

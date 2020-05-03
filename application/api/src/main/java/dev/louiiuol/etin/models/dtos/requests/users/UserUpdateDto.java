@@ -14,7 +14,9 @@ import dev.louiiuol.etin.api.validators.username.UniqueUsername;
  */
 public class UserUpdateDto {
 
-    protected UserUpdateDto() {/*Overrides default constructor as protected without arguments*/}
+    protected UserUpdateDto() {
+        // Overrides default no-args constructor as protected
+    }
 
     @UniqueUsername
     @Size(min = 4, max = 12)
@@ -30,7 +32,7 @@ public class UserUpdateDto {
 
     @Override
     public String toString() {
-        return MessageFormat.format("UserCreateDTO: [username: {0}, email: {1}, password: [PROTECTED], avatar: {3} ]",
+        return MessageFormat.format("UserCreateDTO: [username: {0}, email: {1}, password: [PROTECTED], avatar: {2} ]",
         username, email, avatar );
     }
 

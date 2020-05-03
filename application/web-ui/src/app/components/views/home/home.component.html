@@ -3,18 +3,18 @@
   <section id="headline">
     <h1 class="is-primary mat-display-3">The first <em class="is-accent">electronic </em> <br/>Swear Tin !</h1>
     <h2 *ngFor='let sub of subTitles' class="mat-title is-accent has-icon is-flex-inline">
-      <app-icon class="lg icons" name="{{sub.icon}}"></app-icon>{{ sub.title }}
+      <app-icon class="lg icon" name="{{sub.icon}}"></app-icon>{{ sub.title }}
     </h2>
   </section>
 
   <mat-card id="forms">
     <mat-tab-group mat-stretch-tabs dynamicHeight
       [color]=" 'accent' " [backgroundColor]=" 'primary' ">
-      <mat-tab *ngIf="active == 'register' " label="Create your account">
+      <mat-tab *ngIf="activeForm == 'register' " label="Create your account">
         <app-register (activeEvent)="setActive($event)"></app-register>
       </mat-tab>
-      <mat-tab *ngIf="active == 'login' " label="login" isActive>
-        <app-login (activeEvent)="setActive($event)"></app-login> 
+      <mat-tab *ngIf="activeForm == 'login' " label="Access your account">
+        <app-login (activeEvent)="setActive($event)"></app-login>
       </mat-tab>
     </mat-tab-group>
   </mat-card>

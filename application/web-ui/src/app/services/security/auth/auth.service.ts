@@ -1,75 +1,66 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Config } from '../../../../resources/config';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthLogin } from '../../../models/user/login.model';
-import { TokenStorageService } from '../token/token-storage.service';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Token, AuthLogin, AuthInfo, IToken } from 'src/app/models';
+import { TokenStore } from '../token/token.store';
 
+const formUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
+const register_url = environment.root_url + 'api/auth/signup';
+const token_url = environment.root_url + 'oauth/token';
+const pass = 'password';
+const grantFields = {
+  password: 'grant_type=' + pass,
+  refresh: 'grant_type=refresh_token',
+  passField: '&' + pass + '=',
+  clientId: '&client_id=eTin-web-app',
+};
+
+/**
+ * Defines all Http methods related to User Authentication
+ */
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  constructor(protected router: Router, private http: HttpClient, private snackBar: MatSnackBar, private tokenStore: TokenStorageService) {}
+  private current = new BehaviorSubject<Token>(null);
+  public get currentUser(): AuthInfo { return new AuthInfo(this.current.value); }
+  public token$: Observable<Token> = this.current.asObservable();
+  public isLoggedIn$: Observable<boolean>;
+  public isLoggedOut$: Observable<boolean>;
 
-  signUp = (info: any): Observable<string> => this.http.post<string>(Config.uris.register, info, Config.httpOptions.json);
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private tokenStore: TokenStore
+  ) { // Fetch current user's token
+    this.current.next(tokenStore.checkToken() ? tokenStore.getToken() : null);
+    // Update Observables depending on Subject state
+    this.isLoggedIn$ = this.token$.pipe( map( subject => !!subject ) );
+    this.isLoggedOut$ = this.isLoggedIn$.pipe( map( loggedIn => !loggedIn ) );
+  }
 
-  logOut() {
-    console.log('hello motehrfuicker');
+  signUp = (info: any): Observable<number> => // Creates new User in database
+    this.http.post<number>(register_url, info, environment.config.jsonHeader)
+
+  logIn = (data: AuthLogin): Observable<void> => // Log and update current User Subject
+    this.authenticate(data).pipe( map(token => { this.updateSubject(token); }) )
+
+  logOut = (): Promise<boolean> => { // Clear current user instance and token
     this.tokenStore.clearToken();
-    this.router.navigate(['/welcome']);
+    this.current.next(null);
+    return this.router.navigate(['/']);
   }
 
-  logIn(data: AuthLogin): void {
-    this.createPasswordGrant(data).subscribe(
-      token => {
-        this.tokenStore.saveToken(token);
-        this.router.navigate(['/dashboard']);
-        this.snackBar.open('Welcome Back ' + data.username, 'close', { duration: 3000 } );
-      }, error => {
-        const err = error.error.error;
-        if (!!err) {
-          if (err === 'unauthorized' || err === 'invalid_grant' ) {
-            this.snackBar.open('These credentials doesn\'t seems right ... \r\n please check them again ! ', '', { duration: 3000 } );
-          }
-        } else {
-          this.snackBar.open('Seems like server is down, try again later 👻 ', '', { duration: 3000 } );
-        }
-      }
-    );
-  }
+  private authenticate = (data: AuthLogin): Observable<IToken> => // Log with credentials and retrieve token
+    this.http.post<IToken>(token_url, this.generateUrlFormEncoded(data), formUrlEncoded)
 
-  isLoggedIn = (): boolean => this.tokenStore.checkToken();
+  private generateUrlFormEncoded = (data: AuthLogin): string => // Generates authentication Form to retrieve
+    grantFields.password + '&username=' + data.username
+    + grantFields.passField + data.password + grantFields.clientId
 
-  getCurrentUser = (): any => {
-    const token = this.tokenStore.getToken();
-    return {
-      id: token.userId,
-      username: token.username,
-      avatar: token.avatar,
-      role: token.role
-    };
-  }
-
-  refreshToken = () => {
-    const refreshToken = this.tokenStore.getToken().refreshToken;
-    const header = Config.grantType.refresh + Config.clientId + '&refresh_token=' + refreshToken;
-    let token;
-    this.http.post(Config.uris.token, header, Config.httpOptions.formUrlEncoded).subscribe(
-        (data) => {
-          console.log(data);
-          token = data;
-        },
-        (err) => {
-          console.log(err);
-        }
-    );
-    return token;
-  }
-
-  private createPasswordGrant = (data: AuthLogin): Observable<any> => {
-    const header = Config.grantType.password + '&username=' + data.username + '&password=' + data.password + Config.clientId;
-    return this.http.post<any>(Config.uris.token, header, Config.httpOptions.formUrlEncoded);
-  }
+  private updateSubject = (input: IToken): void => // Update current user Subject depending on input
+    this.current.next( this.tokenStore.saveToken(input) )
 
 }

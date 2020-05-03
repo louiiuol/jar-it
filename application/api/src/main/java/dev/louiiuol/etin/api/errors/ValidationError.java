@@ -1,11 +1,12 @@
 package dev.louiiuol.etin.api.errors;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 
 /**
- * Represents a validation error when API receive
- * invalid input dto. Holds additional informations, such as
- * entity name, field name, catched error and type (ERROR/GLOBAL)
+ * Defines a validation holding errors when invalid input dto are sent to API.
+ * This class holds additional informations, such as entity name, field name,
+ * catched error and type (ERROR/GLOBAL)
  */
 public final class ValidationError implements Serializable {
 
@@ -41,7 +42,7 @@ public final class ValidationError implements Serializable {
      * @param errorMessage reason / cause message
      * @return updated {@code ValidationError}
      */
-    public static ValidationError ofGlobalType(String entityName,  String fieldName, String errorMessage) {
+    public static ValidationError ofGlobalType(String entityName, String fieldName, String errorMessage) {
         ValidationError error = new ValidationError(entityName, fieldName, errorMessage);
         error.type = Type.GLOBAL;
         return error;
@@ -60,13 +61,15 @@ public final class ValidationError implements Serializable {
     }
 
     @Override
-    public String toString() { 
-        return "{entityName=" + entityName + ", fieldName=" + fieldName+ ", error=" + error + ", type=" + type + "}"; 
+    public String toString() {
+        return MessageFormat
+            .format("{ entityName: {0}, fieldName: {1}, error: {2}, type: {3} }",
+            entityName, fieldName, error, type);
     }
 
     /** 
      * Defines {@code ValidatorError} type: FIELD or GLOBAL
      */
-    public static enum Type { FIELD, GLOBAL; }
+    public enum Type { FIELD, GLOBAL; }
 
 }

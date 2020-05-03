@@ -20,7 +20,7 @@ import dev.louiiuol.etin.models.dtos.responses.users.UserViewDetailsDto;
 import dev.louiiuol.etin.models.dtos.responses.users.UserViewDto;
 import dev.louiiuol.etin.services.user.UserService;
 
-/** 
+/**
  * This class exposes REST API containing multiple CRUD request
  * to handle {@code User} and {@code Authentication} informations.
  * 
@@ -30,7 +30,7 @@ import dev.louiiuol.etin.services.user.UserService;
  * @see PreAuthorize
  */
 @RestController
-public class UserController  extends ControllerAdvice {
+public class UserController extends ControllerAdvice {
 
 	private final UserService service;
 
@@ -39,30 +39,38 @@ public class UserController  extends ControllerAdvice {
 	}
 
 	@PostMapping("auth/signup")
-	public Long create(@Valid @RequestBody UserCreateDto dto) { return service.create(dto); }
+	public Long create(@Valid @RequestBody UserCreateDto dto) {
+		return service.create(dto);
+	}
 
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping("secure/users/{id}")
-	public UserViewDto get(@PathVariable("id") Long id) { return service.get(id); }
-
+	public UserViewDto get(@PathVariable("id") Long id) {
+		return service.get(id);
+	}
+	
 	@PreAuthorize("hasRole('USER')")
-	@GetMapping("secure/users/{id}/details")
-	public UserViewDetailsDto getDetails(@PathVariable("id") Long id) { return service.getDetails(id); }
+	@GetMapping("secure/users")
+	public Set<UserViewDto> getAll() {
+		return service.getAll();
+	}
 
 	@PreAuthorize(" ( hasRole('USER') and @validatorService.validRequester(#id) ) or hasRole('ADMIN')")
 	@PutMapping("secure/users/{id}")
-	public void update(@PathVariable("id") Long id, @Valid @RequestBody UserUpdateDto dto) { service.update(id, dto); }
+	public void update(@PathVariable("id") Long id, @Valid @RequestBody UserUpdateDto dto) {
+		service.update(id, dto);
+	}
 
 	@PreAuthorize(" ( hasRole('USER') and @validatorService.validRequester(#id) ) or hasRole('ADMIN')")
 	@DeleteMapping("secure/users/{id}")
-	public void delete(@PathVariable("id") Long id) { service.delete(id); }
+	public void close(@PathVariable("id") Long id) {
+		service.close(id);
+	}
 
 	@PreAuthorize("hasRole('USER')")
-	@GetMapping("secure/users")
-	public Set<UserViewDto> getAll() { return service.getAll(); }
-
-	@PreAuthorize("hasRole('USER') and @validatorService.validRequester(#id)")
-    @GetMapping("/secure/whoami")
-    public UserViewDetailsDto userInfo() { return service.getDetails( SecurityHelper.getUserId() );}
+    @GetMapping("secure/whoami")
+	public UserViewDetailsDto userInfo() {
+		return service.getDetails(SecurityHelper.getUserId());
+	}
 
 }

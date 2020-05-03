@@ -1,9 +1,15 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+import { HttpHeaders } from '@angular/common/http';
+
+export const Config = {
+  jsonHeader: { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) },
+  title: 'eTin: First electronic Swear Tin online !'
+};
 
 export const environment = {
-  production: false
+  production: false,
+  root_url: 'http://localhost:1337/',
+  root_url_secured: 'http://localhost:1337/api/secure/',
+  config: Config
 };
 
 /*
@@ -13,4 +19,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+import 'zone.js/dist/zone-error';  // Included with Angular CLI.

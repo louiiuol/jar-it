@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
@@ -13,16 +14,18 @@ import org.modelmapper.config.Configuration.AccessLevel;
 import org.modelmapper.convention.MatchingStrategies;
 
 /**
- * Defines configuration for {@code Mappers} used by the API
+ * Defines custom {@code Mappers} configuration used by the API
+ * to transform {@code entities} into {@code dtos} and vice versa
  * 
- * @see  ObjectMapper
+ * @see ObjectMapper
  * @see ModelMapper
  */
 @Configuration
 public class MapperConfig {
 
     /**
-	 * Custom {@code ModelMapper} bean that configures mapping between DTO and entities.
+	 * Defines custom {@code ModelMapper} Bean
+	 * that configures mapping between DTO and entities.
 	 * <p>
 	 * <i> field matching is enabled with private access and standard matching strategy. </i>
 	 * @return an instance of {@code ModelMapper}
@@ -49,10 +52,11 @@ public class MapperConfig {
 	@Bean
     protected ObjectMapper objectMapper() {
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.setVisibility(
-			mapper.getSerializationConfig().getDefaultVisibilityChecker()
-				.withFieldVisibility(JsonAutoDetect.Visibility.ANY)
-		);
+		VisibilityChecker<?> checker = mapper
+			.getSerializationConfig()
+			.getDefaultVisibilityChecker()
+			.withFieldVisibility(JsonAutoDetect.Visibility.ANY);
+		mapper.setVisibility(checker);
 		mapper.registerModules(new JavaTimeModule());
 		mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 		return mapper;

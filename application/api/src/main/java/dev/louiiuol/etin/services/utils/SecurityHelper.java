@@ -26,12 +26,18 @@ public final class SecurityHelper {
      * Returns the {@code Authentication} object associated to the
      * currently authenticated principal, or an authentication request token.
      * 
-     * @return {@code Authentication} or {@code null} if no authenticationinformation is available
+     * @return {@code Authentication} or {@code null} if no authentication information is available
      */
     public static Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
+    /**
+     * Returns the {@code Authentication} object 's id associated to the
+     * currently authenticated principal, or an authentication request token.
+     * 
+     * @return {@code Long} or {@code null} if no authentication information is available
+     */
     @SuppressWarnings("unchecked")
     public static Long getUserId() {
         Authentication auth = getAuthentication();
@@ -41,8 +47,12 @@ public final class SecurityHelper {
         return value.longValue();
     }
 
-    public static String getUsername() {  return getPrincipal(); }
+    public static String getUsername() {
+        return getPrincipal();
+    }
 
-    public static String getPrincipal() { return (String) getAuthentication().getPrincipal(); }
+    public static String getPrincipal() {
+        return (String) getAuthentication().getPrincipal();
+    }
 
 }

@@ -3,16 +3,18 @@ package dev.louiiuol.etin.api.errors;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.text.MessageFormat;
 
 /**
- * This final class holding some errors catched by server
- * and wrap into list with additional informations on exception
+ * Defines a final class holding various errors types catched by API:
+ * Theses will we wrap in a field 'errors', and additional informations
+ * regarding errors' sources will be provided.
  */
 public final class ApiErrorsDto<T> implements Serializable {
 
     private static final long serialVersionUID = 7277092767926099434L;
 
-    private final List<T> errors;
+    private final transient List<T> errors;
 
     private final int errorCount;
 
@@ -23,7 +25,7 @@ public final class ApiErrorsDto<T> implements Serializable {
     private final String path;
 
     /**
-     * Creates a new {@code ApiErrorsDto} with given arguments.
+     * Defines a new {@code ApiErrorsDto} with given arguments.
      * 
      * @param errors list of catched errors 
      * @param status http status returned by server
@@ -37,17 +39,31 @@ public final class ApiErrorsDto<T> implements Serializable {
         this.path = path;
     }
 
-    public List<T> getErrors() { return errors; }
+    public List<T> getErrors() {
+        return errors;
+    }
 
-    public int getErrorCount() { return errorCount; }
+    public int getErrorCount() {
+        return errorCount;
+    }
 
-    public LocalDateTime getTimestamp() { return timestamp; }
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
 
-    public int getStatus() { return status; }
+    public int getStatus() {
+        return status;
+    }
 
-    public String getPath() { return path; }
+    public String getPath() {
+        return path;
+    }
 
     @Override
-    public String toString() { return "{errorCount=" + errorCount + ", timestamp=" + timestamp + ", status=" + status + ", path=" + path + "}"; }
+    public String toString() {
+        return MessageFormat
+            .format( "{ errors: {0}, errorCount: {1}, timestamp: {2}, status: {3}, path: {4} }",
+            errors, errorCount, timestamp, status, path);
+    }
 
 }

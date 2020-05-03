@@ -19,8 +19,8 @@ spring:
         url: jdbc:mysql://localhost:3306/etin_test?createDatabaseIfNotExist=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
         username: staff
         password: 
-        data: classpath:sql/integration-test.sql
-        initialization-mode: always 
+        data: classpath:sql/integration-test.dml.sql
+        initialization-mode: always
     jpa:
         open-in-view: false
         show-sql: true
@@ -47,12 +47,8 @@ logging:
     config: classpath:logback/logback-dev.xml
 
 jwt-auth-server:
-    keyStore: jwt.jks
-    keyPass: "SwearTinKey"
-    keyAlias: "SwearTinKey"
+    keyStore: swear-tin.jks
+    keyAlias: SwearTinKey
+    keyPass: Rz67nH496643GnY236dRmOkb67
     accessTokenValiditySeconds: 1800
     refreshTokenValiditySeconds: 86400
-
-cron:
-    config:
-        each-day: "0 0 0 * * *"

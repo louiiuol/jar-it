@@ -1,30 +1,34 @@
+import { environment } from '../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './components/app.component';
+import { LayoutModule } from '@angular/cdk/layout';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from '../resources/material.module';
-
-
-import { ViewsComponents } from './components/views';
-import { SharedComponents, SharedServices, SharedEntriesComponents } from './components/shared';
-import { LayoutModule } from '@angular/cdk/layout';
-import { AuthModule } from './services/security';
-import { DashboardComponent } from './components/views/dashboard/dashboard.component';
-import { NavbarComponent } from './components/shared/navbar/navbar.component';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MaterialModule } from './material.module';
+import { AppRoutingModule } from './app.routing';
+import { AppComponent } from './components/app.component';
+import { HomeComponent, LoginComponent, RegisterComponent, DashboardComponent, PageNotFoundComponent } from './components/views';
+import { NavbarComponent, IconComponent } from './components/shared';
+import { LoaderComponent, LoaderService } from './services/loader';
+import { AnonymousGuard, UserGuard } from './services/security/guards';
+import { AuthService } from './services/security/auth/auth.service';
+import { FormFactory } from './services/forms/form.factory';
+import { TokenInterceptor } from './services/security/token/token.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ...ViewsComponents,
-    ...SharedComponents
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent,
+    DashboardComponent,
+    PageNotFoundComponent,
+    NavbarComponent,
+    LoaderComponent,
+    IconComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,15 +43,17 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
     AppRoutingModule
   ],
   entryComponents: [
-    ...SharedEntriesComponents
+    IconComponent
   ],
   providers: [
-    ...SharedServices,
-    ...AuthModule,
+    LoaderService,
+    AnonymousGuard,
+    UserGuard,
+    AuthService,
+    FormFactory,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], // Defines custom 'Module schemas' to improve Angular cohesion
   bootstrap: [AppComponent]
 })
 export class AppModule { }

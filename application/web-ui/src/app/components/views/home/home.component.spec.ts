@@ -1,22 +1,17 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
-import { IconComponent } from '../../shared/icon/icon.component';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('HomeComponent', () => {
+
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HomeComponent, IconComponent ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
-    })
-    .compileComponents();
-  }));
-
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [ HomeComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    }).compileComponents();
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -27,13 +22,13 @@ describe('HomeComponent', () => {
   });
 
   it('should init with login form', () => {
-    expect(component.active).toEqual('login');
+    expect(component.activeForm).toEqual('login');
   });
 
   it('should toggle to register form', () => {
-    const register = 'register';
-    component.setActive(register);
-    expect(component.active).toEqual(register);
+    const formName = 'register';
+    component.setActive(formName);
+    expect(component.activeForm).toEqual(formName);
   });
 
   it('should load sub-titles', () => {

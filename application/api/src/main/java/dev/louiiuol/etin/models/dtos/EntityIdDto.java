@@ -11,7 +11,9 @@ public class EntityIdDto implements Serializable {
 
     private static final long serialVersionUID = -2651333217353842740L;
 
-    protected EntityIdDto() {/*Overrides default constructor as protected without arguments*/}
+    protected EntityIdDto() {
+        // Overrides default no-args constructor as protected
+    }
 
     /**
      * Creates new DTO based on given id

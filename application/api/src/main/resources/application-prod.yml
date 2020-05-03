@@ -22,9 +22,9 @@ spring:
     jpa:
         open-in-view: false
         show-sql: false
-        generate-ddl: false #true
+        generate-ddl: false
         hibernate:
-            ddl-auto: none #update
+            ddl-auto: none
         properties: 
             hibernate:
                 dialect: org.hibernate.dialect.MySQL5InnoDBDialect
@@ -38,8 +38,6 @@ spring:
         use-code-as-default-message: false
     mvc:
         throw-exception-if-no-handler-found: true
-        favicon:
-            enabled: false
     resources:
         add-mappings: false
 
@@ -47,12 +45,8 @@ logging:
     config: classpath:logback/logback-spring.xml
 
 jwt-auth-server:
-    keyStore: jwt.jks
-    keyPass: "SwearTinKey"
-    keyAlias: "SwearTinKey"
+    keyStore: swear-tin.jks
+    keyAlias: SwearTinKey
+    keyPass: Rz67nH496643GnY236dRmOkb67
     accessTokenValiditySeconds: 1800
     refreshTokenValiditySeconds: 86400
-
-cron:
-    config:
-        each-day: "0 0 0 * * *"

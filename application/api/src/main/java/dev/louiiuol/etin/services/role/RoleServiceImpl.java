@@ -22,11 +22,13 @@ import dev.louiiuol.etin.services.utils.AbstractService;
 public class RoleServiceImpl extends AbstractService<Role, RoleRepository>
     implements RoleService {
 
-    protected RoleServiceImpl(RoleRepository repo) { super(repo); }
+    protected RoleServiceImpl(RoleRepository repo) {
+        super(repo);
+    }
 
     @Override
     public Set<Role> getRoles(String code) {
-        Set<Role> roles = new HashSet<Role>(); 
+        Set<Role> roles = new HashSet<>(); 
         Role role = repo().findByCode(code)
             .orElseThrow(ResourceNotFoundException::new);
         roles.add(role);

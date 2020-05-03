@@ -152,7 +152,7 @@ public class IntegrationTestConfig {
 	 * @return{@String} ADMIN / USER username
 	 */
 	private String username(boolean admin) {
-		return admin ? "louiiuol" : "Juliette";
+		return admin ? "louiiuol" : "Juju58";
 	}
 
 }

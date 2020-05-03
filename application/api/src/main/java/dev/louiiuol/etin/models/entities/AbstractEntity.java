@@ -21,17 +21,23 @@ public abstract class AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = 4461731511372760807L;
 
-    protected AbstractEntity() {/*Overrides default constructor as protected without arguments*/}
+    protected AbstractEntity() {
+        // Overrides default no-args constructor as protected
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "BIGINT(20) UNSIGNED")
     private Long id;
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
     @Override
-    public int hashCode() { return id.hashCode(); }
+    public int hashCode() {
+        return id.hashCode();
+    }
 
     @Override
 	public boolean equals(Object other) {
@@ -41,6 +47,8 @@ public abstract class AbstractEntity implements Serializable {
     }
 
     @Override
-    public String toString() { return MessageFormat.format("{0}", id); }
+    public String toString() {
+        return MessageFormat.format("{0}", id);
+    }
 
 }
