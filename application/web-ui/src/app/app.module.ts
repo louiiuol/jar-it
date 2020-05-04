@@ -17,6 +17,7 @@ import { AnonymousGuard, UserGuard } from './services/security/guards';
 import { AuthService } from './services/security/auth/auth.service';
 import { FormFactory } from './services/forms/form.factory';
 import { TokenInterceptor } from './services/security/token/token.interceptor';
+import { AvatarPickerComponent } from './components/shared/avatar-picker/avatar-picker.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TokenInterceptor } from './services/security/token/token.interceptor';
     NavbarComponent,
     LoaderComponent,
     IconComponent,
+    AvatarPickerComponent,
   ],
   imports: [
     BrowserModule,

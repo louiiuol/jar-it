@@ -5,5 +5,5 @@ export { AuthLogin } from './user/login.model';
 export { RegisterInfo } from './user/register.model';
 
 export { UserView, IUserView } from './user/user-view.model';
-
+export { UserViewDetails } from './user/user-view-details.model';
 

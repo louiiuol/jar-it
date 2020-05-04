@@ -1,0 +1,16 @@
+<button id="avatarMenu" mat-icon-button
+  color='accent' [matMenuTriggerFor]="avatarPicker"
+  aria-label="user navigation menu">
+  <app-icon class="icon avatar sm"
+    avatar="true" name="{{current}}"></app-icon>
+  <app-icon class="icon lg" name="arrow-down"></app-icon>
+</button>
+
+<mat-menu #avatarPicker="matMenu" xPosition="after">
+  <div id="avatar-picker">
+    <button *ngFor="let avatar of avatarsList" mat-menu-item>
+      <app-icon (click)="select(avatar)" class="icon avatar sm"
+        avatar="true"name='{{avatar}}'></app-icon>
+    </button>
+  </div>
+</mat-menu>
