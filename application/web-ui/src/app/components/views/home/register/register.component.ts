@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
   readonly parentErrorStateMatcher = new ParentErrorStateMatcher();
   readonly minDate: Date = this.nowMinusYears(115);
   readonly maxDate: Date = this.nowMinusYears(18);
+  avatar = 'unknown';
 
   hidden = { pass: true, confirm: true };
 
@@ -42,7 +43,8 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    const registerCredentials = new RegisterInfo(this.username.value, this.email.value, this.password.value, this.birthDate.value);
+    const registerCredentials
+      = new RegisterInfo(this.username.value, this.email.value, this.password.value, this.birthDate.value, this.avatar);
     this.authService.signUp(registerCredentials).subscribe( () => {
       this.forms.handleSuccessMessages('You registered with success, Well done !');
       this.toggleForm();
@@ -57,6 +59,10 @@ export class RegisterComponent implements OnInit {
 
   private nowMinusYears(years: number) {
     return new Date(new Date().setFullYear(new Date().getFullYear() - years));
+  }
+
+  onPick(picked: string) {
+    this.avatar = picked;
   }
 
 }

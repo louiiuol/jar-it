@@ -1,0 +1,12 @@
+#avatar-picker {
+  max-width: 450px;
+  max-height: 250px;
+  overflow-x: auto;
+  text-align: center;
+  padding-bottom: 64px;
+  button {
+    width: initial !important;
+    display: inline-flex;
+    margin-bottom: 1rem;
+  }
+}

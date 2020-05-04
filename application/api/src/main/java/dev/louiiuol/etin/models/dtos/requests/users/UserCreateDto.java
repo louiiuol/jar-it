@@ -10,8 +10,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import dev.louiiuol.etin.api.validators.adult.Adult;
 import dev.louiiuol.etin.api.validators.email.UniqueEmail;
 import dev.louiiuol.etin.api.validators.username.UniqueUsername;
@@ -46,7 +44,6 @@ public class UserCreateDto {
     @Size(min = 6, max = 20)
     private String password;
 
-    @JsonIgnore
     private String avatar = "unknown";
 
     @NotNull

@@ -1,12 +1,25 @@
-<form id="register-form" class="expanded spaced" [formGroup]="registerForm" novalidate (ngSubmit)="register()">
+<form id="register-form" class="expanded spaced" [formGroup]="registerForm">
 
-    <mat-form-field>
-        <mat-label>What's your name ?</mat-label>
-        <input formControlName="username" matInput maxlength="20" placeholder="johnDoe1986" required >
-        <mat-error *ngFor="let validation of errorMessages.username">
-            <mat-error *ngIf="forms.isValid(username, validation)">{{validation.message}}</mat-error>
-        </mat-error>
-    </mat-form-field>
+    <section class="is-flex space-evenly">
+        <mat-form-field style="width:60%" >
+            <mat-label>What's your name ?</mat-label>
+            <input formControlName="username" matInput maxlength="20" placeholder="johnDoe1986" required >
+            <mat-error *ngFor="let validation of errorMessages.username">
+                <mat-error *ngIf="forms.isValid(username, validation)">{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field style="width:40%" >
+          <mat-label>What is your bithdate ?</mat-label>
+          <input formControlName="birthDate" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngFor="let validation of errorMessages.birthDate">
+              <mat-error *ngIf="forms.isValid(birthDate, validation)">{{validation.message}}</mat-error>
+          </mat-error>
+      </mat-form-field>
+
+    </section>
 
     <mat-form-field>
         <mat-label>How can we reach you ?</mat-label>
@@ -16,17 +29,9 @@
         </mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>What is your bithdate ?</mat-label>
-      <input  formControlName="birthDate" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" required>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngFor="let validation of errorMessages.birthDate">
-          <mat-error *ngIf="forms.isValid(birthDate, validation)">{{validation.message}}</mat-error>
-      </mat-error>
-  </mat-form-field>
-
     <section formGroupName="passwordForm" class="is-flex space-evenly">
+
+      <app-avatar-picker style="width:10%; align-self:flex-start" [current]='avatar' (picked)="onPick($event)"></app-avatar-picker>
 
         <mat-form-field style="width:40%">
             <mat-label>Choose a password</mat-label>
@@ -58,7 +63,7 @@
     </mat-slide-toggle>
 
     <footer class="is-flex spaced space-evenly">
-        <button type="submit" mat-raised-button [disabled]="registerForm.invalid" color="primary" >Join us !</button>
+        <button type="submit" mat-raised-button [disabled]="registerForm.invalid" color="primary" (click)="register()" >Join us !</button>
         <button color="primary" mat-button (click)="toggleForm()">Already have an account ?</button>
     </footer>
 
