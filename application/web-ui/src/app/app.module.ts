@@ -10,14 +10,20 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './components/app.component';
-import { HomeComponent, LoginComponent, RegisterComponent, DashboardComponent, PageNotFoundComponent } from './components/views';
-import { NavbarComponent, IconComponent } from './components/shared';
-import { LoaderComponent, LoaderService } from './services/loader';
-import { AnonymousGuard, UserGuard } from './services/security/guards';
-import { AuthService } from './services/security/auth/auth.service';
-import { FormFactory } from './services/forms/form.factory';
-import { TokenInterceptor } from './services/security/token/token.interceptor';
-import { AvatarPickerComponent } from './components/shared/avatar-picker/avatar-picker.component';
+import {
+  HomeComponent, LoginComponent, RegisterComponent, DashboardComponent,
+  PageNotFoundComponent, UserProfileComponent
+} from './components/views';
+import {
+  AvatarPickerComponent, LoaderComponent, ConfirmationMessageComponent,
+  ConfirmationPassComponent, FooterComponent, NavbarComponent, IconComponent
+} from './components/shared';
+import {
+  LoaderService, AuthService, FormFactory, TokenInterceptor,
+  AnonymousGuard, UserGuard
+} from './services';
+
+import 'hammerjs';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,10 @@ import { AvatarPickerComponent } from './components/shared/avatar-picker/avatar-
     LoaderComponent,
     IconComponent,
     AvatarPickerComponent,
+    UserProfileComponent,
+    ConfirmationMessageComponent,
+    ConfirmationPassComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +55,8 @@ import { AvatarPickerComponent } from './components/shared/avatar-picker/avatar-
     AppRoutingModule
   ],
   entryComponents: [
-    IconComponent
+    IconComponent,
+    ConfirmationMessageComponent
   ],
   providers: [
     LoaderService,

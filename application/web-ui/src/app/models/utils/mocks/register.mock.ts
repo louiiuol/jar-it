@@ -1,4 +1,4 @@
-import { RegisterInfo } from '../../user/register.model';
+import { RegisterInfo } from '../../user/register/register.model';
 
 const pass = 'Password';
 

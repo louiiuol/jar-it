@@ -7,11 +7,12 @@ import { FormBuilder } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormFactory } from 'src/app/services/forms/form.factory';
 import { AuthService } from 'src/app/services/security/auth/auth.service';
-import { AuthServiceMockSimple, registerMock, tokenMock } from 'src/app/models/utils/mocks';
+import { registerMock, tokenMock } from 'src/app/models/utils/mocks';
 import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('RegisterComponent', () => {
 
@@ -27,7 +28,8 @@ describe('RegisterComponent', () => {
   beforeEach( (() => {
     TestBed.configureTestingModule({
       declarations: [ RegisterComponent ],
-      imports: [RouterTestingModule, HttpClientTestingModule, MatSnackBarModule, BrowserAnimationsModule],
+      imports: [RouterTestingModule, HttpClientTestingModule, MatSnackBarModule,
+        BrowserAnimationsModule, MatDialogModule ],
       providers: [FormFactory, FormBuilder, AuthService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
@@ -63,7 +65,7 @@ describe('RegisterComponent', () => {
   });
 
   it('should store username as variable', () => {
-    (component.passwordForm.get('password') as any).value = registerMock.password;
+    (component.registerForm.get('passwordForm').get('password') as any).value = registerMock.password;
     expect(component.password.value).toBe(registerMock.password);
   });
 
@@ -76,7 +78,7 @@ describe('RegisterComponent', () => {
   it('should register', () => {
     (component.registerForm.get('username') as any).value = registerMock.username;
     (component.registerForm.get('email')as any).value = registerMock.email;
-    (component.passwordForm.get('password') as any).value = registerMock.password;
+    (component.registerForm.get('passwordForm').get('password') as any).value = registerMock.password;
     component.register();
     const req = httpMock.expectOne(environment.root_url + 'api/auth/signup');
     req.flush(tokenMock);

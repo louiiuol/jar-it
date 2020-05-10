@@ -81,6 +81,14 @@ public class User extends AbstractEntity {
         this.enabled = false;
     }
 
+    /**
+     *  Getter to retrieve user password
+     * @return encrypted password as {@code String}
+     */
+    public String getPassword() {
+        return password;
+    }
+
     /** Following methods are used by Spring's UserDetails ONLY to customize tokens */
     protected String getUsername() {
         return username;
@@ -90,8 +98,22 @@ public class User extends AbstractEntity {
         return email;
     }
 
-    protected String getPassword() {
-        return password;
+    
+
+    protected boolean getAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    protected boolean getAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    protected boolean getCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    protected boolean getEnabled() {
+        return enabled;
     }
 
     protected String getAvatar() {

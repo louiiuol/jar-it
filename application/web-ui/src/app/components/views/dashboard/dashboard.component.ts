@@ -1,23 +1,16 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthInfo } from 'src/app/models';
-import { AuthService } from 'src/app/services/security/auth/auth.service';
+import { AuthService } from 'src/app/services';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
-  currentUser: AuthInfo;
+  get currentUser(): AuthInfo { return this.authService.currentUser; }
 
-  constructor(
-    private authService: AuthService
-  ) { }
-
-  ngOnInit(): void {
-    this.currentUser = this.authService.currentUser;
-  }
+  constructor(private authService: AuthService) { }
 
 }

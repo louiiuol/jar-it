@@ -30,7 +30,9 @@ public class UserDetails extends User {
      * @return {@code UserDetails}
      */
     public UserDetails(dev.louiiuol.etin.models.entities.User user) {
-      super( user.getUsername(), user.getPassword(), buildAuthorities(user.getRoles()) );
+      super(user.getUsername(), user.getPassword(), user.getEnabled(),
+        user.getAccountNonExpired(), user.getCredentialsNonExpired(),
+        user.getAccountNonLocked(), buildAuthorities(user.getRoles()) );
       id = user.getId();
       avatar = user.getAvatar();
     }

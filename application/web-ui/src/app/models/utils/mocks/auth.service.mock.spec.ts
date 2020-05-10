@@ -1,4 +1,4 @@
-import { Token } from '../token.model';
+import { Token } from '../token/token.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthInfo } from '../..';
@@ -20,7 +20,7 @@ export class AuthServiceMockSimple { // Mock to reproduce relevant behaviors for
 
 export class AuthServiceMockFull {
   private subject = new BehaviorSubject<Token>(null);
-  public get currentUser(): Token { return new Token(tokenMock) }
+  public get currentUser(): Token { return new Token(tokenMock); }
   public token$: Observable<Token> = this.subject.asObservable();
   public isLoggedIn$: Observable<boolean>;
   public isLoggedOut$: Observable<boolean>;

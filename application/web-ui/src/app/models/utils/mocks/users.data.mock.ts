@@ -1,4 +1,4 @@
-import { UserView } from '../../user/user-view.model';
+import { UserView } from '../../user/view/user-view.model';
 
 export const usersDataMock: UserView[] = [
   { id: 1, username: 'Bob', avatar: 'm6' },

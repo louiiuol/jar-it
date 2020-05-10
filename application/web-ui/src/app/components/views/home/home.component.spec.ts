@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+// tslint:disable: no-string-literal
 describe('HomeComponent', () => {
 
   let component: HomeComponent;
@@ -22,13 +23,13 @@ describe('HomeComponent', () => {
   });
 
   it('should init with login form', () => {
-    expect(component.activeForm).toEqual('login');
+    expect(component['activeForm']).toEqual('login');
   });
 
   it('should toggle to register form', () => {
     const formName = 'register';
     component.setActive(formName);
-    expect(component.activeForm).toEqual(formName);
+    expect(component['activeForm']).toEqual(formName);
   });
 
   it('should load sub-titles', () => {

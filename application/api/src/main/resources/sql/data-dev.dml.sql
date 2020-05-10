@@ -8,7 +8,7 @@ DELETE FROM users;
 DELETE FROM roles;
 DELETE FROM users_roles;
 
-INSERT INTO users (username, email, birth_date, avatar, password, enabled, account_non_expired, account_non_locked, credentials_non_expired) VALUES ('louiiuol', 'louiiuol@live.fr', '1995-11-17', 'm14', '$2a$10$.qnpE6nYCMJm9Id7SuwyP.u2xyXv1BWetauvdhGpy8iZgMzk8YdJK', 'T', 'T', 'T', 'T');
+INSERT INTO users (username, email, birth_date, avatar, password, enabled, account_non_expired, account_non_locked, credentials_non_expired) VALUES ('louiiuol', 'louiiuol@live.fr', '1995-11-17', 'm17', '$2a$10$.qnpE6nYCMJm9Id7SuwyP.u2xyXv1BWetauvdhGpy8iZgMzk8YdJK', 'T', 'T', 'T', 'T');
 INSERT INTO users (username, email, birth_date, avatar, password, enabled, account_non_expired, account_non_locked, credentials_non_expired) VALUES ('Juju58', 'juju@live.fr', '1986-04-24', 'g06', '$2a$10$.qnpE6nYCMJm9Id7SuwyP.u2xyXv1BWetauvdhGpy8iZgMzk8YdJK', 'T', 'T', 'T', 'T');
 INSERT INTO users (username, email, birth_date, avatar, password, enabled, account_non_expired, account_non_locked, credentials_non_expired) VALUES ('ElodieR', 'elodie@live.fr', '2001-09-16', 'g12', '$2a$10$.qnpE6nYCMJm9Id7SuwyP.u2xyXv1BWetauvdhGpy8iZgMzk8YdJK', 'T', 'T', 'T', 'T');
 INSERT INTO users (username, email, birth_date, avatar, password, enabled, account_non_expired, account_non_locked, credentials_non_expired) VALUES ('Yakaru56', 'yakaru@live.fr', '1994-12-24', 'm8', '$2a$10$.qnpE6nYCMJm9Id7SuwyP.u2xyXv1BWetauvdhGpy8iZgMzk8YdJK', 'T', 'T', 'T', 'T');

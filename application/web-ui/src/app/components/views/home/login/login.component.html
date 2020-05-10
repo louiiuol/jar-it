@@ -1,26 +1,24 @@
-<form id="login-form" class="expanded spaced" [formGroup]="loginForm" (submit)="login()" >
-  <mat-form-field>
+<h3 class='header'>Access your account</h3>
+<form id='login-form' [formGroup]='loginForm' (submit)='login()' >
+  <mat-form-field appearance='outline' color='primary'>
     <mat-label>Who are you ?</mat-label>
-    <input matInput placeholder="johnDoe45" formControlName="username">
-    <mat-error *ngFor="let validation of errorMessages.username">
-      <mat-error *ngIf="forms.isValid(username, validation)">{{validation.message}}</mat-error>
+    <input matInput formControlName='username' placeholder='username' type='text' maxlength='20' required>
+    <mat-error *ngFor='let validation of errorMessages.username'>
+      <mat-error *ngIf='patterns.isValid(username, validation)'>{{validation.message}}</mat-error>
     </mat-error>
   </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field >
       <mat-label>Prove it !</mat-label>
-      <input matInput placeholder="password" formControlName="password" [type]="hide ? 'password' : 'text'">
-      <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <app-icon class="icon xs" name="{{hide ? 'hidden' : 'visible'}}"></app-icon>
-      </a>
-      <mat-hint align="end"> At least one letter uppercase, one lowercase, and one number </mat-hint>
-      <mat-error *ngFor="let validation of errorMessages.password">
-        <mat-error *ngIf="forms.isValid(password, validation)">{{validation.message}}</mat-error>
+      <input matInput formControlName='password' placeholder='******' [type]='password_type' maxlength='20' required>
+      <app-icon matSuffix (click)='hide = !hide' class='icon xs' name='{{password_icon}}'></app-icon>
+      <mat-error *ngFor='let validation of errorMessages.password'>
+        <mat-error *ngIf='patterns.isValid(password, validation)'>{{validation.message}}</mat-error>
       </mat-error>
     </mat-form-field>
 
-    <footer class="is-flex space-evenly">
-      <button mat-raised-button [disabled]="username.invalid || password.invalid" color="primary" >Stop swearing now</button>
-      <a color="primary" mat-button (click)="toggleForm()">Doesn't have an account yet ?</a>
+    <footer>
+      <button mat-raised-button [disabled]='username.invalid || password.invalid' color='primary' >Log in</button>
+      <a color='primary' mat-button (click)='toggleForm()'>Doesn't have an account yet ?</a>
     </footer>
 </form>

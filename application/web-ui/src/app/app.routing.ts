@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent, PageNotFoundComponent, DashboardComponent } from './components/views';
+import { HomeComponent, PageNotFoundComponent, DashboardComponent, UserProfileComponent } from './components/views';
 import { AnonymousGuard, UserGuard } from './services/security/guards';
 
 export const routes: Routes = [
@@ -11,6 +11,11 @@ export const routes: Routes = [
 
   { path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [UserGuard]
+  },
+
+  { path: 'profile',
+    component: UserProfileComponent,
     canActivate: [UserGuard]
   },
 

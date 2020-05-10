@@ -1,8 +1,11 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
+/**
+ * Provides Guard to validate access to unlogged routes
+ */
 @Injectable({ providedIn: 'root' })
 export class AnonymousGuard implements CanActivate, OnDestroy {
 
@@ -13,8 +16,7 @@ export class AnonymousGuard implements CanActivate, OnDestroy {
     private authService: AuthService,
     private router: Router
   ) {
-    this.logged$ = this.authService.isLoggedIn$
-      .subscribe((logged: boolean) => this.isLoggedIn = logged);
+    this.logged$ = this.authService.isLoggedIn$.subscribe(logged => this.isLoggedIn = logged);
   }
 
   ngOnDestroy(): void {
@@ -26,9 +28,7 @@ export class AnonymousGuard implements CanActivate, OnDestroy {
    * and returns boolean: true if the user isn't logged in, false otherwise
    */
   canActivate() {
-    if (this.isLoggedIn) {
-      this.router.navigate(['dashboard']);
-    }
+    if (this.isLoggedIn) { this.router.navigate(['dashboard']); }
     return !this.isLoggedIn;
   }
 

@@ -5,7 +5,7 @@ import { TokenInterceptor } from './token.interceptor';
 import { TokenStore } from './token.store';
 import { tokenMock } from 'src/app/models/utils/mocks';
 import { UserService } from '../../domain/user/user.service';
-import { LoaderService } from '../../loader';
+import { LoaderService } from '../..';
 import { RouterTestingModule } from '@angular/router/testing';
 import { routes } from 'src/app/app.routing';
 import { Router } from '@angular/router';
@@ -47,8 +47,8 @@ describe('Token Interceptor', () => {
   it('should add authorization header', () => {
     spyOn(tokenStore, 'checkToken').and.returnValue(true);
     spyOn(tokenStore, 'getToken').and.returnValue(tokenMock);
-    userService.get(1).subscribe(res => response = res, err => errResponse = err);
-    const httpRequest = httpMock.expectOne(environment.root_url_secured + 'users/1');
+    userService.getAllUsers().subscribe(res => response = res, err => errResponse = err);
+    const httpRequest = httpMock.expectOne('http://localhost:1337/api/secure/users');
     expect(httpRequest.request.headers.has('Authorization')).toEqual(true);
     expect(httpRequest.request.headers.get('Authorization')).toBe('bearer' + tokenMock.access_token);
   });

@@ -4,27 +4,19 @@ import { Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Token, AuthLogin, AuthInfo, IToken } from 'src/app/models';
+import { Token, AuthLogin, AuthInfo, IToken, UserViewDetails } from 'src/app/models';
 import { TokenStore } from '../token/token.store';
 
-const formUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
-const register_url = environment.root_url + 'api/auth/signup';
-const token_url = environment.root_url + 'oauth/token';
-const pass = 'password';
-const grantFields = {
-  password: 'grant_type=' + pass,
-  refresh: 'grant_type=refresh_token',
-  passField: '&' + pass + '=',
-  clientId: '&client_id=eTin-web-app',
-};
-
 /**
- * Defines all Http methods related to User Authentication
+ * Provides all Http methods related to User Authentication
  */
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private current = new BehaviorSubject<Token>(null);
+  private readonly register_url = environment.root_url + 'api/auth/signup';
+  private readonly token_url = environment.root_url + 'oauth/token';
+  private readonly whoami_url = environment.root_url + 'api/secure/whoami';
+  private readonly current = new BehaviorSubject<Token>(null);
   public get currentUser(): AuthInfo { return new AuthInfo(this.current.value); }
   public token$: Observable<Token> = this.current.asObservable();
   public isLoggedIn$: Observable<boolean>;
@@ -42,10 +34,10 @@ export class AuthService {
   }
 
   signUp = (info: any): Observable<number> => // Creates new User in database
-    this.http.post<number>(register_url, info, environment.config.jsonHeader)
+    this.http.post<number>(this.register_url, info, environment.config.jsonHeader)
 
   logIn = (data: AuthLogin): Observable<void> => // Log and update current User Subject
-    this.authenticate(data).pipe( map(token => { this.updateSubject(token); }) )
+    this.authenticate(data, false).pipe( map(token => { this.updateSubject(token); }) )
 
   logOut = (): Promise<boolean> => { // Clear current user instance and token
     this.tokenStore.clearToken();
@@ -53,14 +45,23 @@ export class AuthService {
     return this.router.navigate(['/']);
   }
 
-  private authenticate = (data: AuthLogin): Observable<IToken> => // Log with credentials and retrieve token
-    this.http.post<IToken>(token_url, this.generateUrlFormEncoded(data), formUrlEncoded)
+  whoami = (): Observable<UserViewDetails> =>
+    this.http.get<UserViewDetails>(this.whoami_url, environment.config.jsonHeader)
 
-  private generateUrlFormEncoded = (data: AuthLogin): string => // Generates authentication Form to retrieve
-    grantFields.password + '&username=' + data.username
-    + grantFields.passField + data.password + grantFields.clientId
+  reloadToken(data: AuthLogin, refresh: boolean): Observable<void> {
+    this.tokenStore.clearToken();
+    return this.authenticate(data, refresh).pipe(map(token => { this.updateSubject(token); }));
+  }
+
+  private authenticate = (data: AuthLogin, refresh: boolean): Observable<IToken> => {// Log with credentials and retrieve token
+    const formUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
+    return this.http.post<IToken>(this.token_url, this.generateUrlFormEncoded(data, refresh), formUrlEncoded);
+  }
+
+  private generateUrlFormEncoded = (data: AuthLogin, refresh?: boolean): string => // Generates authentication Form to retrieve
+    `grant_type=${refresh ? 'refresh_token' : 'password'}&username=${data.username}&password=${data.password}&client_id=eTin-web-app`
 
   private updateSubject = (input: IToken): void => // Update current user Subject depending on input
-    this.current.next( this.tokenStore.saveToken(input) )
+    this.current.next(this.tokenStore.saveToken(input))
 
 }

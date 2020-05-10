@@ -1,0 +1,18 @@
+<h3 class='header' mat-dialog-title>Confirmation needed</h3>
+<section mat-dialog-content>
+  <p class='legend'>{{message}}</p>
+  <form class='large' [formGroup]='confirmationForm'>
+    <mat-form-field>
+      <mat-label>Prove it !</mat-label>
+      <input matInput formControlName='password' placeholder='******' maxlength="20" [type]='password_type' required>
+        <app-icon matSuffix (click)='hide = !hide' class='icon xs' name='{{password_icon}}'></app-icon>
+      <mat-error *ngFor='let validation of errorMsg.password'>
+        <mat-error *ngIf='patterns.isValid(password, validation)'>{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+  </form>
+</section>
+<footer mat-dialog-actions>
+  <button color='accent' mat-stroked-button (click)='onCancel()'>cancel</button>
+  <button color='primary' mat-raised-button [disabled]='password.invalid' [mat-dialog-close]='onConfirm()'>Yes I'm sure</button>
+</footer>

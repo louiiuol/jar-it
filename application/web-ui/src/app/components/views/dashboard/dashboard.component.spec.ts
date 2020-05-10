@@ -4,6 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AuthServiceMockFull, loginMock } from 'src/app/models/utils/mocks';
 import { DashboardComponent } from './dashboard.component';
 import { AuthService } from 'src/app/services/security/auth/auth.service';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('DashboardComponent', () => {
 
@@ -15,7 +16,8 @@ describe('DashboardComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ DashboardComponent ],
       imports: [ RouterTestingModule, HttpClientTestingModule ],
-      providers: [{provide: AuthService, useClass: AuthServiceMockFull}]
+      providers: [{ provide: AuthService, useClass: AuthServiceMockFull }],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
     authService = TestBed.inject(AuthService);
     fixture = TestBed.createComponent(DashboardComponent);

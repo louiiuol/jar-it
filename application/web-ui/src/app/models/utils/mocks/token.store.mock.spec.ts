@@ -1,4 +1,4 @@
-import { Token, IToken } from '../token.model';
+import { Token, IToken } from '../token/token.model';
 import { tokenMock } from './token.mock';
 
 export class TokenStoreMock { // Mock to reproduce TokenStore behaviour in Tests
