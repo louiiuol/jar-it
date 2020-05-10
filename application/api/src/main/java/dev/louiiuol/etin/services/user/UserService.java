@@ -35,6 +35,8 @@ public interface UserService extends UserDetailsService {
      * @return {@code UserViewDto} */
     public UserViewDto get(Long userId);
 
+    public boolean matchPassword(Long userId, String password); 
+
     /**
      * Return user's details matching the given id
      * 

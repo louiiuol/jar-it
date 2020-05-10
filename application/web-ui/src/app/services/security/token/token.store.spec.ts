@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { TokenStore } from './token.store';
 import { tokenMock } from 'src/app/models/utils/mocks';
 import { Cookie } from 'ng2-cookies';
-import { Token } from 'src/app/models/utils/token.model';
+import { Token } from 'src/app/models/utils/token/token.model';
 
 describe('TokenStore', () => {
 

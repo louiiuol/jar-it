@@ -44,7 +44,7 @@ describe('AuthService [UNLOGGED]', () => {
   });
 
   it('should generate formUrlEncoded', () => {
-    const actual = service['generateUrlFormEncoded'](loginMock);
+    const actual = service['generateUrlFormEncoded'](loginMock, false);
     expect(actual).toBeDefined();
   });
 
@@ -55,7 +55,7 @@ describe('AuthService [UNLOGGED]', () => {
 
   it('should authenticate and retrieve token', () => {
     let actual: Token;
-    service['authenticate'](loginMock).subscribe(
+    service['authenticate'](loginMock, false).subscribe(
       token => actual = new Token(token)
     );
     const req = httpMock.expectOne(environment.root_url + 'oauth/token');

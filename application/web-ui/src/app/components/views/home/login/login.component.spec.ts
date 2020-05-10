@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('LoginComponent', () => {
 
@@ -27,7 +28,7 @@ describe('LoginComponent', () => {
   beforeEach( () => {
     TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
-      imports: [RouterTestingModule, HttpClientTestingModule, MatSnackBarModule, BrowserAnimationsModule],
+      imports: [RouterTestingModule, HttpClientTestingModule, MatSnackBarModule, BrowserAnimationsModule, MatDialogModule],
       providers: [FormFactory, FormBuilder, AuthService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();

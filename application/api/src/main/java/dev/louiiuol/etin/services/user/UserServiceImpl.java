@@ -89,8 +89,12 @@ public class UserServiceImpl extends AbstractService<User, UserRepository>
     @Override
     public UserDetails loadUserByUsername(String username) {
         User user = repo().findByUsername(username) // Request User with his username using JPA
-            .orElseThrow(ResourceNotFoundException::new); // Check if  User is found
+                .orElseThrow(ResourceNotFoundException::new); // Check if  User is found
         return new dev.louiiuol.etin.models.entities.UserDetails(user); // Return custom version of Spring's UserDetails entity
+    }
+    
+    public boolean matchPassword(Long id, String password) {
+        return encoder.matches(password, getEntity(id).getPassword()); 
     }
 
 }

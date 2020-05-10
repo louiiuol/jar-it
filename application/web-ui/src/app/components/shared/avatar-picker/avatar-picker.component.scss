@@ -1,12 +1,21 @@
-#avatar-picker {
-  max-width: 450px;
-  max-height: 250px;
-  overflow-x: auto;
-  text-align: center;
-  padding-bottom: 64px;
-  button {
-    width: initial !important;
-    display: inline-flex;
-    margin-bottom: 1rem;
+a.mat-menu-item {
+  padding: 0;
+  margin: 1rem .5rem;
+  max-width: 48px;
+  max-height: 48px;
+  border-radius: 50% !important;
+  width: initial !important;
+  display: inline-flex;
+  border: 3px solid #26cada;
+}
+a.mat-fab {
+  position: relative;
+  .icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
+  &.sm { width: 3.5rem; height: 3.5rem; }
+  &.xl { width: 7rem; height: 7rem; }
 }

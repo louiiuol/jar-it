@@ -1,70 +1,68 @@
-<form id="register-form" class="expanded spaced" [formGroup]="registerForm">
+<h3 class='header'>Create a new account</h3>
+<form id='register-form' [formGroup]='registerForm'>
 
-    <section class="is-flex space-evenly">
-        <mat-form-field style="width:60%" >
-            <mat-label>What's your name ?</mat-label>
-            <input formControlName="username" matInput maxlength="20" placeholder="johnDoe1986" required >
-            <mat-error *ngFor="let validation of errorMessages.username">
-                <mat-error *ngIf="forms.isValid(username, validation)">{{validation.message}}</mat-error>
-            </mat-error>
-        </mat-form-field>
+  <section>
+    <app-avatar-picker [size]="'sm'" [current]='avatar' (picked)='onPick($event)'
+      style='padding-top: .65rem; margin-left: 35px;'></app-avatar-picker>
 
-        <mat-form-field style="width:40%" >
-          <mat-label>What is your bithdate ?</mat-label>
-          <input formControlName="birthDate" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" required>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-          <mat-error *ngFor="let validation of errorMessages.birthDate">
-              <mat-error *ngIf="forms.isValid(birthDate, validation)">{{validation.message}}</mat-error>
-          </mat-error>
-      </mat-form-field>
+    <mat-form-field style='width:70%' appearance='outline' color='primary' >
+      <mat-label>username</mat-label>
+      <input matInput formControlName='username' placeholder='username' maxlength='20' type='text' required >
+      <mat-error *ngFor='let validation of errorMsg.username'>
+        <mat-error *ngIf='patterns.isValid(username, validation)'>{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+  </section>
 
-    </section>
-
-    <mat-form-field>
-        <mat-label>How can we reach you ?</mat-label>
-        <input formControlName="email" matInput placeholder="name@mail.com" email required >
-        <mat-error *ngFor="let validation of errorMessages.email">
-            <mat-error *ngIf="forms.isValid(email, validation)">{{validation.message}}</mat-error>
-        </mat-error>
+  <section class='wrapped'>
+    <mat-form-field appearance='outline' color='primary' >
+      <mat-label>email</mat-label>
+      <input matInput formControlName='email' placeholder='mail@example.com' maxlength='30' type='email' email required >
+      <mat-error *ngFor='let validation of errorMsg.email'>
+        <mat-error *ngIf='patterns.isValid(email, validation)'>{{validation.message}}</mat-error>
+      </mat-error>
     </mat-form-field>
 
-    <section formGroupName="passwordForm" class="is-flex space-evenly">
+    <mat-form-field appearance='outline' color='primary' >
+      <mat-label>birth date</mat-label>
+      <input matInput formControlName='birthDate' placeholder='MM/DD/YYYY' [min]='patterns.oldestAlive()' [max]='patterns.majority()' [matDatepicker]='picker' required>
+      <mat-datepicker-toggle matSuffix [for]='picker'></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngFor='let validation of errorMsg.birthDate'>
+        <mat-error *ngIf='patterns.isValid(birthDate, validation)'>{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+  </section>
 
-      <app-avatar-picker style="width:10%; align-self:flex-start" [current]='avatar' (picked)="onPick($event)"></app-avatar-picker>
+  <section class='wrapped' formGroupName='passwordForm'>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput formControlName='password' placeholder='******' [type]='password_type' maxlength='20' required>
+      <app-icon matSuffix (click)='hidden.pass = !hidden.pass' class='icon xs' name='{{password_icon}}'></app-icon>
+      <mat-error *ngFor='let validation of errorMsg.password'>
+        <mat-error *ngIf='patterns.isValid(password, validation)'>{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
 
-        <mat-form-field style="width:40%">
-            <mat-label>Choose a password</mat-label>
-            <input formControlName="password" [type]="hidden.pass ? 'password' : 'text'" matInput placeholder="*************" required>
-            <a mat-icon-button matSuffix (click)="hidden.pass = !hidden.pass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidden.pass">
-                <app-icon class="icon xs" name="{{hidden.pass ? 'hidden' : 'visible'}}"></app-icon>
-            </a>
-            <mat-error *ngFor="let validation of errorMessages.password">
-                <mat-error *ngIf="forms.isValid(password, validation)">{{validation.message}}</mat-error>
-            </mat-error>
-        </mat-form-field>
-
-        <mat-form-field style="width:40%">
-            <mat-label>Confirm your password</mat-label>
-            <input formControlName="confirm" [type]="hidden.confirm ? 'password' : 'text'" matInput placeholder="*************"
-            [errorStateMatcher]="parentErrorStateMatcher" required >
-            <a mat-icon-button matSuffix (click)="hidden.confirm = !hidden.confirm" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidden.confirm">
-                <app-icon class="icon xs" name="{{hidden.confirm ? 'hidden' : 'visible'}}"></app-icon>
-            </a>
-            <mat-error class="is-flex spaced space-evenly" *ngFor="let validation of errorMessages.confirm">
-                <mat-error *ngIf="forms.isValid(confirm, validation)">{{validation.message}}</mat-error>
-            </mat-error>
-        </mat-form-field>
-
-    </section>
-
-    <mat-slide-toggle class="is-flex space-evenly" formControlName="agree" color="accent"required >
-        Do you agree with <span class='is-accent'>usage terms</span>
+    <mat-form-field>
+      <mat-label>Confirmation</mat-label>
+      <input matInput formControlName='confirm' placeholder='******' [type]='confirm_type' maxlength='20' required
+      [errorStateMatcher]='parentErrorStateMatcher'>
+      <app-icon matSuffix (click)='hidden.confirm = !hidden.confirm' class='icon xs' name='{{confirm_icon}}'></app-icon>
+      <mat-error *ngFor='let validation of errorMsg.confirm'>
+        <mat-error *ngIf='patterns.isValid(confirm, validation)'>{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+  </section>
+  <section class='spaced'>
+    <mat-slide-toggle formControlName='agree' color='accent' required>
+      Do you agree with <span class='is-accent'>usage terms</span>
     </mat-slide-toggle>
+  </section>
 
-    <footer class="is-flex spaced space-evenly">
-        <button type="submit" mat-raised-button [disabled]="registerForm.invalid" color="primary" (click)="register()" >Join us !</button>
-        <button color="primary" mat-button (click)="toggleForm()">Already have an account ?</button>
-    </footer>
+  <footer>
+    <button type='submit' mat-raised-button [disabled]='registerForm.invalid' color='primary' (click)='register()' >Join us</button>
+    <button color='primary' mat-button (click)='toggleForm()'>Already have an account ?</button>
+  </footer>
 
 </form>

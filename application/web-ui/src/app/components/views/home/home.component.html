@@ -1,22 +1,18 @@
-<main class="is-flex space-evenly">
+<section id='home'>
 
-  <section id="headline">
-    <h1 class="is-primary mat-display-3">The first <em class="is-accent">electronic </em> <br/>Swear Tin !</h1>
-    <h2 *ngFor='let sub of subTitles' class="mat-title is-accent has-icon is-flex-inline">
-      <app-icon class="lg icon" name="{{sub.icon}}"></app-icon>{{ sub.title }}
-    </h2>
-  </section>
+  <h1 class='is-primary'>The first <em class='is-accent'>electronic </em> Swear Tin !</h1>
 
-  <mat-card id="forms">
-    <mat-tab-group mat-stretch-tabs dynamicHeight
-      [color]=" 'accent' " [backgroundColor]=" 'primary' ">
-      <mat-tab *ngIf="activeForm == 'register' " label="Create your account">
-        <app-register (activeEvent)="setActive($event)"></app-register>
-      </mat-tab>
-      <mat-tab *ngIf="activeForm == 'login' " label="Access your account">
-        <app-login (activeEvent)="setActive($event)"></app-login>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
+  <div class='content'>
+    <div id='headline'>
+      <h2 *ngFor='let sub of subTitles' class='is-accent has-icon'>
+        <app-icon class='sm icon' name='{{sub.icon}}'></app-icon>{{ sub.title }}
+      </h2>
+    </div>
 
-</main>
+    <mat-card class='has-form'>
+      <app-register *ngIf='active' (activeEvent)='setActive($event)'></app-register>
+      <app-login *ngIf='!active' (activeEvent)='setActive($event)'></app-login>
+    </mat-card>
+  </div>
+
+</section>

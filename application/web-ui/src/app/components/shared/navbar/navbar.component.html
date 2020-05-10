@@ -1,45 +1,33 @@
 <mat-toolbar>
 
-  <img height="62" id ="logo" src="assets/img/logo.svg" alt="eTin logo">
+  <img id ='logo' src='assets/img/logo.svg' alt='Swear Jar logo'>
 
-  <div *ngIf="isLoggedIn$ | async">
+  <section *ngIf='user'>
 
-    <button id="userMenu"
-      mat-stroked-button
-      color='accent'
-      [matMenuTriggerFor]="userMenu"
-      aria-label="user navigation menu">
-      <app-icon class="icon avatar sm" avatar="true" name="{{ user.avatar }}"></app-icon>
-      <app-icon class="icon sm" name="arrow-down"></app-icon>
+    <button id='user-menu-btn' aria-label='user navigation menu'
+      mat-stroked-button color='accent' [matMenuTriggerFor]='userMenu'>
+      <app-icon class='icon sm' avatar='true' name='{{ user.avatar }}'></app-icon>
+      <app-icon class='icon sm' name='arrow-down'></app-icon>
     </button>
 
-    <mat-menu #userMenu="matMenu" xPosition="before">
+    <mat-menu #userMenu='matMenu' xPosition='before'>
 
-      <span id="username">Logged as <strong>{{ user.username }}</strong></span>
+      <span id='username'>Logged as <strong>{{ user.username }}</strong></span>
 
-      <button mat-menu-item
-          class='is-accent has-icon'
-          (click)="showDashboard()">
-          <app-icon class="icon sm" name="dashboard"></app-icon>
-          Dashboard
+      <button mat-menu-item class='is-accent has-icon' routerLink='/dashboard'>
+        <app-icon class='icon xs' name='dashboard'></app-icon> Dashboard
       </button>
 
-      <button mat-menu-item
-          class='is-accent has-icon'
-          (click)="showProfile()">
-          <app-icon class="icon sm" name="profile"></app-icon>
-          Profile
+      <button mat-menu-item class='is-accent has-icon' routerLink='/profile'>
+        <app-icon class='icon xs' name='profile'></app-icon> Profile
       </button>
 
-      <button mat-menu-item
-          (click)="logout()"
-          class='is-accent has-icon'>
-      <app-icon class="icon sm" name="power"></app-icon>
-      Disconnect
+      <button class='is-accent has-icon' mat-menu-item (click)='logout()'>
+        <app-icon class='icon xs' name='power'></app-icon> Disconnect
       </button>
 
     </mat-menu>
 
-  </div>
+  </section>
 
 </mat-toolbar>

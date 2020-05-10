@@ -7,21 +7,21 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 })
 export class AvatarPickerComponent {
 
-  @Input() current: string;
-  @Output() picked = new EventEmitter<string>();
-
-  constructor() { }
+  @Input() readonly current: string;
+  @Input() readonly size: string;
+  @Output() readonly picked = new EventEmitter<string>();
 
   get avatarsList() { return this.generateAvatars(); }
+
+  constructor() { }
 
   select(avatar: string) {
     this.picked.emit(avatar);
   }
 
   private generateAvatars(): string[] {
-    const avatarList: string[] = [];
-    avatarList.push('unknown');
-    for (let i = 1; i < 19; i++) { avatarList.push('m' + i, 'g' + i); }
+    const avatarList: string[] = ['unknown'];
+    for (let i = 1; i < 19; i++) { avatarList.push(`m${i}`, `g${i}`); }
     return avatarList;
   }
 

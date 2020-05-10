@@ -1,35 +1,22 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Token } from 'src/app/models';
+import { Component } from '@angular/core';
+import { AuthInfo } from 'src/app/models';
 import { AuthService } from 'src/app/services/security/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  isLoggedIn$: Observable<boolean>;
+  private current: AuthInfo;
 
-  user: Token;
+  get user() { return this.current; }
 
-  constructor(
-    private router: Router,
-    private auth: AuthService
-  ) {}
-
-  ngOnInit(): void {
-    this.isLoggedIn$ = this.auth.isLoggedIn$;
-    this.auth.token$.subscribe(user => this.user = user);
+  constructor(private auth: AuthService) {
+    this.auth.token$.subscribe(token => this.current = !!token ? new AuthInfo(token) : null);
   }
 
   logout = (): Promise<boolean> => this.auth.logOut();
-
-  showDashboard = (): Promise<boolean> => this.router.navigate(['/dashboard']);
-
-  showProfile = (): Promise<boolean> => this.router.navigate(['/profile']);
 
 }
