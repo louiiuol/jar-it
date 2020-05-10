@@ -24,6 +24,7 @@ import {
 } from './services';
 
 import 'hammerjs';
+import { AdminBoardComponent } from './components/views/admin-board/admin-board.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import 'hammerjs';
     ConfirmationMessageComponent,
     ConfirmationPassComponent,
     FooterComponent,
+    AdminBoardComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,13 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent, PageNotFoundComponent, DashboardComponent, UserProfileComponent } from './components/views';
-import { AnonymousGuard, UserGuard } from './services/security/guards';
+import { AnonymousGuard, UserGuard, AdminGuard } from './services/security/guards';
+import { AdminBoardComponent } from './components/views/admin-board/admin-board.component';
 
 export const routes: Routes = [
 
   { path: '',
     component: HomeComponent,
     canActivate: [AnonymousGuard] },
+
+    { path: 'admin',
+    component: AdminBoardComponent,
+    canActivate: [AdminGuard]
+  },
 
   { path: 'dashboard',
     component: DashboardComponent,
