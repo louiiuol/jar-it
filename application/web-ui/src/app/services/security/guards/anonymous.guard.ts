@@ -9,27 +9,24 @@ import { AuthService } from '../auth/auth.service';
 @Injectable({ providedIn: 'root' })
 export class AnonymousGuard implements CanActivate, OnDestroy {
 
-  private isLoggedIn: boolean;
-  private logged$: Subscription;
+    private isLoggedIn: boolean;
+    private logged$: Subscription;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {
-    this.logged$ = this.authService.isLoggedIn$.subscribe(logged => this.isLoggedIn = logged);
-  }
+    constructor(private authService: AuthService, private router: Router) {
+        this.logged$ = this.authService.isLoggedIn$.subscribe(logged => this.isLoggedIn = logged);
+    }
 
-  ngOnDestroy(): void {
-    this.logged$.unsubscribe();
-  }
+    ngOnDestroy(): void {
+        this.logged$.unsubscribe();
+    }
 
-  /** Overriding canActivate to non-logged routes
-   * This method redirect to dashboard view if user is logged in,
-   * and returns boolean: true if the user isn't logged in, false otherwise
-   */
-  canActivate() {
-    if (this.isLoggedIn) { this.router.navigate(['dashboard']); }
-    return !this.isLoggedIn;
-  }
+    /** Overriding canActivate to non-logged routes
+     * This method redirect to dashboard view if user is logged in,
+     * and returns boolean: true if the user isn't logged in, false otherwise
+     */
+    canActivate() {
+        if (this.isLoggedIn) { this.router.navigate(['dashboard']); }
+        return !this.isLoggedIn;
+    }
 
 }

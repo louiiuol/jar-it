@@ -50,7 +50,7 @@ describe('Token Interceptor', () => {
     userService.getAllUsers().subscribe(res => response = res, err => errResponse = err);
     const httpRequest = httpMock.expectOne('http://localhost:1337/api/secure/users');
     expect(httpRequest.request.headers.has('Authorization')).toEqual(true);
-    expect(httpRequest.request.headers.get('Authorization')).toBe('bearer' + tokenMock.access_token);
+    expect(httpRequest.request.headers.get('Authorization')).toBe('bearer ' + tokenMock.access_token);
   });
 
   it('shouldn\'t add invalid token', () => {

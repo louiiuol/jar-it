@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Token, AuthLogin, AuthInfo, IToken, UserViewDetails } from 'src/app/models';
+import { Token, AuthLogin, AuthInfo, IToken, UserViewDetails, RegisterInfo } from 'src/app/models';
 import { TokenStore } from '../token/token.store';
 
 /**
@@ -13,55 +13,62 @@ import { TokenStore } from '../token/token.store';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private readonly register_url = environment.root_url + 'api/auth/signup';
-  private readonly token_url = environment.root_url + 'oauth/token';
-  private readonly whoami_url = environment.root_url + 'api/secure/whoami';
-  private readonly current = new BehaviorSubject<Token>(null);
-  public get currentUser(): AuthInfo { return new AuthInfo(this.current.value); }
-  public token$: Observable<Token> = this.current.asObservable();
-  public isLoggedIn$: Observable<boolean>;
-  public isLoggedOut$: Observable<boolean>;
+    private readonly register_url = environment.root_url + 'api/auth/signup';
+    private readonly token_url = environment.root_url + 'oauth/token';
+    private readonly whoami_url = environment.root_url_secured + 'whoami';
+    private readonly current = new BehaviorSubject<Token>(null);
+    public token$: Observable<Token> = this.current.asObservable();
+    public isLoggedIn$: Observable<boolean>;
+    public isLoggedOut$: Observable<boolean>;
 
-  constructor(
-    private router: Router,
-    private http: HttpClient,
-    private tokenStore: TokenStore
-  ) { // Fetch current user's token
-    this.current.next(tokenStore.checkToken() ? tokenStore.getToken() : null);
-    // Update Observables depending on Subject state
-    this.isLoggedIn$ = this.token$.pipe( map( subject => !!subject ) );
-    this.isLoggedOut$ = this.isLoggedIn$.pipe( map( loggedIn => !loggedIn ) );
-  }
+    public get currentUser(): AuthInfo { return new AuthInfo(this.current.value); }
 
-  signUp = (info: any): Observable<number> => // Creates new User in database
-    this.http.post<number>(this.register_url, info, environment.config.jsonHeader)
+    constructor(
+        private router: Router,
+        private http: HttpClient,
+        private tokenStore: TokenStore
+    ) { // Fetch current user's token
+        this.current.next(tokenStore.checkToken() ? tokenStore.getToken() : null);
+        // Update Observables depending on Subject state
+        this.isLoggedIn$ = this.token$.pipe( map( token => !!token ) );
+        this.isLoggedOut$ = this.isLoggedIn$.pipe( map( loggedIn => !loggedIn ) );
+    }
 
-  logIn = (data: AuthLogin): Observable<void> => // Log and update current User Subject
-    this.authenticate(data, false).pipe( map(token => { this.updateSubject(token); }) )
+    signUp = (info: RegisterInfo): Observable<number> => // Creates new User in database
+        this.http.post<number>(this.register_url, info, environment.config.jsonHeader)
 
-  logOut = (): Promise<boolean> => { // Clear current user instance and token
-    this.tokenStore.clearToken();
-    this.current.next(null);
-    return this.router.navigate(['/']);
-  }
+    logIn = (data: AuthLogin): Observable<void> => // Log and update current User Subject
+        this.authenticate(data, false).pipe( map(token => this.updateSubject(token)) )
 
-  whoami = (): Observable<UserViewDetails> =>
-    this.http.get<UserViewDetails>(this.whoami_url, environment.config.jsonHeader)
+    logOut = (): Promise<boolean> => { // Clear current user instance and token
+        this.tokenStore.clearToken();
+        this.current.next(null);
+        return this.router.navigate(['/']);
+    }
 
-  reloadToken(data: AuthLogin, refresh: boolean): Observable<void> {
-    this.tokenStore.clearToken();
-    return this.authenticate(data, refresh).pipe(map(token => { this.updateSubject(token); }));
-  }
+    whoami = (): Observable<UserViewDetails> =>
+        this.http.get<UserViewDetails>(this.whoami_url, environment.config.jsonHeader)
 
-  private authenticate = (data: AuthLogin, refresh: boolean): Observable<IToken> => {// Log with credentials and retrieve token
-    const formUrlEncoded = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) };
-    return this.http.post<IToken>(this.token_url, this.generateUrlFormEncoded(data, refresh), formUrlEncoded);
-  }
+    reloadToken(data: AuthLogin, refresh: boolean): Observable<void> {
+        this.tokenStore.clearToken();
+        return this.authenticate(data, refresh).pipe(map(token => this.updateSubject(token)));
+    }
 
-  private generateUrlFormEncoded = (data: AuthLogin, refresh?: boolean): string => // Generates authentication Form to retrieve
-    `grant_type=${refresh ? 'refresh_token' : 'password'}&username=${data.username}&password=${data.password}&client_id=eTin-web-app`
+    isAdmin = (): boolean => // Check is current logged user is admin or not
+        (this.current.value.roles.filter(role => role.authority === 'ROLE_ADMIN').length) !== 0
 
-  private updateSubject = (input: IToken): void => // Update current user Subject depending on input
-    this.current.next(this.tokenStore.saveToken(input))
+    private authenticate = (data: AuthLogin, refresh: boolean): Observable<IToken> => // Log with credentials and retrieve token
+        this.http.post<IToken>(this.token_url, this.generateTokenForm(data, refresh),
+            { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) })
+
+    private generateTokenForm = (data: AuthLogin, refresh?: boolean): string =>
+        `${refresh ? this.refreshToken(this.current.value.refresh_token) : this.accesToken(data.username, data.password)}&client_id=eTin-web-app`
+
+    private accesToken = (username: string, password: string): string => `grant_type=password&username=${username}&password=${password}`;
+
+    private refreshToken = (refreshToken: string): string => `grant_type=refresh_token&token=${refreshToken}`;
+
+    private updateSubject = (input: IToken): void => // Update current user Subject depending on input
+        this.current.next(this.tokenStore.saveToken(input))
 
 }

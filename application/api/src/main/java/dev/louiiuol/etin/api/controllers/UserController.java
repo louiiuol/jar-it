@@ -55,7 +55,7 @@ public class UserController extends ControllerAdvice {
 		return service.getAll();
 	}
 
-	@PreAuthorize(" ( hasRole('USER') and @validatorService.validRequester(#id) ) or hasRole('ADMIN')")
+	@PreAuthorize(" ( hasRole('USER') and @validatorService.validRequester(#id) ) or hasRole('ADMIN') ")
 	@PutMapping("secure/users/{id}")
 	public void update(@PathVariable("id") Long id, @Valid @RequestBody UserUpdateDto dto) {
 		service.update(id, dto);

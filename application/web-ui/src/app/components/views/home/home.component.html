@@ -1,18 +1,18 @@
 <section id='home'>
 
-  <h1 class='is-primary'>The first <em class='is-accent'>electronic </em> Swear Tin !</h1>
+    <h1 class='is-primary'>The first <em class='is-accent'>electronic </em> Swear Tin !</h1>
 
-  <div class='content'>
-    <div id='headline'>
-      <h2 *ngFor='let sub of subTitles' class='is-accent has-icon'>
-        <app-icon class='sm icon' name='{{sub.icon}}'></app-icon>{{ sub.title }}
-      </h2>
+    <div class='content'>
+        <div id='headline'>
+            <h2 *ngFor='let sub of subTitles' class='is-accent has-icon'>
+                <app-icon class='sm icon' name='{{sub.icon}}'></app-icon>{{ sub.title }}
+            </h2>
+        </div>
+
+        <mat-card class='has-form'>
+            <app-register *ngIf='active' (activeEvent)='setActive($event)'></app-register>
+            <app-login *ngIf='!active' (activeEvent)='setActive($event)'></app-login>
+        </mat-card>
     </div>
-
-    <mat-card class='has-form'>
-      <app-register *ngIf='active' (activeEvent)='setActive($event)'></app-register>
-      <app-login *ngIf='!active' (activeEvent)='setActive($event)'></app-login>
-    </mat-card>
-  </div>
 
 </section>

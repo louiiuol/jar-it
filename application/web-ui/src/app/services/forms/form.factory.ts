@@ -13,42 +13,50 @@ import { ConfirmationMessageComponent, ConfirmationPassComponent } from 'src/app
 @Injectable({ providedIn: 'root' })
 export class FormFactory {
 
-  constructor(
-    private fb: FormBuilder,
-    private snackBar: MatSnackBar,
-    private dialog: MatDialog,
-  ) {
-    this.fb = new FormBuilder();
-  }
-
-  builder = (): FormBuilder => this.fb;
-
-  handleSuccessMessages = (message: any): MatSnackBarRef<SimpleSnackBar> =>
-    this.snackBar.open(message, 'close', { duration: 3000 })
-
-  handleErrorMessages = (err: any): MatSnackBarRef<SimpleSnackBar> => { // To improve
-    const errorMessages: string[] = [];
-    if (err.status === 401 || (err.status === 400 && err.error.error === 'invalid_grant')) {
-      errorMessages.push(HttpErrorMessages.invalidCredentials);
-    } else if (err.status === 0) {
-      errorMessages.push(HttpErrorMessages.unreachableApi);
-    } else if (err.status === 400) {
-      const errors = err.error.errors;
-      if ( !!errors ) {
-        errors.map( ( current: any ) => { errorMessages.push(current.error); } );
-      }
-    } else {
-      errorMessages.push(err);
+    constructor(
+        private fb: FormBuilder,
+        private snackBar: MatSnackBar,
+        private dialog: MatDialog,
+    ) {
+        this.fb = new FormBuilder();
     }
-    return this.snackBar.open(errorMessages.join(' - '), 'close', { duration: 30000 });
-  }
 
-  confirmationStep = (msg: string): Observable<ConfirmationMessageData> => this.openDialog(ConfirmationMessageComponent, msg);
+    builder = (): FormBuilder => this.fb;
 
-  confirmationPass = (msg: string): Observable<ConfirmationPassData> => this.openDialog(ConfirmationPassComponent, msg);
+    handleSuccessMessages = (message: any): MatSnackBarRef<SimpleSnackBar> =>
+        this.snackBar.open(message, 'close', { duration: 3000 })
 
-  private openDialog = (comp: any, msg: string): Observable<any> => this.dialog.open(comp, this.dialogConf(msg)).afterClosed();
+    handleErrorMessages = (err: any): MatSnackBarRef<SimpleSnackBar> => // To improve
+        this.snackBar.open(this.generateInvalidRequestMessages(err).join(' - '), 'close', { duration: 30000 })
 
-  private dialogConf = (msg: string): MatDialogConfig => ({ width: '300px', disableClose: true, data: { message: msg } });
+    confirmationStep = (msg: string): Observable<ConfirmationMessageData> => this.openDialog(ConfirmationMessageComponent, msg);
 
+    confirmationPass = (msg: string): Observable<ConfirmationPassData> => this.openDialog(ConfirmationPassComponent, msg);
+
+    private openDialog = (comp: any, msg: string): Observable<any> => this.dialog.open(comp, this.dialogConf(msg)).afterClosed();
+
+    private dialogConf = (msg: string): MatDialogConfig => ({ width: '300px', disableClose: true, data: { message: msg } });
+
+    private generateInvalidRequestMessages(err: any): string[] {
+        const errorMessages: string[] = [];
+        if (err.status === 401 || (err.status === 400 && err.error.error === 'invalid_grant')) {
+        errorMessages.push(HttpErrorMessages.invalidCredentials);
+        } else if (err.status === 0) {
+        errorMessages.push(HttpErrorMessages.unreachableApi);
+        } else if (err.status === 400) {
+        errorMessages.push(...this.handleInvalidArguments(err));
+        } else {
+        errorMessages.push(err);
+        }
+        return errorMessages;
+    }
+
+    private handleInvalidArguments(err: any): string[] {
+        const errorMessages: string[] = [];
+        const errors = err.error.errors;
+        if ( !!errors ) {
+        errors.map( ( current: any ) => { errorMessages.push(current.error); } );
+        }
+        return errorMessages;
+    }
 }
