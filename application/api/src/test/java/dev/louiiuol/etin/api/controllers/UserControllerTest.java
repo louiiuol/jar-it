@@ -203,7 +203,7 @@ public class UserControllerTest extends IntegrationTestConfig {
      */
     @Test
     void update_loggedInvalid_fail() throws Exception {
-        String data = "{\"username\": \"test42\"}";
+        String data = "{\"username\": \"test42\", \"actualPassword\": \"Password1\"}";
         String response = loggedPut(USERS_URI + "/3", data, false)
             .andExpect(status().isForbidden())
             .andReturn().getResponse().getContentAsString();
@@ -223,7 +223,7 @@ public class UserControllerTest extends IntegrationTestConfig {
      */
     @Test
     void update_notLogged_fail() throws Exception {
-        String data = "{\"username\": \"tester404\"}";
+        String data = "{\"username\": \"random123\"}";
         String response = mockMvc.perform(
             put(USERS_URI + "/3").contentType(JSON_TYPE).content(data))
             .andExpect(status().isUnauthorized())

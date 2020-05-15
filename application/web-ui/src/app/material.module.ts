@@ -21,14 +21,18 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
-  exports: [
-    MatToolbarModule, MatButtonModule, MatCardModule, MatInputModule, MatDialogModule,
-    MatTableModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatTabsModule, MatGridListModule,
-    MatSnackBarModule, MatCheckboxModule, MatSlideToggleModule, MatTooltipModule, MatDatepickerModule, MatSelectModule,
-    MatStepperModule, MatChipsModule, MatAutocompleteModule, MatBadgeModule, MatNativeDateModule
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA] // Defines custom 'Module schemas' to improve Angular cohesion
+    exports: [
+        MatToolbarModule, MatButtonModule, MatCardModule, MatInputModule, MatDialogModule,
+        MatTableModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatTabsModule, MatGridListModule,
+        MatSnackBarModule, MatCheckboxModule, MatSlideToggleModule, MatTooltipModule, MatDatepickerModule, MatSelectModule,
+        MatStepperModule, MatChipsModule, MatAutocompleteModule, MatBadgeModule, MatNativeDateModule, MatExpansionModule,
+        MatSortModule, MatPaginatorModule
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA] // Defines custom 'Module schemas' to improve Angular cohesion
 })
 export class MaterialModule { }

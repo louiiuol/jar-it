@@ -4,17 +4,17 @@ import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.util.Set;
 
-import javax.persistence.Convert;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import dev.louiiuol.etin.api.validators.adult.Adult;
 import dev.louiiuol.etin.api.validators.email.UniqueEmail;
 import dev.louiiuol.etin.api.validators.username.UniqueUsername;
 import dev.louiiuol.etin.models.entities.Role;
-import dev.louiiuol.etin.services.utils.BooleanConverter;
 
 /**
  * DTO representing the {@code UserCreateDto}
@@ -23,6 +23,7 @@ import dev.louiiuol.etin.services.utils.BooleanConverter;
  * @see UniqueEmail
  * @see UniqueUsername
  */
+@SuppressWarnings("unused")
 public class UserCreateDto {
 
     protected UserCreateDto() {
@@ -50,25 +51,25 @@ public class UserCreateDto {
     @Adult
     private LocalDate birthDate;
 
+    @JsonIgnore
     private Set<Role> roles;
 
-    @Convert(converter = BooleanConverter.class)
     private boolean enabled = true;
-
-    @Convert(converter = BooleanConverter.class)
     private boolean accountNonExpired = true;
-
-    @Convert(converter = BooleanConverter.class)
     private boolean accountNonLocked = true;
-
-    @Convert(converter = BooleanConverter.class)
     private boolean credentialsNonExpired = true;
 
-    public String getPassword() { return password; }
+    public String getPassword() {
+        return password;
+    }
 
-    public void setPassword(String password) { this.password = password; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public void setRoles(Set<Role> roles) { this.roles = roles; }
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     @Override
     public String toString() {

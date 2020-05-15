@@ -2,7 +2,6 @@ package dev.louiiuol.etin.services.user;
 
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,16 +28,16 @@ import dev.louiiuol.etin.services.utils.AbstractService;
 public class UserServiceImpl extends AbstractService<User, UserRepository>
     implements UserService {
 
-    @Autowired
     private PasswordEncoder encoder;
 
     private final RoleService roleService;
 
     private static final String USER_ROLE = "ROLE_USER";
 
-    protected UserServiceImpl(UserRepository repo, RoleService roleService) {
+    protected UserServiceImpl(UserRepository repo, RoleService roleService, PasswordEncoder encoder) {
         super(repo);
         this.roleService = roleService;
+        this.encoder = encoder;
     }
 
     @Override
@@ -93,8 +92,9 @@ public class UserServiceImpl extends AbstractService<User, UserRepository>
         return new dev.louiiuol.etin.models.entities.UserDetails(user); // Return custom version of Spring's UserDetails entity
     }
     
+    @Override
     public boolean matchPassword(Long id, String password) {
-        return encoder.matches(password, getEntity(id).getPassword()); 
+        return encoder.matches(password, getEntity(id).getPassword());
     }
 
 }

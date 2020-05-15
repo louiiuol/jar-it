@@ -25,4 +25,10 @@ INSERT INTO users_roles VALUES (5,1);
 
 COMMIT;
 
+INSERT INTO associations (name, code, description, link) VALUES ('WWF Environnement', 'WWF', 'This is a simple description...', 'http://www.wwf.org');
+INSERT INTO associations (name, code, description, link) VALUES ('Médecins Sans Frontières', 'MSF', 'This is a simple description...', 'http://www.msf.org');
+INSERT INTO associations (name, code, description, link) VALUES ('Croix Rouge', 'CR', 'This is a simple description...', 'http://www.cr.org');
+
+COMMIT;
+
 SET autocommit = 1; /* true */

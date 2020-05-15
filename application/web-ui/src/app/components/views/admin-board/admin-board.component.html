@@ -1,1 +1,38 @@
-<p>admin-board works!</p>
+<mat-card id='admin-board'>
+    <h3 class='header'>Admin Board</h3>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Association
+                </mat-panel-title>
+                <mat-panel-description>
+                    Manage application's association informations
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <app-association-office id='association-office'></app-association-office>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Users
+                </mat-panel-title>
+                <mat-panel-description>
+                Manage application's users states & informations
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+                <p>Coming soon</p>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Jars
+                </mat-panel-title>
+                <mat-panel-description>
+                Manage application's elctronic jars states & informations
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+                <p>Coming soon</p>
+        </mat-expansion-panel>
+    </mat-accordion>
+</mat-card>

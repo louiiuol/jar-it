@@ -33,6 +33,15 @@ create table users_roles (
     primary key (user_id, role_id)
 );
 
+create table associations (
+    id BIGINT(20) UNSIGNED not null auto_increment,
+    code CHAR(5) not null,
+    description varchar(255),
+    link varchar(255) not null,
+    name VARCHAR(50) not null,
+    primary key (id)
+);
+
 alter table roles 
     add constraint roles_code_UNIQUE unique (code);
 

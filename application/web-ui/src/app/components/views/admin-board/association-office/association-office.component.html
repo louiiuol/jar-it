@@ -1,0 +1,57 @@
+<mat-table color='primary' [dataSource]='associationList'
+    matSort matSortActive="id" matSortDisableClear matSortDirection="desc" multiTemplateDataRows>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef='id'>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>id</mat-header-cell>
+        <mat-cell *matCellDef='let el'> {{el.id}} </mat-cell>
+    </ng-container>
+
+    <!-- CODE Column -->
+    <ng-container matColumnDef='code'>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>code</mat-header-cell>
+        <mat-cell *matCellDef='let el'> {{el.code}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef='name'>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>name</mat-header-cell>
+        <mat-cell *matCellDef='let el'> {{el.name}} </mat-cell>
+    </ng-container>
+
+    <!--  Description Column -->
+    <ng-container matColumnDef='description'>
+        <mat-header-cell *matHeaderCellDef>description</mat-header-cell>
+        <mat-cell *matCellDef='let el'>
+        <p>{{el.description | descriptionFormatter }}</p>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Link Column -->
+    <ng-container matColumnDef='link'>
+        <mat-header-cell class='action' *matHeaderCellDef>link</mat-header-cell>
+        <mat-cell class='action' *matCellDef='let el'>
+        <a class='is-primary' target='blank' *ngIf='!!el.link' mat-icon-button href='{{el.link}}' ><app-icon class='icon xs' name='link'></app-icon></a>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Edit Column -->
+    <ng-container matColumnDef='edit'>
+        <mat-header-cell class='action' *matHeaderCellDef>edit</mat-header-cell>
+        <mat-cell class='action' *matCellDef='let el'>
+        <button class='is-accent' mat-icon-button (click)='edit(el.id)' ><app-icon class='icon xs' name='gear'></app-icon></button> </mat-cell>
+    </ng-container>
+
+    <!-- Delete Column -->
+    <ng-container matColumnDef='delete'>
+        <mat-header-cell class='action' *matHeaderCellDef>delete</mat-header-cell>
+        <mat-cell class='action' *matCellDef='let el'>
+        <button class='is-warn' mat-icon-button (click)='delete(el.id)' ><app-icon class='icon xs' name='trash'></app-icon></button></mat-cell>
+    </ng-container>
+
+  <mat-header-row *matHeaderRowDef='displayedColumns; sticky: true'></mat-header-row>
+  <mat-row *matRowDef='let row; columns: displayedColumns;'></mat-row>
+
+</mat-table>
+<mat-paginator [length]="resultsLength" [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
+<button mat-mini-fab id="create" (click)='create()'>+</button>

@@ -1,0 +1,14 @@
+#admin-board {
+    align-self: center;
+    margin: 0 auto;
+    width: 80vw;
+    .mat-expansion-panel-header-title {
+        font-family: pacifico, sans-serif !important;
+        color: #f178b1;
+    }
+    .mat-expansion-panel-header-description {
+        font-style: italic;
+        line-height: 2rem;
+    }
+    #association-office { position: relative; height: 100%; display: block; }
+}

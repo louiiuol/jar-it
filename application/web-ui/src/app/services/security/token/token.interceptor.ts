@@ -11,18 +11,18 @@ import { LoaderService } from '../../loader/loader.service';
 @Injectable({ providedIn: 'root' })
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private tokenStore: TokenStore, private loader: LoaderService) {}
+    constructor(private tokenStore: TokenStore, private loader: LoaderService) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.loader.show();
-    if (this.tokenStore.checkToken()) {
-      const token = this.tokenStore.getToken();
-      req = this.addHeader(req, token.access_token);
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        this.loader.show();
+        if (this.tokenStore.checkToken()) {
+            const token = this.tokenStore.getToken();
+            req = this.addHeader(req, token.access_token);
+        }
+        return next.handle(req).pipe(finalize( () => this.loader.hide()));
     }
-    return next.handle(req).pipe(finalize( () => this.loader.hide()));
-  }
 
-  addHeader = (req: HttpRequest<any>, token: string): HttpRequest<any> =>
-    req.clone({ headers: req.headers.set('Authorization', `bearer${token}`) })
+    addHeader = (req: HttpRequest<any>, token: string): HttpRequest<any> =>
+        req.clone({ headers: req.headers.set('Authorization', `bearer ${token}`) })
 
 }

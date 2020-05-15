@@ -9,27 +9,24 @@ import { AuthService } from '../auth/auth.service';
 @Injectable( { providedIn: 'root' } )
 export class UserGuard implements CanActivate, OnDestroy {
 
-  private isLoggedIn: boolean;
-  private logged$: Subscription;
+    private isLoggedIn: boolean;
+    private logged$: Subscription;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {
-    this.logged$ = this.authService.isLoggedIn$.subscribe(logged => this.isLoggedIn = logged);
-  }
+    constructor(private authService: AuthService, private router: Router) {
+        this.logged$ = this.authService.isLoggedIn$.subscribe(logged => this.isLoggedIn = logged);
+    }
 
-  ngOnDestroy(): void {
-    this.logged$.unsubscribe();
-  }
+    ngOnDestroy(): void {
+        this.logged$.unsubscribe();
+    }
 
-  /**Overriding canActivate to restricted routes
-   * This method redirect to home page view if user is not logged in,
-   * and returns boolean: true if the user is logged in, false otherwise
-   */
-  canActivate() {
-    if ( !this.isLoggedIn ) { this.router.navigate(['/']); }
-    return this.isLoggedIn;
-  }
+    /**Overriding canActivate to restricted routes
+     * This method redirect to home page view if user is not logged in,
+     * and returns boolean: true if the user is logged in, false otherwise
+     */
+    canActivate() {
+        if ( !this.isLoggedIn ) { this.router.navigate(['/']); }
+        return this.isLoggedIn;
+    }
 
 }

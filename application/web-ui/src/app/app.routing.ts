@@ -6,33 +6,33 @@ import { AdminBoardComponent } from './components/views/admin-board/admin-board.
 
 export const routes: Routes = [
 
-  { path: '',
-    component: HomeComponent,
-    canActivate: [AnonymousGuard] },
+    { path: '',
+        component: HomeComponent,
+        canActivate: [AnonymousGuard] },
 
     { path: 'admin',
-    component: AdminBoardComponent,
-    canActivate: [AdminGuard]
-  },
+        component: AdminBoardComponent,
+        canActivate: [AdminGuard]
+    },
 
-  { path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [UserGuard]
-  },
+    { path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [UserGuard]
+    },
 
-  { path: 'profile',
-    component: UserProfileComponent,
-    canActivate: [UserGuard]
-  },
+    { path: 'profile',
+        component: UserProfileComponent,
+        canActivate: [UserGuard]
+    },
 
-  { path: '404', component: PageNotFoundComponent },
+    { path: '404', component: PageNotFoundComponent },
 
-  { path: '**', redirectTo: '/404', pathMatch: 'full' }
+    { path: '**', redirectTo: '/404', pathMatch: 'full' }
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

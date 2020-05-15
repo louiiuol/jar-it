@@ -1,0 +1,39 @@
+<h3 class='header' mat-dialog-title>New Association</h3>
+<section mat-dialog-content>
+    <form [formGroup]='associationForm'>
+        <div class='wrapped'>
+            <mat-form-field appearance='outline'>
+                <mat-label>name</mat-label>
+                <input matInput formControlName='name' type='text' placeholder='name' maxlength='40' required >
+                <mat-error *ngFor='let validation of errorMsg.name'>
+                    <mat-error *ngIf='patterns.isValid(name, validation)'>{{validation.message}}</mat-error>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field id='code'appearance='outline'>
+                <mat-label>code</mat-label>
+                <input matInput formControlName='code' type='text' placeholder='code' maxlength='5' required >
+                <mat-error *ngFor='let validation of errorMsg.code'>
+                    <mat-error *ngIf='patterns.isValid(code, validation)'>{{validation.message}}</mat-error>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <mat-form-field appearance='outline'>
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName='description' placeholder="Provide a description" maxlength='255' ></textarea>
+            <mat-error *ngFor='let validation of errorMsg.description'>
+                <mat-error *ngIf='patterns.isValid(description, validation)'>{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance='outline'>
+            <mat-label>Donation link</mat-label>
+            <input matInput formControlName='link' type='text' placeholder='paste donation link' required>
+            <mat-error *ngFor='let validation of errorMsg.link'>
+                <mat-error *ngIf='patterns.isValid(link, validation)'>{{validation.message}}</mat-error>
+            </mat-error>
+        </mat-form-field>
+    </form>
+</section>
+<footer mat-dialog-actions>
+    <button color='accent' mat-stroked-button (click)='onCancel()'>cancel</button>
+    <button color='primary' mat-raised-button [disabled]='associationForm.invalid || associationForm.untouched' (click)='onCreate()'>Yes I'm sure</button>
+</footer>
