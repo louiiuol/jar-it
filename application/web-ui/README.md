@@ -1,6 +1,6 @@
-# e-Tin Web UI
+# Jar It Web UI
 
-## ![eTin wiki banner](../../docs/src/img/banner.png)
+## ![Jar it wiki banner](../../docs/src/img/banner.png)
 
 ## Prerequisites 📚
 
@@ -25,7 +25,7 @@
 | tslint | ~6.1.0 |
 | typescript | ~3.8.3 |
 
-## ![eTin wiki banner](../../docs/src/img/screen-home.png)
+## ![Jar it wiki banner](../../docs/src/img/screen-home.png)
 
 ## Development server 🛠
 

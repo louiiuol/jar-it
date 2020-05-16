@@ -1,17 +1,17 @@
 # User Story 👤
 
-## ![alt text](../src/img/banner.png "eTin wiki banner")
+## ![wiki banner](../src/img/banner.png )
 
 > Please find below examples of 'User Story' used to create specific feature of the application.
 
-## Tinee Creation
+## Jaree Creation
 
-## ![alt text](../src/img/spec/personae/us-creation-tinee.png "eTin wiki banner")
+## ![us jaree creation](../src/img/spec/personae/us-creation-jaree.png)
 
 ***
 
 ## Contact ✉️
 
-Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspect of this project.
+Feel free to [Submit new issue](https://github.com/louiiuol/jar-it/issues) if you have any suggestions or wish to learn more about certain aspects of this project.
 
 🏡 *[Go back home](../README.md)*

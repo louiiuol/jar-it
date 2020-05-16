@@ -1,8 +1,8 @@
 # Documentation 💡
 
-## ![alt text](src/img/banner.png "eTin wiki banner")
+## ![alt text](src/img/banner.png "Jar it wiki banner")
 
-> This *Github Pages* contains all documentation related to the eTin project: from designing interfaces to conceiving and implementing databases. This wiki will explain the creation process  of this project  as follow:
+> This *Github Pages* contains all documentation related to the Jar it project: from designing interfaces to conceiving and implementing databases. This wiki will explain the creation process of this project. It also provides diverse sources around its conception.
 
 ## Index 🔍
 
@@ -31,4 +31,4 @@
 
 ## Contact ✉️
 
-Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspect of this project.
+Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspects of this project.

@@ -1,6 +1,6 @@
-CREATE SCHEMA `etin` ;
+CREATE SCHEMA `jar_it` ;
 
-USE `etin`; /* default schema for script */
+USE `jar_it`; /* default schema for script */
 
 SET autocommit = 0; /* false */
 

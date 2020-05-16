@@ -10,13 +10,13 @@ server:
 
 spring:
     application:
-        name: etin
+        name: jar-it
     banner:
         location: classpath:banners/banner-dev.txt
     profiles:
         active: dev
     datasource:
-        url: jdbc:mysql://localhost:3306/etin_dev?createDatabaseIfNotExist=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
+        url: jdbc:mysql://localhost:3306/jar_it_dev?createDatabaseIfNotExist=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
         username: staff
         password:
         data: classpath:sql/data-dev.dml.sql
@@ -48,8 +48,8 @@ logging:
     config: classpath:logback/logback-dev.xml
 
 jwt-auth-server:
-    keyStore: swear-tin.jks
-    keyAlias: SwearTinKey
+    keyStore: jar-it.jks
+    keyAlias: JarItJWTKey
     keyPass: Rz67nH496643GnY236dRmOkb67
     accessTokenValiditySeconds: 1800
     refreshTokenValiditySeconds: 86400

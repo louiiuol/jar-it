@@ -1,6 +1,6 @@
-# e.Tin Application Overview
+# Jar It Application Overview
 
-## ![eTin wiki banner](../docs/src/img/banner.png)
+## ![JarIt wiki banner](../docs/src/img/banner.png)
 
 ## Getting Started 💪
 
@@ -19,7 +19,7 @@
 
 > Additional information related to each part of the project can be found in the nested REAME.md files. Here is only a handy overview of the application.
 
-## ![eTin wiki banner](../docs/src/img/spec/architecture/architecture.png)
+## ![JarIt wiki banner](../docs/src/img/spec/architecture/architecture.png)
 
 ## Contact ✉️
 

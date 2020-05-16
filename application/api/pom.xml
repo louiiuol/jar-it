@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>dev.louiiuol.etin</groupId>
+	<groupId>dev.louiiuol.jarit</groupId>
 	<artifactId>api</artifactId>
-	<version>0.0.1</version>
-	<name>etinApi</name>
-	<description>Turn those nasty habits into an occasion to support the action you care about!</description>
+	<version>0.1.0</version>
+	<name>jarItAPI</name>
+	<description>Turn those nasty habits on occasion to support associations you care about !</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -149,7 +149,7 @@
 
 	<build>
 
-		<finalName>etin-server</finalName>
+		<finalName>jar-it-api</finalName>
 
 		<plugins>
 
