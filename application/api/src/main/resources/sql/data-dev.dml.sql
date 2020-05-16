@@ -1,4 +1,4 @@
-USE etin_dev; /* default schema for script */
+USE jar_it_dev; /* default schema for script */
 
 SET autocommit = 0; /* false */
 

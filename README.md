@@ -1,15 +1,15 @@
-# *e*Tin | the first electronic swear tin
+# Jar it | the first electronic swear Jar
 
-![Spring CI](https://github.com/louiiuol/swear-tin/workflows/Spring%20CI/badge.svg)
-![Node CI](https://github.com/louiiuol/swear-tin/workflows/Node%20CI/badge.svg)
+![Spring CI](https://github.com/louiiuol/jar-it/workflows/Spring%20CI/badge.svg)
+![Node CI](https://github.com/louiiuol/jar-it/workflows/Node%20CI/badge.svg)
 
 ## ![eTin wiki banner](docs/src/img/banner.png)
 
 ## Presentation 🎙
 
-> You wish to work in a more **quiet** and **peaceful** place where **swearing** out loud is a faraway memory? **eTin** will help you turn those _nasty habits_ on **occasion** to **contribute to actions you care about**! With your team, agree on the amount you will have to pay for each swears you'll dare to pronounce, and choose the association you want to support!
+> You wish to work in a more **quiet** and **peaceful** place where **swearing** out loud is a faraway memory? **Jar it** will help you turn those _nasty habits_ on **occasion** to **contribute to actions you care about**! With your team, agree on the amount you will have to pay for each swears you'll dare to pronounce, and choose the association you want to support!
 >
-> *Find all documentation related to this project [here](https://louiiuol.github.io/swear-tin/) !*
+> *Find all documentation related to this project [here](https://louiiuol.github.io/jar-it/) !*
 
 ## Built With 🚀
 
@@ -18,7 +18,7 @@
 
 ## ![eTin wiki banner](docs/src/img/spec/architecture/architecture.png)
 
-> *More information related to the stack [here](https://louiiuol.github.io/swear-tin/spec/architecture.md/)!*
+> *More information related to the stack [here](https://louiiuol.github.io/jar-it/spec/architecture.html/)!*
 
 ## Contributing 🙌
 
@@ -35,4 +35,4 @@ This project is licensed under the GNU General Public License v3.0 License (cf. 
 
 ## Contact ✉️
 
-Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspects of this project.
+Feel free to [Submit new issue](https://github.com/louiiuol/jar-it/issues) if you have any suggestions or wish to learn more about certain aspects of this project.

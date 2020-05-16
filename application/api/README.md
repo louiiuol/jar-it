@@ -1,6 +1,6 @@
-# e-Tin Api V1
+# Jar it Api V1
 
-## ![eTin wiki banner](../../docs/src/img/banner.png)
+## ![jar-it wiki banner](../../docs/src/img/banner.png)
 
 > This application, using SpringBoot Security combined with OAuth, provides a secured RESTFUL API to handle, persist and retrieve business values, mapped from *dtos* to *entities*, in the database configured as requested. More information about the API context and technical stack available in the documentation.
 
@@ -20,7 +20,7 @@
 ## Installing 🛠
 
 ```shell
-cd {YOUR_WORKSPACE}/swear-tin/application/api;
+cd {YOUR_WORKSPACE}/jar-it/application/api;
 mvn clean install;
 mvn spring-boot:run -Dspring-boot.run.profiles=[dev/prod/test]
 ```
@@ -30,7 +30,7 @@ mvn spring-boot:run -Dspring-boot.run.profiles=[dev/prod/test]
 >Tests are very time consuming and no always worthy. Because this application is mainly a RESTFUL API, tests will be focused around Integration Test. More details about the tests in the documentation.
 
 ```shell
-cd {YOUR_WORKSPACE}/swear-tin/application/api;
+cd {YOUR_WORKSPACE}/jar-it/application/api;
 mvn clean install
 ```
 
@@ -39,7 +39,7 @@ mvn clean install
 ## Deployment 🚀
 
 ```shell
-java -jar -Dspring.profiles.active=[dev/prod/test] {YOUR_WORKSPACE}/swear-tin/application/api/target/etin-server.jar
+java -jar -Dspring.profiles.active=[dev/prod/test] {YOUR_WORKSPACE}/jar-it/application/api/target/jar-it-server.jar
 ```
 
 ## REST API Resources
@@ -48,16 +48,16 @@ java -jar -Dspring.profiles.active=[dev/prod/test] {YOUR_WORKSPACE}/swear-tin/ap
 
 ### Users
 
-## ![eTin wiki banner](../../docs/src/img/swagger/users.png)
+## ![jar-it wiki banner](../../docs/src/img/swagger/users.png)
 
 ## Models
 
 > FInd below most relevant models of the API
 
-## ![eTin wiki banner](../../docs/src/img/spec/architecture/diagramme-classe.png)
+## ![jar-it wiki banner](../../docs/src/img/spec/architecture/diagramme-classe.png)
 
 ***
 
 ## Contact ✉️
 
-Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspects of this project.
+Feel free to [Submit new issue](https://github.com/louiiuol/jar-it/issues) if you have any suggestions or wish to learn more about certain aspects of this project.

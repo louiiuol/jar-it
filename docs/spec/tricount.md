@@ -1,6 +1,6 @@
 # Benchmark 🔍
 
-## ![alt text](../src/img/banner.png "eTin wiki banner")
+## ![wiki banner](../src/img/banner.png)
 
 This benchmark will be focused on the mobile application of Tricount.
  It helps determine if the development of Cod'Octopus is relevant regarding existing tools like [Tricount](https://www.tricount.com/), by analyzing the following points:
@@ -46,15 +46,15 @@ Tricount also provides some external features such as help section, and integrat
 
 ## Conclusion 💡
 
-> **e.Tin will also choose a very soft and clean visual, but could allow users to customize their display regarding their tastes.**
+> **Jar it will also choose a very soft and clean visual, but could allow users to customize their display regarding their tastes.**
 > **It also need to be as simple to use as Tricount, but it will also provide a Guided Tour to help users navigate on the app.**
-> **e.Tin will take a similar approach, keeping very simplistic terms so information's meaning is simply understandable. But ChangIt will also bring some humour, to motivate users to keep using the app.**
+> **Jar it will take a similar approach, keeping very simplistic terms so information's meaning is simply understandable. But ChangIt will also bring some humour, to motivate users to keep using the app.**
 > **Finally, the app should follow the same PWA approach, by loading only used modules, and storing credentials in user device, even though the first approach of the app will be a Website**
 
 ***
 
 ## Contact ✉️
 
-Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspect of this project.
+Feel free to [Submit new issue](https://github.com/louiiuol/jar-it/issues) if you have any suggestions or wish to learn more about certain aspects of this project.
 
 🏡 *[Go back home](../README.md)*
