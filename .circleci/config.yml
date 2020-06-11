@@ -2,10 +2,11 @@ version: 2.1
 
 jobs:
   build:
+    working_directory: application/api/
     docker:
       - image: 'circleci/openjdk:11-jdk'
     steps:
-      - checkout application/api/
+      - checkout
       - run:
           name: Analyze on SonarCloud
           command: mvn verify sonar:sonar
