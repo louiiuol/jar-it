@@ -16,17 +16,14 @@ jobs:
         node-version: [8.x, 10.x, 12.x]
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
-      run:
+    - run:
         npm install --prefix application/web-ui
-        npm ci --prefix application/web-ui
         npm run build --if-present --prefix application/web-ui
-        npm run test -- --watch=false --progress=false --browsers=ChromeHeadlessCI --prefix application/web-ui
-        npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js --prefix application/web-ui
+        npm run test --prefix application/web-ui
       env:
         CI: true
