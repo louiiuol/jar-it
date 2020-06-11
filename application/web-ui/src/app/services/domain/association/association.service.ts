@@ -17,7 +17,7 @@ export class AssociationService {
     constructor(private http: HttpClient) { }
 
     get = (id: number): Observable<AssociationView> =>
-        this.http.get<AssociationView>(`${this.association_url}/${id}`, this.headerJson);
+        this.http.get<AssociationView>(`${this.association_url}/${id}`, this.headerJson)
 
     getAll = (sort: string, order: string, page: number, size: number): Observable<AssociationPage> =>
         this.http.get<AssociationPage>(`${this.association_url}?page=${page}&size=${size}&sort=${sort}&order=${order}`, this.headerJson)

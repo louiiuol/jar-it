@@ -1,6 +1,6 @@
 export class AssociationView {
 
-    readonly id: number;
+    id: number;
     readonly name: string;
     readonly code: string;
     readonly description: string;

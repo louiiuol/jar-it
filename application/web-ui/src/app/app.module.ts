@@ -25,6 +25,19 @@ import {
 } from './services';
 import 'hammerjs';
 import { DescriptionFormatterPipe } from './services/pipes/description-formater.pipe';
+import { JarCreateComponent } from './components/views/dashboard/jar-board/jar-create/jar-create.component';
+import { JarDetailsComponent } from './components/views/jar-details/jar-details.component';
+import { ConfessComponent } from './components/views/jar-details/jar-active/confess/confess.component';
+import { JarPreviewComponent } from './components/views/dashboard/jar-board/jar-preview/jar-preview.component';
+import { JarSettingsComponent } from './components/shared/jar-settings/jar-settings.component';
+import { MemberAddComponent } from './components/shared/member-add/member-add.component';
+import { JarBoardComponent } from './components/views/dashboard/jar-board/jar-board.component';
+import { MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material/chips';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { JarResolver } from './services/domain/jar/jar.resolve';
+import { JarCreatedComponent } from './components/views/jar-details/jar-created/jar-created.component';
+import { JarActiveComponent } from './components/views/jar-details/jar-active/jar-active.component';
+import { JarOverComponent } from './components/views/jar-details/jar-over/jar-over.component';
 
 @NgModule({
     declarations: [
@@ -45,7 +58,17 @@ import { DescriptionFormatterPipe } from './services/pipes/description-formater.
         AdminBoardComponent,
         AssociationOfficeComponent,
         AssociationCreateComponent,
-        DescriptionFormatterPipe
+        DescriptionFormatterPipe,
+        JarCreateComponent,
+        MemberAddComponent,
+        JarPreviewComponent,
+        JarSettingsComponent,
+        JarDetailsComponent,
+        ConfessComponent,
+        JarBoardComponent,
+        JarCreatedComponent,
+        JarActiveComponent,
+        JarOverComponent
     ],
     imports: [
         BrowserModule,
@@ -69,7 +92,9 @@ import { DescriptionFormatterPipe } from './services/pipes/description-formater.
         UserGuard,
         AuthService,
         FormFactory,
+        JarResolver,
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+        { provide: MAT_CHIPS_DEFAULT_OPTIONS, useValue: { separatorKeyCodes: [ENTER, COMMA] } }
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA], // Defines custom 'Module schemas' to improve Angular cohesion
     bootstrap: [AppComponent]

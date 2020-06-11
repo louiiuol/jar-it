@@ -1,0 +1,5 @@
+<mat-card id='jar-details' *ngIf='isJarLoading'>
+    <app-jar-created [infos]="infos" *ngIf='isCreated'  (activeEvent)='setState($event)'></app-jar-created>
+    <app-jar-active [infos]="infos" *ngIf='isActive' (activeEvent)='setState($event)'></app-jar-active>
+    <app-jar-over [infos]="infos" *ngIf='isOver' (activeEvent)='setState($event)'></app-jar-over>
+</mat-card>

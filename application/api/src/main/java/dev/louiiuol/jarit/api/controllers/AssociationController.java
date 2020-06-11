@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import dev.louiiuol.jarit.business.dtos.requests.associations.AssociationCreateDto;
-import dev.louiiuol.jarit.business.dtos.responses.associations.AssociationViewDto;
-import dev.louiiuol.jarit.business.dtos.responses.associations.AssociationPageDto;
+import dev.louiiuol.jarit.business.dtos.associations.AssociationCreateDto;
+import dev.louiiuol.jarit.business.dtos.associations.AssociationViewDto;
+import dev.louiiuol.jarit.business.dtos.associations.AssociationPageDto;
 import dev.louiiuol.jarit.services.association.AssociationService;
 /** 
  * This class exposes REST API containing multiple CRUD request

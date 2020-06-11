@@ -1,0 +1,176 @@
+<button mat-icon-button id="close-dialog" color="primary" mat-button (click)="close()" aria-label="close tinee dialog">
+    <app-icon class="icon xs" name="close"></app-icon>
+</button>
+
+<h3 class="header">Create your Jar</h3>
+
+<mat-horizontal-stepper linear='true' #stepper>
+
+    <ng-template style="display:flex" matStepperIcon="edit">
+        <app-icon class=" icon xxs" name="edit"></app-icon>
+    </ng-template>
+
+    <mat-step [stepControl]="jarGeneralForm">
+
+        <ng-template matStepLabel>Generals</ng-template>
+        <form [formGroup]="jarGeneralForm">
+
+            <p class="legend">Please describe the title and the description of your Jar</p>
+
+            <mat-form-field>
+                <mat-label>Tinee's title</mat-label>
+                <input matInput formControlName="title" maxlength="40" placeholder="my first Jar" required >
+                <mat-error *ngFor="let validation of errorMessages.title">
+                    <mat-error *ngIf="title.hasError(validation.type) && (title.dirty || title.touched)">{{validation.message}}</mat-error>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" placeholder="your description"></textarea>
+                <mat-error *ngFor="let validation of errorMessages.description">
+                    <mat-error *ngIf="description.hasError(validation.type) && (description.dirty || description.touched)">{{validation.message}}</mat-error>
+                </mat-error>
+            </mat-form-field>
+
+        </form>
+
+        <footer>
+            <button color="primary" mat-raised-button matStepperNext
+                [disabled]="jarGeneralForm.invalid" >Next</button>
+        </footer>
+
+    </mat-step>
+
+    <mat-step [stepControl]="jarSettingsForm">
+
+        <ng-template matStepLabel>Settings</ng-template>
+        <form [formGroup]="jarSettingsForm">
+
+            <p class="legend">Set the global settings of this Jar</p>
+
+            <div class="wrapped">
+                <mat-form-field>
+                    <mat-label>Amount per swear</mat-label>
+                    <input formControlName="referenceCost" matInput type= "number" required >
+                    <span matPrefix>&euro; &nbsp;</span>
+                    <mat-error *ngFor="let validation of errorMessages.maxAmount">
+                        <mat-error *ngIf="maxAmount.hasError(validation.type) && (maxAmount.dirty || maxAmount.touched)">{{validation.message}}</mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Maximum amount</mat-label>
+                    <input formControlName="maxAmount" matInput type= "number" required >
+                    <span matPrefix>&euro; &nbsp;</span>
+                    <mat-error *ngFor="let validation of errorMessages.maxAmount">
+                        <mat-error *ngIf="maxAmount.hasError(validation.type) && (maxAmount.dirty || maxAmount.touched)">{{validation.message}}</mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="wrapped">
+                <mat-form-field>
+                    <mat-label>Closing date</mat-label>
+                    <input matInput formControlName="closingDate"
+                        [matDatepicker]="picker" placeholder="Choose a date"
+                        [min]="patterns.minJarDuration()" [max]="patterns.maxJarDuration()">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngFor="let validation of errorMessages.title">
+                        <mat-error *ngIf="title.hasError(validation.type) && (title.dirty || title.touched)">{{validation.message}}</mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Association addressee</mat-label>
+                    <mat-select formControlName="addressee">
+                        <mat-option *ngFor="let association of associations" [value]="association"> {{association.name}} </mat-option>
+                    </mat-select>
+                    <mat-error *ngFor="let validation of errorMessages.title">
+                        <mat-error *ngIf="title.hasError(validation.type) && (title.dirty || title.touched)">{{validation.message}}</mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+        <footer>
+            <button color="accent" mat-stroked-button matStepperPrevious>Back</button>
+            <button color="primary" mat-raised-button matStepperNext [disabled]="jarSettingsForm.invalid">Next</button>
+        </footer>
+
+    </mat-step>
+
+    <mat-step [stepControl]="jarMembersForm" optional>
+
+        <ng-template matStepLabel>Members</ng-template>
+        <form [formGroup]="jarSettingsForm">
+
+            <p class="legend">You can direclty add member from here !</p>
+
+            <app-member-add
+                (activeEvent)='setMembers($event)'
+                [allUsers]="allUsers"
+                [author]='author'
+                [currentUserId]='author.id'
+                [memberList]="members"></app-member-add>
+        </form>
+        <footer>
+            <button color="accent" mat-stroked-button matStepperPrevious>Back</button>
+            <button color="primary" mat-raised-button matStepperNext>Next</button>
+        </footer>
+    </mat-step>
+
+    <mat-step [stepControl]="confirmCtrl">
+        <ng-template matStepLabel>Confirmation</ng-template>
+
+        <p class="legend">Confirm informations before creating your Jar !</p>
+        <mat-card *ngIf='jarGeneralForm.valid && jarSettingsForm.valid'>
+            <article id='preview'>
+                <h3 class='jar-title is-primary'>{{title.value}}</h3>
+                <p class='legend'>{{description.value}} </p>
+                <section id='preview-body'>
+                    <mat-chip-list>
+                        <mat-chip color="accent" selected>Max amount for the jar:
+                            <strong>{{maxAmount.value}}</strong>
+                            <span> &euro; &nbsp;</span>
+                        </mat-chip>
+                        <mat-chip color="accent" selected>Amount per swear:
+                            <strong>{{referenceCost.value}}</strong>
+                            <span>&euro; &nbsp;</span>
+                        </mat-chip>
+                        <mat-chip color="accent" selected>until:
+                            <strong>{{closingDate.value | date: 'fullDate' }}</strong>
+                        </mat-chip>
+                        <mat-chip color="accent" selected>for:
+                            <strong>{{addressee.value.name}}</strong>
+                        </mat-chip>
+                    </mat-chip-list>
+                    <hr class="spacer">
+                    <mat-chip-list>
+                        <mat-chip selected color="primary" *ngFor="let member of members">
+                            <p id='member-chip'>
+                                <app-icon name="{{member.avatar}}"
+                                    avatar='true' class="icon avatar xs"></app-icon>
+                                <span>{{member.username}}</span>
+                                <app-icon *ngIf='member.admin' name="crown" class="icon xs"
+                                matTooltip="this member is an admin"></app-icon>
+                            </p>
+                        </mat-chip>
+                    </mat-chip-list>
+                </section>
+            </article>
+        </mat-card>
+
+        <footer>
+            <button color="accent" mat-stroked-button matStepperPrevious>Back</button>
+            <mat-slide-toggle [formControl]="confirmCtrl" color="accent"
+            required >Are you sure ?</mat-slide-toggle>
+            <button color="primary" mat-raised-button (click)="createJar()"
+                [disabled]="jarGeneralForm.invalid || jarSettingsForm.invalid || confirmCtrl.invalid || loading">
+                CREATE
+            </button>
+        </footer>
+
+    </mat-step>
+
+</mat-horizontal-stepper>

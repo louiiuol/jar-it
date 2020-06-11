@@ -35,10 +35,10 @@ public interface AssociationRepository extends JpaRepository<Association, Long> 
     /**
      * Return a list of all Associations present in database
      * 
-     * @param pageable interface for pagination information
-     * @return {@code List<AssociationAssociationViewDto>}
+     * @param page interface for pagination information
+     * @return {@code Page<Association>}
      */
-    Page<Association> findAll(Pageable pageable);
+    Page<Association> findAll(Pageable page);
 
     /**
      * Check if {@Association} with given {@code name} is exists or not.

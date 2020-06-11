@@ -3,11 +3,11 @@
  */
 export class UserView {
 
-  constructor(
-    public readonly id: number,
-    public readonly username: string,
-    public readonly avatar: string
-  ) { }
+    constructor(
+        public readonly id: number,
+        public readonly username: string,
+        public readonly avatar: string
+    ) { }
 
 }
 /**
@@ -15,8 +15,8 @@ export class UserView {
  */
 export interface IUserView {
 
-  readonly id: number;
-  readonly username: string;
-  readonly avatar: string;
+    readonly id: number;
+    readonly username: string;
+    readonly avatar: string;
 
 }

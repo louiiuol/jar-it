@@ -14,25 +14,17 @@ import dev.louiiuol.jarit.api.exceptions.ResourceNotFoundException;
 import dev.louiiuol.jarit.business.entities.AbstractEntity;
 
 /**
- * Abstract Service to be extends in every domain services of the API, 
- * provides couple of methods and injected services:
+ * <i>Abstract Service to be extended in every <b>business services</b> implementations</i>
  * <p>
- * This class defines a contract for every services that extends it,
- * most of basic methods are defined here to simplify persistence and mapping in Service's Implementations:
- * use them & do not create new unnecessary ones. When using this class,
- * please provide {@code T} Entity & {@code R} Repository
- * <ul>
- * <li> {@link ModelMapper} - to map DTO in Entity and vice versa
- * <li> {@link R Repository} - Repository used to persist datas
- * </ul>
- * Methods:
- * <ul>
- * <li> T {@link #getEntity(Long) }
- * <li> Set<V> {@link #getAll(Class<V>) }
- * <li> void {@link #update(Long, Class<V>)}
- * <li> V {@link #mapView(T, Class<V>)}
- * <li> Set<V> {@link #mapSetView(Collection<T>, Class<V>)}
- * </ul>
+ * This class <b> defines a contract </b> for every services that extends it,
+ * most of basic methods are defined here to <b>simplify persistence</b>, with JPA,
+ * and <b>mapping datas</b>, with ModelMapper, in Service's Implementations.
+ * <p>
+ * <i>When using this class please provide {@code T} Entity & {@code R} Repository</i>
+ * 
+ * @see ModelMapper
+ * @see JpaRepository
+ * @see Service Spring's service annotation
  */
 @Service
 public abstract class AbstractService<T extends AbstractEntity, R extends JpaRepository<T, Long>> {
@@ -58,14 +50,15 @@ public abstract class AbstractService<T extends AbstractEntity, R extends JpaRep
         repo = repository;
     }
 
-
     /**
      * Returns instance of {@code ModelMapper} to be used
      * for custom mapping in domain Services
      * 
      * @return new instance of {@code ModelMapper}
      */
-    protected ModelMapper mapper() { return mapper; }
+    protected ModelMapper mapper() {
+        return mapper;
+    }
 
     /** 
      * Returns instance of {@code R Repository} to be used
@@ -73,7 +66,9 @@ public abstract class AbstractService<T extends AbstractEntity, R extends JpaRep
      * 
      * @return {@code R Repository}
      */
-    protected R repo() { return repo; }
+    protected R repo() {
+        return repo;
+    }
 
     /**
      * Fetching entity through repository and returns it if found

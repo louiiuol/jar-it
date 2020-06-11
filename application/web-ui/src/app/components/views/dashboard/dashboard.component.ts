@@ -3,14 +3,14 @@ import { AuthInfo } from 'src/app/models';
 import { AuthService } from 'src/app/services';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
 
-  get currentUser(): AuthInfo { return this.authService.currentUser; }
+    get currentUser(): AuthInfo { return this.authService.currentUser; }
 
-  constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService) { }
 
 }

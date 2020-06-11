@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.louiiuol.jarit.services.utils.SecurityHelper;
-import dev.louiiuol.jarit.business.dtos.requests.users.UserCreateDto;
-import dev.louiiuol.jarit.business.dtos.requests.users.UserUpdateDto;
-import dev.louiiuol.jarit.business.dtos.responses.users.UserViewDetailsDto;
-import dev.louiiuol.jarit.business.dtos.responses.users.UserViewDto;
+import dev.louiiuol.jarit.business.dtos.users.UserCreateDto;
+import dev.louiiuol.jarit.business.dtos.users.UserUpdateDto;
+import dev.louiiuol.jarit.business.dtos.users.UserViewDetailsDto;
+import dev.louiiuol.jarit.business.dtos.users.UserViewDto;
 import dev.louiiuol.jarit.services.user.UserService;
 
 /**
