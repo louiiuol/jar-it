@@ -50,8 +50,9 @@ public class Role extends AbstractEntity {
 
     @Override
 	public boolean equals(Object other) {
-        if (other instanceof Role)
+        if (other instanceof Role) {
             return code.equals( ((Role) other).code );
+        }
 		return false;
     }
 

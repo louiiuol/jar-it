@@ -1,0 +1,3 @@
+export enum jarState {
+    CREATED, ACTIVE, OUT_DATED, MAX_AMOUNT_REACHED, PAYED, CLOSED
+}

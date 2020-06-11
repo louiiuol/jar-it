@@ -20,6 +20,12 @@ export const Patterns = {
 
     majority: (): Date => fn.nowMinusYears(18),
 
-    oldestAlive: (): Date => fn.nowMinusYears(130)
+    oldestAlive: (): Date => fn.nowMinusYears(130),
+
+    minJarDuration: (): Date => new Date(Date.now() + (2629746000 / 2)),
+
+    maxJarDuration: (): Date => new Date(Date.now() + (2629746000 * 2)),
+
+    now: (): Date => new Date(Date.now())
 
 };

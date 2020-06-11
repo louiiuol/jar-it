@@ -4,10 +4,10 @@ import java.util.Set;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import dev.louiiuol.jarit.business.dtos.requests.users.UserCreateDto;
-import dev.louiiuol.jarit.business.dtos.requests.users.UserUpdateDto;
-import dev.louiiuol.jarit.business.dtos.responses.users.UserViewDetailsDto;
-import dev.louiiuol.jarit.business.dtos.responses.users.UserViewDto;
+import dev.louiiuol.jarit.business.dtos.users.UserCreateDto;
+import dev.louiiuol.jarit.business.dtos.users.UserUpdateDto;
+import dev.louiiuol.jarit.business.dtos.users.UserViewDetailsDto;
+import dev.louiiuol.jarit.business.dtos.users.UserViewDto;
 
 /**
  * Interface to deal with {@code User} informations.

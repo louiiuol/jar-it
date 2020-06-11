@@ -8,6 +8,7 @@ import { ErrorMessages, Patterns } from 'src/app/services/forms/utils';
 import { AssociationService } from 'src/app/services/domain/association/association.service';
 import { FormFactory } from 'src/app/services';
 import { AssociationCreate } from 'src/app/models';
+import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 
 @Component({
     selector: 'app-association-create',
@@ -44,14 +45,14 @@ export class AssociationCreateComponent implements OnDestroy {
     onCreate(): void {
         if (this.associationForm.valid) {
         const association = new AssociationCreate(this.name.value, this.code.value, this.description.value, this.link.value);
-        this.associationService.create(association).subscribe((id) => {
+        this.associationService.create(association).pipe(takeUntil(this.destroyed$))
+            .subscribe((id) => {
             this.data.id = id;
             this.data.created = true;
             this.dialogRef.close(this.data);
         },
         err => this.forms.handleErrorMessages(err));
         }
-
     }
 
     private init(): void {

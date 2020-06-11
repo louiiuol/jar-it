@@ -49,6 +49,7 @@ snack-bar-container { // Defines shared SnacbBar Global custom styles
 .mat-card, .mat-dialog-container { // Defines custom styles for mat card & dialog,containing form
     padding: 0 !important;
     border-radius: 10px !important;
+    position: relative;
     h3.header {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -99,12 +100,23 @@ snack-bar-container { // Defines shared SnacbBar Global custom styles
         }
     }
     p.legend { text-align: center; }
-    .mat-dialog-content { margin: 1rem 0 !important;  }
+    .mat-dialog-content { margin: 1rem 0 !important; }
+    #close-dialog {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: #FFFFFF;
+    }
+    mat-dialog-actions, mat-card-actions {
+        display: flex !important;
+        justify-content: space-evenly !important;
+    }
     footer {
         display: flex;
         flex-flow: row wrap;
         place-content: space-between space-evenly;
-        margin-bottom: 1rem
+        margin-bottom: 1rem;
+        margin-top: 1rem;
     }
 }
 
@@ -122,3 +134,13 @@ snack-bar-container { // Defines shared SnacbBar Global custom styles
 .mat-fab .mat-button-wrapper { padding: 4px 0 !important; } // Fixing default Material behaviour
 mat-card.has-form form .mat-form-field .mat-icon-button, .mat-dialog-container form .mat-form-field .mat-icon-button { padding-top: 4px !important; }
 .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix { top: .5em !important; }
+mat-slide-toggle label { flex: 0 !important;}
+.mat-button-wrapper { display: block; }
+.mat-step-icon-content { display: flex; }
+.mat-slide-toggle.reverse {
+    label {
+        flex-direction: row-reverse;
+    }
+}
+.mat-card-header-text { width: 100%;}
+.member-info .mat-chip-list-wrapper { justify-content: space-between !important;}

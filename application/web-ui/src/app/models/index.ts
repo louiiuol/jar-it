@@ -13,3 +13,14 @@ export { ConfirmationPassData } from './utils/dialog/confirmation-pass-data.dial
 
 export { AssociationView } from './association/association-view.model';
 export { AssociationCreate } from './association/association-create.model';
+
+export { JarView } from './jar/jar-view.model';
+export { JarDetails } from './jar/jar-details.model';
+export { JarCreate } from './jar/jar-create.model';
+export { JarUpdate } from './jar/jar-update.model';
+
+export { MemberPreview } from './jar/member/member-preview.model';
+export { MemberDetails } from './jar/member/member-details.model';
+export { MemberCreate } from './jar/member/member-create.model';
+
+export { Confession } from './jar/confession/confession.model';

@@ -23,7 +23,6 @@ import dev.louiiuol.jarit.api.errors.ApiErrorsDto;
 import dev.louiiuol.jarit.api.errors.MessageNotReadableError;
 import dev.louiiuol.jarit.api.errors.ResourceNotFoundError;
 import dev.louiiuol.jarit.api.errors.ValidationError;
-
 import dev.louiiuol.jarit.api.exceptions.ResourceNotFoundException;
 
 /**
@@ -93,7 +92,7 @@ public abstract class ControllerAdvice extends ResponseEntityExceptionHandler {
 		ApiErrorsDto<ResourceNotFoundError> apiErrors = new ApiErrorsDto<>(errors, HttpStatus.NOT_FOUND.value(), getRequestURI());
 		return new ResponseEntity<>(apiErrors, HttpStatus.NOT_FOUND);
 	}
-	
+
 	protected static String getRequestURI() { 
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		return attr.getRequest().getRequestURI();

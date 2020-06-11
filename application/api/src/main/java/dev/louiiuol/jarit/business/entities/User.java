@@ -77,6 +77,10 @@ public class User extends AbstractEntity {
     // Overrides default no-args constructor as protected
   }
 
+  /**
+   * Close user account: Spring Security will
+   * no longer accepts user's credentials
+   */
   public void close() {
     this.enabled = false;
   }

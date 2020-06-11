@@ -1,15 +1,15 @@
 import { HttpHeaders } from '@angular/common/http';
 
 export const Config = {
-  jsonHeader: { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) },
-  title: 'eTin: First electronic Swear Tin online !'
+    jsonHeader: { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) },
+    title: 'eTin: First electronic Swear Tin online !'
 };
 
 export const environment = {
-  production: false,
-  root_url: 'http://localhost:1337/',
-  root_url_secured: 'http://localhost:1337/api/secure/',
-  config: Config
+    production: false,
+    root_url: 'http://localhost:1337/',
+    root_url_secured: 'http://localhost:1337/api/secure/',
+    config: Config
 };
 
 /*
