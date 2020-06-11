@@ -1,0 +1,11 @@
+<a class='{{size}}' mat-fab aria-label='user navigation menu'
+  color='accent' [matMenuTriggerFor]='avatarPicker'>
+  <app-icon class='icon {{size}}' avatar='true' name='{{current}}'></app-icon>
+</a>
+
+<mat-menu #avatarPicker='matMenu' xPosition='after'>
+  <a *ngFor='let avatar of avatarsList' mat-menu-item>
+      <app-icon mat-fab (click)='select(avatar)' class='icon sm has-border'
+        avatar='true' name='{{avatar}}' ></app-icon>
+  </a>
+</mat-menu>

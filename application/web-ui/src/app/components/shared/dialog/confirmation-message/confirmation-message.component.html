@@ -1,0 +1,8 @@
+<h3 class='header' mat-dialog-title>Confirmation needed</h3>
+<section mat-dialog-content>
+  <p>{{message}}</p>
+</section>
+<footer mat-dialog-actions>
+  <button color='accent' mat-stroked-button (click)='onCancel()'>cancel</button>
+  <button color='primary' mat-raised-button [mat-dialog-close]='onConfirm()'>Yes I'm sure</button>
+</footer>

@@ -1,74 +1,74 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Config } from '../../../../resources/config';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthLogin } from '../../../models/user/login.model';
-import { TokenStorageService } from '../token/token-storage.service';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Token, AuthLogin, AuthInfo, IToken, UserViewDetails, RegisterInfo } from 'src/app/models';
+import { TokenStore } from '../token/token.store';
 
+/**
+ * Provides all Http methods related to User Authentication
+ */
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  constructor(protected router: Router, private http: HttpClient, private snackBar: MatSnackBar, private tokenStore: TokenStorageService) {}
+    private readonly register_url = environment.root_url + 'api/auth/signup';
+    private readonly token_url = environment.root_url + 'oauth/token';
+    private readonly whoami_url = environment.root_url_secured + 'whoami';
+    private readonly current = new BehaviorSubject<Token>(null);
+    public token$: Observable<Token> = this.current.asObservable();
+    public isLoggedIn$: Observable<boolean>;
+    public isLoggedOut$: Observable<boolean>;
 
-  signUp = (info: any): Observable<string> => this.http.post<string>(Config.uris.register, info, Config.httpOptions.json);
+    public get currentUser(): AuthInfo { return new AuthInfo(this.current.value); }
 
-  logIn(data: AuthLogin): void {
-    this.createPasswordGrant(data).subscribe(
-      token => {
-        this.tokenStore.saveToken(token);
-        this.router.navigate(['/dashboard']);
-        this.snackBar.open('Welcome Back ' + data.username, 'close', { duration: 3000 } );
-      }, error => {
-        const err = error.error.error;
-        if (!!err) {
-          if (err === 'unauthorized' || err === 'invalid_grant' ) {
-            this.snackBar.open('These credentials doesn\'t seems right ... \r\n please check them again ! ', '', { duration: 3000 } );
-          }
-        } else {
-          this.snackBar.open('Seems like server is down, try again later 👻 ', '', { duration: 3000 } );
-        }
-      }
-    );
-  }
+    constructor(
+        private router: Router,
+        private http: HttpClient,
+        private tokenStore: TokenStore
+    ) { // Fetch current user's token
+        this.current.next(tokenStore.checkToken() ? tokenStore.getToken() : null);
+        // Update Observables depending on Subject state
+        this.isLoggedIn$ = this.token$.pipe( map( token => !!token ) );
+        this.isLoggedOut$ = this.isLoggedIn$.pipe( map( loggedIn => !loggedIn ) );
+    }
 
-  logout = (): void => {
-    this.tokenStore.clearToken();
-    this.router.navigate(['/welcome']);
-  }
+    signUp = (info: RegisterInfo): Observable<number> => // Creates new User in database
+        this.http.post<number>(this.register_url, info, environment.config.jsonHeader)
 
-  isLoggedIn = (): boolean => this.tokenStore.checkToken();
+    logIn = (data: AuthLogin): Observable<void> => // Log and update current User Subject
+        this.authenticate(data, false).pipe( map(token => this.updateSubject(token)) )
 
-  getCurrentUser = (): any => {
-    const token = this.tokenStore.getToken();
-    return {
-      id: token.userId,
-      username: token.username,
-      avatar: token.avatar,
-      role: token.role
-    };
-  }
+    logOut = (): Promise<boolean> => { // Clear current user instance and token
+        this.tokenStore.clearToken();
+        this.current.next(null);
+        return this.router.navigate(['/']);
+    }
 
-  refreshToken = () => {
-    const refreshToken = this.tokenStore.getToken().refreshToken;
-    const header = Config.grantType.refresh + Config.clientId + '&refresh_token=' + refreshToken;
-    let token;
-    this.http.post(Config.uris.token, header, Config.httpOptions.formUrlEncoded).subscribe(
-        (data) => {
-          console.log(data);
-          token = data;
-        },
-        (err) => {
-          console.log(err);
-        }
-    );
-    return token;
-  }
+    whoami = (): Observable<UserViewDetails> =>
+        this.http.get<UserViewDetails>(this.whoami_url, environment.config.jsonHeader)
 
-  private createPasswordGrant = (data: AuthLogin): Observable<any> => {
-    const header = Config.grantType.password + '&username=' + data.username + '&password=' + data.password + Config.clientId;
-    return this.http.post<any>(Config.uris.token, header, Config.httpOptions.formUrlEncoded);
-  }
+    reloadToken(data: AuthLogin, refresh: boolean): Observable<void> {
+        this.tokenStore.clearToken();
+        return this.authenticate(data, refresh).pipe(map(token => this.updateSubject(token)));
+    }
+
+    isAdmin = (): boolean => // Check is current logged user is admin or not
+        (this.current.value.roles.filter(role => role.authority === 'ROLE_ADMIN').length) !== 0
+
+    private authenticate = (data: AuthLogin, refresh: boolean): Observable<IToken> => // Log with credentials and retrieve token
+        this.http.post<IToken>(this.token_url, this.generateTokenForm(data, refresh),
+            { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }) })
+
+    private generateTokenForm = (data: AuthLogin, refresh?: boolean): string =>
+        `${refresh ? this.refreshToken(this.current.value.refresh_token) : this.accesToken(data.username, data.password)}&client_id=eTin-web-app`
+
+    private accesToken = (username: string, password: string): string => `grant_type=password&username=${username}&password=${password}`;
+
+    private refreshToken = (refreshToken: string): string => `grant_type=refresh_token&token=${refreshToken}`;
+
+    private updateSubject = (input: IToken): void => // Update current user Subject depending on input
+        this.current.next(this.tokenStore.saveToken(input))
 
 }

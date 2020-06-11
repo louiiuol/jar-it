@@ -1,20 +1,20 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'app-icon',
-  template: `<svg><use [attr.xlink:href]="href"></use></svg>`
+    selector: 'app-icon',
+    template: `<svg> <use [attr.xlink:href]="href"></use> </svg>`,
+    styleUrls: ['./icon.component.scss'],
+    encapsulation: ViewEncapsulation.None // Styles accessed by entire app
 })
 export class IconComponent {
 
-  @Input() name: string;
-  @Input() avatar: boolean;
+    @Input() readonly name: string;
+    @Input() readonly avatar: boolean;
 
-  private base = 'assets/img/';
-  private prefix = 'icons.svg#';
-  private prefixForAvatar = 'avatars.svg#';
+    get href(): string {
+        return `assets/img/${this.avatar ? 'avatars' : 'icons'}.svg#${this.name}`;
+    }
 
-  get href() { return this.base +  (!!this.avatar ? this.prefixForAvatar : this.prefix) + this.name; }
-
-  constructor() { }
+    constructor() { }
 
 }

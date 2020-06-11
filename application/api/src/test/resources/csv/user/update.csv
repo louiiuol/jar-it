@@ -1,5 +1,5 @@
 input ; expected
-{"username": "tester53", "email": "test@test.fr", "avatar": "m4"} ; 200
+{"actualPassword": "Password1", "username": "tester53", "email": "test@test.fr", "avatar": "m4"} ; 200
 {"username": "louiiuol"} ; 400
 {"username": "lou"} ; 400
 {"username": "toolongusername"} ; 400

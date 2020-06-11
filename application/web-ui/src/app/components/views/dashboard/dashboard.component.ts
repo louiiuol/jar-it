@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { User } from 'src/app/models';
+import { AuthInfo } from 'src/app/models';
 import { AuthService } from 'src/app/services';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
 
-  constructor(protected authService: AuthService) { }
+    get currentUser(): AuthInfo { return this.authService.currentUser; }
 
-  get user(): User { return this.authService.getCurrentUser(); }
+    constructor(private authService: AuthService) { }
 
 }

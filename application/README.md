@@ -1,6 +1,6 @@
-# e.Tin Application Overview
+# Jar It Application Overview
 
-## ![eTin wiki banner](../docs/src/img/banner.png)
+## ![JarIt wiki banner](../docs/src/img/banner.png)
 
 ## Getting Started 💪
 
@@ -15,28 +15,12 @@
 | JDK | 13.0.1 |
 | Node.js | 10.16.0 |
 | Angular CLI | 9.1.0 |
-| SQL Workbench | - |
+| SQL Workbench | 8.0.19 |
 
-## Installing 🛠
+> Additional information related to each part of the project can be found in the nested REAME.md files. Here is only a handy overview of the application.
 
-```shell
-launch command coming soon ...
-```
-
-## Testing🧪
-
-```shell
-test command coming soon ...
-```
-
-## Build 🏗
-
-```shell
-build command coming soon ...
-```
-
-***
+## ![JarIt wiki banner](../docs/src/img/spec/architecture/architecture.png)
 
 ## Contact ✉️
 
-Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspect of this project.
+Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspects of this project.

@@ -1,15 +1,16 @@
 input ; expected
-{"username": "tester42", "email": "testing@test.fr", "password": "Password1"} ; 200
-{"username": "", "email": "", "password": ""} ; 400
-{"username": "louiiuol", "email": "testing@test.fr", "password": "Password1"} ; 400
-{"username": "      ", "email": "testing@test.fr", "password": "Password1"} ; 400
-{"username": "", "email": "testing@test.fr", "password": "Password1"} ; 400
-{"username": "reallytoolongusername", "email": "testing@test.fr", "password": "Password1"} ; 400
-{"username": "short", "email": "testing@test.fr", "password": "Password1"} ; 400
-{"username": "tester42", "email": "louiiuol@live.fr", "password": "Password1"} ; 400
-{"username": "tester42", "email": "", "password": "Password1"} ; 400
-{"username": "tester42", "email": "      ", "password": "Password1"} ; 400
-{"username": "tester42", "email": "not-an-email", "password": "Password1"} ; 400
-{"username": "tester42", "email": "testing@test.fr", "password": ""} ; 400
-{"username": "tester42", "email": "testing@test.fr", "password": "Areallytoolongpasswordlimitedto20"} ; 400
-{"username": "tester42", "email": "testing@test.fr", "password": "       "} ; 400
+{"username": "tester42", "email": "testing@test.fr", "password": "Password1", "birthDate": "1995-06-22"} ; 200
+{"username": "", "email": "", "password": "", "birthDate": "1995-06-22"} ; 400
+{"username": "louiiuol", "email": "testing@test.fr", "password": "Password1", "birthDate": "1995-06-22"} ; 400
+{"username": "      ", "email": "testing@test.fr", "password": "Password1", "birthDate": "1995-06-22"} ; 400
+{"username": "", "email": "testing@test.fr", "password": "Password1", "birthDate": "1995-06-22"} ; 400
+{"username": "reallytoolongusername", "email": "testing@test.fr", "password": "Password1", "birthDate": "1995-06-22"} ; 400
+{"username": "short", "email": "testing@test.fr", "password": "Password1", "birthDate": "1995-06-22"} ; 400
+{"username": "tester42", "email": "louiiuol@live.fr", "password": "Password1", "birthDate": "1995-06-22"} ; 400
+{"username": "tester42", "email": "", "password": "Password1", "birthDate": "1995-06-22"} ; 400
+{"username": "tester42", "email": "      ", "password": "Password1", "birthDate": "1995-06-22"} ; 400
+{"username": "tester42", "email": "not-an-email", "password": "Password1", "birthDate": "1995-06-22"} ; 400
+{"username": "tester42", "email": "testing@test.fr", "password": "", "birthDate": "1995-06-22"} ; 400
+{"username": "tester42", "email": "testing@test.fr", "password": "Areallytoolongpasswordlimitedto20", "birthDate": "1995-06-22"} ; 400
+{"username": "tester42", "email": "testing@test.fr", "password": "       ", "birthDate": "1995-06-22"} ; 400
+{"username": "tester42", "email": "testing@test.fr", "password": "Password1", "birthDate": "2015-06-22"} ; 400

@@ -1,21 +1,19 @@
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
-import { LoaderService } from 'src/app/components/shared/loader/loader.service';
+import { BehaviorSubject } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
     selector: 'app-loader',
     template: `<div *ngIf="isLoading | async" class="overlay">
-        <mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+        <mat-progress-spinner class="spinner" [color]="'primary'" [mode]="'indeterminate'" [value]="50">
         </mat-progress-spinner>
-    </div>`
+    </div>`,
+  styleUrls: ['./loader.component.scss'],
 })
 export class LoaderComponent {
 
-    color = 'primary';
-    mode = 'indeterminate';
-    value = 50;
-    isLoading: Subject<boolean> = this.loaderService.isLoading;
+  get isLoading(): BehaviorSubject<boolean> { return this.loaderService.isLoading; }
 
-    constructor(private loaderService: LoaderService) {}
+  constructor(private loaderService: LoaderService) { }
 
 }

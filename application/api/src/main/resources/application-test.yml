@@ -1,5 +1,5 @@
 server:
-    port: 9090
+    port: 1338
     servlet:
         context-path: /
         jsp:
@@ -10,17 +10,17 @@ server:
 
 spring:
     application:
-        name: etin
+        name: jar-it
     banner:
         location: classpath:banners/banner-test.txt
     profiles:
         active: test
     datasource:
-        url: jdbc:mysql://localhost:3306/etin_test?createDatabaseIfNotExist=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
-        username: root
+        url: jdbc:mysql://localhost:3306/jar_it_test?createDatabaseIfNotExist=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
+        username: staff
         password: 
-        data: classpath:sql/integration-test.sql
-        initialization-mode: always 
+        data: classpath:sql/integration-test.dml.sql
+        initialization-mode: always
     jpa:
         open-in-view: false
         show-sql: true
@@ -44,15 +44,11 @@ spring:
         add-mappings: false
 
 logging:
-    config: classpath:logs/logback-dev.xml
+    config: classpath:logback/logback-dev.xml
 
 jwt-auth-server:
-    keyStore: jwt.jks
-    keyPass: "JwtKey"
-    keyAlias: "jwtKey"
+    keyStore: jar-it.jks
+    keyAlias: JarItJWTKey
+    keyPass: Rz67nH496643GnY236dRmOkb67
     accessTokenValiditySeconds: 1800
     refreshTokenValiditySeconds: 86400
-
-cron:
-    config:
-        each-day: "0 0 0 * * *"

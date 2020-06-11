@@ -1,0 +1,26 @@
+.icon {
+    width: 2rem;
+    height: 2rem;
+    max-width: 100%;
+    max-height: 100%;
+    display: inline-flex;
+    vertical-align: middle;
+    svg { fill: currentColor; }
+    &.xxs { width: 1rem; height: 1rem; }
+    &.xs { width: 1.5rem; height: 1.5rem; }
+    &.xsm { width: 2.25rem; height: 2.25rem; }
+    &.sm { width: 3rem; height: 3rem; }
+    &.md { width: 4rem; height: 4rem; }
+    &.lg { width: 5rem; height: 5rem; }
+    &.xl { width: 6.5rem; height: 6.5rem; }
+    &.xxl { width: 8rem; height: 8rem; }
+    &.is-rounded { border-radius: 50%; }
+    &.shadowed {
+        -webkit-filter: drop-shadow(1px 2px 4px rgba(0,0,0,0.2));
+        filter: drop-shadow(1px 2px 4px rgba(0,0,0,0.2));
+    }
+}
+
+.has-icon {
+    .icon { margin-right: .5rem; margin-left: .5rem; }
+}

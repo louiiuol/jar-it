@@ -1,6 +1,6 @@
-# Expression du besoin 👂
+# Expression du Besoin 👂
 
-## ![e.Tin banner](../src/img/banner.png)
+## ![wiki banner](../src/img/banner.png)
 
 ## Problématique 🤔
 
@@ -32,6 +32,6 @@ Le contenu sera ainsi rédigé par défaut en anglais, langue universel. Des tra
 
 ## Contact ✉️
 
-Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspect of this project.
+Feel free to [Submit new issue](https://github.com/louiiuol/jar-it/issues) if you have any suggestions or wish to learn more about certain aspects of this project.
 
 🏡 *[Go back home](../README.md)*

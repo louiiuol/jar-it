@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `
-  <app-navbar></app-navbar>
-  <main class="container mat-typography">
-    <router-outlet></router-outlet>
-  </main>
-  `
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  constructor() {}
+
+  constructor() { }
+
 }

@@ -1,0 +1,68 @@
+<mat-card id='profile' class='has-form'>
+  <h3 class='header' >Your Informations</h3>
+  <form *ngIf='!!currentUser'>
+    <section [formGroup]='profileForm'>
+      <div class=' aside'>
+        <app-avatar-picker [current]='avatarForm' [size]="'xl'" (picked)='onPick($event)'></app-avatar-picker>
+        <mat-chip-list class='chips ' aria-label='user current roles'>
+          <mat-chip *ngFor='let role of currentUser.roles' color='primary' selected>{{role.code.slice(5)}}</mat-chip>
+        </mat-chip-list>
+      </div>
+
+      <div id='main-form'>
+        <div class='wrapped'>
+          <mat-form-field appearance='outline'>
+            <mat-label>username</mat-label>
+            <input matInput formControlName='username' type='text' placeholder='username' maxlength='20' required >
+            <mat-error *ngFor='let validation of errorMsg.username'>
+              <mat-error *ngIf='patterns.isValid(username, validation)'>{{validation.message}}</mat-error>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance='outline'>
+            <mat-label>birth date</mat-label>
+            <input matInput formControlName='birthDate' [min]='patterns.oldestAlive()' [max]='patterns.majority()' [matDatepicker]='picker' required>
+            <mat-datepicker-toggle matSuffix [for]='picker'></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngFor='let validation of errorMsg.birthDate'>
+              <mat-error *ngIf='patterns.isValid(birthDate, validation)'>{{validation.message}}</mat-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance='outline'>
+          <mat-label>email</mat-label>
+          <input matInput formControlName='email' placeholder='email@example.com' email required >
+          <mat-error *ngFor='let validation of errorMsg.email'>
+            <mat-error *ngIf='patterns.isValid(email, validation)'>{{validation.message}}</mat-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </section>
+
+    <section [formGroup]='updatePasswordForm' class='wrapped'>
+      <mat-form-field>
+        <mat-label>Update your password</mat-label>
+        <input matInput formControlName='password' placeholder='******' [type]='password_type' >
+        <app-icon matSuffix (click)='hidden.pass = !hidden.pass' class='icon xs' name='{{password_icon}}'></app-icon>
+        <mat-error *ngFor='let validation of errorMsg.password'>
+          <mat-error *ngIf='patterns.isValid(password, validation)'>{{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Confirm your new password</mat-label>
+        <input matInput formControlName='confirm' placeholder='******' [type]='password_type' >
+        <app-icon matSuffix (click)='hidden.confirm = !hidden.confirm' class='icon xs' name='{{confirm_icon}}'></app-icon>
+        <mat-error *ngFor='let validation of errorMsg.confirm'>
+          <mat-error *ngIf='patterns.isValid(confirm, validation)'>{{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+    </section>
+
+  <footer>
+    <button type='submit' mat-stroked-button color='warn' (click)='close()' >close account</button>
+    <button color='accent' mat-button (click)='reset()'>reset</button>
+    <button type='submit' mat-raised-button [disabled]='!isValidForm()' color='primary' (click)='update()' >Update now</button>
+  </footer>
+
+</form>
+
+</mat-card>

@@ -1,22 +1,54 @@
-h1 {
-  font-size: 10vw;
-  line-height: 15vw !important;
-  text-align: center;
-  padding-bottom: 1rem !important;
+section#home {
+  height: 100%;
+  h1 {
+    text-align: center;
+    font-size: 6vw;
+    line-height: 4vw;
+  }
+  div.content {
+    display: flex;
+    flex-flow: row wrap;
+    place-content: space-evenly;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    height: 80%;
+    div#headline {
+      align-self: center;
+      margin-top: .5rem;
+      h2 {
+        font-weight: normal;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        font-family: poppins, sans-serif !important;
+        padding: 1.25rem 0;
+      }
+      &, .has-form { width: 35%; }
+    }
+    .has-form {
+      min-width: 350px;
+      max-width: 600px;
+      align-self: center;
+    }
+  }
 }
 
-h2 {
-  max-width: 780px;
-  line-height: 4rem;
-  font-family: poppins, sans-serif !important;
-  margin: 5rem auto !important;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  icon { margin-right: 1rem; }
+/** MEDIA BREAKPOINTS */
+@media (min-width: 780px) and (max-width: 980px) { // Specific Headline Font Breakpoint (tablet)
+  h1 { font-size: 9vw !important; line-height: 11vw !important; }
 }
-mat-card#forms {
-  padding: 0;
-  margin: 1rem auto;
-  max-width: 550px;
+@media (max-width: 980px) { // Smaller than desktop Only
+  .content { margin-top: .5rem !important; padding-top: 0 !important;}
+  div#headline h2 { padding: .5rem 0; padding-top: 0 !important; }
+  div#headline, .has-form { margin: 1rem auto !important; width: 90% !important; }
+}
+@media (max-width: 780px) { // Tablet and smaller Only
+  h1 { font-size: 15vw !important; line-height: 16vw !important;
+    em { display: block; padding-top: 4vw; }
+  }
+
+}
+@media (min-width: 780px) { // Bigger than tablet Only
+  div.content {
+    margin-top: 2rem; padding-top: 3rem;
+  }
 }

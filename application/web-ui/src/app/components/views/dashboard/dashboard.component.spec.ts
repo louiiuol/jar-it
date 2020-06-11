@@ -1,29 +1,37 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { DashboardComponent } from './dashboard.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthServiceMockFull, loginMock } from 'src/app/models/utils/mocks';
+import { DashboardComponent } from './dashboard.component';
+import { AuthService } from 'src/app/services/security/auth/auth.service';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('DashboardComponent', () => {
-  let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ],
-      imports: [ RouterTestingModule, HttpClientTestingModule, MatSnackBarModule ]
-    })
-    .compileComponents();
-  }));
+    let component: DashboardComponent;
+    let fixture: ComponentFixture<DashboardComponent>;
+    let authService: AuthService;
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach( () => {
+        TestBed.configureTestingModule({
+        declarations: [ DashboardComponent ],
+        imports: [ RouterTestingModule, HttpClientTestingModule ],
+        providers: [{ provide: AuthService, useClass: AuthServiceMockFull }],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
+        }).compileComponents();
+        authService = TestBed.inject(AuthService);
+        fixture = TestBed.createComponent(DashboardComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should load current user id', () => {
+        authService.logIn(loginMock);
+        expect(component.currentUser).toBeDefined();
+    });
+
 });

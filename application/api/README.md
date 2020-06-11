@@ -1,6 +1,6 @@
-# e-Tin Api V1
+# Jar it Api V1
 
-## ![eTin wiki banner](../../docs/src/img/banner.png)
+## ![jar-it wiki banner](../../docs/src/img/banner.png)
 
 > This application, using SpringBoot Security combined with OAuth, provides a secured RESTFUL API to handle, persist and retrieve business values, mapped from *dtos* to *entities*, in the database configured as requested. More information about the API context and technical stack available in the documentation.
 
@@ -20,9 +20,9 @@
 ## Installing 🛠
 
 ```shell
-cd swear-tin/application/api;
+cd {YOUR_WORKSPACE}/jar-it/application/api;
 mvn clean install;
-mvn spring-boot:run -Dspring-boot.run.profiles=[dev/prod]
+mvn spring-boot:run -Dspring-boot.run.profiles=[dev/prod/test]
 ```
 
 ## Testing & Build 🧪
@@ -30,54 +30,34 @@ mvn spring-boot:run -Dspring-boot.run.profiles=[dev/prod]
 >Tests are very time consuming and no always worthy. Because this application is mainly a RESTFUL API, tests will be focused around Integration Test. More details about the tests in the documentation.
 
 ```shell
-cd swear-tin/application/api;
+cd {YOUR_WORKSPACE}/jar-it/application/api;
 mvn clean install
+```
+
+> This will generate a .jar file that can be executed on any OS with a JDK 13 installed.
+
+## Deployment 🚀
+
+```shell
+java -jar -Dspring.profiles.active=[dev/prod/test] {YOUR_WORKSPACE}/jar-it/application/api/target/jar-it-server.jar
 ```
 
 ## REST API Resources
 
-> This program provides a RESTFULL Api to handle functionalities needed for build IHM.
-> Please follow the guide if you want to do your own request.
-> Find below all ressources available:
+> This program provides a RESTFUL API to handle functionalities needed to build IHM. Please follow the guide if you want to do your own request. Find below all resources available:
 
 ### Users
 
-description | action | url | param | authentication |
-|--------|--------|-----|:-----:|:--------------:|
-| Register | POST | "auth/signup" | UserCreateDto | - |
-| User's information | GET | "secure/users/{id}" | Long | USER |
-| User's details | GET | "secure/users/{id}/details" | Long | USER |
-| update information | PUT | "secure/users/{id}/details" | UserUpdateDto | USER + validRequester |
-| delete user | DELETE | "secure/users/{id}/details" | - | USER + validRequester |
-| All user's information | GET | "secure/users" | - | USER |
-| authenticated user | GET | "secure/whoami" | - | USER |
-
-*ValidRequester: Spring Security checks if the user requested is the same as the authenticated one.
+## ![jar-it wiki banner](../../docs/src/img/swagger/users.png)
 
 ## Models
 
 > FInd below most relevant models of the API
 
-### User
-
-| field | type | size | constraints |
-|-------|:----:|:----:|:------------:|
-| username | String | 0-12 | UQ - NN |
-| email | String | 0-100 | UQ - NN |
-| password | String | - | NN |
-| avatar | String | - | NN |
-| roles | Set< Role > | - | - |
-| enabled | boolean | 1 | ENUM('T', 'F') NN |
-| accountNonExpired | boolean | 1 | ENUM('T', 'F') NN |
-| accountNonLocked | boolean | 1 | ENUM('T', 'F') NN |
-| credentialsNonExpired | boolean | 1 | ENUM('T', 'F') NN |
-
-## Further help ☝️
-
-> the following links will help you understand how this project was made:
+## ![jar-it wiki banner](../../docs/src/img/spec/architecture/diagramme-classe.png)
 
 ***
 
 ## Contact ✉️
 
-Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspect of this project.
+Feel free to [Submit new issue](https://github.com/louiiuol/jar-it/issues) if you have any suggestions or wish to learn more about certain aspects of this project.

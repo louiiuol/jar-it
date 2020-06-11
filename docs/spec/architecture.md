@@ -1,29 +1,29 @@
 # Architecture Overview 🏗
 
-## ![alt text](../src/img/banner.png "eTin wiki banner")
+## ![wiki banner](../src/img/banner.png)
 
 ## Application Architecture (High Level)
 
-### ![alt text](../src/img/spec/architecture/architecture.png "eTin architecture overview")
+### ![architecture](../src/img/spec/architecture/architecture.png)
 
 ### Sitemap
 
 #### Web UI
 
-##### ![alt text](../src/img/spec/architecture/sitemap-webui.png "eTin sitemap webui")
+##### ![sitemap web ui](../src/img/spec/architecture/sitemap-webui.png)
 
 #### API
 
-##### ![alt text](../src/img/spec/architecture/sitemap-api.png "eTin sitemap api")
+##### ![api](../src/img/spec/architecture/sitemap-api.png)
 
 ## Class Diagram
 
-### ![alt text](../src/img/spec/architecture/diagramme-classe.png "eTin class diagram")
+### ![class diagram](../src/img/spec/architecture/diagramme-classe.png)
 
 ***
 
 ## Contact ✉️
 
-Feel free to [Submit new issue](https://github.com/louiiuol/swear-tin/issues) if you have any suggestions or wish to learn more about certain aspect of this project.
+Feel free to [Submit new issue](https://github.com/louiiuol/jar-it/issues) if you have any suggestions or wish to learn more about certain aspects of this project.
 
 🏡 *[Go back home](../README.md)*

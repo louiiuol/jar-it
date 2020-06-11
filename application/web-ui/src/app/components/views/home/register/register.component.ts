@@ -1,77 +1,79 @@
-import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
-import { AuthService, PasswordValidator, FormFactory, ParentErrorStateMatcher } from 'src/app/services';
-import { RegisterInfo, AuthLogin } from 'src/app/models';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Config } from 'src/resources';
+import { Component, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { FormGroup, AbstractControl } from '@angular/forms';
+import { Subject } from 'rxjs/internal/Subject';
+import { takeUntil } from 'rxjs/internal/operators/takeUntil';
+import { ErrorMessages, Patterns, SuccessMessages, ParentErrorStateMatcher } from 'src/app/services/forms/utils';
+import { FormFactory, AuthService } from 'src/app/services';
+import { UserForm, PasswordRequiredForm } from 'src/app/services/forms/groups';
+import { RegisterInfo } from 'src/app/models';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-register',
+    templateUrl: './register.component.html'
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnDestroy {
 
-  constructor( private authService: AuthService, private fb: FormBuilder, public forms: FormFactory, protected snackBar: MatSnackBar) {}
+    @Output() private readonly activeEvent = new EventEmitter<string>();
 
-  registerForm: FormGroup;
-  passwordForm: FormGroup;
-  readonly errorMessages = this.forms.errorMessages;
-  parentErrorStateMatcher = new ParentErrorStateMatcher();
+    private destroyed$ = new Subject(); // Subject to unsubscribe to all present Subscription at once
+    registerForm: FormGroup;
+    readonly errorMsg = ErrorMessages.user;
+    readonly patterns = Patterns;
+    readonly parentErrorStateMatcher = new ParentErrorStateMatcher();
+    avatar = 'unknown';
+    hidden = { pass: true, confirm: true };
 
-  hide = true;
-  hideConfirm = true;
+    get username(): AbstractControl { return this.registerForm.get('username'); }
+    get email(): AbstractControl { return this.registerForm.get('email'); }
+    get birthDate(): AbstractControl { return this.registerForm.get('birthDate'); }
+    get password(): AbstractControl { return this.registerForm.get('passwordForm').get('password'); }
+    get password_type(): string { return this.hidden.pass ? 'password' : 'text'; }
+    get password_icon(): string { return this.hidden.pass ? 'hidden' : 'visible'; }
+    get confirm(): AbstractControl { return this.registerForm.get('passwordForm').get('confirm'); }
+    get confirm_type(): string { return this.hidden.confirm ? 'password' : 'text'; }
+    get confirm_icon(): string { return this.hidden.confirm ? 'hidden' : 'visible'; }
+    get agree(): AbstractControl { return this.registerForm.get('agree'); }
 
-  @Output() activeEvent = new EventEmitter<string>();
+    constructor(private authService: AuthService, private forms: FormFactory) {
+        this.init();
+    }
 
-  get username(): AbstractControl { return this.registerForm.get('username'); }
-  get email(): AbstractControl { return this.registerForm.get('email'); }
-  get password(): AbstractControl { return this.passwordForm.get('password'); }
-  get confirm(): AbstractControl { return this.passwordForm.get('confirm'); }
-  get agree(): AbstractControl { return this.registerForm.get('agree'); }
+    ngOnDestroy(): void {
+        this.destroyed$.next();
+    }
 
-  ngOnInit(): void {
-    this.createForms();
-  }
+    register(): void {
+        this.authService.signUp(this.credentials()).pipe(takeUntil(this.destroyed$))
+            .subscribe(() => this.handleRegisterSuccess(), error => this.forms.handleErrorMessages(error));
+    }
 
-  register(): void {
-    const registerCredentials = new RegisterInfo(this.username.value, this.email.value, this.password.value);
-    this.authService.signUp(registerCredentials).subscribe(
-      () => this.logIn(),
-      error => this.displayError(error)
-    );
-  }
+    toggleForm() {
+        this.registerForm.reset();
+        this.activeEvent.emit('login');
+    }
 
-  showLogin() {
-    this.passwordForm.reset();
-    this.activeEvent.emit('login');
-  }
+    onPick(picked: string) {
+        this.avatar = picked;
+    }
 
-  private createForms(): void {
-    this.passwordForm = new FormGroup(
-      { password: this.forms.userForm.password, confirm: new FormControl('', Validators.required) },
-      (formGroup: FormGroup) => PasswordValidator.areEqual(formGroup)
-    );
-    this.registerForm = this.fb.group({
-      username: this.forms.userForm.username,
-      email: this.forms.userForm.email,
-      passwordForm: this.passwordForm,
-      agree: new FormControl(false, Validators.requiredTrue)
-    });
-  }
+    private init() {
+        this.registerForm = this.forms.builder().group(this.registerGroup());
+    }
 
-  private displayError(error: any) {
-    const errors = error.error.errors;
-    if ( !!errors ) {
-            const errorMessages: string[] = [];
-            errors.forEach( ( err: any ) => { errorMessages.push(err.error); } );
-            this.snackBar.open(errorMessages.join(Config.crlf), 'close');
-          }
-  }
+    private registerGroup = (): any => ({
+        username: UserForm.username,
+        email: UserForm.email,
+        birthDate: UserForm.birthDate,
+        passwordForm: PasswordRequiredForm,
+        agree: UserForm.agree
+    })
 
-  private logIn() {
-    const loginCredentials = new AuthLogin(this.username.value, this.password.value);
-    this.authService.logIn(loginCredentials);
-  }
+    private credentials = (): RegisterInfo =>
+        new RegisterInfo(this.username.value, this.email.value, this.password.value, this.birthDate.value, this.avatar)
+
+    private handleRegisterSuccess(): void {
+        this.forms.handleSuccessMessages(SuccessMessages.register);
+        this.toggleForm();
+    }
 
 }

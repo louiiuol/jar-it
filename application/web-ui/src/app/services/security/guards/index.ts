@@ -1,2 +1,3 @@
 export { UserGuard} from './user.gard';
-export { AuthGuard} from './auth.gard';
+export { AnonymousGuard} from './anonymous.guard';
+export { AdminGuard } from './admin.guard';

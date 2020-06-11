@@ -1,0 +1,55 @@
+server:
+    port: 1337
+    servlet:
+        context-path: /
+        jsp:
+            registered: false
+    error:
+        whitelabel: 
+            enabled: false
+
+spring:
+    application:
+        name: jar-it
+    banner:
+        location: classpath:banners/banner-dev.txt
+    profiles:
+        active: dev
+    datasource:
+        url: jdbc:mysql://localhost:3306/jar_it_dev?createDatabaseIfNotExist=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
+        username: staff
+        password:
+        data: classpath:sql/data-dev.dml.sql
+        initialization-mode: always
+    jpa:
+        open-in-view: false
+        show-sql: true
+        generate-ddl: true
+        hibernate:
+            ddl-auto: create-drop
+        properties: 
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+                format_sql: true
+                jdbc:
+                    batch_size: 10
+                    order_inserts: false
+                    order_updates: false
+                    generate_statistics: true
+                generate_statistics: true
+    messages:
+        use-code-as-default-message: true
+    mvc:
+        throw-exception-if-no-handler-found: true
+    resources:
+        add-mappings: false
+
+logging:
+    config: classpath:logback/logback-dev.xml
+
+jwt-auth-server:
+    keyStore: jar-it.jks
+    keyAlias: JarItJWTKey
+    keyPass: Rz67nH496643GnY236dRmOkb67
+    accessTokenValiditySeconds: 1800
+    refreshTokenValiditySeconds: 86400

@@ -1,8 +1,7 @@
 export { UserService } from './domain/user/user.service';
 
 export { FormFactory } from './forms/form.factory';
-export { ParentErrorStateMatcher } from './forms/form.factory';
-export { PasswordValidator } from './forms/validators/password.validator';
 
-export { AuthModule } from './security';
-export { AuthService } from './security/auth/auth.service';
+export { LoaderService } from './loader/loader.service';
+
+export { AuthService, TokenInterceptor, UserGuard, AnonymousGuard } from './security';

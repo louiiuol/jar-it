@@ -1,0 +1,146 @@
+@import '~@angular/material/theming'; // Custom Theming for Angular Material
+@include mat-core(); // Include the common styles for Angular Material.
+
+$blue: ( // Defines Primary Palette color
+    50: #e0f8fa, 100: #b3ecf2, 200: #80e0ea, 300: #4dd4e1, 400: #26cada,
+    500: #00c1d4, 600: #00bbcf, 700: #00b3c9, 800: #00abc3, 900: #009eb9,
+    A100: #e2faff, A200: #aff1ff, A400: #7ce9ff, A700: #63e4ff,
+    contrast: ( 50: $dark-primary-text, 100: $dark-primary-text, 200: $dark-primary-text, 300: $light-primary-text,
+        400: $light-primary-text, 500: $light-primary-text, 600: $light-primary-text, 700: $light-primary-text,
+        800: $light-primary-text, 900: $light-primary-text, A100: $dark-primary-text, A200: $light-primary-text,
+        A400: $light-primary-text, A700: $light-primary-text )
+);
+
+$pink: ( // Defines Accent (secondary) Palette color
+    50: #fdecf4, 100: #facfe3, 200: #f7b0d1, 300: #f490bf, 400: #f178b1, 500: #ef60a3, 600: #ed589b,
+    700: #eb4e91, 800: #e84488, 900: #e43377, A100: #ffffff, A200: #fff6fa, A400: #ffc3d9, A700: #ffaac9,
+    contrast: ( 50: $dark-primary-text, 100: $dark-primary-text, 200: $dark-primary-text, 300: $light-primary-text,
+        400: $light-primary-text, 500: $light-primary-text, 600: $light-primary-text, 700: $light-primary-text,
+        800: $light-primary-text, 900: $light-primary-text, A100: $dark-primary-text, A200: $light-primary-text,
+        A400: $light-primary-text, A700: $light-primary-text )
+);
+
+$red: ( // Defines Warnings Palette color
+    50: #fee8e7, 100: #fdc6c4, 200: #fca19d, 300: #fb7b75, 400: #fa5e58, 500: #f9423a, 600: #f83c34,
+    700: #f7332c, 800: #f62b25, 900: #f51d18, A100: #ffffff, A200: #fff3f3, A400: #ffc1c0, A700: #ffa8a7,
+    contrast: ( 50: $dark-primary-text, 100: $dark-primary-text, 200: $dark-primary-text, 300: $light-primary-text,
+        400: $light-primary-text, 500: $light-primary-text, 600: $light-primary-text, 700: $light-primary-text, 800: $light-primary-text,
+        900: $light-primary-text, A100: $dark-primary-text, A200: $light-primary-text, A400: $light-primary-text, A700: $light-primary-text )
+);
+
+$primary: mat-palette($blue); // Defines Primary color
+$accent: mat-palette($pink); // Defines accent (secondary) color
+$warn: mat-palette($red); // Defines Warnings color
+$theme: mat-light-theme($primary, $accent, $warn); // Inject new colors in Material Components
+@include angular-material-theme($theme); // Export the new theme in angular project
+
+/* CUSTOM STYLES */
+.is-accent { color: mat-color($accent) !important; } // Export accent color as reusable class in project stylesheets
+.is-primary { color: mat-color($primary) !important; } // Export primary color as reusable class in project stylesheets
+.is-warn { color: mat-color($warn) !important; }// Export warning color as reusable class in project stylesheets
+
+snack-bar-container { // Defines shared SnacbBar Global custom styles
+    width: auto !important;
+    background: #ffffff !important;
+    color: mat-color($accent) !important;
+    border: 1px solid currentColor;
+}
+
+.mat-card, .mat-dialog-container { // Defines custom styles for mat card & dialog,containing form
+    padding: 0 !important;
+    border-radius: 10px !important;
+    position: relative;
+    h3.header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: #26cada;
+        padding: 1rem 0;
+        width: 100%;
+        text-align: center;
+        font-size: 1.8rem;
+        line-height: 2.5rem;
+        font-family: pacifico, sans-serif !important;
+        color: #FFFFFF !important;
+    }
+    .mat-tab-header-pagination {
+        display: none;
+    }
+    form {
+        text-align: center;
+        width: 100%;
+        padding: 1.25rem 2rem 0.75rem;
+        &.large { padding: 1.25rem 0 0.75rem;}
+            @media (max-width: 580px) {
+            padding: 1.25rem .5rem 0.75rem;
+            }
+        section {
+            margin: 0 auto .25rem;
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            place-content: center space-evenly;
+        }
+        .mat-form-field {
+            width: 90%;
+            margin: 0 auto;
+            .mat-icon-button { padding-top: 10px; }
+            @media (max-width: 580px) {
+                width: 100%;
+            }
+        }
+        .wrapped {
+            display: flex;
+            flex-flow: row wrap;
+            place-content: center space-evenly;
+            .mat-form-field { width: 45%; }
+            @media (max-width: 580px) {
+                .mat-form-field { width: 100%; }
+            }
+        }
+    }
+    p.legend { text-align: center; }
+    .mat-dialog-content { margin: 1rem 0 !important; }
+    #close-dialog {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: #FFFFFF;
+    }
+    mat-dialog-actions, mat-card-actions {
+        display: flex !important;
+        justify-content: space-evenly !important;
+    }
+    footer {
+        display: flex;
+        flex-flow: row wrap;
+        place-content: space-between space-evenly;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+    }
+}
+
+.mat-menu-panel { // Add margins to menus dropdown overlay
+    margin-top: .5rem !important;
+    .mat-menu-content:not(:empty) { // Defines custom style for content wrapper
+        max-width: 450px !important;
+        max-height: 250px !important;
+        overflow-x: auto;
+        text-align: center;
+    }
+}
+
+.mat-chip-list-wrapper{ justify-content: space-evenly !important; } // Fixing default Material behaviour
+.mat-fab .mat-button-wrapper { padding: 4px 0 !important; } // Fixing default Material behaviour
+mat-card.has-form form .mat-form-field .mat-icon-button, .mat-dialog-container form .mat-form-field .mat-icon-button { padding-top: 4px !important; }
+.mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix { top: .5em !important; }
+mat-slide-toggle label { flex: 0 !important;}
+.mat-button-wrapper { display: block; }
+.mat-step-icon-content { display: flex; }
+.mat-slide-toggle.reverse {
+    label {
+        flex-direction: row-reverse;
+    }
+}
+.mat-card-header-text { width: 100%;}
+.member-info .mat-chip-list-wrapper { justify-content: space-between !important;}

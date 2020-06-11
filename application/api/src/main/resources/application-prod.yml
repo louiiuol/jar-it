@@ -10,21 +10,21 @@ server:
 
 spring:
     application:
-        name: etin
+        name: jar-it
     banner:
         location: classpath:banners/banner-prod.txt
     profiles:
         active: prod
     datasource:
-        url: jdbc:mysql://localhost:3306/etin?createDatabaseIfNotExist=false&useSSL=true&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
-        username: root
+        url: jdbc:mysql://localhost:3306/jar_it?createDatabaseIfNotExist=false&useSSL=true&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
+        username: staff
         password:
     jpa:
         open-in-view: false
         show-sql: false
-        generate-ddl: false #true
+        generate-ddl: false
         hibernate:
-            ddl-auto: none #update
+            ddl-auto: none
         properties: 
             hibernate:
                 dialect: org.hibernate.dialect.MySQL5InnoDBDialect
@@ -38,21 +38,15 @@ spring:
         use-code-as-default-message: false
     mvc:
         throw-exception-if-no-handler-found: true
-        favicon:
-            enabled: false
     resources:
         add-mappings: false
 
 logging:
-    config: classpath:logs/logback-spring.xml
+    config: classpath:logback/logback-spring.xml
 
 jwt-auth-server:
-    keyStore: jwt.jks
-    keyPass: "JwtKey"
-    keyAlias: "jwtKey"
+    keyStore: jar-it.jks
+    keyAlias: JarItJWTKey
+    keyPass: Rz67nH496643GnY236dRmOkb67
     accessTokenValiditySeconds: 1800
     refreshTokenValiditySeconds: 86400
-
-cron:
-    config:
-        each-day: "0 0 0 * * *"

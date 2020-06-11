@@ -1,0 +1,14 @@
+#new-association {
+    position: absolute;
+    font-size: 1rem;
+    font-weight: bolder !important;
+    bottom: 0;
+    left: 1rem;
+}
+.mat-table {
+    .action {
+        background-color: rgb(245,245,245);
+        max-width: 64px;
+        &.mat-cell, &.mat-header-cell { display: flex; justify-content: center; }
+    }
+}

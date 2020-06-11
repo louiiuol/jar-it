@@ -1,0 +1,12 @@
+#preview {
+    padding: .5rem 1rem 1rem;
+    .jar-title { font-size: 2rem; text-align: center; }
+    strong { padding-left: .25rem; }
+    #member-chip {
+        display: flex;
+        align-items: center;
+        & > * {
+            margin: .25rem;
+        }
+    }
+}

@@ -7,16 +7,21 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-  constructor() {}
+  private activeForm: string;
 
-  active = 'login';
+  readonly subTitles = [
+    { icon: 'stop', title: 'Turn those nasty habits on opportunities to support associations you care about'},
+    { icon: 'peace', title: 'Create a peacefull and friendly environment around you'},
+    { icon: 'challenge', title: 'Challenge yourself and the others to be aware of your daily swears' }];
 
-  subTitles = [
-    { icon: 'stop', title: 'Turn those nasty habits on opportunities to support actions you like'},
-    { icon: 'peace', title: 'Create peacefull and friendly environment around you'},
-    { icon: 'challenge', title: 'Challenge yourself and the others to be aware'}
-  ];
+  get active(): boolean { return this.activeForm === 'register'; }
 
-  setActive($event: any): void { this.active = $event; }
+  constructor() {
+    this.activeForm = 'login';
+  }
+
+  setActive(form: string): void {
+    this.activeForm = form;
+  }
 
 }
