@@ -14,8 +14,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 import dev.louiiuol.jarit.api.IntegrationTestConfig;
-import dev.louiiuol.jarit.business.dtos.responses.users.UserViewDetailsDto;
-import dev.louiiuol.jarit.business.dtos.responses.users.UserViewDto;
+import dev.louiiuol.jarit.business.dtos.users.UserViewDetailsDto;
+import dev.louiiuol.jarit.business.dtos.users.UserViewDto;
 
 /**
  * Integration tests for REST {@code UserController} checks. <p>

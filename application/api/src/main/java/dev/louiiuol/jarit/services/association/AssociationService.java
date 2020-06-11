@@ -1,8 +1,8 @@
 package dev.louiiuol.jarit.services.association;
 
-import dev.louiiuol.jarit.business.dtos.requests.associations.AssociationCreateDto;
-import dev.louiiuol.jarit.business.dtos.responses.associations.AssociationPageDto;
-import dev.louiiuol.jarit.business.dtos.responses.associations.AssociationViewDto;
+import dev.louiiuol.jarit.business.dtos.associations.AssociationCreateDto;
+import dev.louiiuol.jarit.business.dtos.associations.AssociationPageDto;
+import dev.louiiuol.jarit.business.dtos.associations.AssociationViewDto;
 
 /**
  * Interface to deal with {@code Association} informations.

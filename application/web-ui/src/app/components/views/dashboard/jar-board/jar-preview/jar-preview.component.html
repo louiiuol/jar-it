@@ -1,0 +1,44 @@
+<mat-card [ngClass]="{'is-primary':isActive, 'is-accent':isOver}">
+
+    <mat-card-header >
+        <mat-card-title class="is-primary">
+            <span id='header-wrap'>
+                <h4>{{jar.title}}</h4>
+            <app-icon avatar="true" name="{{jar.author.avatar}}"
+            class="icon owner is-accent has-border is-rounded xsm"
+            matTooltip="{{jar.author.username}} is the creator of this jar"></app-icon>
+            </span>
+
+        </mat-card-title>
+    </mat-card-header>
+    <mat-chip-list>
+        <mat-chip selected color='primary'>{{jar.state}}</mat-chip>
+    </mat-chip-list>
+    <mat-card-content>
+        <mat-chip-list>
+            <p class='is-primary'>
+                <app-icon name='calendar' class='icon'></app-icon>
+                <mat-chip selected color='primary'>{{daysLeft}} days left !</mat-chip>
+            </p>
+            <p class='is-accent'>for <mat-chip id='addressee' selected color='accent'>{{jar.addressee}}</mat-chip></p>
+        </mat-chip-list>
+        <mat-chip-list>
+            <p class='is-accent'>
+                <app-icon name='peoples' class='icon'></app-icon>
+                <mat-chip selected color='accent'>{{jar.membersCount}} members</mat-chip>
+            </p>
+            <p class='is-primary' *ngIf='!isCreated'>
+                <app-icon name='money' class='icon'></app-icon>
+                <mat-chip selected color='primary'>
+                    {{jar.balance}} / {{jar.maxAmount}}
+                    <span>&euro; &nbsp;</span>
+                </mat-chip>
+            </p>
+        </mat-chip-list>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button color="accent" mat-raised-button [routerLink]="['/jars', jar.id]">OPEN</button>
+    </mat-card-actions>
+
+</mat-card>

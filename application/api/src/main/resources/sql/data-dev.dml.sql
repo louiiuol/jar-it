@@ -31,4 +31,10 @@ INSERT INTO associations (name, code, description, link) VALUES ('Croix Rouge', 
 
 COMMIT;
 
+INSERT INTO jars (`closing_date`, `max_amount`, `reference_cost`, `start_date`, `state`, `title`, `addressee_id`, `author_id`) VALUES ('2021-11-17', '5', '1', '1995-11-17', '1', 'Clean Up !', '1', '1');
+
+INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('T', 0.00, '2021-11-17', 'F', '1', '1' );
+INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('F', 0.00, '2021-11-17', 'F', '1', '2' );
+INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('F', 0.00, '2021-11-17', 'F', '1', '3' );
+
 SET autocommit = 1; /* true */

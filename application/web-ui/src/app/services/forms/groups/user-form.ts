@@ -8,7 +8,7 @@ export const UserForm = {
     Validators.maxLength(20),
     Validators.pattern(Patterns.alphanumeric)
   ]],
-  birthDate: ['', [
+  birthDate: [new Date(), [
     Validators.required
   ]],
   email: new FormControl('', Validators.compose([

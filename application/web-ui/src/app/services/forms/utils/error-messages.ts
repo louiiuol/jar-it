@@ -42,6 +42,14 @@ export const ErrorMessages = {
         ],
         link: [ { type: 'pattern', message: 'This is not an url' } ],
     },
+    jar: {
+        title: [ { type: 'pattern', message: 'You need to add a name before getting started' } ],
+        description: [ { type: 'pattern', message: 'This description is too long !!' } ],
+        maxAmount: [ { type: 'pattern', message: 'must be between 0 and 50' } ],
+        goal: [ { type: 'required', message: 'You must choose an addressee' } ],
+        endDate: [ { type: 'pattern', message: 'You must accept terms and conditions' } ],
+        members: [ { type: 'pattern', message: 'You must accept terms and conditions' } ]
+    },
     pass_required: 'Your current password is required !'
     };
 

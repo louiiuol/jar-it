@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 
 
-import dev.louiiuol.jarit.business.dtos.requests.associations.AssociationCreateDto;
-import dev.louiiuol.jarit.business.dtos.responses.associations.AssociationPageDto;
-import dev.louiiuol.jarit.business.dtos.responses.associations.AssociationViewDto;
+import dev.louiiuol.jarit.business.dtos.associations.AssociationCreateDto;
+import dev.louiiuol.jarit.business.dtos.associations.AssociationPageDto;
+import dev.louiiuol.jarit.business.dtos.associations.AssociationViewDto;
 import dev.louiiuol.jarit.business.entities.Association;
 import dev.louiiuol.jarit.business.repositories.AssociationRepository;
 import dev.louiiuol.jarit.services.utils.AbstractService;

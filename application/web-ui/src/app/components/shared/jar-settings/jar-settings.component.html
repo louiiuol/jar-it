@@ -1,0 +1,37 @@
+<span id='header-wrap'>
+    <h4 class='is-primary'>{{jar.title}}</h4>
+<app-icon avatar="true" name="{{jar.author.avatar}}"
+class="icon owner is-accent has-border is-rounded sm"
+matTooltip="{{jar.author.username}} is the creator of this jar"></app-icon>
+</span>
+<p class='legend'>{{jar.description}}</p>
+<section id="settings">
+    <mat-chip-list aria-label="Jar Settings">
+        <section id='wrapper'>
+            <div>
+                <mat-chip color="primary" selected >
+                    <app-icon class='icon xs' name='peoples'></app-icon>
+                    <strong>{{jar.members.length}}</strong> members
+                </mat-chip>
+                <mat-chip color="primary" selected >
+                    <app-icon class='icon xs' name='swear'></app-icon>
+                    <strong>{{confessions}}</strong> confessions
+                </mat-chip>
+            </div>
+            <div id="jar-gauge" class="is-relative" >
+                <meter class=" is-accent" max="{{jar.maxAmount }}" value="{{jar.balance }}" title="GB"></meter>
+                <span id="meter-indicator" class=" is-accent"> <strong>{{jar.balance | currency: 'EUR' }}</strong>funded <br> on <strong>{{jar.maxAmount | currency: 'EUR'}}</strong> </span>
+            </div>
+            <div>
+                <mat-chip color="primary" selected >
+                    <app-icon class='icon xs' name='support'></app-icon>
+                    <strong class='addressee' >{{ jar.addressee.name }}</strong>
+                </mat-chip>
+                <mat-chip color="primary" selected >
+                    <app-icon class='icon xs' name='calendar'></app-icon>
+                    <strong>{{remaining}}</strong> days left !
+                </mat-chip>
+            </div>
+        </section>
+    </mat-chip-list>
+</section>

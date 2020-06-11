@@ -6,10 +6,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import dev.louiiuol.jarit.business.dtos.requests.users.UserCreateDto;
-import dev.louiiuol.jarit.business.dtos.requests.users.UserUpdateDto;
-import dev.louiiuol.jarit.business.dtos.responses.users.UserViewDetailsDto;
-import dev.louiiuol.jarit.business.dtos.responses.users.UserViewDto;
+import dev.louiiuol.jarit.business.dtos.users.UserCreateDto;
+import dev.louiiuol.jarit.business.dtos.users.UserUpdateDto;
+import dev.louiiuol.jarit.business.dtos.users.UserViewDetailsDto;
+import dev.louiiuol.jarit.business.dtos.users.UserViewDto;
 import dev.louiiuol.jarit.api.exceptions.ResourceNotFoundException;
 import dev.louiiuol.jarit.business.entities.User;
 import dev.louiiuol.jarit.business.repositories.UserRepository;
