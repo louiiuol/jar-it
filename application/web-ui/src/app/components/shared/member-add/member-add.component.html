@@ -3,14 +3,14 @@
         <mat-chip-list #memberChips aria-label="member selection">
             <div id="chips-wrap">
                 <mat-chip color='accent' *ngFor="let memberChip of memberList"
-                    [removable]="(memberChip.userId !== author.userId && currentUserId == author.userId)"
+                    [removable]="isRemovable(memberChip)"
                     (removed)="removeMember(memberChip)">
                     <p id='member-chip'>
                         <app-icon name="{{memberChip.avatar}}"
                             avatar='true' class="icon avatar xs"
                             matTooltip="{{memberChip.username}}"></app-icon>
                         <mat-slide-toggle class='reverse' [(ngModel)]='memberChip.admin'
-                            [disabled]='memberChip.userId === author.userId || !isJarAdmin(currentUserId) || memberChip.userId === currentUserId'
+                            [disabled]='memberChip.userId === author.id || !isJarAdmin(currentUserId) || memberChip.userId === currentUserId'
                             [ngModelOptions]="{standalone: true}"
                             matTooltip="Allow admin permissions"></mat-slide-toggle>
                         <app-icon name="close" class="icon xs"

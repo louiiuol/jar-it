@@ -20,7 +20,7 @@ export class MemberAddComponent {
     get startingList(): MemberDetails[] { return this.memberList; }
 
     @Input() currentUserId: number;
-    @Input() author: MemberPreview;
+    @Input() author: UserView;
     @Input() memberList: MemberDetails[];
     @Input() allUsers: UserView[];
 
@@ -57,6 +57,9 @@ export class MemberAddComponent {
     displayFn(member: any): any {
         return member;
     }
+
+    isRemovable = (memberChip: MemberDetails) =>
+        (memberChip.userId !== this.author.id && this.currentUserId === this.author.id)
 
     isJarAdmin = (id: number): boolean => this.memberList.find(current => current .userId === id).admin;
 
