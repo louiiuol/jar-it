@@ -1,44 +1,44 @@
-<mat-card [ngClass]="{'is-primary':isActive, 'is-accent':isOver}">
+<mat-card [ngClass]="{'is-accent':isOver}">
+    <section class="aside" *ngIf="isActive">
+        <mat-chip class='balance' selected>
+            <app-icon class='icon xs' name='money'></app-icon>
+            {{jar.balance}} / {{jar.maxAmount | currency:'EUR'}} </mat-chip>
+        <span class='days-left'>
+            <em> {{daysLeft}} days left !</em>
+        </span>
+    </section>
 
-    <mat-card-header >
-        <mat-card-title class="is-primary">
-            <span id='header-wrap'>
-                <h4>{{jar.title}}</h4>
-            <app-icon avatar="true" name="{{jar.author.avatar}}"
-            class="icon owner is-accent has-border is-rounded xsm"
-            matTooltip="{{jar.author.username}} is the creator of this jar"></app-icon>
+    <section class="aside" *ngIf="isCreated">
+            <span class='empty'>Activation <br> needed</span>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <h4 class='title is-primary'>{{jar.title}}</h4>
+            <span class='addressee is-accent'>
+                <app-icon class='icon xs' name='support'></app-icon>
+                <strong>{{jar.addressee}}</strong>
             </span>
+        </div>
 
-        </mat-card-title>
-    </mat-card-header>
-    <mat-chip-list>
-        <mat-chip selected color='primary'>{{jar.state}}</mat-chip>
-    </mat-chip-list>
-    <mat-card-content>
-        <mat-chip-list>
-            <p class='is-primary'>
-                <app-icon name='calendar' class='icon'></app-icon>
-                <mat-chip selected color='primary'>{{daysLeft}} days left !</mat-chip>
-            </p>
-            <p class='is-accent'>for <mat-chip id='addressee' selected color='accent'>{{jar.addressee}}</mat-chip></p>
-        </mat-chip-list>
-        <mat-chip-list>
-            <p class='is-accent'>
-                <app-icon name='peoples' class='icon'></app-icon>
-                <mat-chip selected color='accent'>{{jar.membersCount}} members</mat-chip>
-            </p>
-            <p class='is-primary' *ngIf='!isCreated'>
-                <app-icon name='money' class='icon'></app-icon>
-                <mat-chip selected color='primary'>
-                    {{jar.balance}} / {{jar.maxAmount}}
-                    <span>&euro; &nbsp;</span>
-                </mat-chip>
-            </p>
-        </mat-chip-list>
-    </mat-card-content>
-
-    <mat-card-actions>
-        <button color="accent" mat-raised-button [routerLink]="['/jars', jar.id]">OPEN</button>
-    </mat-card-actions>
-
+        <div class="row grouped ">
+            <span class='members'>
+                <app-icon class='icon xs' name='peoples'></app-icon>
+                <em>{{jar.membersCount}} members</em>
+            </span>
+            <span class='confessions'>
+                <app-icon class='icon xs' name='swear'></app-icon>
+                <em>5 confessions</em>
+            </span>
+            <span class='confessions'>
+                <app-icon name='calendar' class='icon xxs'></app-icon>
+                <em>since: {{jar.startDate | date: 'shortDate'}}</em>
+            </span>
+        </div>
+    </section>
+    <app-icon [routerLink]="['/jars', jar.id]"class='icon open-details is-accent' name='visible'></app-icon>
 </mat-card>
+
+<!-- <app-icon avatar="true" name="{{jar.author.avatar}}"
+        class="icon owner is-accent has-border is-rounded xsm"
+        matTooltip="{{jar.author.username}} created this jar"></app-icon> -->

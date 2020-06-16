@@ -38,6 +38,7 @@ import { JarResolver } from './services/domain/jar/jar.resolve';
 import { JarCreatedComponent } from './components/views/jar-details/jar-created/jar-created.component';
 import { JarActiveComponent } from './components/views/jar-details/jar-active/jar-active.component';
 import { JarOverComponent } from './components/views/jar-details/jar-over/jar-over.component';
+import { UserBoardComponent } from './components/views/dashboard/user-board/user-board.component';
 
 @NgModule({
     declarations: [
@@ -68,7 +69,8 @@ import { JarOverComponent } from './components/views/jar-details/jar-over/jar-ov
         JarBoardComponent,
         JarCreatedComponent,
         JarActiveComponent,
-        JarOverComponent
+        JarOverComponent,
+        UserBoardComponent
     ],
     imports: [
         BrowserModule,

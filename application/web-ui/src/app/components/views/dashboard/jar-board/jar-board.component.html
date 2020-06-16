@@ -1,10 +1,12 @@
-<mat-card id="filters">
-    <span class='legend'>Filters coming soon .. </span>
-    <button id="new-jar" mat-fab (click)="newJar()"
-        color='accent' matTooltip="new electronic jar">+</button>
+<mat-card id="jars-board">
+    <section class="header">
+        <div id='jars-filters'>Filters coming soon .. </div>
+        <button id="new-jar" mat-mini-fab (click)="newJar()"
+            color='accent' matTooltip="new electronic jar">+</button>
+    </section>
+    <section *ngIf='!!jars' id='jars-preview'>
+        <h2 *ngIf="jars.length == 0" class="empty">This place looks a bit empty, start create your first Tinee now !</h2>
+        <app-jar-preview *ngFor="let jar of jars"
+        [user]='user' [jar]='jar'></app-jar-preview>
+    </section>
 </mat-card>
-
-<section id="jars-board" *ngIf='!!jars' >
-    <h2 *ngIf="jars.length == 0" class="empty">This place looks a bit empty, start create your first Tinee now !</h2>
-    <app-jar-preview *ngFor="let jar of jars " [user]='user' [jar]='jar'></app-jar-preview>
-</section>
