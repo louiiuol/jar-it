@@ -9,6 +9,7 @@ import dev.louiiuol.jarit.business.dtos.jars.members.MemberDetailsDto;
 import dev.louiiuol.jarit.business.entities.Member;
 import dev.louiiuol.jarit.business.repositories.MemberRepository;
 import dev.louiiuol.jarit.services.utils.AbstractService;
+import dev.louiiuol.jarit.services.utils.SecurityHelper;
 
 /**
  * Concrete implementation of {@code MemberService}
@@ -42,6 +43,14 @@ public class MemberServiceImpl extends AbstractService<Member, MemberRepository>
     public boolean isJarMember(Long jarId, Long userId) {
         Member entity = getOne(jarId, userId);
         return entity != null;
+    }
+
+    @Override
+    public void pay(Long id) {
+        Long userId = SecurityHelper.getUserId();
+        Member entity = getOne(id, userId);
+        entity.payed();
+        repo().save(entity);
     }
 
     private Member getOne(Long jarId, Long userId) {

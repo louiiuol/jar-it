@@ -19,8 +19,6 @@ public class MemberUpdateDto extends EntityIdDto {
 
     private Boolean admin;
 
-    private Boolean payed;
-
     protected MemberUpdateDto() {
         // Overrides default no-args constructor as protected
     }
@@ -35,8 +33,8 @@ public class MemberUpdateDto extends EntityIdDto {
 
     @Override
     public String toString() {
-        return MessageFormat.format("{ id: {0}, user: {1}, admin: {2}, payed {3} }",
-            getId(), user, admin, payed);
+        return MessageFormat.format("{ id: {0}, user: {1}, admin: {2} }",
+            getId(), user, admin);
     }
 
 }

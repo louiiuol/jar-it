@@ -94,6 +94,14 @@ public class Member extends AbstractEntity {
         this.jar = jar;
     }
 
+    public List<Confession> getConfessions() {
+        return confessions;
+    }
+    
+    public void payed() {
+        this.payed = true;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(jar, user);

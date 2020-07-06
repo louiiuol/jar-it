@@ -21,4 +21,12 @@ public interface ConfessionRepository extends JpaRepository<Confession, Long> {
      */
     Set<Confession> findAllByAuthorId(Long userId);
 
+    /**
+     * Find all {@code Confession} entities by their user's id.
+     * 
+     * @param jarId jar's identifier
+     * @return Set<Confession> if the id matches.
+     */
+    Set<Confession> findAllByAuthorJarId(Long jarId);
+
 }

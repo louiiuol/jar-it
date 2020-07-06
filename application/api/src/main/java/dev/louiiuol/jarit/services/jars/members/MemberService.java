@@ -28,4 +28,6 @@ public interface MemberService {
 
     public boolean isJarMember(Long jarId, Long userId);
 
+    public void pay(Long id);
+
 }

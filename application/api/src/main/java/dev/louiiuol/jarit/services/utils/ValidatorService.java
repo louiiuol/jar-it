@@ -21,6 +21,9 @@ public class ValidatorService {
     private static final String ACTIVE = JarState.ACTIVE.toString();
     private static final String CREATED = JarState.CREATED.toString();
 
+    private static final String OUT_DATED = JarState.OUT_DATED.toString();
+    private static final String MAX_REACHED = JarState.MAX_AMOUNT_REACHED.toString();
+
     protected ValidatorService(MemberService memberService, JarService jarService) {
         this.memberService = memberService;
         this.jarService = jarService;
@@ -78,6 +81,17 @@ public class ValidatorService {
      */
     public Boolean isActive(Long jarId) {
         return jarService.getDetails(jarId).getState().equals(ACTIVE);
+    }
+
+    /**
+     * Checks if specifed jar is active or not depending on STATE
+     * 
+     * @param jarId Jar's identifier
+     * @return {@code True} if authenticated User is a member, else {@code False}
+     */
+    public Boolean isOver(Long jarId) {
+        String state = jarService.getDetails(jarId).getState();
+        return state.equals(MAX_REACHED) || state.equals(OUT_DATED);
     }
 
     /**

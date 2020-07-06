@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 import java.time.LocalDateTime;
 
 import dev.louiiuol.jarit.business.dtos.EntityIdDto;
+import dev.louiiuol.jarit.business.dtos.jars.members.MemberPreviewDto;
 
 /**
  * DTO representing the {@code ConfessionViewDto}
@@ -11,13 +12,15 @@ import dev.louiiuol.jarit.business.dtos.EntityIdDto;
  * 
  * @see EntityIdDto
  */
-public class ConfessionViewDto extends EntityIdDto {
+public class ConfessionViewDto {
 
-    private static final long serialVersionUID = 6890622760916411206L;
+    private long id;
 
     private String swear;
 
     private LocalDateTime date;
+
+    private MemberPreviewDto author;
 
     protected ConfessionViewDto() {
         // Overrides default no-args constructor as protected
@@ -25,8 +28,8 @@ public class ConfessionViewDto extends EntityIdDto {
 
     @Override
     public String toString() {
-        return MessageFormat.format("{ id: {0}, swear: {1}, date: {2} }",
-            getId(), swear, date);
+        return MessageFormat.format("{ id: {0}, swear: {1}, date: {2}, author: {3} }",
+            id, swear, date, author);
     }
 
 }

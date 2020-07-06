@@ -1,10 +1,13 @@
 package dev.louiiuol.jarit.services.jars;
 
 import dev.louiiuol.jarit.business.dtos.jars.confessions.ConfessDto;
+import dev.louiiuol.jarit.business.dtos.jars.confessions.ConfessionViewDto;
 import dev.louiiuol.jarit.business.dtos.jars.members.MemberUpdateDto;
 
 import java.util.List;
+import java.util.Set;
 
+import dev.louiiuol.jarit.business.dtos.PageDto;
 import dev.louiiuol.jarit.business.dtos.jars.JarCreateDto;
 import dev.louiiuol.jarit.business.dtos.jars.JarDetailsDto;
 import dev.louiiuol.jarit.business.dtos.jars.JarUpdateSettingsDto;
@@ -60,9 +63,9 @@ public interface JarService {
      * Returns all user's jars
      *  
      * @param id User's identifier
-     * @return {@code Set<JarPreviewDto>} list of User's Jars
+     * @return {@code PageDto<JarPreviewDto>} list of User's Jars
      */
-    public List<JarPreviewDto> getAllByUser(Long id);
+    public PageDto<JarPreviewDto> getAllByUser(Long id, int page, int size, String order, String sort);
 
     /**
      * Update specified Jar's settings based on given {@code JarUpdateDto}.
@@ -100,6 +103,8 @@ public interface JarService {
      * Returns all jars in database (used by admin)
      * @return {@code List<JarPreviewDto>} All Jars from database
      */
-    public List<JarPreviewDto> getAll();
+    public PageDto<JarPreviewDto> getAll(int page, int size, String order, String sort);
+
+	public Set<ConfessionViewDto> getJarConfessions(Long jarId);
 
 }
