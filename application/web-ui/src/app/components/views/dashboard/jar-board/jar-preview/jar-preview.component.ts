@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { UserView, JarView } from 'src/app/models';
-import { JarService } from 'src/app/services/domain/jar/jar.service';
-import { JarDetailsComponent } from '../../../jar-details/jar-details.component';
+import { JarHelperService } from 'src/app/services/domain/jar/Jar-helper.service';
+import { JarState } from 'src/app/models/jar/jar-state.model';
 
 @Component({
     selector: 'app-jar-preview',
@@ -13,16 +12,11 @@ import { JarDetailsComponent } from '../../../jar-details/jar-details.component'
 export class JarPreviewComponent {
 
     @Input() jar: JarView;
-    @Input() user: UserView;
 
-    get daysLeft() { return this.service.remainingDays(this.jar.closingDate); }
-    get isCreated() { return this.jar.state.toString() === 'CREATED'; }
-    get isActive() { return this.jar.state.toString() === 'ACTIVE'; }
-    get isOver() { return this.jar.state.toString() === 'MAX_AMOUNT_REACHED' || this.jar.state.toString() === 'OUT_DATED'; }
+    get daysLeft(): number { return JarHelperService.remainingDays(this.jar.closingDate); }
+    get jarState(): string { return this.jar.state.toString(); }
+    get isOpenable(): boolean { return this.jar.additionalInfos.currentUserIsAdmin || this.jar.state !== JarState.CREATED; }
 
-    constructor(private dialog: MatDialog, private service: JarService) {}
-
-    openDetails = (jar: any): any =>
-        this.dialog.open(JarDetailsComponent, { data: {jar, user: this.user}, disableClose: true } )
+    constructor() {}
 
 }

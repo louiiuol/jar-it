@@ -1,48 +1,84 @@
 mat-card {
     width: 95%;
-    margin: .5rem auto 0;
-    padding: .5rem 1.25rem !important;
+    min-width: 375px;
+    max-width: 725px;
     display: flex;
     flex-flow: row nowrap;
-    align-items: center;
     justify-content: space-between;
-    .aside {
+    margin: .5rem auto 0;
+    padding: .5rem 1.25rem !important;
+    border-bottom: 3px solid currentColor;
+    .wrapper {
         display: flex;
-        flex-flow: column nowrap;
+        flex-flow: row wrap;
         align-items: center;
-        justify-content: center;
-        .days-left {
-            font-size: .85rem;
+        justify-content: space-between;
+        flex: 1;
+        .days-left, .members, .confessions, #payed em {
+            color: #aeaeae;
         }
-    }
-    .content {
-        width: 80%;
-        .title {
-            font-size: 1.25rem;
-            text-align: left;
-            font-family: poppins !important;
-        }
-        .addressee {
-            font-size: .6rem;
-        }
-        .row {
+        .aside {
             display: flex;
-            flex-flow: row nowrap;
-            justify-content: space-between;
+            flex-flow: column nowrap;
             align-items: center;
-            width: 75%;
-            margin: 0 auto;
-            .addressee {margin: 0 .5rem;}
-            &.grouped {
-                justify-content: center;
-                & > span { margin: 0 1rem; }
+            justify-content: center;
+            width: 125px;
+            .mat-chip {
+                height: auto !important;
+                text-align: center;
+            }
+            .days-left, #payed em {
+                font-size: .85rem;
+            }
+            &#payed p {
+                background: currentColor;
+                padding: .25rem .5rem;
+                border-radius: 10px;
+                line-height: 21px;
+                strong {
+                    color: white;
+                }
+            }
+        }
+        .content {
+            flex: 1;
+            margin: 0 .5rem auto;
+            .title {
+                font-size: 1.5rem;
+                text-align: left;
+                font-family: poppins !important;
+            }
+            .row {
+                width: 100%;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                align-items: center;
+                padding: .125rem .25rem;
+                &.grouped { justify-content: space-evenly;}
+                .addressee {
+                    margin: 0 .5rem;
+                    font-size: .7rem;
+                    display: flex;
+                }
+                span {
+                    font-size: .85rem;
+                }
+                em { margin-left: .25rem; }
+                strong { margin-left: .5rem; }
             }
         }
     }
-    .days-left, .members, .confessions {
-        color: #aeaeae;
-    }
-    .open-details {
-        cursor: pointer;
+    .vertical-aside {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+        & > * { margin: .25rem auto; }
+        .open-details {
+            border-radius: 50%;
+            transition: background .6s ease;
+            &:hover {background: currentColor;}
+        }
     }
 }

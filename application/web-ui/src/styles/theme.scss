@@ -38,6 +38,7 @@ $theme: mat-light-theme($primary, $accent, $warn); // Inject new colors in Mater
 .is-accent { color: mat-color($accent) !important; } // Export accent color as reusable class in project stylesheets
 .is-primary { color: mat-color($primary) !important; } // Export primary color as reusable class in project stylesheets
 .is-warn { color: mat-color($warn) !important; }// Export warning color as reusable class in project stylesheets
+.is-success { color: #26da35 !important; }// Export success color as reusable class in project stylesheets
 
 snack-bar-container { // Defines shared SnacbBar Global custom styles
     width: auto !important;
@@ -68,7 +69,7 @@ snack-bar-container { // Defines shared SnacbBar Global custom styles
     form {
         text-align: center;
         width: 100%;
-        padding: 1.25rem 2rem 0.75rem;
+        padding: .25rem 2rem 0.75rem;
         &.large { padding: 1.25rem 0 0.75rem;}
             @media (max-width: 580px) {
             padding: 1.25rem .5rem 0.75rem;
@@ -115,6 +116,7 @@ snack-bar-container { // Defines shared SnacbBar Global custom styles
         display: flex;
         flex-flow: row wrap;
         place-content: space-between space-evenly;
+        align-items: center;
         margin-bottom: 1rem;
         margin-top: 1rem;
     }
@@ -144,3 +146,9 @@ mat-slide-toggle label { flex: 0 !important;}
 }
 .mat-card-header-text { width: 100%;}
 .member-info .mat-chip-list-wrapper { justify-content: space-between !important;}
+#members-update #chips-wrap {
+    width: 100%;
+    text-align: center;
+    max-height: 135px;
+    overflow-y: scroll;
+}

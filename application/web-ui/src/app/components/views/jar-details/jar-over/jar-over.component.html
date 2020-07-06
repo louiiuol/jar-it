@@ -1,43 +1,53 @@
-<section id='jar-over' *ngIf='!!jar' class='is-accent'>
-    <app-jar-settings
-        [user]='currentUserId'
-        [remaining]='remaining'
-        [jar]='jar' [small]='false' ></app-jar-settings>
-
-    <div id="pay">
+<section id="headline">
+    <mat-chip-list>
+        <div id='addressee'>
+            <p class='legend'>supports: </p>
+            <mat-chip selected color='accent'>
+                <app-icon class='icon xs' name='support'></app-icon>
+                <span>{{jar.addressee.name}}</span>
+            </mat-chip>
+        </div>
+        <mat-chip selected color='primary'>
+            <app-icon class='icon xs' name='peoples'></app-icon>
+            <strong>{{jar.members.length}}</strong> members</mat-chip>
+        <mat-chip selected color='primary'>
+            <app-icon class='icon xs' name='swear'></app-icon>
+            <strong>15</strong> confessions</mat-chip>
+    </mat-chip-list>
+    <div id="pay" *ngIf='isVisible()'>
         <p class="legend">Ready to pay your share ?</p>
         <button mat-raised-button color='accent' class='has-icon' (click)='pay()'>
             <app-icon class='icon xs' name='support'></app-icon>
             SUPPORT</button>
     </div>
+</section>
 
-    <p class="legend">
-        <app-icon name='peoples' class='icon xs'></app-icon>
-        Find below all members who participate to this Jar
-    </p>
+<section id='jar-over' class=jar-content>
 
     <div id='members-table' class="tab-wrapper">
-        <mat-chip-list>
-            <mat-card *ngFor='let member of jar.members'>
+        <p class="legend centered">
+            <app-icon name='peoples' class='icon xs'></app-icon>
+            Find below all members who still owe something
+        </p>
+        <div class='content'>
+            <mat-card *ngFor='let member of filteredMembers'>
                 <div class="card-wrapper">
-                    <app-icon name='{{member.avatar}}' class='icon avatar' avatar='true'></app-icon>
-                    <span class='is-primary'>{{member.username}}</span>
-                    <span class='chip-item'>
-                        <mat-chip selected color='accent'><strong>{{member.confessions.length}}</strong> confessions</mat-chip>
+                    <span class='is-primary centered'>
+                        <app-icon name='{{member.avatar}}' class='icon avatar' avatar='true'></app-icon>
+                        {{member.username}}
                     </span>
-                    <span class='chip-item'>
-                        <em class="date legend">fund:</em>
-                        <mat-chip selected color='primary'>{{member.balance | currency:'EUR'}}</mat-chip>
+                    <span class='chip-item centered'>
+                        <em class="date legend">owes:</em>
+                        <mat-chip selected color='primary'
+                            matTooltip='{{member.confessions.length}} confessions'>{{member.balance | currency:'EUR'}}</mat-chip>
                     </span>
-                    <span *ngIf='member.payed' >
-                            <app-icon class='icon xs is-primary' name='complete'></app-icon>
-                    </span>
-                    <span *ngIf='!member.payed' class='is-accent'>
-                            <app-icon class='icon xs ' name='close'></app-icon>
+                    <span>
+                            <app-icon class='icon xs is-accent helped' name='close'
+                            matTooltip='Member needs support the association'></app-icon>
                     </span>
                 </div>
             </mat-card>
-        </mat-chip-list>
+        </div>
     </div>
 
 </section>

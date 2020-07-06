@@ -2,6 +2,7 @@ import { UserView } from '../../user/view/user-view.model';
 
 export class Confession {
 
+    id: number;
     swear: string;
     author: UserView;
     date: Date;

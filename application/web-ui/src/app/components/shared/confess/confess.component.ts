@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Patterns } from 'src/app/services/forms/utils';
 import { Confess } from 'src/app/models/jar/confession/confess-model';
 import { ConfessionService } from 'src/app/services/domain/jar/member/confession.service';
+import { JarDetails } from 'src/app/models';
 
 @Component({
     selector: 'app-confess',
@@ -16,7 +17,7 @@ export class ConfessComponent {
 
     @ViewChild('confessionInput', { static: false }) confessionInput: ElementRef<HTMLInputElement>;
 
-    get jar(): any { return this.data.jar; }
+    get jar(): JarDetails { return this.data.jar; }
     get reporterId(): number { return this.jar.members.find(member => member.userId === this.data.user).id; }
 
     readonly confession = new FormControl('', [Validators.required, Validators.pattern(Patterns.text)]);

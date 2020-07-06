@@ -43,20 +43,31 @@ export const ErrorMessages = {
         link: [ { type: 'pattern', message: 'This is not an url' } ],
     },
     jar: {
-        title: [ { type: 'required', message: 'You need to add a name before getting started' } ],
-        description: [ { type: 'required', message: 'This description is too long !!' } ],
+        title: [
+            { type: 'required', message: 'You need to add a name before getting started' },
+            { type: 'maxlength', message: 'must be 20 characters max' },
+            { type: 'minlength', message: 'must be at least 5 characters long' }
+        ],
+        description: [
+            { type: 'required', message: 'This description is too long !!' },
+            { type: 'maxlength', message: 'must be 144 characters max' }
+        ],
         maxAmount: [
             { type: 'required', message: 'must be defined' },
-            { type: 'min', message: 'must be at least 20' },
-            { type: 'max', message: 'can\'t be more than 100' },
+            { type: 'min', message: 'must be at least 10' },
+            { type: 'max', message: 'can\'t be more than 100' }
         ],
         referenceCost: [
             { type: 'required', message: 'must be defined' },
             { type: 'min', message: 'must be at least 0.10' },
-            { type: 'max', message: 'can\'t be more than 2' },
+            { type: 'max', message: 'can\'t be more than 2' }
         ],
-        goal: [ { type: 'required', message: 'You must choose an addressee' } ],
-        endDate: [ { type: 'required', message: 'You must choose a closing date !' } ]
+        addressee: [ { type: 'required', message: 'You must choose an addressee' } ],
+        closingDate: [
+            { type: 'required', message: 'You must choose a closing date !' },
+            { type: 'matDatepickerMin', message: 'too soon' },
+            { type: 'matDatepickerMax', message: 'too far away' }
+        ]
     },
     pass_required: 'Your current password is required !'
     };

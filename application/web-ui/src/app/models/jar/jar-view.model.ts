@@ -1,6 +1,6 @@
-import { AssociationView } from '../association/association-view.model';
-import { MemberPreview } from './member/member-preview.model';
-import { jarState } from './jar-state.model';
+import { MemberPreview, AssociationView } from './..';
+import { JarState } from './jar-state.model';
+import { JarExtras } from './jar-extras.model';
 
 export class JarView {
 
@@ -9,13 +9,11 @@ export class JarView {
     description: string;
     author: MemberPreview;
     addressee: AssociationView;
-    balance: number;
     referenceCost: number;
     maxAmount: number;
-    startDate: Date;
+    startingDate: Date;
     closingDate: Date;
-    membersCount: number;
-    ConfessionsCount: number;
-    state: jarState;
+    state: JarState;
+    additionalInfos: JarExtras;
 
 }

@@ -13,7 +13,7 @@ export const JarForm = {
         Validators.maxLength(144),
         Validators.pattern(Patterns.text)
     ]],
-    referenceCost: [0.5, [
+    referenceCost: [1, [
         Validators.required,
         Validators.min(0.1),
         Validators.max(2)

@@ -9,6 +9,7 @@ import { FormFactory, UserService } from 'src/app/services';
 import { AssociationService } from 'src/app/services/domain/association/association.service';
 import { JarDetails, UserView, MemberDetails, AssociationView, JarUpdate } from 'src/app/models';
 import { JarForm } from 'src/app/services/forms/groups';
+import { JarHelperService } from 'src/app/services/domain/jar/Jar-helper.service';
 
 @Component({
     selector: 'app-jar-created',
@@ -76,7 +77,7 @@ export class JarCreatedComponent implements OnInit {
 
     setMembers = (event: MemberDetails[]): MemberDetails[] => this.members = event;
 
-    remainingDays = () => this.jarService.remainingDays(this.closingDate.value);
+    remainingDays = () => JarHelperService.remainingDays(this.closingDate.value);
 
     confessionsAvailables = () => Math.abs(this.maxAmount.value / this.referenceCost.value);
 
@@ -86,16 +87,6 @@ export class JarCreatedComponent implements OnInit {
 
     validForm = (): boolean => (this.jarGeneralForm.valid && this.jarSettingsForm.valid)
         && this.informationsChanged()
-
-    activateJar(): void {
-        this.forms.confirmationStep('Are you sure you want to activate this jar ? You won\'t be able to add new members nor changes settings !').pipe(takeUntil(this.destroyed$))
-            .subscribe(confirm => {
-                if (!!confirm) {
-                    this.jarService.activate(this.jar.id).pipe(takeUntil(this.destroyed$))
-                        .subscribe(() => this.activeEvent.emit('ACTIVE'));
-                }
-        });
-    }
 
     updateSettings = () => this.jarService.update(this.getUpdatedFields())
         .subscribe(() => {
@@ -154,6 +145,15 @@ export class JarCreatedComponent implements OnInit {
             this.jar.referenceCost = updated.referenceCost;
         }
         this.reset();
+    }
+
+    activateJar(): void {
+        this.forms.confirmationStep('Are you sure you want to activate this jar ? You won\'t be able to add new members nor changes settings !')
+            .subscribe(confirm => {
+                if (!!confirm) {
+                    this.jarService.activate(this.jar.id).subscribe(() => this.activeEvent.emit('ACTIVE'));
+                }
+        });
     }
 
 }

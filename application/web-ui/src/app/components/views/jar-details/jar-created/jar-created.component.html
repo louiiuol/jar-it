@@ -1,118 +1,128 @@
-<section *ngIf='!!jar && !!jar.members && isJarAdmin'>
-    <h3 class='header' >Configure your Jar before activation !</h3>
-
-    <section id="headline">
-        <mat-chip-list>
-            <mat-chip selected color='primary'><strong>{{members.length}}</strong> members</mat-chip>
-            <mat-chip selected color='primary'>{{remainingDays()}} days left !</mat-chip>
-            <mat-chip selected color='accent'>{{confessionsAvailables()}} confessions availables</mat-chip>
-            <mat-chip class='is-accent'>for <strong>{{jar.addressee.name}}</strong></mat-chip>
-        </mat-chip-list>
-    </section>
+<section id="headline">
+    <mat-chip-list>
+        <div id='addressee'>
+            <p class='legend'>supports: </p>
+            <mat-chip selected color='accent'>
+                <app-icon class='icon xs' name='support'></app-icon>
+                <span>{{jar.addressee.name}}</span>
+            </mat-chip>
+        </div>
+        <mat-chip selected color='primary'>
+            <app-icon class='icon xs' name='peoples'></app-icon>
+            <strong>{{jar.members.length}}</strong> members</mat-chip>
+        <mat-chip selected color='primary'>
+            <app-icon class='icon xs' name='calendar'></app-icon>
+            <strong>{{remainingDays()}}</strong> days left !</mat-chip>
+            <mat-chip selected color='primary'>
+                <app-icon class='icon xs' name='swear'></app-icon>
+                <strong>{{confessionsAvailables()}}</strong> confessions availables</mat-chip>
+    </mat-chip-list>
     <div id='activate' class='is-accent'>
-        <h4>You must activate this Jar to start confess in it! You won't be able to add new members nor changes actuals settings.</h4>
-        <button color="accent" mat-raised-button (click)='activateJar()'>
+        <p>Activate this Jar to start confess in it!</p>
+        <button color="accent" mat-raised-button (click)='activateJar()' disabled='{{!isJarAdmin}}'>
             <app-icon class='icon xs' name='rocket'></app-icon>
             Activate</button>
     </div>
-    <p class="legend">
-        <app-icon class='icon xs' name='peoples'></app-icon>
-        Manage Jar members
-    </p>
-    <section id="member-update" *ngIf='allUsers && isJarAdmin'>
+</section>
+<section class='jar-content'>
 
-        <app-member-add id='member-input'
+    <div id='settings' *ngIf='!!isJarAdmin'>
+        <p class="legend is-primary">
+            <app-icon class='icon xs' name='gear'></app-icon>
+            Update the settings of this Jar
+        </p>
+        <div class="wrapper">
+            <form [formGroup]="jarGeneralForm">
+                <mat-form-field>
+                    <mat-label>Tinee's title</mat-label>
+                    <input matInput formControlName="title" maxlength="40" placeholder="my first Jar" required >
+                    <mat-error *ngFor="let validation of errorMessages.title">
+                        <mat-error *ngIf="title.hasError(validation.type) && (title.dirty || title.touched)">{{validation.message}}</mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance='outline'>
+                    <mat-label>Description</mat-label>
+                    <textarea matInput formControlName="description" placeholder="your description"></textarea>
+                    <mat-error *ngFor="let validation of errorMessages.description">
+                        <mat-error *ngIf="description.hasError(validation.type) && (description.dirty || description.touched)">{{validation.message}}</mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+            </form>
+
+            <form [formGroup]="jarSettingsForm" >
+
+                <div class="wrapped">
+                    <mat-form-field>
+                        <mat-label>Amount per swear</mat-label>
+                        <input formControlName="referenceCost" matInput type= "number" required >
+                        <span matPrefix>&euro; &nbsp;</span>
+                        <mat-error *ngFor="let validation of errorMessages.referenceCost">
+                            <mat-error *ngIf="referenceCost.hasError(validation.type) && (referenceCost.dirty || referenceCost.touched)">{{validation.message}}</mat-error>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Maximum amount</mat-label>
+                        <input formControlName="maxAmount" matInput type= "number" required >
+                        <span matPrefix>&euro; &nbsp;</span>
+                        <mat-error *ngFor="let validation of errorMessages.maxAmount">
+                            <mat-error *ngIf="maxAmount.hasError(validation.type) && (maxAmount.dirty || maxAmount.touched)">{{validation.message}}</mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                    <mat-form-field>
+                        <mat-label>Closing date</mat-label>
+                        <input matInput formControlName="closingDate"
+                            [matDatepicker]="picker" placeholder="Choose a date"
+                            [min]="patterns.minJarDuration()" [max]="patterns.maxJarDuration()">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngFor="let validation of errorMessages.closingDate">
+                            <mat-error *ngIf="closingDate.hasError(validation.type) && (closingDate.dirty || closingDate.touched)">{{validation.message}}</mat-error>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-select formControlName="addressee">
+                            <mat-option *ngFor="let association of associations" [value]="association.id"> {{association.name}} </mat-option>
+                        </mat-select>
+                        <mat-error *ngFor="let validation of errorMessages.addressee">
+                            <mat-error *ngIf="addressee.hasError(validation.type) && (addressee.dirty || addressee.touched)">{{validation.message}}</mat-error>
+                        </mat-error>
+                    </mat-form-field>
+            </form>
+        </div>
+        <footer>
+            <button color="accent" mat-stroked-button
+            (click)='reset()'>RESET</button>
+            <button color="primary" mat-raised-button
+            [disabled]="!validForm()" (click)='updateSettings()'>UPDATE</button>
+        </footer>
+    </div>
+
+    <div *ngIf='!isJarAdmin'>
+        <p class="legend is-accent">
+            This jar is not active yet ! Come back when one of the admin will activate it !
+        </p>
+    </div>
+    <div id="members-update" *ngIf='allUsers && isJarAdmin'>
+        <p class='legend is-primary'>
+            <app-icon class='icon xs' name='peoples'></app-icon>
+            Jar members
+        </p>
+            <app-members-update id='member-input'
             (activeEvent)='setMembers($event)'
             [allUsers]="allUsers"
             [author]='jar.author'
             [currentUserId]='currentUserId'
-            [memberList]="members"></app-member-add>
-            <button color="primary" mat-stroked-button
-                [disabled]="membersListChanged()" (click)='updateMembers()'>
-                    Update <br> Members
-            </button>
-    </section>
+            [memberList]="members"></app-members-update>
+                <button color='primary' mat-raised-button
+                    [disabled]="!membersListChanged()" (click)='updateMembers()'>
+                    UPDATE
+                </button>
 
-    <p class="legend">
-        <app-icon class='icon xs' name='gear'></app-icon>
-        Update the settings of this Jar
-    </p>
-
-    <section id='settings' >
-        <form [formGroup]="jarGeneralForm">
-
-            <mat-form-field>
-                <mat-label>Tinee's title</mat-label>
-                <input matInput formControlName="title" maxlength="40" placeholder="my first Jar" required >
-                <mat-error *ngFor="let validation of errorMessages.title">
-                    <mat-error *ngIf="title.hasError(validation.type) && (title.dirty || title.touched)">{{validation.message}}</mat-error>
-                </mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance='outline'>
-                <mat-label>Description</mat-label>
-                <textarea matInput formControlName="description" placeholder="your description"></textarea>
-                <mat-error *ngFor="let validation of errorMessages.description">
-                    <mat-error *ngIf="description.hasError(validation.type) && (description.dirty || description.touched)">{{validation.message}}</mat-error>
-                </mat-error>
-            </mat-form-field>
-
-        </form>
-
-        <form [formGroup]="jarSettingsForm" >
-
-            <div class="wrapped">
-                <mat-form-field>
-                    <mat-label>Amount per swear</mat-label>
-                    <input formControlName="referenceCost" matInput type= "number" required >
-                    <span matPrefix>&euro; &nbsp;</span>
-                    <mat-error *ngFor="let validation of errorMessages.maxAmount">
-                        <mat-error *ngIf="maxAmount.hasError(validation.type) && (maxAmount.dirty || maxAmount.touched)">{{validation.message}}</mat-error>
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field>
-                    <mat-label>Maximum amount</mat-label>
-                    <input formControlName="maxAmount" matInput type= "number" required >
-                    <span matPrefix>&euro; &nbsp;</span>
-                    <mat-error *ngFor="let validation of errorMessages.maxAmount">
-                        <mat-error *ngIf="maxAmount.hasError(validation.type) && (maxAmount.dirty || maxAmount.touched)">{{validation.message}}</mat-error>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-
-                <mat-form-field>
-                    <mat-label>Closing date</mat-label>
-                    <input matInput formControlName="closingDate"
-                        [matDatepicker]="picker" placeholder="Choose a date"
-                        [min]="patterns.minJarDuration()" [max]="patterns.maxJarDuration()">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngFor="let validation of errorMessages.title">
-                        <mat-error *ngIf="title.hasError(validation.type) && (title.dirty || title.touched)">{{validation.message}}</mat-error>
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field>
-                    <mat-select formControlName="addressee">
-                        <mat-option *ngFor="let association of associations" [value]="association.id"> {{association.name}} </mat-option>
-                    </mat-select>
-                    <mat-error *ngFor="let validation of errorMessages.title">
-                        <mat-error *ngIf="title.hasError(validation.type) && (title.dirty || title.touched)">{{validation.message}}</mat-error>
-                    </mat-error>
-                </mat-form-field>
-        </form>
-    </section>
-    <footer>
-        <button color="accent" mat-stroked-button
-        (click)='reset()'>Reset</button>
-        <button color="primary" mat-raised-button
-        [disabled]="!validForm()" (click)='updateSettings()'>Update</button>
-    </footer>
-</section>
-
-<section *ngIf='!isJarAdmin'>
-    <p class="legend">
-        This jar is not active yet ! Come back when one of the admin will activate it !
-    </p>
+    </div>
 </section>

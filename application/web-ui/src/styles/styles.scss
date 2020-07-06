@@ -55,6 +55,9 @@ h1, h1 > *, h2:not(.empty), h2 > *, h3, h3 > *, h4, h5, h6, .is-pacifico, .mat-c
     &-lg { padding: 2.5rem 4rem}
     &-xs { padding: .65rem 1rem}
 }
-.legend { color: #AAA; font-style: italic; padding: .5rem 1rem;}
+.legend { color: #AAA; font-style: italic; padding: .5rem;}
 .empty { padding: 1rem; color: #888; font-style: italic; text-align: center; font-family: 'poppins, sans-serif' !important;}
 hr.spacer { opacity: 0; height: 2rem; }
+.disabled { cursor: not-allowed;}
+.helped { cursor: help;}
+.centered { text-align: center;}

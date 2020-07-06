@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatAutocomplete } from '@angular/material/autocomplete';
@@ -43,7 +42,6 @@ export class JarCreateComponent implements OnInit {
 
     author: UserView;
     loading = false;
-    separatorKeysCodes: number[] = [ENTER, COMMA];
 
     members: MemberDetails[] = [];
     allUsers: UserView[] = [];
@@ -60,10 +58,11 @@ export class JarCreateComponent implements OnInit {
     ngOnInit() {
         this.data.created = false;
         this.author = this.data.author;
-        this.userService.getAllUsers().subscribe( data => this.allUsers = data );
-        this.associationService.getAll('id', 'asc', 0, 50).subscribe( data => this.associations = data.items );
+        this.userService.getAllUsers().pipe(takeUntil(this.destroyed$)).subscribe( data => this.allUsers = data );
+        this.associationService.getAll('id', 'asc', 0, 50).pipe(takeUntil(this.destroyed$))
+            .subscribe(data => this.associations = data.items);
         this.buildForms();
-        this.members.push(this.mapAuthor());
+        this.members.push(new MemberDetails(this.author.id, this.author.username, this.author.avatar, true));
     }
 
     createJar(): void {
@@ -76,7 +75,11 @@ export class JarCreateComponent implements OnInit {
             }, err => this.forms.handleErrorMessages(err));
     }
 
-    close = (): void => this.dialogRef.close(false);
+    close(): void {
+        this.jarGeneralForm.reset();
+        this.jarSettingsForm.reset();
+        this.dialogRef.close(false);
+    }
 
     setMembers = (event: MemberDetails[]): MemberDetails[] => this.members = event;
 
@@ -97,8 +100,5 @@ export class JarCreateComponent implements OnInit {
     private jarInfos = () => new JarCreate(this.title.value, this.maxAmount.value,
         this.closingDate.value, this.addressee.value.id, this.memberService.mapMembers(this.members),
         this.author.id, this.referenceCost.value, this.description.value)
-
-    private mapAuthor = (): MemberDetails =>
-        new MemberDetails(this.author.id, this.author.username, this.author.avatar, true)
 
 }

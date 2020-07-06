@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, Input, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UserView } from 'src/app/models/user/view/user-view.model';
 import { Observable } from 'rxjs';
@@ -6,14 +6,14 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { map, startWith } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MemberCreate, MemberPreview, MemberDetails } from 'src/app/models';
+import { MemberDetails } from 'src/app/models';
 
 @Component({
-    selector: 'app-member-add',
-    templateUrl: './member-add.component.html',
-    styleUrls: ['./member-add.component.scss']
+    selector: 'app-members-update',
+    templateUrl: './members-update.component.html',
+    styleUrls: ['./members-update.component.scss']
 })
-export class MemberAddComponent {
+export class MembersUpdateComponent {
 
     @Output() membersEvent = new EventEmitter<MemberDetails[]>();
 

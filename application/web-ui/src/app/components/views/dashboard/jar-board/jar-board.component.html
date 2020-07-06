@@ -1,12 +1,16 @@
 <mat-card id="jars-board">
     <section class="header">
-        <div id='jars-filters'>Filters coming soon .. </div>
+        <p class="legend is-primary">
+            <app-icon class='icon xs' name='swear'></app-icon>
+            Your swears jars
+        </p>
         <button id="new-jar" mat-mini-fab (click)="newJar()"
-            color='accent' matTooltip="new electronic jar">+</button>
+            color='accent' matTooltip="create your own swear jar">+</button>
     </section>
     <section *ngIf='!!jars' id='jars-preview'>
         <h2 *ngIf="jars.length == 0" class="empty">This place looks a bit empty, start create your first Tinee now !</h2>
-        <app-jar-preview *ngFor="let jar of jars"
-        [user]='user' [jar]='jar'></app-jar-preview>
+        <app-jar-preview *ngFor="let jar of jars" [jar]='jar'></app-jar-preview>
+        <mat-paginator [length]="resultsLength" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 50]">
+        </mat-paginator>
     </section>
 </mat-card>

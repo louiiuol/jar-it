@@ -1,44 +1,74 @@
-<mat-card [ngClass]="{'is-accent':isOver}">
-    <section class="aside" *ngIf="isActive">
-        <mat-chip class='balance' selected>
-            <app-icon class='icon xs' name='money'></app-icon>
-            {{jar.balance}} / {{jar.maxAmount | currency:'EUR'}} </mat-chip>
-        <span class='days-left'>
-            <em> {{daysLeft}} days left !</em>
-        </span>
+<mat-card [ngClass]="{'is-accent':jarState == 'CREATED', 'is-primary':jarState == 'ACTIVE', 'is-success':jarState == 'PAYED', 'is-warn':jarState == 'MAX_AMOUNT_REACHED' || jarState == 'OUT_DATED'}">
+    <section class='wrapper'>
+        <mat-chip-list>
+            <section class="aside" *ngIf="jarState == 'ACTIVE'">
+                <mat-chip class='balance' selected>
+                    {{jar.additionalInfos.balance}} / {{jar.maxAmount}} €</mat-chip>
+                <span class='days-left'>
+                    <em> {{daysLeft}} days left !</em>
+                </span>
+            </section>
+            <section class="aside" *ngIf="jarState == 'CREATED'">
+                    <mat-chip selected color='accent'>
+                        <p><strong>ACTIVATION <br> NEEDED</strong></p>
+                    </mat-chip>
+            </section>
+            <section id='payed' class="aside" *ngIf="jarState == 'PAYED'">
+                <p class='is-success'><strong>PAYED</strong></p>
+                <em>{{jar.maxAmount | currency: 'EUR'}} funded !</em>
+        </section>
+        </mat-chip-list>
+
+        <section class="aside" *ngIf="jarState == 'MAX_AMOUNT_REACHED' || jarState == 'OUT_DATED' ">
+            <mat-chip selected color='warn'>
+                <p><strong>PAYMENT <br/> REQUIRED</strong></p>
+            </mat-chip>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <h4 class='title is-primary'>{{jar.title}}</h4>
+                <div class='addressee is-accent'>
+                    <app-icon class='icon xs' name='support'></app-icon>
+                    <span>{{jar.addressee.name}}</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="row grouped">
+                    <span class='members'>
+                        <app-icon class='icon xs' name='peoples'></app-icon>
+                        <em><strong>{{jar.additionalInfos.membersCount}}</strong> members</em>
+                    </span>
+                    <span class='confessions' *ngIf="!(jarState == 'CREATED')">
+                        <app-icon class='icon xs' name='swear'></app-icon>
+                        <em><strong>{{jar.additionalInfos.confessionsCount}}</strong> confessions</em>
+                    </span>
+                    <span class='confessions'>
+                        <app-icon name='calendar' class='icon xxs'></app-icon>
+                        <em>since <strong class="helped" matTooltip="Creation date of the jar">{{jar.startingDate | date: 'mediumDate'}}</strong></em>
+                    </span>
+                </div>
+            </div>
+        </section>
     </section>
 
-    <section class="aside" *ngIf="isCreated">
-            <span class='empty'>Activation <br> needed</span>
+    <section class='vertical-aside'>
+        <app-icon id='owner' avatar="true" name="{{jar.author.avatar}}"
+            class="icon xs helped" matTooltip="{{jar.author.username}} created this jar"></app-icon>
+        <a *ngIf="isOpenable && !(jarState == 'PAYED')" [routerLink]="['/jars', jar.id]" class='open-details is-primary'>
+            <app-icon class='icon xs' name='visible' ></app-icon>
+        </a>
+        <a *ngIf="!isOpenable && !(jarState == 'PAYED')" class=' disabled is-primary'>
+            <app-icon class='icon xxs' name='infos'
+                matTooltip="This jar is not ready yet, wait for an admin to activate it !"></app-icon>
+        </a>
+        <a *ngIf="jarState == 'PAYED'" class=' disabled is-primary'>
+            <app-icon class='icon xxs' name='infos'
+                matTooltip="This jar is now finished, thanks everyone !"></app-icon>
+        </a>
     </section>
 
-    <section class="content">
-        <div class="row">
-            <h4 class='title is-primary'>{{jar.title}}</h4>
-            <span class='addressee is-accent'>
-                <app-icon class='icon xs' name='support'></app-icon>
-                <strong>{{jar.addressee}}</strong>
-            </span>
-        </div>
-
-        <div class="row grouped ">
-            <span class='members'>
-                <app-icon class='icon xs' name='peoples'></app-icon>
-                <em>{{jar.membersCount}} members</em>
-            </span>
-            <span class='confessions'>
-                <app-icon class='icon xs' name='swear'></app-icon>
-                <em>5 confessions</em>
-            </span>
-            <span class='confessions'>
-                <app-icon name='calendar' class='icon xxs'></app-icon>
-                <em>since: {{jar.startDate | date: 'shortDate'}}</em>
-            </span>
-        </div>
-    </section>
-    <app-icon [routerLink]="['/jars', jar.id]"class='icon open-details is-accent' name='visible'></app-icon>
 </mat-card>
 
-<!-- <app-icon avatar="true" name="{{jar.author.avatar}}"
-        class="icon owner is-accent has-border is-rounded xsm"
-        matTooltip="{{jar.author.username}} created this jar"></app-icon> -->
+
