@@ -20,7 +20,9 @@ import dev.louiiuol.jarit.business.entities.UserDetails;
 @Service
 public final class SecurityHelper {
 
-    private SecurityHelper() {/*Overrides default constructor as private without arguments*/}
+    private SecurityHelper() {
+        // Overrides default constructor as private without arguments
+    }
 
     /**
      * Returns the {@code Authentication} object associated to the

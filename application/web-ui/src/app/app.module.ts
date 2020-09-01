@@ -27,10 +27,9 @@ import 'hammerjs';
 import { DescriptionFormatterPipe } from './services/pipes/description-formater.pipe';
 import { JarCreateComponent } from './components/views/dashboard/jar-board/jar-create/jar-create.component';
 import { JarDetailsComponent } from './components/views/jar-details/jar-details.component';
-import { ConfessComponent } from './components/views/jar-details/jar-active/confess/confess.component';
+import { ConfessComponent } from './components/shared/confess/confess.component';
 import { JarPreviewComponent } from './components/views/dashboard/jar-board/jar-preview/jar-preview.component';
-import { JarSettingsComponent } from './components/shared/jar-settings/jar-settings.component';
-import { MemberAddComponent } from './components/shared/member-add/member-add.component';
+import { MembersUpdateComponent } from './components/shared/members-update/members-update.component';
 import { JarBoardComponent } from './components/views/dashboard/jar-board/jar-board.component';
 import { MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material/chips';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
@@ -38,6 +37,7 @@ import { JarResolver } from './services/domain/jar/jar.resolve';
 import { JarCreatedComponent } from './components/views/jar-details/jar-created/jar-created.component';
 import { JarActiveComponent } from './components/views/jar-details/jar-active/jar-active.component';
 import { JarOverComponent } from './components/views/jar-details/jar-over/jar-over.component';
+import { PayComponent } from './components/views/jar-details/jar-over/pay/pay.component';
 
 @NgModule({
     declarations: [
@@ -60,15 +60,15 @@ import { JarOverComponent } from './components/views/jar-details/jar-over/jar-ov
         AssociationCreateComponent,
         DescriptionFormatterPipe,
         JarCreateComponent,
-        MemberAddComponent,
+        MembersUpdateComponent,
         JarPreviewComponent,
-        JarSettingsComponent,
         JarDetailsComponent,
         ConfessComponent,
         JarBoardComponent,
         JarCreatedComponent,
         JarActiveComponent,
-        JarOverComponent
+        JarOverComponent,
+        PayComponent
     ],
     imports: [
         BrowserModule,

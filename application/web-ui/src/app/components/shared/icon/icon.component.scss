@@ -24,3 +24,9 @@
 .has-icon {
     .icon { margin-right: .5rem; margin-left: .5rem; }
 }
+.open-details {
+    transition: color .8s ease;
+    &:hover svg {
+        color: white;
+    }
+}

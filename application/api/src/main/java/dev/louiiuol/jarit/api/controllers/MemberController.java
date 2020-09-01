@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,6 +35,12 @@ public class MemberController {
 	@PreAuthorize("@validatorService.isJarMember(#jarId)")
     public Set<MemberDetailsDto> getJarMembers(@PathVariable("jar") Long jarId) {
         return service.getAllByJar(jarId);
+    }
+
+    @PutMapping("/{id}/pay")
+	@PreAuthorize("@validatorService.isJarMember(#id) AND @validatorService.isOver(#id)")
+    public void updateJarMembers(@PathVariable("id") Long id) {
+        service.pay(id);
     }
 
 }

@@ -26,11 +26,11 @@ public class SchedulerService extends AbstractService<Jar, JarRepository> {
      */
     @Scheduled(cron="0 0 0 * * *") // to be run every day at 00 am
     public void checkJarEndDate() {
-        List<Jar> tinees = repo().findAll();
-        for (Jar tinee : tinees)
-            if (tinee.getClosingDate().isBefore(LocalDate.now())) {
-                tinee.setState(JarState.OUT_DATED);
-                repo().save(tinee);
+        List<Jar> jars = repo().findAll();
+        for (Jar jar : jars)
+            if (jar.getClosingDate().isBefore(LocalDate.now())) {
+                jar.setState(JarState.OUT_DATED);
+                repo().save(jar);
             }
     }
 

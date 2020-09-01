@@ -1,0 +1,12 @@
+<button mat-icon-button id="close-dialog" color="primary" aria-label="close tinee dialog">
+    <app-icon (click)="close()" class="icon xs" name="close"></app-icon>
+</button>
+<h3 mat-dialog-title class="header">Support the association</h3>
+<p class='legend'>Ready to pay your share ?</p>
+<form>
+    <p>Please contribute to the association by clicking <a target="blank" href="{{jar.addressee.link}}">here</a></p>
+</form>
+<footer>
+    <mat-slide-toggle [(ngModel)]="isChecked">I've contributed</mat-slide-toggle>
+    <button color="primary" mat-raised-button (click)="pay()" disabled='{{!isChecked}}'>Checked</button>
+</footer>

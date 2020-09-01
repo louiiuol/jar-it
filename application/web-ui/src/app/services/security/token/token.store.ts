@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Cookie } from 'ng2-cookies';
 import { IToken, Token } from 'src/app/models';
 
-const cookieFieldName = 'eTin_Token';
+const cookieFieldName = 'Jarit_Token';
 
 /**
  * Provides Store to save, check, get or delete tokens

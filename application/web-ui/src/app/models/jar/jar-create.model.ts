@@ -5,7 +5,7 @@ export class JarCreate {
     title: string;
     description: string;
     maxAmount: number;
-    closingDate: Date;
+    closingDate: string;;
     addressee: number;
     author: number;
     members: MemberCreate[];
@@ -15,12 +15,15 @@ export class JarCreate {
                 members: MemberCreate[], author: number, referenceCost: number, description?: string) {
         this.title = title;
         this.description = !!description ? description : 'No description provided';
-        this.closingDate = closingDate;
+        this.closingDate = closingDate.getFullYear() + '-'
+            + (closingDate.getMonth() + 1).toString().padStart(2, '0') + '-'
+            + closingDate.getDate().toString().padStart(2, '0');
         this.maxAmount = maxAmount;
         this.addressee = addressee;
         this.members = members;
         this.author = author;
         this.referenceCost = referenceCost;
+        console.log(closingDate.getMonth())
     }
 
 }

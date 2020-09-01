@@ -47,6 +47,9 @@ public class JarCreateDto {
     @JsonIgnore
     private JarState state = JarState.CREATED;
 
+    @JsonIgnore
+    private LocalDate startingDate = LocalDate.now();
+
     protected JarCreateDto() {
         // Overrides default no-args constructor as protected
     }

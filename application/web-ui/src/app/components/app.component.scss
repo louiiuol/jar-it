@@ -1,20 +1,22 @@
 #global-navbar {
-  padding: .5rem 0;
-  width: 100%;
+    padding: .5rem 0;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
 }
 
 main#global-container {
-  display: flex;
-  flex-flow: row wrap;
-  place-content: start center;
-  position: relative;
-  width: 100%;
-  min-height: calc(100vh - 130px);
-  padding: 1rem 0 75px;
-  & > * { width: 100%; }
+    display: flex;
+    flex-flow: row wrap;
+    place-content: start center;
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 50px);
+    padding-top:5rem;
+    & > * { width: 100%; }
 }
 
 #global-footer{
-  height: 50px;
-  width: 100%;
+    height: 50px;
+    width: 100%;
 }

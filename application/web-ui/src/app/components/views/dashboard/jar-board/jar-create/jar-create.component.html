@@ -4,7 +4,7 @@
 
 <h3 class="header">Create your Jar</h3>
 
-<mat-horizontal-stepper linear='true' #stepper>
+<mat-horizontal-stepper linear='true' #stepper dynamicHeight>
 
     <ng-template style="display:flex" matStepperIcon="edit">
         <app-icon class=" icon xxs" name="edit"></app-icon>
@@ -18,13 +18,12 @@
             <p class="legend">Please describe the title and the description of your Jar</p>
 
             <mat-form-field>
-                <mat-label>Tinee's title</mat-label>
+                <mat-label>Jar's title</mat-label>
                 <input matInput formControlName="title" maxlength="40" placeholder="my first Jar" required >
                 <mat-error *ngFor="let validation of errorMessages.title">
                     <mat-error *ngIf="title.hasError(validation.type) && (title.dirty || title.touched)">{{validation.message}}</mat-error>
                 </mat-error>
             </mat-form-field>
-
             <mat-form-field>
                 <mat-label>Description</mat-label>
                 <textarea matInput formControlName="description" placeholder="your description"></textarea>
@@ -54,8 +53,8 @@
                     <mat-label>Amount per swear</mat-label>
                     <input formControlName="referenceCost" matInput type= "number" required >
                     <span matPrefix>&euro; &nbsp;</span>
-                    <mat-error *ngFor="let validation of errorMessages.maxAmount">
-                        <mat-error *ngIf="maxAmount.hasError(validation.type) && (maxAmount.dirty || maxAmount.touched)">{{validation.message}}</mat-error>
+                    <mat-error *ngFor="let validation of errorMessages.referenceCost">
+                        <mat-error *ngIf="referenceCost.hasError(validation.type) && (referenceCost.dirty || referenceCost.touched)">{{validation.message}}</mat-error>
                     </mat-error>
                 </mat-form-field>
 
@@ -77,8 +76,8 @@
                         [min]="patterns.minJarDuration()" [max]="patterns.maxJarDuration()">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngFor="let validation of errorMessages.title">
-                        <mat-error *ngIf="title.hasError(validation.type) && (title.dirty || title.touched)">{{validation.message}}</mat-error>
+                    <mat-error *ngFor="let validation of errorMessages.closingDate">
+                        <mat-error *ngIf="closingDate.hasError(validation.type) && (closingDate.dirty || closingDate.touched)">{{validation.message}}</mat-error>
                     </mat-error>
                 </mat-form-field>
 
@@ -87,8 +86,8 @@
                     <mat-select formControlName="addressee">
                         <mat-option *ngFor="let association of associations" [value]="association"> {{association.name}} </mat-option>
                     </mat-select>
-                    <mat-error *ngFor="let validation of errorMessages.title">
-                        <mat-error *ngIf="title.hasError(validation.type) && (title.dirty || title.touched)">{{validation.message}}</mat-error>
+                    <mat-error *ngFor="let validation of errorMessages.addressee">
+                        <mat-error *ngIf="addressee.hasError(validation.type) && (addressee.dirty || addressee.touched)">{{validation.message}}</mat-error>
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -107,12 +106,12 @@
 
             <p class="legend">You can direclty add member from here !</p>
 
-            <app-member-add
+            <app-members-update
                 (activeEvent)='setMembers($event)'
                 [allUsers]="allUsers"
                 [author]='author'
                 [currentUserId]='author.id'
-                [memberList]="members"></app-member-add>
+                [memberList]="members"></app-members-update>
         </form>
         <footer>
             <button color="accent" mat-stroked-button matStepperPrevious>Back</button>

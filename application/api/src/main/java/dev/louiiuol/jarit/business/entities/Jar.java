@@ -40,7 +40,7 @@ public class Jar extends AbstractEntity {
     private User author;
 
     @Column(nullable = false, updatable = false)
-    private LocalDate startDate = LocalDate.now();
+    private LocalDate startingDate;
 
     @Column(nullable = false)
     private LocalDate closingDate;
@@ -105,9 +105,8 @@ public class Jar extends AbstractEntity {
     @Override
     public String toString() {
         return MessageFormat.format(
-                "{ id: {0}, title: {1}, description: {2}, author: {3}, start_date: {4}, sate: {5}, reference_cost: {6}, max_amount: {7},  closing_date: {8}, goal: {9} } ",
-                getId(), title, description, author.getId(), startDate, state, referenceCost, maxAmount, closingDate,
-                addressee.getId());
+                "{ id: {0}, title: {1}, description: {2}, author: {3}, state: {5}, goal: {9}, starting_date: {4}, closing_date: {8}, reference_cost: {6}, max_amount: {7} } ",
+                getId(), title, description, author.getId(), startingDate, state, referenceCost, maxAmount, closingDate, addressee.getId());
     }
 
 }

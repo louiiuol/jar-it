@@ -1,0 +1,13 @@
+form {
+    padding: 0 !important;
+    #member-chip {
+        align-items: center;
+        & > * { margin: .25rem; }
+    }
+    #search {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        cursor: pointer;
+    }
+}

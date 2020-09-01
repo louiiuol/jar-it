@@ -1,34 +1,31 @@
 .mat-toolbar {
-  place-content: center space-between;
-  background: none !important;
-  img#logo {
-    height: 64px;
-  }
-  button#user-menu-btn {
-    border-radius: 5px;
-    box-shadow: 1px 2px 4px rgba($color: #13c2f7, $alpha: .2);
-    background: #ffffff;
-    border: 1px solid currentColor;
-    padding: .25rem .5rem;
-  }
-
+    place-content: center space-between;
+    background: none !important;
+    img#logo {
+        height: 64px;
+    }
+    .icon {
+        cursor: pointer;
+        box-shadow: 1px 2px 4px rgba($color: #000000, $alpha: .6);
+        border-radius: 50%;
+    }
 }
 
 #username {
-  width: 100%;
-  text-align: center;
-  background: #00c1d4;
-  color: white;
-  padding: 1rem;
-  margin-top: -8px;
-  display: block;
+    width: 100%;
+    text-align: center;
+    background: #00c1d4;
+    color: white;
+    padding: 1rem;
+    margin-top: -8px;
+    display: block;
 }
 
 button.mat-menu-item {
-  font-weight: bold !important;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  icon {padding-right: 1rem;} font-size: 1rem;
+    font-weight: bold !important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    icon {padding-right: 1rem;} font-size: 1rem;
 }
 

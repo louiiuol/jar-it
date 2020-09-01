@@ -1,7 +1,9 @@
 package dev.louiiuol.jarit.api.controllers;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,12 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import dev.louiiuol.jarit.business.dtos.PageDto;
 import dev.louiiuol.jarit.business.dtos.jars.JarCreateDto;
 import dev.louiiuol.jarit.business.dtos.jars.JarDetailsDto;
 import dev.louiiuol.jarit.business.dtos.jars.JarUpdateSettingsDto;
 import dev.louiiuol.jarit.business.dtos.jars.confessions.ConfessDto;
+import dev.louiiuol.jarit.business.dtos.jars.confessions.ConfessionViewDto;
 import dev.louiiuol.jarit.business.dtos.jars.members.MemberUpdateDto;
 import dev.louiiuol.jarit.business.dtos.jars.JarPreviewDto;
 import dev.louiiuol.jarit.services.jars.JarService;
@@ -60,8 +66,25 @@ public class JarController {
 
     @GetMapping("users/{id}")
 	@PreAuthorize("@validatorService.validRequester(#id)")
-    public List<JarPreviewDto> getUserJars(@PathVariable("id") Long id) {
-        return service.getAllByUser(id);
+    public PageDto<JarPreviewDto> getUserJars(@PathVariable("id") Long id,
+        UriComponentsBuilder uriBuilder,
+        HttpServletResponse response,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size,
+        @RequestParam(defaultValue = "asc") String order,
+        @RequestParam(defaultValue = "id") String sort) {
+            return service.getAllByUser(id, page, size, order, sort);
+    }
+    
+    @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public PageDto<JarPreviewDto> getAllJars(UriComponentsBuilder uriBuilder,
+        HttpServletResponse response,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size,
+        @RequestParam(defaultValue = "asc") String order,
+        @RequestParam(defaultValue = "id") String sort) {
+            return service.getAll(page, size, order, sort);
     }
 
     @PutMapping("/{id}/settings")
@@ -88,10 +111,10 @@ public class JarController {
         service.confess(jarId, dto);
     }
 
-    @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public List<JarPreviewDto> getAllJars() {
-        return service.getAll();
+    @GetMapping("/{id}/confessions")
+    @PreAuthorize("@validatorService.isActive(#jarId) and @validatorService.isJarMember(#jarId)")
+    public Set<ConfessionViewDto> getConfessions(@PathVariable("id") Long jarId) {
+        return service.getJarConfessions(jarId);
     }
 
 }

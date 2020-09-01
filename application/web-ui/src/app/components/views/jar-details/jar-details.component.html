@@ -1,5 +1,18 @@
 <mat-card id='jar-details' *ngIf='isJarLoading'>
-    <app-jar-created [infos]="infos" *ngIf='isCreated'  (activeEvent)='setState($event)'></app-jar-created>
-    <app-jar-active [infos]="infos" *ngIf='isActive' (activeEvent)='setState($event)'></app-jar-active>
-    <app-jar-over [infos]="infos" *ngIf='isOver' (activeEvent)='setState($event)'></app-jar-over>
+        <div id="jar-header">
+            <div class="left">
+                <h2 class='is-primary'>{{jar.title}}</h2>
+                <p class="legend">{{!!jar.description ? jar.description : 'This jar doesn\'t have a description'}}</p>
+            </div>
+            <div class='aside'>
+                <app-icon avatar="true" name="{{jar.author.avatar}}"
+                    class="icon owner is-accent has-border is-rounded helped"
+                    matTooltip="{{jar.author.username}} is the creator of this jar">
+                </app-icon>
+                <p class='legend'>since <strong>{{jar.startingDate | date:'fullDate'}}</strong></p>
+            </div>
+        </div>
+        <app-jar-created [infos]="infos" *ngIf="jarState === 'CREATED'" (activeEvent)='setState($event)'></app-jar-created>
+        <app-jar-active [infos]="infos" *ngIf="jarState === 'ACTIVE'" (activeEvent)='setState($event)'></app-jar-active>
+        <app-jar-over [infos]="infos" *ngIf="jarState === 'MAX_AMOUNT_REACHED' || jarState === 'OUT_DATED'" (activeEvent)='setState($event)'></app-jar-over>
 </mat-card>

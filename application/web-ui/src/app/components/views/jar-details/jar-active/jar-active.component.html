@@ -1,83 +1,75 @@
-<section id='jar-active' *ngIf='!!jar' class='is-primary'>
-    <app-jar-settings
-    [user]='currentUserId'
-    [remaining]='remainingDays'
-    [jar]='jar' [small]='false' ></app-jar-settings>
-
-    <div id="confess">
-        <p class="legend">Did your sworn something ?</p>
-        <button mat-raised-button color='primary' (click)='confess()'>confess</button>
+<section id="headline" class='is-primary'>
+    <div id="jar-gauge" class="is-relative">
+        <meter class=" is-accent" max="{{jar.maxAmount }}" value="{{jar.balance }}" title="GB"></meter>
+        <span id="meter-indicator"> <em>current balance: </em><strong>{{jar.balance }}</strong> on <strong>{{jar.maxAmount}}</strong> €</span>
     </div>
-    <mat-tab-group mat-stretch-tabs dynamicHeight>
-        <mat-tab>
-            <ng-template mat-tab-label>
-            <app-icon name='clock' class='icon xs'></app-icon>
-            History
-            </ng-template>
+    <mat-chip-list>
+        <div id='addressee'>
+            <p class='legend'>supports: </p>
+            <mat-chip selected color='accent'>
+                <app-icon class='icon xs' name='support'></app-icon>
+                <span>{{jar.addressee.name}}</span>
+            </mat-chip>
+        </div>
+        <mat-chip selected color='primary'>
+            <app-icon class='icon xs' name='peoples'></app-icon>
+            <strong>{{jar.members.length}}</strong> members</mat-chip>
+        <mat-chip selected color='primary'>
+            <app-icon class='icon xs' name='swear'></app-icon>
+            <strong>{{confessionsCount}}</strong> confessions
+        </mat-chip>
+        <mat-chip selected color='primary'>
+            <app-icon class='icon xs' name='calendar'></app-icon>
+            <strong>{{remainingDays}}</strong> days left !
+        </mat-chip>
+    </mat-chip-list>
+</section>
+<section class='jar-content' >
+    <div id='history-table' *ngIf='!!jar'>
+        <div class="header">
+            <p class="legend is-primary">
+                <app-icon name='clock' class='icon xs'></app-icon>
+                Jar's confessions
+            </p>
+            <button mat-raised-button color='accent' (click)='confess()'>
+                <app-icon class='icon xs' name='swear'></app-icon>
+                CONFESS
+            </button>
+        </div>
 
-            <ng-template matTabContent>
-                <p *ngIf='confessions === 0' class="empty">No swears were confessed here yet !</p>
-                <div *ngIf='confessions > 0'>
-                    <p class='legend'>Filters coming soon</p>
-                    <div id='confession-table' *ngFor='let member of jar.members'>
-                        <mat-card *ngFor='let confession of member.confessions'>
-                            <div class="wrapper">
-                                <span class="has-icon author">
-                                    <app-icon name='{{member.avatar}}' class='icon avatar' avatar='true'></app-icon>
-                                    <span class='is-primary'>{{member.username}}</span>
-                                </span>
-                                <em>confessed</em>
-                                <strong class='is-accent'>{{confession.swear}}</strong>
-                                <em class="date">{{confession.date | date:'shortDate'}}</em>
-                            </div>
-                        </mat-card>
-                    </div>
+        <div class="wrapper">
+            <p *ngIf='confessionsCount === 0' class="empty">No swears were confessed here yet !</p>
+            <div id='confession-table' class='table-content' *ngIf='confessionsCount > 0 && !!confessionsList'>
+                <div class="wrapper" *ngFor='let confession of confessionsList'>
+                    <p class="legend date">{{confession.date | date:'short'}}</p>
+                    <mat-card>
+                        <h4 class='is-accent'>{{confession.swear}}</h4>
+                        <p class='legend'>confessed by</p>
+                        <span class="has-icon author">
+                            <app-icon name='{{confession.author.avatar}}' class='icon avatar' avatar='true'></app-icon>
+                            <span class='is-primary'>{{confession.author.username}}</span>
+                        </span>
+                    </mat-card>
                 </div>
-            </ng-template>
-        </mat-tab>
-
-        <mat-tab>
-            <ng-template mat-tab-label>
+                <hr class='spacer'>
+            </div>
+        </div>
+    </div>
+    <div id='members-table' class='is-primary'>
+        <p class="legend">
             <app-icon name='peoples' class='icon xs'></app-icon>
             Members
-            </ng-template>
-            <ng-template matTabContent>
-                <p class="legend">Find below all members contributing to this Jar</p>
-                <div id='members-table'>
-                    <div class="tab-wrapper">
-                        <mat-card *ngFor='let member of jar.members'>
-
-                            <div class="card-wrapper">
-                                <span class="has-icon author">
-                                    <app-icon name='{{member.avatar}}' class='icon avatar' avatar='true'></app-icon>
-                                    <span class='is-primary'>{{member.username}}</span>
-                                    <app-icon *ngIf='member.admin' name='crown' class='icon xs is-primary admin' matTooltip='This member is an admin'></app-icon>
-                                    <div *ngIf='!member.admin' class="spaced"></div>
-                                </span>
-                                <div class="member-info">
-                                    <mat-chip-list>
-                                        <span class='chip-item'>
-                                            <em class="date legend">joined:</em>
-                                            <mat-chip>{{member.joined | date:'shortDate'}}</mat-chip>
-                                        </span>
-                                        <span class='chip-item'>
-                                            <em class="date legend">confessions:</em>
-                                            <mat-chip selected color='accent'>{{member.confessions.length}}</mat-chip>
-                                        </span>
-                                        <span class='chip-item'>
-                                            <em class="date legend">fund:</em>
-                                            <mat-chip selected color='primary'>{{member.balance | currency:'EUR'}}</mat-chip>
-                                        </span>
-                                    </mat-chip-list>
-                                </div>
-                            </div>
-
-                        </mat-card>
-                    </div>
+        </p>
+        <div class="table-wrapper">
+            <mat-card *ngFor='let member of sortedMembers'>
+                <div class="card-wrapper">
+                    <app-icon name='{{member.avatar}}' class='icon avatar' avatar='true' matTooltip="joined: {{member.joined | date:'shortDate'}}"></app-icon>
+                    <p class='legend'>{{member.username}}</p>
+                    <app-icon *ngIf='member.admin' name='crown' class='icon xxs is-primary admin' matTooltip='This member is an admin'></app-icon>
+                    <mat-chip selected color='primary'>{{member.balance | currency:'EUR'}}</mat-chip>
                 </div>
-            </ng-template>
-        </mat-tab>
-
-    </mat-tab-group>
+            </mat-card>
+        </div>
+    </div>
 </section>
 

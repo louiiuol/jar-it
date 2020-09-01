@@ -6,7 +6,7 @@ export const AssociationForm = {
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(40),
-        Validators.pattern(Patterns.text)
+        Validators.pattern(Patterns.alphanumeric)
     ]],
     code: ['', [
         Validators.required,
@@ -16,7 +16,7 @@ export const AssociationForm = {
     ]],
     description: ['', [
         Validators.maxLength(255),
-        Validators.pattern(Patterns.text)
+        Validators.pattern(Patterns.alphanumeric)
     ]],
     link: ['', [
         Validators.required,

@@ -1,11 +1,58 @@
 #jar-details {
     margin: .5rem auto;
-    width: 90vw;
-    max-width: 728px;
-    border-radius: 10px;
+    max-width: 928px;
+    border-radius: 10px !important;
+    overflow: hidden;
+    #jar-header {
+        display: flex;
+        justify-content: space-between;
+        padding: .5rem;
+        h2 { font-size: 2rem;}
+        .aside {text-align: right; }
+    }
+    #headline {
+        width: 100%;
+        padding: 1rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        background: rgb(245, 245, 245);
+        box-shadow: inset 0 0 10px rgba($color: #444444, $alpha: .4);
+
+        #addressee {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .mat-chip {
+            margin-bottom: 1rem;
+            strong { margin: 0 .5rem; }
+        }
+        #activate, #pay {
+            background: #ffffff;
+            padding: .75rem 0 0;
+            margin: 0 1rem;
+            border-radius: 10px;
+            box-shadow: 1px 2px 4px rgba($color: #000000, $alpha: .3);
+            p {
+                font-family: Poppins !important;
+                width: 80%;
+                margin: 0 auto 1rem;
+                text-align: center;
+                color: rgba($color: #000000, $alpha: .3)
+            }
+            button {
+                display: block;
+                margin: 1rem auto;
+            }
+        }
+    }
+    .jar-content {
+        display: flex;
+        justify-content: space-between;
+    }
     footer {
         width: 100%;
-        height: 125px;
         background: #ffffff;
     }
 }

@@ -1,0 +1,13 @@
+<button mat-icon-button id="close-dialog" color="primary" aria-label="close tinee dialog">
+    <app-icon (click)="close()" class="icon xs" name="close"></app-icon>
+</button>
+<h3 mat-dialog-title class="header">Confess</h3>
+<form>
+    <p class='legend'>What did you sworn about ?</p>
+    <mat-form-field>
+        <mat-label>Confess</mat-label>
+        <input matInput placeholder="Damn it !" [formControl]="confession" required>
+        <mat-error *ngIf="confession.invalid">That's not a confession !</mat-error>
+    </mat-form-field>
+    <button color="primary" mat-raised-button (click)="confess()">Confess</button>
+</form>

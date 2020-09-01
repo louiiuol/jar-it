@@ -93,7 +93,7 @@ public abstract class ControllerAdvice extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(apiErrors, HttpStatus.NOT_FOUND);
 	}
 
-	protected static String getRequestURI() { 
+	private static String getRequestURI() { 
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		return attr.getRequest().getRequestURI();
 	}

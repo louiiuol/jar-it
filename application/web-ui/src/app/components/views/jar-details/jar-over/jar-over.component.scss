@@ -1,19 +1,22 @@
 #jar-over {
-    border: 2px solid currentColor;
-    border-radius: 10px;
-    #header {
-        padding: 0 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
     #members-table.tab-wrapper {
+        flex: 1;
         display: flex;
-        flex-flow: row wrap;
-        justify-content: space-evenly;
+        flex-flow: column nowrap;
+        justify-content: flex-start;
         align-items: center;
         padding: 1rem .5rem;
-        .mat-card { width: 90% !important; margin: .5rem 1rem}
+        .content {
+            display: flex;
+            justify-content: center;
+            flex-flow: row wrap;
+            align-items: center;
+            .mat-card {
+                // max-width: 32% !important;
+                margin: .5rem;
+            }
+        }
+
         .card-wrapper {
             display: flex;
             flex-flow: row nowrap;
@@ -24,11 +27,3 @@
     }
 }
 
-#pay {
-    width: 60%;
-    margin: 2rem auto;
-    padding: 0 1.25rem .85rem;
-    border-radius: 10px;
-    border: 2px solid currentColor;
-    text-align: center;
-}

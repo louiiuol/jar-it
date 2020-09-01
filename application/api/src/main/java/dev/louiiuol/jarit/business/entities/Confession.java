@@ -41,6 +41,9 @@ public class Confession extends AbstractEntity {
         // Overrides default no-args constructor as protected
     }
 
+    public Member getAuthor() {
+        return author;
+    }
     @Override
     public int hashCode() {
         return getId().hashCode();

@@ -22,7 +22,7 @@ spring:
         data: classpath:sql/data-dev.dml.sql
         initialization-mode: always
     jpa:
-        open-in-view: false
+        open-in-view: false # disable connection to JDBC for other EntityManager other than Spring ones
         show-sql: true
         generate-ddl: true
         hibernate:

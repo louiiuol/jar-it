@@ -27,7 +27,7 @@ public class JarDetailsDto {
 
     private AssociationViewDto addressee;
 
-    private LocalDate startDate;
+    private LocalDate startingDate;
 
     private LocalDate closingDate;
 
@@ -35,7 +35,7 @@ public class JarDetailsDto {
 
     private Long maxAmount;
 
-    private Long referenceCost;
+    private Double referenceCost;
 
     private Double balance;
 
@@ -69,7 +69,7 @@ public class JarDetailsDto {
     @Override
     public String toString() {
         return MessageFormat.format("{ id: {0}, title: {1}, author: {2}, addressee: {3}, state: {4}, balance: {5}, starting_date: {6}, closing_date: {7}, description: {8}, maximum_amount: {9}, reference_cost: {10}, members: {11} }",
-            id, title, author, addressee, state, balance, startDate, closingDate, description, maxAmount, referenceCost, members);
+            id, title, author, addressee, state, balance, startingDate, closingDate, description, maxAmount, referenceCost, members);
     }
 
 }
