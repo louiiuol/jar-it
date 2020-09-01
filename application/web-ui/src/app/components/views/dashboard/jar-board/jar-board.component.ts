@@ -48,7 +48,7 @@ export class JarBoardComponent implements OnInit, OnChanges, OnDestroy {
 
     newJar(): void {
         const dialogRef = this.dialog.open(JarCreateComponent,
-            { maxWidth: '728x', disableClose: true, data: { author: this.user, created: false } });
+            { disableClose: true, data: { author: this.user, created: false } });
 
         dialogRef.afterClosed().pipe(takeUntil(this.destroyed$))
             .subscribe(created => {

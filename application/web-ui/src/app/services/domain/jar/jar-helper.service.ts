@@ -5,6 +5,7 @@ import { JarState } from 'src/app/models/jar/jar-state.model';
 @Injectable({ providedIn: 'root' })
 export class JarHelperService {
 
+
     static remainingDays = (closingDate: Date): number => {
         const now = new Date(Date.now()).getTime(); // get today date for jar in millisecond
         const end = new Date(closingDate).getTime(); // get Max date for jar in millisecond
@@ -20,8 +21,15 @@ export class JarHelperService {
                 confessions.push(confession);
             }
         }
-        confessions.sort((current: Confession, next: Confession) => next.id - current.id);
-        return confessions;
+        return this.sortConfessions(confessions);
+    }
+
+    static sortConfessions(confessions: Confession[]): Confession[] {
+        return confessions.sort((current: Confession, next: Confession) => {
+            const nextDate = new Date(next.date.toString()).getTime();
+            const actualDate = new Date(current.date.toString()).getTime();
+            return nextDate - actualDate;
+        });
     }
 
     static leftToPay(jarMembers: MemberDetails[]): number {
@@ -29,6 +37,10 @@ export class JarHelperService {
             .reduce((total, current) => total + current.balance, 0); // Total of their balance only
     }
 
-    static getConfessionsCount = (jar: JarDetails) => jar.members.reduce( (total, current) => total + current.confessions.length, 0);
+    static getConfessionsCount = (jar: JarDetails) => jar.members.reduce((total, current) => total + current.confessions.length, 0);
+
+    static sortMembers(members: MemberDetails[]): MemberDetails[] {
+        return members.sort((current, next) => current.username.toLowerCase().localeCompare(next.username.toLowerCase()));
+    }
 
 }

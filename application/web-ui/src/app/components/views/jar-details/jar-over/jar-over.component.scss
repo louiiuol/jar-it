@@ -3,7 +3,7 @@
         flex: 1;
         display: flex;
         flex-flow: column nowrap;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
         padding: 1rem .5rem;
         .content {
@@ -12,8 +12,8 @@
             flex-flow: row wrap;
             align-items: center;
             .mat-card {
-                width: 40% !important;
-                margin: .5rem auto;
+                // max-width: 32% !important;
+                margin: .5rem;
             }
         }
 

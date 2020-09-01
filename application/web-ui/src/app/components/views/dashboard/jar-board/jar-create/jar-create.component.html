@@ -18,7 +18,7 @@
             <p class="legend">Please describe the title and the description of your Jar</p>
 
             <mat-form-field>
-                <mat-label>Tinee's title</mat-label>
+                <mat-label>Jar's title</mat-label>
                 <input matInput formControlName="title" maxlength="40" placeholder="my first Jar" required >
                 <mat-error *ngFor="let validation of errorMessages.title">
                     <mat-error *ngIf="title.hasError(validation.type) && (title.dirty || title.touched)">{{validation.message}}</mat-error>

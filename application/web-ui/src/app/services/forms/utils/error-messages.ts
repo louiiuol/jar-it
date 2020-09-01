@@ -16,7 +16,7 @@ export const ErrorMessages = {
         ],
         birthDate: [ { type: 'required', message: 'You must be adult to register !' } ],
         password: [
-            { type: 'required', message: 'Secure your account' },
+            { type: 'required', message: 'Password is required' },
             { type: 'minlength', message: 'must be at least 6 characters long' },
             { type: 'maxlength', message: 'must be 25 characters max' },
             { type: 'pattern', message: 'must contain at least one uppercase, one lowercase, and one number' }
@@ -44,12 +44,12 @@ export const ErrorMessages = {
     },
     jar: {
         title: [
-            { type: 'required', message: 'You need to add a name before getting started' },
+            { type: 'required', message: 'You need to add a title' },
             { type: 'maxlength', message: 'must be 20 characters max' },
             { type: 'minlength', message: 'must be at least 5 characters long' }
         ],
         description: [
-            { type: 'required', message: 'This description is too long !!' },
+            { type: 'pattern', message: 'This description contains invalid characters' },
             { type: 'maxlength', message: 'must be 144 characters max' }
         ],
         maxAmount: [
@@ -73,7 +73,7 @@ export const ErrorMessages = {
     };
 
 export const HttpErrorMessages = {
-    invalidCredentials: 'These credentials doesn\'t seems right ... \r\n please check them again ! ',
-    unreachableApi: 'Seems like server is down, try again later 👻 ',
+    invalidCredentials: 'These credentials doesn\'t seems right ...  please check them again ! ',
+    unreachableApi: 'Seems like server is down, try again later ... ',
     blackMagic: 'Black Magic happened, sorry ! 🎩'
     };

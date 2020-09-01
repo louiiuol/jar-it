@@ -20,16 +20,16 @@ export class ConfessComponent {
     get jar(): JarDetails { return this.data.jar; }
     get reporterId(): number { return this.jar.members.find(member => member.userId === this.data.user).id; }
 
-    readonly confession = new FormControl('', [Validators.required, Validators.pattern(Patterns.text)]);
+    readonly confession = new FormControl('', [Validators.required, Validators.pattern(Patterns.alphanumeric)]);
 
     constructor(
-        protected snackBar: MatSnackBar, protected dialogRef: MatDialogRef<ConfessComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: JarDialogData, private confessionService: ConfessionService) {}
+        private snackBar: MatSnackBar, private dialogRef: MatDialogRef<ConfessComponent>,
+        @Inject(MAT_DIALOG_DATA) private data: JarDialogData, private confessionService: ConfessionService) {}
 
     confess(): void {
         const confess = new Confess(this.confession.value, this.reporterId, this.jar.id);
         this.confessionService.confess(confess, this.jar.id).subscribe( () => {
-            this.close();
+            this.dialogRef.close(confess);
             this.snackBar.open('Confession added with success !', 'close', { duration: 3000 });
         }, err => this.snackBar.open(err, 'close', { duration: 3000 } ));
     }

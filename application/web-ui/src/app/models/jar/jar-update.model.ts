@@ -8,7 +8,7 @@ export class JarUpdate {
         public balance?: number,
         public referenceCost?: number,
         public maxAmount?: number,
-        public closingDate?: Date
+        public closingDate?: string
     ) { }
 
 }

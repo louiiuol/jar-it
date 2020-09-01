@@ -1,14 +1,10 @@
 <mat-toolbar>
 
-    <img id ='logo' src='assets/img/logo.svg' alt='Swear Jar logo'>
+    <img  class='pointed' routerLink='/dashboard' id ='logo' src='assets/img/logo.svg' alt='Swear Jar logo'>
 
     <section *ngIf='user'>
 
-        <button id='user-menu-btn' aria-label='user navigation menu'
-        mat-stroked-button color='accent' [matMenuTriggerFor]='userMenu'>
-        <app-icon class='icon sm' avatar='true' name='{{ user.avatar }}'></app-icon>
-        <app-icon class='icon sm' name='arrow-down'></app-icon>
-        </button>
+        <app-icon [matMenuTriggerFor]='userMenu' class='icon sm' avatar='true' name='{{ user.avatar }}'></app-icon>
 
         <mat-menu #userMenu='matMenu' xPosition='before'>
 

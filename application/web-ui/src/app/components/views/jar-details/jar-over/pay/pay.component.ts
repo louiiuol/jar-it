@@ -8,6 +8,7 @@ import { ConfessComponent } from 'src/app/components/shared/confess/confess.comp
 import { JarDialogData } from 'src/app/models/jar/jar-data.dialog';
 import { ConfessionService } from 'src/app/services/domain/jar/member/confession.service';
 import { JarService } from 'src/app/services/domain/jar/jar.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-pay',
@@ -21,15 +22,18 @@ export class PayComponent {
     get jar(): JarDetails { return this.data.jar; }
     get reporterId(): number { return this.jar.members.find(member => member.userId === this.data.user).id; }
 
-    readonly confession = new FormControl('', [Validators.required, Validators.pattern(Patterns.text)]);
+    isChecked = false;
+
+    readonly confession = new FormControl('', [Validators.required, Validators.pattern(Patterns.alphanumeric)]);
 
     constructor(
         protected snackBar: MatSnackBar, protected dialogRef: MatDialogRef<ConfessComponent>, private jarService: JarService,
-        @Inject(MAT_DIALOG_DATA) public data: JarDialogData) {}
+        @Inject(MAT_DIALOG_DATA) public data: JarDialogData, private router: Router) {}
 
     pay(): void {
         this.jarService.pay(this.jar.id).subscribe( () => {
             this.close();
+            this.router.navigate(['/dashboard']);
             this.snackBar.open('You supported the association with success !', 'close', { duration: 3000 });
         }, err => this.snackBar.open(err, 'close', { duration: 3000 } ));
     }

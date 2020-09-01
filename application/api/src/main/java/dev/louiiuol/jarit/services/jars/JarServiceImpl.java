@@ -182,8 +182,9 @@ public class JarServiceImpl extends AbstractService<Jar, JarRepository> implemen
     }
 
     private int getJarConfessionsCount(List<Member> members) {
-        return members.stream().reduce(0, (accumulator, member) -> accumulator + member.getConfessions().size(),
-                Integer::sum);
+        return members.stream()
+                .reduce(0, (accumulator, member) ->
+                    accumulator + member.getConfessions().size(), Integer::sum);
     }
 
 }

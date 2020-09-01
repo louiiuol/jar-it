@@ -1,6 +1,8 @@
 #global-navbar {
     padding: .5rem 0;
     width: 100%;
+    position: fixed;
+    z-index: 100;
 }
 
 main#global-container {
@@ -9,8 +11,8 @@ main#global-container {
     place-content: start center;
     position: relative;
     width: 100%;
-    min-height: calc(100vh - 130px);
-    padding: .5rem 0;
+    min-height: calc(100vh - 50px);
+    padding-top:5rem;
     & > * { width: 100%; }
 }
 

@@ -85,7 +85,6 @@ snack-bar-container { // Defines shared SnacbBar Global custom styles
         .mat-form-field {
             width: 90%;
             margin: 0 auto;
-            .mat-icon-button { padding-top: 10px; }
             @media (max-width: 580px) {
                 width: 100%;
             }
@@ -134,7 +133,6 @@ snack-bar-container { // Defines shared SnacbBar Global custom styles
 
 .mat-chip-list-wrapper{ justify-content: space-evenly !important; } // Fixing default Material behaviour
 .mat-fab .mat-button-wrapper { padding: 4px 0 !important; } // Fixing default Material behaviour
-mat-card.has-form form .mat-form-field .mat-icon-button, .mat-dialog-container form .mat-form-field .mat-icon-button { padding-top: 4px !important; }
 .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix { top: .5em !important; }
 mat-slide-toggle label { flex: 0 !important;}
 .mat-button-wrapper { display: block; }
@@ -151,4 +149,8 @@ mat-slide-toggle label { flex: 0 !important;}
     text-align: center;
     max-height: 135px;
     overflow-y: scroll;
+}
+app-jar-create {
+    max-width: 630px;
+    display: block;
 }

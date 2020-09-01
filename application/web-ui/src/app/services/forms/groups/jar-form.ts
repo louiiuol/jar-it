@@ -3,17 +3,17 @@ import { Patterns } from '../utils';
 
 export const JarForm = {
 
-    title: ['Shhhhh !!', [
+    title: ['Quiet Please', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(20),
-        Validators.pattern(Patterns.text)
+        Validators.pattern(Patterns.alphanumeric)
     ]],
     description: ['A place to relax ...', [
         Validators.maxLength(144),
-        Validators.pattern(Patterns.text)
+        Validators.pattern(Patterns.alphanumeric)
     ]],
-    referenceCost: [1, [
+    referenceCost: [0.5, [
         Validators.required,
         Validators.min(0.1),
         Validators.max(2)

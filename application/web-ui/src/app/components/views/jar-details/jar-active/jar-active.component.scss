@@ -65,10 +65,10 @@
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-evenly;
-        align-items: start;
+        align-items: flex-start;
         max-height: 325px;
         overflow-y: scroll;
-        padding-top: 35px;
+        padding-top: 1rem;
         .mat-card { margin: .25rem auto;}
         .card-wrapper {
             width: 225px;

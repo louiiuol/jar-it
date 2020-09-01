@@ -1,54 +1,64 @@
 section#home {
-  height: 100%;
-  h1 {
-    text-align: center;
-    font-size: 6vw;
-    line-height: 4vw;
-  }
-  div.content {
-    display: flex;
-    flex-flow: row wrap;
-    place-content: space-evenly;
-    margin-top: 2rem;
-    padding-top: 1rem;
-    height: 80%;
-    div#headline {
-      align-self: center;
-      margin-top: .5rem;
-      h2 {
-        font-weight: normal;
-        font-size: 1.5rem;
-        line-height: 2rem;
-        font-family: poppins, sans-serif !important;
-        padding: 1.25rem 0;
-      }
-      &, .has-form { width: 35%; }
+    height: 100%;
+    .mat-card#home-wrapper {
+        background-color: rgb(245,245,245);
+        padding: 5rem 3rem 0 !important;
+        width: 95vw;
+        min-height: 80vh;
+        margin:  0 auto;
+        box-shadow: inset 0 0 10px rgba($color: #444444, $alpha: .4);
+        h1 {
+            text-align: center;
+            font-size: 6vw;
+            line-height: 4vw;
+        }
+        div.content {
+            display: flex;
+            flex-flow: row wrap-reverse;
+            place-content: space-evenly;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            height: 80%;
+            min-height: 500px;
+            div#headline {
+                align-self: center;
+                margin-top: .5rem;
+                h2 {
+                    font-weight: normal;
+                    font-size: 1.5rem;
+                    line-height: 2rem;
+                    font-family: poppins, sans-serif !important;
+                    padding: 1.25rem 0;
+                }
+                &, .has-form { width: 35%; }
+            }
+            .has-form {
+                min-width: 350px;
+                max-width: 470px;
+                align-self: center;
+            }
+        }
     }
-    .has-form {
-      min-width: 350px;
-      max-width: 600px;
-      align-self: center;
-    }
-  }
+
 }
 
 /** MEDIA BREAKPOINTS */
 @media (min-width: 780px) and (max-width: 980px) { // Specific Headline Font Breakpoint (tablet)
-  h1 { font-size: 9vw !important; line-height: 11vw !important; }
+    h1 { font-size: 9vw !important; line-height: 11vw !important; }
 }
 @media (max-width: 980px) { // Smaller than desktop Only
-  .content { margin-top: .5rem !important; padding-top: 0 !important;}
-  div#headline h2 { padding: .5rem 0; padding-top: 0 !important; }
-  div#headline, .has-form { margin: 1rem auto !important; width: 90% !important; }
+    .content { margin-top: .5rem !important; padding-top: 0 !important;}
+    div#headline h2 { padding: .5rem 0; padding-top: 0 !important; }
+    div#headline, .has-form { margin: 1rem auto !important; width: 90% !important; }
 }
 @media (max-width: 780px) { // Tablet and smaller Only
-  h1 { font-size: 15vw !important; line-height: 16vw !important;
-    em { display: block; padding-top: 4vw; }
-  }
+    h1 { font-size: 15vw !important; line-height: 16vw !important;
+        em { display: block; padding-top: 4vw; }
+    }
 
 }
 @media (min-width: 780px) { // Bigger than tablet Only
-  div.content {
-    margin-top: 2rem; padding-top: 3rem;
-  }
+    div.content {
+        margin-top: 2rem; padding-top: 3rem;
+    }
 }

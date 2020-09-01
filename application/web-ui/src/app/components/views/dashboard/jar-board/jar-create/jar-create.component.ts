@@ -66,6 +66,7 @@ export class JarCreateComponent implements OnInit {
     }
 
     createJar(): void {
+        console.log(this.jarInfos());
         this.jarService.create(this.jarInfos()).pipe(takeUntil(this.destroyed$))
             .subscribe((id) => {
                 this.data.id = id;

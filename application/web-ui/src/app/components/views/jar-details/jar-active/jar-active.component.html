@@ -41,7 +41,7 @@
             <p *ngIf='confessionsCount === 0' class="empty">No swears were confessed here yet !</p>
             <div id='confession-table' class='table-content' *ngIf='confessionsCount > 0 && !!confessionsList'>
                 <div class="wrapper" *ngFor='let confession of confessionsList'>
-                    <p class="legend date">{{confession.date | date:'shortTime'}}</p>
+                    <p class="legend date">{{confession.date | date:'short'}}</p>
                     <mat-card>
                         <h4 class='is-accent'>{{confession.swear}}</h4>
                         <p class='legend'>confessed by</p>
@@ -61,7 +61,7 @@
             Members
         </p>
         <div class="table-wrapper">
-            <mat-card *ngFor='let member of jar.members'>
+            <mat-card *ngFor='let member of sortedMembers'>
                 <div class="card-wrapper">
                     <app-icon name='{{member.avatar}}' class='icon avatar' avatar='true' matTooltip="joined: {{member.joined | date:'shortDate'}}"></app-icon>
                     <p class='legend'>{{member.username}}</p>

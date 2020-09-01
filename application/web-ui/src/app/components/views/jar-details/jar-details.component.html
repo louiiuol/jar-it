@@ -6,10 +6,10 @@
             </div>
             <div class='aside'>
                 <app-icon avatar="true" name="{{jar.author.avatar}}"
-                    class="icon owner is-accent has-border is-rounded"
+                    class="icon owner is-accent has-border is-rounded helped"
                     matTooltip="{{jar.author.username}} is the creator of this jar">
                 </app-icon>
-                <p class='legend'>since <strong>{{jar.startingDate | date:'shortDate'}}</strong></p>
+                <p class='legend'>since <strong>{{jar.startingDate | date:'fullDate'}}</strong></p>
             </div>
         </div>
         <app-jar-created [infos]="infos" *ngIf="jarState === 'CREATED'" (activeEvent)='setState($event)'></app-jar-created>

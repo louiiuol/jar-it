@@ -12,7 +12,7 @@
             <strong>{{jar.members.length}}</strong> members</mat-chip>
         <mat-chip selected color='primary'>
             <app-icon class='icon xs' name='swear'></app-icon>
-            <strong>15</strong> confessions</mat-chip>
+            <strong>{{confessions}}</strong> confessions</mat-chip>
     </mat-chip-list>
     <div id="pay" *ngIf='isVisible()'>
         <p class="legend">Ready to pay your share ?</p>
@@ -31,7 +31,7 @@
         </p>
         <div class='content'>
             <mat-card *ngFor='let member of filteredMembers'>
-                <div class="card-wrapper">
+                <div class="card-wrapper helped" matTooltip='Member must support the association'>
                     <span class='is-primary centered'>
                         <app-icon name='{{member.avatar}}' class='icon avatar' avatar='true'></app-icon>
                         {{member.username}}
@@ -40,10 +40,6 @@
                         <em class="date legend">owes:</em>
                         <mat-chip selected color='primary'
                             matTooltip='{{member.confessions.length}} confessions'>{{member.balance | currency:'EUR'}}</mat-chip>
-                    </span>
-                    <span>
-                            <app-icon class='icon xs is-accent helped' name='close'
-                            matTooltip='Member needs support the association'></app-icon>
                     </span>
                 </div>
             </mat-card>

@@ -17,7 +17,7 @@
                 <app-icon class='icon xs' name='swear'></app-icon>
                 <strong>{{confessionsAvailables()}}</strong> confessions availables</mat-chip>
     </mat-chip-list>
-    <div id='activate' class='is-accent'>
+    <div id='activate' class='is-accent' *ngIf="isJarAuthor">
         <p>Activate this Jar to start confess in it!</p>
         <button color="accent" mat-raised-button (click)='activateJar()' disabled='{{!isJarAdmin}}'>
             <app-icon class='icon xs' name='rocket'></app-icon>
@@ -34,7 +34,7 @@
         <div class="wrapper">
             <form [formGroup]="jarGeneralForm">
                 <mat-form-field>
-                    <mat-label>Tinee's title</mat-label>
+                    <mat-label>Jar's title</mat-label>
                     <input matInput formControlName="title" maxlength="40" placeholder="my first Jar" required >
                     <mat-error *ngFor="let validation of errorMessages.title">
                         <mat-error *ngIf="title.hasError(validation.type) && (title.dirty || title.touched)">{{validation.message}}</mat-error>
@@ -113,16 +113,11 @@
             <app-icon class='icon xs' name='peoples'></app-icon>
             Jar members
         </p>
-            <app-members-update id='member-input'
-            (activeEvent)='setMembers($event)'
-            [allUsers]="allUsers"
-            [author]='jar.author'
-            [currentUserId]='currentUserId'
-            [memberList]="members"></app-members-update>
-                <button color='primary' mat-raised-button
-                    [disabled]="!membersListChanged()" (click)='updateMembers()'>
-                    UPDATE
-                </button>
-
+        <app-members-update id='member-input'
+        (activeEvent)='setMembers($event)'
+        [allUsers]="allUsers"
+        [author]='jar.author'
+        [currentUserId]='currentUserId'
+        [memberList]="startingMembers"></app-members-update>
     </div>
 </section>

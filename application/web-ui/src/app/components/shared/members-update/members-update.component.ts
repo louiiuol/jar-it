@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UserView } from 'src/app/models/user/view/user-view.model';
 import { Observable } from 'rxjs';
@@ -13,11 +13,12 @@ import { MemberDetails } from 'src/app/models';
     templateUrl: './members-update.component.html',
     styleUrls: ['./members-update.component.scss']
 })
-export class MembersUpdateComponent {
+export class MembersUpdateComponent implements OnInit {
 
     @Output() membersEvent = new EventEmitter<MemberDetails[]>();
 
     get startingList(): MemberDetails[] { return this.memberList; }
+    get isJarAuthor(): boolean { return this.currentUserId === this.author.id; }
 
     @Input() currentUserId: number;
     @Input() author: UserView;
@@ -29,12 +30,18 @@ export class MembersUpdateComponent {
 
     memberCtrl = new FormControl();
     filteredMembers: Observable<MemberDetails[]>;
+    initialMembers: MemberDetails[];
     separatorKeysCodes: number[] = [ENTER, COMMA];
 
     constructor(private snackBar: MatSnackBar) {
         this.filteredMembers = this.memberCtrl.valueChanges.pipe(
             startWith(this.allUsers),
             map((username: string | null) => this.filter(username)));
+    }
+
+    ngOnInit(): void {
+        console.log('init')
+        this.initialMembers = Array.from(this.memberList);
     }
 
     removeMember(user: any): void {
@@ -51,6 +58,7 @@ export class MembersUpdateComponent {
     }
 
     selected(event: MatAutocompleteSelectedEvent): void {
+        console.log(this.memberList)
         this.handleMemberInput(event);
     }
 
@@ -59,11 +67,11 @@ export class MembersUpdateComponent {
     }
 
     isRemovable = (memberChip: MemberDetails) =>
-        (memberChip.userId !== this.author.id && this.currentUserId === this.author.id)
+        (memberChip.userId !== this.author.id && this.currentUserId === this.author.id) || this.wasAddedInSession(memberChip.id)
 
     isJarAdmin = (id: number): boolean => this.memberList.find(current => current .userId === id).admin;
 
-    wasAddedInSession = (id: number ): boolean => !this.startingList.find(current => current .userId === id);
+    wasAddedInSession = (id: number ): boolean => !this.initialMembers.find(current => current .userId === id);
 
     private handleMemberInput = (value: any): void => {
         let output = '';
@@ -91,6 +99,26 @@ export class MembersUpdateComponent {
 
     sendMembers(): void {
         this.membersEvent.emit(this.memberList);
+    }
+
+    resetMembers = (): MemberDetails[] => this.memberList = Array.from(this.initialMembers);
+
+    updateMembers = () => console.log('coming');
+
+    membersListChanged = (): boolean => {
+        let changed = false;
+        const lenghtChanged = this.memberList.length !== this.initialMembers.length;
+        if (lenghtChanged) {
+            return true;
+        } else {
+            this.memberList.sort((current, next) => current.id - next.id);
+            this.initialMembers.sort((current, next) => current.id - next.id);
+            for (let member of this.memberList) {
+                // const index = member.indexOf()
+            }
+        }
+
+        return false;
     }
 
     private filter = (value: string): MemberDetails[] => {

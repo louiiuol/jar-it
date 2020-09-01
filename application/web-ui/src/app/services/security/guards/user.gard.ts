@@ -16,10 +16,6 @@ export class UserGuard implements CanActivate, OnDestroy {
         this.logged$ = this.authService.isLoggedIn$.subscribe(logged => this.isLoggedIn = logged);
     }
 
-    ngOnDestroy(): void {
-        this.logged$.unsubscribe();
-    }
-
     /**Overriding canActivate to restricted routes
      * This method redirect to home page view if user is not logged in,
      * and returns boolean: true if the user is logged in, false otherwise
@@ -28,5 +24,10 @@ export class UserGuard implements CanActivate, OnDestroy {
         if ( !this.isLoggedIn ) { this.router.navigate(['/']); }
         return this.isLoggedIn;
     }
+
+    ngOnDestroy(): void {
+        this.logged$.unsubscribe();
+    }
+
 
 }

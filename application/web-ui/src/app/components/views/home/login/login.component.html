@@ -1,24 +1,24 @@
 <h3 class='header'>Access your account</h3>
 <form id='login-form' [formGroup]='loginForm' (submit)='login()' >
-  <mat-form-field appearance='outline' color='primary'>
-    <mat-label>Who are you ?</mat-label>
-    <input matInput formControlName='username' placeholder='username' type='text' maxlength='20' required>
-    <mat-error *ngFor='let validation of errorMessages.username'>
-      <mat-error *ngIf='patterns.isValid(username, validation)'>{{validation.message}}</mat-error>
-    </mat-error>
-  </mat-form-field>
-
-    <mat-form-field >
-      <mat-label>Prove it !</mat-label>
-      <input matInput formControlName='password' placeholder='******' [type]='password_type' maxlength='20' required>
-      <app-icon matSuffix (click)='hide = !hide' class='icon xs' name='{{password_icon}}'></app-icon>
-      <mat-error *ngFor='let validation of errorMessages.password'>
-        <mat-error *ngIf='patterns.isValid(password, validation)'>{{validation.message}}</mat-error>
-      </mat-error>
+    <mat-form-field appearance='outline' color='primary'>
+        <mat-label>Who are you ?</mat-label>
+        <input matInput formControlName='username' placeholder='username' type='text' maxlength='20' required>
+        <mat-error *ngFor='let validation of errorMessages.username'>
+        <mat-error *ngIf='patterns.isValid(username, validation)'>{{validation.message}}</mat-error>
+        </mat-error>
     </mat-form-field>
 
-    <footer>
-      <button mat-raised-button [disabled]='username.invalid || password.invalid' color='primary' >Log in</button>
-      <a color='primary' mat-button (click)='toggleForm()'>Doesn't have an account yet ?</a>
-    </footer>
+        <mat-form-field >
+        <mat-label>Prove it !</mat-label>
+        <input matInput formControlName='password' placeholder='******' [type]='password_type' maxlength='20' required>
+        <app-icon matSuffix (click)='hide = !hide' class='icon xs' name='{{password_icon}}'></app-icon>
+        <mat-error *ngFor='let validation of errorMessages.password'>
+            <mat-error *ngIf='patterns.isValid(password, validation)'>{{validation.message}}</mat-error>
+        </mat-error>
+        </mat-form-field>
+
+        <footer>
+        <button mat-raised-button [disabled]='username.invalid || password.invalid' color='primary' >Log in</button>
+        <a color='primary' mat-button (click)='toggleForm()'>Doesn't have an account yet ?</a>
+        </footer>
 </form>

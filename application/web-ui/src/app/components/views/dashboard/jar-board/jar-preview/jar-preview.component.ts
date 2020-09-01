@@ -15,7 +15,7 @@ export class JarPreviewComponent {
 
     get daysLeft(): number { return JarHelperService.remainingDays(this.jar.closingDate); }
     get jarState(): string { return this.jar.state.toString(); }
-    get isOpenable(): boolean { return this.jar.additionalInfos.currentUserIsAdmin || this.jar.state !== JarState.CREATED; }
+    get isOpenable(): boolean { return this.jar.additionalInfos.currentUserIsAdmin || this.jar.state.toString() !== 'CREATED'; }
 
     constructor() {}
 

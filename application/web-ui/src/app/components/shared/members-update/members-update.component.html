@@ -14,13 +14,13 @@
                             [ngModelOptions]="{standalone: true}"
                             matTooltip="Allow admin permissions"></mat-slide-toggle>
                         <app-icon name="close" class="icon xs"
-                        matTooltip="remove member" matChipRemove></app-icon>
+                        matTooltip="remove member" matChipRemove *ngIf="isRemovable(memberChip)"></app-icon>
                     </p>
                 </mat-chip>
             </div>
 
             <input #memberInput [formControl]="memberCtrl"
-                placeholder=" Add members ..."
+                placeholder="Update members ..."
                 [matAutocomplete]="auto" [matChipInputFor]="memberChips"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 (matChipInputTokenEnd)="selected($event)"
@@ -37,4 +37,14 @@
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
+
+    <footer>
+        <button color="accent" mat-stroked-button
+        (click)='resetMembers()' >RESET</button>
+        <button color='primary' mat-raised-button
+            [disabled]="!membersListChanged()"
+            (click)='updateMembers()'>
+            UPDATE
+        </button>
+    </footer>
 </form>

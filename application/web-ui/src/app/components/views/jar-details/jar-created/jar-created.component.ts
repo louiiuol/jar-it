@@ -26,7 +26,7 @@ export class JarCreatedComponent implements OnInit {
     get addressee() { return this.jarSettingsForm.get('addressee'); }
     get isJarMember(): boolean { return !!this.jar.members.find(el => el.userId === this.currentUserId); }
     get isJarAdmin(): boolean { return !!this.jar.members.find(el => el.userId === this.currentUserId)?.admin; }
-    get isJarAuthor(): boolean { return this.jar.author.userId === this.currentUserId; }
+    get isJarAuthor(): boolean { return this.jar.author.id === this.currentUserId; }
 
     @Input() infos: any;
     @Output() private readonly activeEvent = new EventEmitter<string>();
@@ -79,11 +79,9 @@ export class JarCreatedComponent implements OnInit {
 
     remainingDays = () => JarHelperService.remainingDays(this.closingDate.value);
 
-    confessionsAvailables = () => Math.abs(this.maxAmount.value / this.referenceCost.value);
+    confessionsAvailables = () => Math.abs(this.maxAmount.value / this.referenceCost.value).toFixed(0);
 
-    membersListChanged = (): boolean => this.startingMembers !== this.infos.jar.members;
 
-    updateMembers = () => console.log('coming');
 
     validForm = (): boolean => (this.jarGeneralForm.valid && this.jarSettingsForm.valid)
         && this.informationsChanged()
@@ -101,7 +99,12 @@ export class JarCreatedComponent implements OnInit {
         if (this.maxAmount.value !== this.jar.maxAmount) { updated.maxAmount = this.maxAmount.value; }
         if (this.referenceCost.value !== this.jar.referenceCost) { updated.referenceCost = this.referenceCost.value; }
         if (this.addressee.value !== this.jar.addressee.id) { updated.addressee = this.addressee.value; }
-        if (this.closingDate.value !== this.jar.closingDate) { updated.closingDate = this.closingDate.value; }
+        if (this.closingDate.value !== this.jar.closingDate) {
+            const closingDate = this.closingDate.value;
+            updated.closingDate = closingDate.getFullYear() + '-'
+                + (closingDate.getMonth() + 1).toString().padStart(2, '0') + '-'
+                + closingDate.getDate().toString().padStart(2, '0');
+        }
         return updated;
     }
 
@@ -133,7 +136,7 @@ export class JarCreatedComponent implements OnInit {
             this.jar.title = updated.title;
         }
         if (!!updated.closingDate) {
-            this.jar.closingDate = updated.closingDate;
+            this.jar.closingDate = new Date(updated.closingDate);
         }
         if (!!updated.description) {
             this.jar.description = updated.description;
@@ -148,7 +151,7 @@ export class JarCreatedComponent implements OnInit {
     }
 
     activateJar(): void {
-        this.forms.confirmationStep('Are you sure you want to activate this jar ? You won\'t be able to add new members nor changes settings !')
+        this.forms.confirmationStep('Are you sure you want to activate this jar ? \n You won\'t be able to add new members nor changes settings !')
             .subscribe(confirm => {
                 if (!!confirm) {
                     this.jarService.activate(this.jar.id).subscribe(() => this.activeEvent.emit('ACTIVE'));

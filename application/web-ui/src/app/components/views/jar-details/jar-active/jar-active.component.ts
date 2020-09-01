@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { JarDetails, Confession } from 'src/app/models';
+import { JarDetails, Confession, MemberDetails } from 'src/app/models';
 import { ConfessComponent } from '../../../shared/confess/confess.component';
 import { JarHelperService } from 'src/app/services/domain/jar/Jar-helper.service';
 import { ConfessionService } from 'src/app/services/domain/jar/member/confession.service';
@@ -20,6 +20,7 @@ export class JarActiveComponent implements OnInit {
     jar: JarDetails;
     currentUserId: number;
     remainingDays: number;
+    sortedMembers: MemberDetails[];
 
     constructor(private service: ConfessionService, private dialog: MatDialog) {}
 
@@ -29,17 +30,19 @@ export class JarActiveComponent implements OnInit {
         this.remainingDays = JarHelperService.remainingDays(this.infos.jar.closingDate);
         this.confessionsList = JarHelperService.getConfessions(this.jar);
         this.confessionsCount = JarHelperService.getConfessionsCount(this.jar);
+        this.sortedMembers = JarHelperService.sortMembers(this.jar.members);
     }
 
     confess() {
         const dialogRef = this.dialog.open(ConfessComponent, { data: this.infos, disableClose: true });
-        dialogRef.afterClosed().subscribe(() => {
-            this.service.getJarConfessions(this.jar.id).subscribe((data: Confession[]) => {
-                console.log(data);
-                this.confessionsCount++;
-                this.confessionsList = data;
-                this.checkMaxAmount();
-            });
+        dialogRef.afterClosed().subscribe((confession) => {
+            this.confessionsList.push(confession);
+            this.checkMaxAmount();
+            this.confessionsCount++;
+            const currentMember = this.jar.members.find(member => member.userId === this.currentUserId);
+            currentMember.balance += this.jar.referenceCost;
+            this.service.getJarConfessions(this.jar.id).subscribe((data: Confession[]) =>
+                this.confessionsList = JarHelperService.sortConfessions(data));
         });
     }
 

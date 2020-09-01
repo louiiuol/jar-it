@@ -24,7 +24,7 @@ export const UserForm = {
   ])),
   avatar: new FormControl('', Validators.compose([
     Validators.required,
-    Validators.pattern(Patterns.text)
+    Validators.pattern(Patterns.alphanumeric)
   ])),
   confirm: new FormControl('', Validators.compose([
     Validators.required,
