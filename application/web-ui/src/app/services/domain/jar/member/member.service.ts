@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { JarCreate, JarView, MemberDetails, MemberCreate } from 'src/app/models';
+import { MemberDetails, MemberCreate } from 'src/app/models';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { Confess } from 'src/app/models/jar/confession/confess-model';
 
 /**
  * Provides Service to request Member's information over API
@@ -21,13 +20,5 @@ export class MemberService {
 
     getMembers = (jarId: number): Observable<MemberDetails[]> =>
         this.http.get<MemberDetails[]>(`${this.jar_url}/${jarId}/members`, this.headerJson)
-
-    mapMembers = (members: MemberDetails[]): MemberCreate[] => {
-        const result = [];
-        for (const member of members) {
-            result.push(new MemberCreate(member.userId, member.admin));
-        }
-        return result;
-    }
 
 }

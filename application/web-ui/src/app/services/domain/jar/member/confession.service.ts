@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Confession } from 'src/app/models';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { Confess } from 'src/app/models/jar/confession/confess-model';
+import { Confession, Confess } from 'src/app/models';
 
 @Injectable({ providedIn: 'root' })
 export class ConfessionService {
@@ -18,5 +17,8 @@ export class ConfessionService {
 
     getJarConfessions = (jar: number): Observable<Confession[]> =>
         this.http.get<Confession[]>(this.jar_url + '/' + jar + '/confessions', this.headerJson)
+
+    updateConfession = (jarId: number, confession: Confess, confessionId: number): Observable<void> =>
+        this.http.put<void>(this.jar_url + '/' + jarId + '/confessions/' + confessionId, confession, this.headerJson)
 
 }

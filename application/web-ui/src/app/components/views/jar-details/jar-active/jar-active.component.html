@@ -41,15 +41,20 @@
             <p *ngIf='confessionsCount === 0' class="empty">No swears were confessed here yet !</p>
             <div id='confession-table' class='table-content' *ngIf='confessionsCount > 0 && !!confessionsList'>
                 <div class="wrapper" *ngFor='let confession of confessionsList'>
-                    <p class="legend date">{{confession.date | date:'short'}}</p>
+                    <p class="legend date helped" matTooltip="{{confession.date | date:'short'}}">{{confession.date | date:'HH:mm'}}</p>
                     <mat-card>
-                        <h4 class='is-accent'>{{confession.swear}}</h4>
-                        <p class='legend'>confessed by</p>
-                        <span class="has-icon author">
-                            <app-icon name='{{confession.author.avatar}}' class='icon avatar' avatar='true'></app-icon>
-                            <span class='is-primary'>{{confession.author.username}}</span>
-                        </span>
+                        <h4 class='is-accent'>{{confession.swear | titleShortener }}</h4>
+                        <div class="wrap">
+                            <em class='legend'>confessed by</em>
+                            <span class="has-icon author">
+                                <span class='is-primary'>{{confession.author.username}}</span>
+                                <app-icon name='{{confession.author.avatar}}' class='icon avatar' avatar='true'></app-icon>
+                            </span>
+                        </div>
                     </mat-card>
+                    <a class='is-accent hoverable pointed' (click)='updateConfession(confession)' *ngIf='ownConfession(confession)'>
+                        <app-icon class='icon xs' name='edit'></app-icon>
+                    </a>
                 </div>
                 <hr class='spacer'>
             </div>

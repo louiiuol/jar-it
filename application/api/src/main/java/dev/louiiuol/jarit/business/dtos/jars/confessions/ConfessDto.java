@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import dev.louiiuol.jarit.api.validators.jar.confess.OwnConfess;
 import dev.louiiuol.jarit.business.dtos.EntityIdDto;
@@ -17,6 +18,7 @@ import dev.louiiuol.jarit.business.dtos.EntityIdDto;
 public class ConfessDto {
 
     @NotBlank
+    @Size(max = 20)
     private String swear;
 
     @NotNull

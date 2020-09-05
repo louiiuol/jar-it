@@ -8,7 +8,7 @@ import { JarService } from 'src/app/services/domain/jar/jar.service';
 import { UserService } from 'src/app/services/domain/user/user.service';
 import { AssociationService } from 'src/app/services/domain/association/association.service';
 import { FormFactory } from 'src/app/services';
-import { UserView, MemberDetails, JarCreate } from 'src/app/models';
+import { UserView, MemberDetails, JarCreate, MemberCreate } from 'src/app/models';
 import { ErrorMessages, Patterns } from 'src/app/services/forms/utils';
 import { JarForm } from 'src/app/services/forms/groups';
 import { JarCreateData } from 'src/app/models/utils/dialog/jar-create-data.dialog';
@@ -99,7 +99,14 @@ export class JarCreateComponent implements OnInit {
     }
 
     private jarInfos = () => new JarCreate(this.title.value, this.maxAmount.value,
-        this.closingDate.value, this.addressee.value.id, this.memberService.mapMembers(this.members),
+        this.closingDate.value, this.addressee.value.id, this.mapMembers(this.members),
         this.author.id, this.referenceCost.value, this.description.value)
 
+    private mapMembers = (members: MemberDetails[]): MemberCreate[] => {
+        const result = [];
+        for (const member of members) {
+            result.push(new MemberCreate(member.userId, member.admin));
+        }
+        return result;
+    }
 }

@@ -38,6 +38,8 @@ import { JarCreatedComponent } from './components/views/jar-details/jar-created/
 import { JarActiveComponent } from './components/views/jar-details/jar-active/jar-active.component';
 import { JarOverComponent } from './components/views/jar-details/jar-over/jar-over.component';
 import { PayComponent } from './components/views/jar-details/jar-over/pay/pay.component';
+import { ConfessionUpdateComponent } from './components/views/jar-details/jar-active/confession-update/confession-update.component';
+import { TitleShortenerPipe } from './services/pipes/title-shortener.pipe';
 
 @NgModule({
     declarations: [
@@ -59,6 +61,7 @@ import { PayComponent } from './components/views/jar-details/jar-over/pay/pay.co
         AssociationOfficeComponent,
         AssociationCreateComponent,
         DescriptionFormatterPipe,
+        TitleShortenerPipe,
         JarCreateComponent,
         MembersUpdateComponent,
         JarPreviewComponent,
@@ -68,7 +71,8 @@ import { PayComponent } from './components/views/jar-details/jar-over/pay/pay.co
         JarCreatedComponent,
         JarActiveComponent,
         JarOverComponent,
-        PayComponent
+        PayComponent,
+        ConfessionUpdateComponent
     ],
     imports: [
         BrowserModule,

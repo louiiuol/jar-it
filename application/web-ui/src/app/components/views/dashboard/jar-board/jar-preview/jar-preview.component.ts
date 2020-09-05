@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { UserView, JarView } from 'src/app/models';
+import { JarView } from 'src/app/models';
 import { JarHelperService } from 'src/app/services/domain/jar/Jar-helper.service';
-import { JarState } from 'src/app/models/jar/jar-state.model';
 
 @Component({
     selector: 'app-jar-preview',

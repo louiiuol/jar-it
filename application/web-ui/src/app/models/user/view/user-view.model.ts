@@ -4,9 +4,9 @@
 export class UserView {
 
     constructor(
-        public readonly id: number,
-        public readonly username: string,
-        public readonly avatar: string
+        public id: number,
+        public username: string,
+        public avatar: string
     ) { }
 
 }
