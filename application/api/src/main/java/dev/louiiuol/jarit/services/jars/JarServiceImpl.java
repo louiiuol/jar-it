@@ -142,8 +142,17 @@ public class JarServiceImpl extends AbstractService<Jar, JarRepository> implemen
         return dtos;
     }
 
+    @Override
+    public void updateConfession(Long confessionId, ConfessDto dto) {
+        Confession confession = confessionRepo.findById(confessionId)
+            .orElseThrow(ResourceNotFoundException::new);
+        mapper().map(dto, confession);
+        confessionRepo.save(confession);
+    }
+
     private Double getJarBalance(List<Member> members) {
-        return new HashSet<>(members).stream().reduce(0.0, (accumulator, member) -> accumulator + member.getBalance(),
+        return new HashSet<>(members).stream()
+            .reduce(0.0, (accumulator, member) -> accumulator + member.getBalance(),
                 Double::sum);
     }
 
@@ -159,7 +168,8 @@ public class JarServiceImpl extends AbstractService<Jar, JarRepository> implemen
     }
 
     private void memberConfess(Long id, Double cost) {
-        Member member = memberRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
+        Member member = memberRepo.findById(id)
+            .orElseThrow(ResourceNotFoundException::new);
         Double newBalance = Double.sum(member.getBalance(), cost);
         member.setBalance(newBalance);
         memberRepo.save(member);

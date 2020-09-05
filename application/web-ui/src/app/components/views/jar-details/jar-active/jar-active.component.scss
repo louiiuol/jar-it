@@ -44,15 +44,31 @@
             justify-content: stretch;
             align-items: center;
             margin: .25rem auto;
+            .date {
+                width: 75px;
+            }
             .mat-card {
+                max-width: 80%;
                 flex: 1;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                flex-flow: row wrap;
                 padding: .125rem 2rem !important;
                 h4 {
-                    font-size: 2rem;
+                    font-size: 1.5rem;
+                    margin: 0 auto;
                 }
+                .wrap{
+                    margin: 0 auto;
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: end;
+                }
+            }
+            a.hoverable {
+                margin-left: .75rem;
             }
         }
     }
@@ -68,7 +84,7 @@
         align-items: flex-start;
         max-height: 325px;
         overflow-y: scroll;
-        padding-top: 1rem;
+        padding: 1rem .5rem;
         .mat-card { margin: .25rem auto;}
         .card-wrapper {
             width: 225px;
@@ -79,4 +95,4 @@
         }
     }
 }
-
+svg { fill: blue; }

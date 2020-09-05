@@ -117,4 +117,10 @@ public class JarController {
         return service.getJarConfessions(jarId);
     }
 
+    @PutMapping("/{jarId}/confessions/{confessionId}")
+	@PreAuthorize("@validatorService.isActive(#jarId) and @validatorService.isJarMember(#jarId)")
+    public void updateConfession(@PathVariable("jarId") Long jarId, @PathVariable("confessionId") Long confessionId, @Valid @RequestBody ConfessDto dto) {
+        service.updateConfession(confessionId, dto);
+    }
+
 }
