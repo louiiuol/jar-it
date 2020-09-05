@@ -1,12 +1,10 @@
-import { Component, ViewChild, ElementRef, Inject } from '@angular/core';
-import { JarDialogData } from 'src/app/models/jar/jar-data.dialog';
+import { Component, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Patterns } from 'src/app/services/forms/utils';
-import { Confess } from 'src/app/models/jar/confession/confess-model';
 import { ConfessionService } from 'src/app/services/domain/jar/member/confession.service';
-import { JarDetails } from 'src/app/models';
+import { JarDetails, Confess, JarDialogData } from 'src/app/models';
+import { FormFactory } from 'src/app/services';
 
 @Component({
     selector: 'app-confess',
@@ -15,23 +13,21 @@ import { JarDetails } from 'src/app/models';
 })
 export class ConfessComponent {
 
-    @ViewChild('confessionInput', { static: false }) confessionInput: ElementRef<HTMLInputElement>;
-
     get jar(): JarDetails { return this.data.jar; }
     get reporterId(): number { return this.jar.members.find(member => member.userId === this.data.user).id; }
 
-    readonly confession = new FormControl('', [Validators.required, Validators.pattern(Patterns.alphanumeric)]);
+    readonly confessionControl = new FormControl('', [Validators.required, Validators.pattern(Patterns.alphanumeric)]);
 
     constructor(
-        private snackBar: MatSnackBar, private dialogRef: MatDialogRef<ConfessComponent>,
-        @Inject(MAT_DIALOG_DATA) private data: JarDialogData, private confessionService: ConfessionService) {}
+        private dialogRef: MatDialogRef<ConfessComponent>, @Inject(MAT_DIALOG_DATA) private data: JarDialogData,
+        private formFactory: FormFactory, private confessionService: ConfessionService) { }
 
     confess(): void {
-        const confess = new Confess(this.confession.value, this.reporterId, this.jar.id);
+        const confess = new Confess(this.confessionControl.value, this.reporterId, this.jar.id);
         this.confessionService.confess(confess, this.jar.id).subscribe( () => {
             this.dialogRef.close(confess);
-            this.snackBar.open('Confession added with success !', 'close', { duration: 3000 });
-        }, err => this.snackBar.open(err, 'close', { duration: 3000 } ));
+            this.formFactory.handleSuccessMessages('Confession added with success !');
+        }, err => this.formFactory.handleErrorMessages(err));
     }
 
     close = (): void => this.dialogRef.close();

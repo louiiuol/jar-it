@@ -75,10 +75,5 @@ mat-card {
         justify-content: space-evenly;
         align-items: center;
         & > * { margin: .25rem auto; }
-        .open-details {
-            border-radius: 50%;
-            transition: background .6s ease;
-            &:hover {background: currentColor;}
-        }
     }
 }

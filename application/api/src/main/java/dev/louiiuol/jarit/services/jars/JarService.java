@@ -28,9 +28,11 @@ import dev.louiiuol.jarit.business.dtos.jars.JarPreviewDto;
  * <li> void {@link #updateMemberBalance( Long user, Long jar, Double balance )}
  * <li> void {@link #removeMember(Long jar, Long user )}
  * </ul>
- * Reports:
+ * Confessions:
   * <ul>
  *  <li> ConfessionViewDto {@link #confess(Long jar, Long user, ConfessDto input)}
+ *  <li> Set {@link #getJarConfessions(Long jarId)}
+ * <li> void {@link #updateConfession(Long confessionId, ConfessDto dto)}
  * </ul>
  */
 public interface JarService {
@@ -98,13 +100,21 @@ public interface JarService {
      */
     public void confess(Long jarId, ConfessDto dto);
 
-
     /**
      * Returns all jars in database (used by admin)
-     * @return {@code List<JarPreviewDto>} All Jars from database
+     * @return {@code PageDto<JarPreviewDto>} All Jars from database
      */
     public PageDto<JarPreviewDto> getAll(int page, int size, String order, String sort);
 
-	public Set<ConfessionViewDto> getJarConfessions(Long jarId);
+    /**
+     * Returns all confessions of specific jar
+     * @return {@code Set<ConfessionViewDto>} All confessions of specific jar
+     */
+    public Set<ConfessionViewDto> getJarConfessions(Long jarId);
+
+    /**
+     * Update specific confession
+     */
+    public void updateConfession(Long confessionId, ConfessDto dto);
 
 }

@@ -56,7 +56,7 @@
     <section class='vertical-aside'>
         <app-icon id='owner' avatar="true" name="{{jar.author.avatar}}"
             class="icon xs helped" matTooltip="{{jar.author.username}} created this jar"></app-icon>
-        <a *ngIf="isOpenable && !(jarState == 'PAYED')" [routerLink]="['/jars', jar.id]" class='open-details is-primary'>
+        <a *ngIf="isOpenable && !(jarState == 'PAYED')" [routerLink]="['/jars', jar.id]" class='hoverable is-primary'>
             <app-icon class='icon xs' name='visible' ></app-icon>
         </a>
         <a *ngIf="!isOpenable && !(jarState == 'PAYED')" class=' disabled is-primary'>

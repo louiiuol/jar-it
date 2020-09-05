@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { JarDetails, Confession, JarView, MemberDetails } from 'src/app/models';
-import { JarState } from 'src/app/models/jar/jar-state.model';
+import { JarDetails, Confession, MemberDetails } from 'src/app/models';
 
 @Injectable({ providedIn: 'root' })
 export class JarHelperService {
@@ -17,15 +16,18 @@ export class JarHelperService {
         const confessions: Confession[] = [];
         for (const member of jar.members) {
             for (const confession of member.confessions) {
-                confession.author = member;
+                confession.author.id = member.id;
+                confession.author.username = member.username;
+                confession.author.avatar = member.avatar;
                 confessions.push(confession);
             }
         }
-        return this.sortConfessions(confessions);
+        this.sortConfessions(confessions);
+        return confessions;
     }
 
-    static sortConfessions(confessions: Confession[]): Confession[] {
-        return confessions.sort((current: Confession, next: Confession) => {
+    static sortConfessions(confessions: Confession[]): void {
+        confessions.sort((current: Confession, next: Confession) => {
             const nextDate = new Date(next.date.toString()).getTime();
             const actualDate = new Date(current.date.toString()).getTime();
             return nextDate - actualDate;

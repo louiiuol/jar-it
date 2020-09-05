@@ -1,14 +1,14 @@
 <button mat-icon-button id='close-dialog' color='primary' aria-label='close tinee dialog'>
     <app-icon (click)='close()' class='icon xs' name='close'></app-icon>
 </button>
-<h3 mat-dialog-title class='header'>Confess</h3>
+<h3 mat-dialog-title class='header'>Update your confession</h3>
 <form>
-    <p class='legend'>What did you sworn about ?</p>
+    <p class='legend'>That wasn't what you said ?</p>
     <mat-form-field>
-        <mat-label>Confess</mat-label>
+        <mat-label>Confession</mat-label>
         <input matInput placeholder='Damn it !' [formControl]='confessionControl' required>
         <mat-error *ngIf='confessionControl.invalid'>That's not a confession !</mat-error>
     </mat-form-field>
     <button color='primary' mat-raised-button
-        disabled='{{confessionControl.invalid}}' (click)='confess()'>Confess</button>
+        disabled='{{confessionControl.invalid}}' (click)='update()'>update</button>
 </form>
