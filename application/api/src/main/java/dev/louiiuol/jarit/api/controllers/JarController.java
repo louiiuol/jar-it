@@ -23,7 +23,6 @@ import dev.louiiuol.jarit.business.dtos.jars.JarDetailsDto;
 import dev.louiiuol.jarit.business.dtos.jars.JarUpdateSettingsDto;
 import dev.louiiuol.jarit.business.dtos.jars.confessions.ConfessDto;
 import dev.louiiuol.jarit.business.dtos.jars.confessions.ConfessionViewDto;
-import dev.louiiuol.jarit.business.dtos.jars.members.MemberUpdateDto;
 import dev.louiiuol.jarit.business.dtos.jars.JarPreviewDto;
 import dev.louiiuol.jarit.services.jars.JarService;
 
@@ -48,8 +47,8 @@ public class JarController {
     }
 
     @PostMapping
-    public Long createJar(@Valid @RequestBody JarCreateDto input) {
-        return service.create(input);
+    public Long createJar(@Valid @RequestBody JarCreateDto dto) {
+        return service.create(dto);
     }
 
     @GetMapping("/{id}")
@@ -95,7 +94,7 @@ public class JarController {
 
     @PutMapping("/{id}/members")
 	@PreAuthorize("@validatorService.isJarAdmin(#id) AND @validatorService.isCreated(#id)")
-    public void updateJarMembers(@PathVariable("id") Long id, @Valid @RequestBody List<MemberUpdateDto> dto) {
+    public void updateJarMembers(@PathVariable("id") Long id, @Valid @RequestBody List<Long> dto) {
         service.updateMembers(id, dto);
     }
 

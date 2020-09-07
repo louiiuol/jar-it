@@ -1,7 +1,7 @@
 package dev.louiiuol.jarit.business.entities;
 
 import java.text.MessageFormat;
-import java.time.LocalDate;
+import java.time.LocalDate; 
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -58,7 +58,7 @@ public class Jar extends AbstractEntity {
     @JoinColumn(nullable = false)
     private Association addressee;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="jar", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="jar", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Member> members;
 
     protected Jar() {
@@ -87,6 +87,10 @@ public class Jar extends AbstractEntity {
 
     public List<Member> getMembers() {
         return members;
+    }
+
+    public User getAuthor() {
+        return author;
     }
 
     @Override

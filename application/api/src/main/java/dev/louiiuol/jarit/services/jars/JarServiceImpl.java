@@ -2,6 +2,7 @@ package dev.louiiuol.jarit.services.jars;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 import dev.louiiuol.jarit.business.dtos.jars.confessions.ConfessDto;
 import dev.louiiuol.jarit.business.dtos.jars.confessions.ConfessionViewDto;
 import dev.louiiuol.jarit.business.dtos.jars.members.MemberCreateDto;
-import dev.louiiuol.jarit.business.dtos.jars.members.MemberUpdateDto;
 import dev.louiiuol.jarit.api.exceptions.ResourceNotFoundException;
 import dev.louiiuol.jarit.business.dtos.PageDto;
 import dev.louiiuol.jarit.business.dtos.jars.JarCreateDto;
@@ -103,18 +103,10 @@ public class JarServiceImpl extends AbstractService<Jar, JarRepository> implemen
     }
 
     @Override
-    public void updateMembers(Long id, List<MemberUpdateDto> dtos) {
+    public void updateMembers(Long id, List<Long> dtos) {
         Jar jar = getEntity(id);
-        for (MemberUpdateDto dto : dtos) {
-            for (Member member : jar.getMembers()) {
-                if (member.getUser().getId().equals(dto.getUser().getId())) {
-                    updateEntityById(dto, member.getUser().getId());
-                } else {
-                    MemberCreateDto entity = new MemberCreateDto(jar.getId(), dto.getUser().getId(), dto.getAdmin());
-                    memberRepo.save(mapper().map(entity, Member.class));
-                }
-            }
-        }
+        removeMembersNotPresentInDtos(dtos, jar);
+        addRemainingMembers(dtos, jar.getId());
     }
 
     @Override
@@ -136,9 +128,7 @@ public class JarServiceImpl extends AbstractService<Jar, JarRepository> implemen
     public Set<ConfessionViewDto> getJarConfessions(Long jarId) {
         Set<Confession> entities = confessionRepo.findAllByAuthorJarId(jarId);
         Set<ConfessionViewDto> dtos = new HashSet<>();
-        entities.forEach(confession -> {
-            dtos.add(mapper().map(confession, ConfessionViewDto.class));
-        });
+        entities.forEach(confession -> dtos.add(mapper().map(confession, ConfessionViewDto.class)));
         return dtos;
     }
 
@@ -193,8 +183,29 @@ public class JarServiceImpl extends AbstractService<Jar, JarRepository> implemen
 
     private int getJarConfessionsCount(List<Member> members) {
         return members.stream()
-                .reduce(0, (accumulator, member) ->
-                    accumulator + member.getConfessions().size(), Integer::sum);
+            .reduce(0, (accumulator, member) -> accumulator + member.getConfessions().size(), Integer::sum);
+    }
+
+    private void removeMembersNotPresentInDtos(List<Long> dtos, Jar jar) {
+        Long authorId = jar.getAuthor().getId();
+        Iterator<Member> iterator = jar.getMembers().iterator();
+        while (iterator.hasNext()) {
+            Long userId = iterator.next().getUser().getId();
+            if (dtos.contains(userId)) {
+                dtos.remove(userId);
+            } else if (!authorId.equals(userId)) {
+                iterator.remove();
+            }
+        }
+        repo().save(jar);
+    }
+
+    private void addRemainingMembers(List<Long> dtos, Long jarId) {
+        for (Long userId : dtos) {
+            MemberCreateDto dto = new MemberCreateDto(jarId, userId, false);
+            Member entity = mapper().map(dto, Member.class);
+            memberRepo.save(entity);
+        }
     }
 
 }

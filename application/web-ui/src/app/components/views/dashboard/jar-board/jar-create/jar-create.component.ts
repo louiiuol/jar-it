@@ -1,18 +1,16 @@
-import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/operators';
 import { JarService } from 'src/app/services/domain/jar/jar.service';
-import { UserService } from 'src/app/services/domain/user/user.service';
 import { AssociationService } from 'src/app/services/domain/association/association.service';
 import { FormFactory } from 'src/app/services';
 import { UserView, MemberDetails, JarCreate, MemberCreate } from 'src/app/models';
 import { ErrorMessages, Patterns } from 'src/app/services/forms/utils';
 import { JarForm } from 'src/app/services/forms/groups';
 import { JarCreateData } from 'src/app/models/utils/dialog/jar-create-data.dialog';
-import { MemberService } from 'src/app/services/domain/jar/member/member.service';
 
 @Component({
     selector: 'app-jar-create',
@@ -21,7 +19,6 @@ import { MemberService } from 'src/app/services/domain/jar/member/member.service
 })
 export class JarCreateComponent implements OnInit {
 
-    @ViewChild('memberInput', {static: false}) memberInput: ElementRef<HTMLInputElement>;
     @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
     get title() { return this.jarGeneralForm.get('title'); }
@@ -44,21 +41,19 @@ export class JarCreateComponent implements OnInit {
     loading = false;
 
     members: MemberDetails[] = [];
-    allUsers: UserView[] = [];
     associations = [];
 
     private readonly destroyed$ = new Subject(); // Subject to unsubscribe to all present Subscription at once
 
     constructor(
         private jarService: JarService, private forms: FormFactory,
-        private dialogRef: MatDialogRef<JarCreateComponent>, private memberService: MemberService,
-        private userService: UserService, private associationService: AssociationService,
+        private dialogRef: MatDialogRef<JarCreateComponent>,
+        private associationService: AssociationService,
         @Inject(MAT_DIALOG_DATA) private data: JarCreateData) {}
 
     ngOnInit() {
         this.data.created = false;
         this.author = this.data.author;
-        this.userService.getAllUsers().pipe(takeUntil(this.destroyed$)).subscribe( data => this.allUsers = data );
         this.associationService.getAll('id', 'asc', 0, 50).pipe(takeUntil(this.destroyed$))
             .subscribe(data => this.associations = data.items);
         this.buildForms();

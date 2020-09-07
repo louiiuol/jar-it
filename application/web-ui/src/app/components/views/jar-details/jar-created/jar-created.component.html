@@ -97,7 +97,7 @@
         </div>
         <footer>
             <button color="accent" mat-stroked-button
-            (click)='reset()'>RESET</button>
+            (click)='resetSettings()'>RESET</button>
             <button color="primary" mat-raised-button
             [disabled]="!validForm()" (click)='updateSettings()'>UPDATE</button>
         </footer>
@@ -108,16 +108,25 @@
             This jar is not active yet ! Come back when one of the admin will activate it !
         </p>
     </div>
-    <div id="members-update" *ngIf='allUsers && isJarAdmin'>
+    <div id="members-update" *ngIf='isJarAdmin'>
         <p class='legend is-primary'>
             <app-icon class='icon xs' name='peoples'></app-icon>
             Jar members
         </p>
-        <app-members-update id='member-input'
+        <app-members-manage id='member-input'
         (activeEvent)='setMembers($event)'
-        [allUsers]="allUsers"
         [author]='jar.author'
+        [update]='true'
         [currentUserId]='currentUserId'
-        [memberList]="startingMembers"></app-members-update>
+        [memberList]="members"></app-members-manage>
+        <footer>
+            <button color="accent" mat-stroked-button
+            (click)='resetMembers()' >RESET</button>
+            <button color='primary' mat-raised-button
+                [disabled]="!membersListChanged()"
+                (click)='updateMembers()'>
+                UPDATE
+            </button>
+        </footer>
     </div>
 </section>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MemberDetails, MemberCreate } from 'src/app/models';
+import { MemberDetails } from 'src/app/models';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
@@ -15,8 +15,8 @@ export class MemberService {
 
     constructor(private http: HttpClient) { }
 
-    updateMembers = (jarId: number, members: MemberCreate[]): Observable<void> =>
-        this.http.post<void>(`${this.jar_url}/${jarId}/members`, members, this.headerJson)
+    updateMembers = (jarId: number, members: number[]): Observable<void> =>
+        this.http.put<void>(`${this.jar_url}/${jarId}/members`, members, this.headerJson)
 
     getMembers = (jarId: number): Observable<MemberDetails[]> =>
         this.http.get<MemberDetails[]>(`${this.jar_url}/${jarId}/members`, this.headerJson)

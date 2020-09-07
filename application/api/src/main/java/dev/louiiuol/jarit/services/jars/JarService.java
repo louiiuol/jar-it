@@ -2,7 +2,6 @@ package dev.louiiuol.jarit.services.jars;
 
 import dev.louiiuol.jarit.business.dtos.jars.confessions.ConfessDto;
 import dev.louiiuol.jarit.business.dtos.jars.confessions.ConfessionViewDto;
-import dev.louiiuol.jarit.business.dtos.jars.members.MemberUpdateDto;
 
 import java.util.List;
 import java.util.Set;
@@ -78,12 +77,12 @@ public interface JarService {
     public void updateSettings(Long id, JarUpdateSettingsDto dto);
 
     /**
-     * Update specified Jar's members based on given {@code JarUpdateDto}.
+     * Update specified Jar's members based on given {@code users' id}.
      * 
      * @param id {@code Jar}'s identifier
-     * @param dto {@code Jar}'s informations to update
+     * @param dto {@code Jar}'s members to update
      */
-    public void updateMembers(Long id, List<MemberUpdateDto> dto);
+    public void updateMembers(Long id, List<Long> dto);
 
     /**
      * Activate specified Jar based on given {@code id}.
