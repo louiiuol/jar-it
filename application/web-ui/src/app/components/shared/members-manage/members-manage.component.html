@@ -1,4 +1,4 @@
-<form *ngIf='memberList && currentUserId && startingList'>
+<form *ngIf='memberList && currentUserId && allUsers'>
     <mat-form-field class='has-suffix members'>
         <mat-chip-list #memberChips aria-label="member selection">
             <div id="chips-wrap">
@@ -7,28 +7,24 @@
                     (removed)="removeMember(memberChip)">
                     <p id='member-chip'>
                         <app-icon name="{{memberChip.avatar}}"
-                            avatar='true' class="icon avatar xs"
-                            matTooltip="{{memberChip.username}}"></app-icon>
+                            avatar='true' class="icon avatar xs"></app-icon>
                         <mat-slide-toggle class='reverse' [(ngModel)]='memberChip.admin'
-                            [disabled]='memberChip.userId === author.id || !isJarAdmin(currentUserId) || memberChip.userId === currentUserId'
-                            [ngModelOptions]="{standalone: true}"
+                            [disabled]='memberChip.userId === author.id || memberChip.userId === currentUserId'
+                            [ngModelOptions]="{standalone: true}" *ngIf="!update"
                             matTooltip="Allow admin permissions"></mat-slide-toggle>
+                            <strong>{{memberChip.username}}</strong>
                         <app-icon name="close" class="icon xs"
                         matTooltip="remove member" matChipRemove *ngIf="isRemovable(memberChip)"></app-icon>
                     </p>
                 </mat-chip>
             </div>
-
-            <input #memberInput [formControl]="memberCtrl"
-                placeholder="Update members ..."
-                [matAutocomplete]="auto" [matChipInputFor]="memberChips"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                (matChipInputTokenEnd)="selected($event)"
+            <input #memberInput [formControl]="memberCtrl" placeholder="Update members ..."
+                [matAutocomplete]="autoComplete" [matChipInputFor]="memberChips"
+                (matChipInputTokenEnd)="selectMember($event)"
                 [matChipInputAddOnBlur]="false">
-            <app-icon id='search' matSuffix (click)="displayAutoComplete()"
-                name="search" class="icon is-primary xs"></app-icon>
+            <app-icon id='search' matSuffix name="search" class="icon is-primary xs"></app-icon>
         </mat-chip-list>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)" [displayWith]="displayFn">
+        <mat-autocomplete #autoComplete="matAutocomplete" (optionSelected)="selectMember($event)">
             <mat-option *ngFor="let filtered of filteredMembers | async" [value]="filtered">
                 <span>
                     <app-icon name="{{filtered.avatar}}" avatar='true' class="icon avatar xs"></app-icon>
@@ -37,14 +33,4 @@
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
-
-    <footer>
-        <button color="accent" mat-stroked-button
-        (click)='resetMembers()' >RESET</button>
-        <button color='primary' mat-raised-button
-            [disabled]="!membersListChanged()"
-            (click)='updateMembers()'>
-            UPDATE
-        </button>
-    </footer>
 </form>

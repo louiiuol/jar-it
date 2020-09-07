@@ -106,12 +106,11 @@
 
             <p class="legend">You can direclty add member from here !</p>
 
-            <app-members-update
+            <app-members-manage
                 (activeEvent)='setMembers($event)'
-                [allUsers]="allUsers"
                 [author]='author'
                 [currentUserId]='author.id'
-                [memberList]="members"></app-members-update>
+                [memberList]="members"></app-members-manage>
         </form>
         <footer>
             <button color="accent" mat-stroked-button matStepperPrevious>Back</button>

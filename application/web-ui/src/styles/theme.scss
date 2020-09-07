@@ -146,9 +146,11 @@ mat-slide-toggle label { flex: 0 !important;}
 .member-info .mat-chip-list-wrapper { justify-content: space-between !important;}
 #members-update #chips-wrap {
     width: 100%;
-    text-align: center;
     max-height: 135px;
     overflow-y: scroll;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
 }
 app-jar-create {
     max-width: 630px;

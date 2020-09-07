@@ -29,7 +29,7 @@ import { JarCreateComponent } from './components/views/dashboard/jar-board/jar-c
 import { JarDetailsComponent } from './components/views/jar-details/jar-details.component';
 import { ConfessComponent } from './components/shared/confess/confess.component';
 import { JarPreviewComponent } from './components/views/dashboard/jar-board/jar-preview/jar-preview.component';
-import { MembersUpdateComponent } from './components/shared/members-update/members-update.component';
+import { MembersManageComponent } from './components/shared/members-manage/members-manage.component';
 import { JarBoardComponent } from './components/views/dashboard/jar-board/jar-board.component';
 import { MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material/chips';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
@@ -63,7 +63,7 @@ import { TitleShortenerPipe } from './services/pipes/title-shortener.pipe';
         DescriptionFormatterPipe,
         TitleShortenerPipe,
         JarCreateComponent,
-        MembersUpdateComponent,
+        MembersManageComponent,
         JarPreviewComponent,
         JarDetailsComponent,
         ConfessComponent,
