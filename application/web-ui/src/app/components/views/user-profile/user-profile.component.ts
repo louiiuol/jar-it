@@ -111,7 +111,7 @@ export class UserProfileComponent implements OnDestroy {
     }
 
     private handleUpdateSuccess(pass: string): void {
-        this.authService.reloadToken(new AuthLogin(this.username.value, pass), false)
+        this.authService.reloadToken(new AuthLogin(this.username.value, pass))
             .subscribe(() => {
                 this.forms.handleSuccessMessages(SuccessMessages.update_profile);
                 this.authService.whoami().subscribe((user) => this.setInitialForm(user));
