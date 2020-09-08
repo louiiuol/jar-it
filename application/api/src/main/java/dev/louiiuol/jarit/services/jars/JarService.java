@@ -116,4 +116,10 @@ public interface JarService {
      */
     public void updateConfession(Long confessionId, ConfessDto dto);
 
+    /**
+     * Check if given association is linked to any {@code Jar}
+     * @return {@code true} the association is linked, {@code false} otherwise
+     */
+    public boolean isAssociationLinkedToJars(Long associationId);
+
 }

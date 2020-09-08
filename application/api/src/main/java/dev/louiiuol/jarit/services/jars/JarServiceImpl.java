@@ -134,10 +134,14 @@ public class JarServiceImpl extends AbstractService<Jar, JarRepository> implemen
 
     @Override
     public void updateConfession(Long confessionId, ConfessDto dto) {
-        Confession confession = confessionRepo.findById(confessionId)
-            .orElseThrow(ResourceNotFoundException::new);
+        Confession confession = confessionRepo.findById(confessionId).orElseThrow(ResourceNotFoundException::new);
         mapper().map(dto, confession);
         confessionRepo.save(confession);
+    }
+    
+    @Override
+    public boolean isAssociationLinkedToJars(Long associationId) {
+        return repo().countByAddresseeId(associationId) != 0;
     }
 
     private Double getJarBalance(List<Member> members) {

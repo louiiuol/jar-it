@@ -104,4 +104,8 @@ public class ValidatorService {
         return SecurityHelper.getUserId().equals(userId);
     }
 
+    public boolean isNotLinkedToJars(Long id) {
+        return !jarService.isAssociationLinkedToJars(id);
+    }
+
 }

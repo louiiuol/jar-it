@@ -44,7 +44,7 @@ public class AssociationController {
 	}
 
 	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') AND @validatorService.isNotLinkedToJars(#id)")
 	public void delete(@PathVariable("id") Long id) {
 		service.delete(id);
 	}

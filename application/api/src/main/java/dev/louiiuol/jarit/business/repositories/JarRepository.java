@@ -51,4 +51,6 @@ public interface JarRepository extends JpaRepository<Jar, Long> {
      */
     long count();
 
+    long countByAddresseeId(Long id);
+
 }
