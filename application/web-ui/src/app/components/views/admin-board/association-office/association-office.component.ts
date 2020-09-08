@@ -92,7 +92,11 @@ export class AssociationOfficeComponent implements AfterViewInit, OnDestroy, OnC
             this.associationService.delete(id).subscribe(() => {
                 this.associationList = this.associationList.filter(association => association.id !== id);
                 this.ngAfterViewInit();
-            }, err => this.forms.handleErrorMessages(err));
+            }, err => {
+                if (err.status === 403) {
+                    this.forms.handleErrorMessages('This association is already linked to Jar(s)');
+                }
+            });
             }
         });
     }
