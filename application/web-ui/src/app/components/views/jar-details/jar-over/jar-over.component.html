@@ -31,15 +31,16 @@
         </p>
         <div class='content'>
             <mat-card *ngFor='let member of filteredMembers'>
-                <div class="card-wrapper helped" matTooltip='Member must support the association'>
+                <div class="card-wrapper helped">
                     <span class='is-primary centered'>
                         <app-icon name='{{member.avatar}}' class='icon avatar' avatar='true'></app-icon>
                         {{member.username}}
                     </span>
                     <span class='chip-item centered'>
                         <em class="date legend">owes:</em>
-                        <mat-chip selected color='primary'
-                            matTooltip='{{member.confessions.length}} confessions'>{{member.balance | currency:'EUR'}}</mat-chip>
+                        <mat-chip selected color='primary' matTooltip='{{member.confessions.length}} swears confessed'>
+                            {{member.balance | currency:'EUR'}}
+                        </mat-chip>
                     </span>
                 </div>
             </mat-card>

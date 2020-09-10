@@ -1,12 +1,13 @@
-<button mat-icon-button id="close-dialog" color="primary" aria-label="close tinee dialog">
-    <app-icon (click)="close()" class="icon xs" name="close"></app-icon>
+<button mat-icon-button id='close-dialog' aria-label='close payment dialog'>
+    <app-icon (click)='close()' class='icon xs' name='close'></app-icon>
 </button>
-<h3 mat-dialog-title class="header">Support the association</h3>
+<h3 mat-dialog-title class='header'>Support the association</h3>
 <p class='legend'>Ready to pay your share ?</p>
 <form>
-    <p>Please contribute to the association by clicking <a target="blank" href="{{jar.addressee.link}}">here</a></p>
+    <p>According to your the number of swear you confessed, you owe <mat-chip selected color='primary'>{{data.balance | currency:'EUR'}}</mat-chip></p>
+    <em>Please contribute by clicking <a target='blank' href="{{data.addresseeLink}}">here</a></em>
 </form>
 <footer>
-    <mat-slide-toggle [(ngModel)]="isChecked">I've contributed</mat-slide-toggle>
-    <button color="primary" mat-raised-button (click)="pay()" disabled='{{!isChecked}}'>Checked</button>
+    <mat-slide-toggle [(ngModel)]='isChecked'>I've contributed</mat-slide-toggle>
+    <button color='primary' mat-raised-button (click)='pay()' disabled='{{!isChecked}}'>Checked</button>
 </footer>
