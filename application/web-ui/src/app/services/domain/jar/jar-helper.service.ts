@@ -35,7 +35,7 @@ export class JarHelperService {
     }
 
     static leftToPay(jarMembers: MemberDetails[]): number {
-        return jarMembers.filter(current => current.payed === false) // Only members who haven't payed yet
+        return jarMembers.filter(current => current.payed === false && current.balance >= 1) // Only members who haven't payed yet
             .reduce((total, current) => total + current.balance, 0); // Total of their balance only
     }
 

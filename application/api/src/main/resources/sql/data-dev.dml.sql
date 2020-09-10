@@ -87,7 +87,7 @@ INSERT INTO jars (`closing_date`, `max_amount`, `reference_cost`, `starting_date
 INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('T', 2.00, '2020-06-13', 'F', '3', '5' ); -- 15
 INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('T', 4.00, '2020-06-13', 'F', '3', '1' );
 INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('F', 3.00, '2020-06-14', 'F', '3', '4' );
-INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('F', 2.00, '2020-06-14', 'F', '3', '5' );
+INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('F', 2.00, '2020-06-14', 'F', '3', '8' );
 INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('F', 2.00, '2020-06-14', 'F', '3', '6' );
 INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('F', 7.00, '2020-06-14', 'F', '3', '7' );
 

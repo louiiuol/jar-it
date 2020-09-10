@@ -28,3 +28,5 @@ export { MemberCreate } from './jar/member/member-create.model';
 export { Confess } from './jar/confession/confess.model';
 export { Confession } from './jar/confession/confession.model';
 export { ConfessionUpdateDialogData } from './jar/confession/confession-update.dialog';
+
+export { PaymentDialogData } from './utils/dialog/payment-data.dialog';
