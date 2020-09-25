@@ -8,6 +8,18 @@ mat-card {
     margin: .5rem auto 0;
     padding: .5rem 1.25rem !important;
     border-bottom: 3px solid currentColor;
+    .mobile {display: none}
+    @media screen and (max-width: 600px) {
+        .title {width: 100%;}
+        .display { display: none;}
+        .mobile { display: inline-block; width: 35%; }
+        .right { width: 50% !important; justify-content: left !important;}
+        .left {
+            display: flex;
+            justify-content: center;
+            .mat-chip-list { width: 100% !important;}
+        }
+    }
     .wrapper {
         display: flex;
         flex-flow: row wrap;

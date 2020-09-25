@@ -1,4 +1,4 @@
-<section id="headline" class='is-primary'>
+<section id="headline" class='is-primary' *ngIf="jar.members">
     <div id="jar-gauge" class="is-relative">
         <meter class=" is-accent" max="{{jar.maxAmount }}" value="{{jar.balance }}" title="GB"></meter>
         <span id="meter-indicator"> <em>current balance: </em><strong>{{jar.balance }}</strong> on <strong>{{jar.maxAmount}}</strong> €</span>
@@ -31,12 +31,26 @@
                 <app-icon name='clock' class='icon xs'></app-icon>
                 Jar's confessions
             </p>
-            <button mat-raised-button color='accent' (click)='confess()'>
-                <app-icon class='icon xs' name='swear'></app-icon>
-                CONFESS
-            </button>
-        </div>
+            <span>
+                <button mat-raised-button color='accent' (click)='confess()'>
+                    <app-icon class='icon xs' name='swear'></app-icon>
+                    CONFESS
+                </button>
+                <button class='legend' mat-stroked-button [matMenuTriggerFor]="membersMenu">
+                    <app-icon name='peoples' class='icon xs'></app-icon>
+                    MEMBERS
+                </button>
+            </span>
 
+            <mat-menu #membersMenu="matMenu" xPosition="before">
+                    <span mat-menu-item *ngFor='let member of sortedMembers' class="member-wrapper">
+                            <app-icon name='{{member.avatar}}' class='icon avatar' avatar='true' matTooltip="joined: {{member.joined | date:'shortDate'}}"></app-icon>
+                            <p class='legend'>{{member.username}}</p>
+                            <app-icon *ngIf='member.admin' name='crown' class='icon xxs is-primary admin' matTooltip='This member is an admin'></app-icon>
+                            <mat-chip selected color='primary'>{{member.balance | currency:'EUR'}}</mat-chip>
+                    </span>
+            </mat-menu>
+        </div>
         <div class="wrapper">
             <p *ngIf='confessionsCount === 0' class="empty">No swears were confessed here yet !</p>
             <div id='confession-table' class='table-content' *ngIf='confessionsCount > 0 && !!confessionsList'>
@@ -51,29 +65,14 @@
                                 <app-icon name='{{confession.author.avatar}}' class='icon avatar' avatar='true'></app-icon>
                             </span>
                         </div>
+                        <a class='is-accent hoverable pointed' (click)='updateConfession(confession)' *ngIf='ownConfession(confession)'>
+                            <app-icon class='icon xs' name='edit'></app-icon>
+                        </a>
                     </mat-card>
-                    <a class='is-accent hoverable pointed' (click)='updateConfession(confession)' *ngIf='ownConfession(confession)'>
-                        <app-icon class='icon xs' name='edit'></app-icon>
-                    </a>
+
                 </div>
                 <hr class='spacer'>
             </div>
-        </div>
-    </div>
-    <div id='members-table' class='is-primary'>
-        <p class="legend">
-            <app-icon name='peoples' class='icon xs'></app-icon>
-            Members
-        </p>
-        <div class="table-wrapper">
-            <mat-card *ngFor='let member of sortedMembers'>
-                <div class="card-wrapper">
-                    <app-icon name='{{member.avatar}}' class='icon avatar' avatar='true' matTooltip="joined: {{member.joined | date:'shortDate'}}"></app-icon>
-                    <p class='legend'>{{member.username}}</p>
-                    <app-icon *ngIf='member.admin' name='crown' class='icon xxs is-primary admin' matTooltip='This member is an admin'></app-icon>
-                    <mat-chip selected color='primary'>{{member.balance | currency:'EUR'}}</mat-chip>
-                </div>
-            </mat-card>
         </div>
     </div>
 </section>

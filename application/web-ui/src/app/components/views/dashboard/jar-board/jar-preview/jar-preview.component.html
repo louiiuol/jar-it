@@ -1,29 +1,32 @@
 <mat-card [ngClass]="{'is-accent':jarState == 'CREATED', 'is-primary':jarState == 'ACTIVE', 'is-success':jarState == 'PAYED', 'is-warn':jarState == 'MAX_AMOUNT_REACHED' || jarState == 'OUT_DATED'}">
     <section class='wrapper'>
-        <mat-chip-list>
-            <section class="aside" *ngIf="jarState == 'ACTIVE'">
-                <mat-chip class='balance' selected>
-                    {{jar.additionalInfos.balance}} / {{jar.maxAmount}} €</mat-chip>
-                <span class='days-left'>
-                    <em> {{daysLeft}} days left !</em>
-                </span>
+        <div class="display">
+            <mat-chip-list>
+                <section class="aside" *ngIf="jarState == 'ACTIVE'">
+                    <mat-chip class='balance' selected>
+                        {{jar.additionalInfos.balance}} / {{jar.maxAmount}} €</mat-chip>
+                    <span class='days-left'>
+                        <em> {{daysLeft}} days left !</em>
+                    </span>
+                </section>
+                <section class="aside" *ngIf="jarState == 'CREATED'">
+                        <mat-chip selected color='accent'>
+                            <p><strong>ACTIVATION <br> NEEDED</strong></p>
+                        </mat-chip>
+                </section>
+                <section class="aside" id='payed' *ngIf="jarState == 'PAYED'">
+                    <p class='is-success'><strong>PAYED</strong></p>
+                    <em>{{jar.maxAmount | currency: 'EUR'}} funded !</em>
             </section>
-            <section class="aside" *ngIf="jarState == 'CREATED'">
-                    <mat-chip selected color='accent'>
-                        <p><strong>ACTIVATION <br> NEEDED</strong></p>
-                    </mat-chip>
+            </mat-chip-list>
+            <section class="aside" *ngIf="jarState == 'MAX_AMOUNT_REACHED' || jarState == 'OUT_DATED' ">
+                <mat-chip selected color='warn'>
+                    <p><strong>PAYMENT <br/> REQUIRED</strong></p>
+                </mat-chip>
             </section>
-            <section id='payed' class="aside" *ngIf="jarState == 'PAYED'">
-                <p class='is-success'><strong>PAYED</strong></p>
-                <em>{{jar.maxAmount | currency: 'EUR'}} funded !</em>
-        </section>
-        </mat-chip-list>
+        </div>
 
-        <section class="aside" *ngIf="jarState == 'MAX_AMOUNT_REACHED' || jarState == 'OUT_DATED' ">
-            <mat-chip selected color='warn'>
-                <p><strong>PAYMENT <br/> REQUIRED</strong></p>
-            </mat-chip>
-        </section>
+
 
         <section class="content">
             <div class="row">
@@ -35,7 +38,33 @@
             </div>
 
             <div class="row">
-                <div class="row grouped">
+                <div class="left">
+                    <mat-chip-list class='mobile'>
+                        <section class="aside" *ngIf="jarState == 'ACTIVE'">
+                            <mat-chip class='balance' selected>
+                                {{jar.additionalInfos.balance}} / {{jar.maxAmount}} €</mat-chip>
+                            <span class='days-left'>
+                                <em> {{daysLeft}} days left !</em>
+                            </span>
+                        </section>
+                        <section class="aside" *ngIf="jarState == 'CREATED'">
+                                <mat-chip selected color='accent'>
+                                    <p><strong>ACTIVATION <br> NEEDED</strong></p>
+                                </mat-chip>
+                        </section>
+                        <section class="aside" id='payed' *ngIf="jarState == 'PAYED'">
+                            <p class='is-success'><strong>PAYED</strong></p>
+                            <em>{{jar.maxAmount | currency: 'EUR'}} funded !</em>
+                    </section>
+                    <section class="aside" *ngIf="jarState == 'MAX_AMOUNT_REACHED' || jarState == 'OUT_DATED' ">
+                        <mat-chip selected color='warn'>
+                            <p><strong>PAYMENT <br/> REQUIRED</strong></p>
+                        </mat-chip>
+                    </section>
+                    </mat-chip-list>
+                </div>
+                <div class="row right grouped">
+
                     <span class='members'>
                         <app-icon class='icon xs' name='peoples'></app-icon>
                         <em><strong>{{jar.additionalInfos.membersCount}}</strong> members</em>

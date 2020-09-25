@@ -34,8 +34,8 @@ export class JarCreatedComponent implements OnInit {
     jar: JarDetails;
     currentUserId: number;
     associations: AssociationView[];
-    members: MemberPreview[];
-    initialMembers: MemberPreview[];
+    members: MemberDetails[];
+    initialMembers: MemberDetails[];
 
     jarSettingsForm: FormGroup;
     jarGeneralForm: FormGroup;
@@ -115,6 +115,13 @@ export class JarCreatedComponent implements OnInit {
         this.memberService.updateMembers(this.jar.id, toUpdate)
             .subscribe(() => {
                 this.initialMembers = Array.from(this.members);
+                this.members.forEach(member => {
+                    if (!member.confessions) {
+                        member.balance = 0;
+                        member.confessions = [];
+                    }
+                });
+                this.jar.members = this.members;
                 this.forms.handleSuccessMessages('Members updated with success !');
             });
     }

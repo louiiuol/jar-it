@@ -13,6 +13,7 @@ main#global-container {
     width: 100%;
     min-height: calc(100vh - 50px);
     padding-top:5rem;
+    padding-bottom: 1rem;
     & > * { width: 100%; }
 }
 

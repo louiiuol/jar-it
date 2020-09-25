@@ -5,6 +5,8 @@
                 <mat-chip color='accent' *ngFor="let memberChip of memberList"
                     [removable]="isRemovable(memberChip)"
                     (removed)="removeMember(memberChip)">
+                    <app-icon *ngIf="update && memberChip.admin" class='icon xs helped'
+                    matTooltip="This user is a Jar's admin" name='crown'></app-icon>
                     <p id='member-chip'>
                         <app-icon name="{{memberChip.avatar}}"
                             avatar='true' class="icon avatar xs"></app-icon>

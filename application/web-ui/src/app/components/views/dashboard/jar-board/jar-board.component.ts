@@ -67,7 +67,6 @@ export class JarBoardComponent implements OnInit, OnChanges, OnDestroy {
             .pipe(takeUntil(this.destroyed$))
             .subscribe(page => {
                 this.jars = page.items;
-                console.log(this.jars);
                 this.resultsLength = page.totalCount;
             });
     }

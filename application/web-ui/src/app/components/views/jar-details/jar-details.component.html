@@ -1,7 +1,9 @@
 <mat-card id='jar-details' *ngIf='isJarLoading'>
         <div id="jar-header">
             <div class="left">
-                <h2 class='is-primary'>{{jar.title}}</h2>
+                <h2 class='is-primary'>
+                    <app-icon routerLink='/dashboard' name="back" class="icon is-primary has-border is-rounded pointed"></app-icon>
+                    {{jar.title}}</h2>
                 <p class="legend">{{!!jar.description ? jar.description : 'This jar doesn\'t have a description'}}</p>
             </div>
             <div class='aside'>
@@ -9,7 +11,8 @@
                     class="icon owner is-accent has-border is-rounded helped"
                     matTooltip="{{jar.author.username}} is the creator of this jar">
                 </app-icon>
-                <p class='legend'>since <strong>{{jar.startingDate | date:'fullDate'}}</strong></p>
+                <p class='legend display'>since <strong>{{jar.startingDate | date:'fullDate'}}</strong></p>
+                <p class='legend mobile'>since <strong>{{jar.startingDate | date:'shortDate'}}</strong></p>
             </div>
         </div>
         <app-jar-created [infos]="infos" *ngIf="jarState === 'CREATED'" (activeEvent)='setState($event)'></app-jar-created>

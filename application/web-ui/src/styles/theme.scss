@@ -40,11 +40,15 @@ $theme: mat-light-theme($primary, $accent, $warn); // Inject new colors in Mater
 .is-warn { color: mat-color($warn) !important; }// Export warning color as reusable class in project stylesheets
 .is-success { color: #26da35 !important; }// Export success color as reusable class in project stylesheets
 
-snack-bar-container { // Defines shared SnacbBar Global custom styles
+.mat-snack-bar-container { // Defines shared SnacbBar Global custom styles
     width: auto !important;
     background: #ffffff !important;
     color: mat-color($accent) !important;
     border: 1px solid currentColor;
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%) !important;
 }
 
 .mat-card, .mat-dialog-container { // Defines custom styles for mat card & dialog,containing form
