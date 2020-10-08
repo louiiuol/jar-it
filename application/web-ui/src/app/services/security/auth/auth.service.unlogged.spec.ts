@@ -55,7 +55,7 @@ describe('AuthService [UNLOGGED]', () => {
 
     it('should authenticate and retrieve token', () => {
         let actual: Token;
-        service['authenticate'](loginMock, false)
+        service['authenticate'](loginMock)
             .subscribe(token => actual = new Token(token));
         const req = httpMock.expectOne(environment.root_url + 'oauth/token');
         req.flush(tokenMock);

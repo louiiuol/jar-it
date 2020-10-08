@@ -55,9 +55,9 @@ INSERT INTO associations (name, code, description, link) VALUES ('UNICEF', 'UCF'
 INSERT INTO associations (name, code, description, link) VALUES ('Amnestry International', 'AMNI', 'This is a simple description...', 'https://soutenir.amnesty.fr/b/mon-don');
 INSERT INTO associations (name, code, description, link) VALUES ('Green Peace', 'GP', 'This is a simple description...', 'https://faire-un-don.greenpeace.fr');
 
-INSERT INTO jars (`closing_date`, `max_amount`, `reference_cost`, `starting_date`, `state`, `title`, `addressee_id`, `author_id`) VALUES ('2020-10-3', '20', '0.50', '2020-07-05', '0', 'Clean Up !', '1', '1');
+INSERT INTO jars (`closing_date`, `max_amount`, `reference_cost`, `starting_date`, `state`, `title`, `addressee_id`, `author_id`) VALUES ('2020-10-3', '20', '0.50', '2020-07-05', '0', 'Clean Up !', '1', '2');
 
-INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('T', 0.00, '2020-07-05', 'F', '1', '1' ); --1
+INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('F', 0.00, '2020-07-05', 'F', '1', '1' ); --1
 INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('T', 0.00, '2020-07-05', 'F', '1', '2' );
 INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('F', 0.00, '2020-07-06', 'F', '1', '4' );
 INSERT INTO members (admin, balance, joined, payed, jar_id, user_id) VALUES ('F', 0.00, '2020-07-06', 'F', '1', '5' );

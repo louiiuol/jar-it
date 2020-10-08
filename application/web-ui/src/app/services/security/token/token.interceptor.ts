@@ -33,7 +33,7 @@ export class TokenInterceptor implements HttpInterceptor {
         }), finalize(() => this.loader.hide()));
     }
 
-    private addHeader = (req: HttpRequest<any>, token: string): HttpRequest<any> =>
+    addHeader = (req: HttpRequest<any>, token: string): HttpRequest<any> =>
         req.clone({ headers: req.headers.set('Authorization', `bearer ${token}`) })
 
     private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
