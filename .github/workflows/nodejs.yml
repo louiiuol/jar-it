@@ -6,6 +6,7 @@ on:
     - master
     - develop
 
+
 jobs:
   build:
 
@@ -21,7 +22,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Install
-        run: npm install --prefix application/web-ui
-    - name: Test
-        run: npm test --prefix application/web-ui
+    - run: npm install --prefix application/web-ui
+    - run: npm run build --if-present --prefix application/web-ui
+    - run: npm test --prefix application/web-ui
+      env:
+        CI: true
